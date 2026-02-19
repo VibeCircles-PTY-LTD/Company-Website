@@ -1,0 +1,11 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  background: #05050A;
+  /* fallback / system font stack used when Google fonts are unavailable */
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
