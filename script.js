@@ -41,17 +41,38 @@ if (contactForm) {
         const email = document.getElementById('email').value;
         const message = document.getElementById('message').value;
         
-        // Simple validation
+        // HTML5 validation handles required fields
         if (name && email && message) {
-            // Show success message
-            alert('Thank you for your message! We will get back to you soon.');
+            // Show inline success message
+            showFormMessage('Thank you for your message! We will get back to you soon.', 'success');
             
             // Reset form
             contactForm.reset();
-        } else {
-            alert('Please fill in all fields.');
         }
     });
+}
+
+// Function to display inline form messages
+function showFormMessage(message, type) {
+    // Remove any existing message
+    const existingMessage = document.querySelector('.form-message');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+    
+    // Create message element
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `form-message form-message-${type}`;
+    messageDiv.textContent = message;
+    
+    // Insert message before submit button
+    const submitButton = contactForm.querySelector('.btn');
+    contactForm.insertBefore(messageDiv, submitButton);
+    
+    // Remove message after 5 seconds
+    setTimeout(() => {
+        messageDiv.remove();
+    }, 5000);
 }
 
 // Scroll to top button functionality (optional)
