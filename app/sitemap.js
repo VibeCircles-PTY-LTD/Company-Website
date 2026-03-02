@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const base = "https://example.com";
+  const base = "https://vibecircle.com";
   return [
     { url: `${base}/`, lastModified: new Date() },
     { url: `${base}/about`, lastModified: new Date() },
@@ -10,6 +10,7 @@ export default function sitemap() {
     { url: `${base}/jobs`, lastModified: new Date() },
     { url: `${base}/marketplace`, lastModified: new Date() },
     { url: `${base}/contact`, lastModified: new Date() },
+    { url: `${base}/pricing`, lastModified: new Date() },
     { url: `${base}/privacy`, lastModified: new Date() },
     { url: `${base}/terms`, lastModified: new Date() },
     { url: `${base}/cookies`, lastModified: new Date() },

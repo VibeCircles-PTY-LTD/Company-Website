@@ -36,10 +36,9 @@ export function useCounter(target, dur = 1800, active = false) {
 }
 
 export function useWindowWidth() {
-  const [w, setW] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 1200
-  );
+  const [w, setW] = useState(1200);
   useEffect(() => {
+    setW(window.innerWidth);
     const h = () => setW(window.innerWidth);
     window.addEventListener("resize", h);
     return () => window.removeEventListener("resize", h);

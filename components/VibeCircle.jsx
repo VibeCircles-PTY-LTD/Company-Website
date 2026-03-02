@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { C } from "@/components/shared/vibeTheme";
 
 const NAV_LINKS = ["About", "Advertise", "Business", "Jobs", "Contact"];
 
@@ -72,7 +73,7 @@ function Nav({ active, setActive }) {
       display: "flex", alignItems: "center", justifyContent: "space-between",
       padding: "0 48px",
       height: "68px",
-      background: scrolled ? "rgba(5,5,10,0.92)" : "transparent",
+      background: scrolled ? "rgba(246,246,249,0.92)" : "transparent",
       backdropFilter: scrolled ? "blur(20px)" : "none",
       borderBottom: scrolled ? "1px solid rgba(255,120,0,0.12)" : "none",
       transition: "all 0.4s ease",
@@ -87,13 +88,13 @@ function Nav({ active, setActive }) {
             style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "13px", letterSpacing: "1.5px", textTransform: "uppercase",
-              color: active === l ? "#FF6B00" : "rgba(255,255,255,0.6)",
+              color: active === l ? "#FF6B00" : "rgba(0,0,0,0.6)",
               textDecoration: "none",
               transition: "color 0.2s",
               cursor: "pointer",
             }}
             onMouseEnter={e => e.target.style.color = "#FF6B00"}
-            onMouseLeave={e => e.target.style.color = active === l ? "#FF6B00" : "rgba(255,255,255,0.6)"}
+            onMouseLeave={e => e.target.style.color = active === l ? "#FF6B00" : "rgba(0,0,0,0.6)"}
           >{l}</a>
         ))}
       </div>
@@ -112,7 +113,7 @@ function Hero() {
       minHeight: "100vh", display: "flex", flexDirection: "column",
       alignItems: "center", justifyContent: "center",
       position: "relative", overflow: "hidden",
-      background: "#05050A",
+      background: "#F6F6F9",
       padding: "120px 24px 80px",
     }}>
       {/* Grid overlay */}
@@ -165,7 +166,7 @@ function Hero() {
         <p style={{
           fontFamily: "'DM Sans', sans-serif",
           fontSize: "clamp(16px,2vw,20px)",
-          color: "rgba(255,255,255,0.5)",
+          color: "rgba(0,0,0,0.6)",
           margin: "32px auto 48px",
           maxWidth: "560px",
           lineHeight: 1.7,
@@ -178,7 +179,7 @@ function Hero() {
             fontFamily: "'Bebas Neue', sans-serif",
             fontSize: "17px", letterSpacing: "3px",
             padding: "16px 44px",
-            background: "#FF6B00", color: "#05050A",
+            background: "#FF6B00", color: "#1a1a1a",
             border: "none", borderRadius: "2px",
             cursor: "pointer",
             transition: "transform 0.2s, box-shadow 0.2s",
@@ -193,12 +194,12 @@ function Hero() {
             fontSize: "17px", letterSpacing: "3px",
             padding: "16px 44px",
             background: "transparent", color: "#FFFFFF",
-            border: "1px solid rgba(255,255,255,0.25)", borderRadius: "2px",
+            border: "1px solid rgba(0,0,0,0.12)", borderRadius: "2px",
             cursor: "pointer",
             transition: "border-color 0.2s, color 0.2s",
           }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = "#FF6B00"; e.currentTarget.style.color = "#FF6B00"; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)"; e.currentTarget.style.color = "#fff"; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(0,0,0,0.12)"; e.currentTarget.style.color = "#1a1a1a"; }}
           >
             Explore the Map
           </button>
@@ -208,7 +209,7 @@ function Hero() {
           marginTop: "56px",
           fontFamily: "'DM Sans', sans-serif",
           fontSize: "13px", letterSpacing: "2px", textTransform: "uppercase",
-          color: "rgba(255,255,255,0.3)",
+          color: "rgba(0,0,0,0.4)",
         }}>
           Find your people. Find your place. Feel the vibe.
         </p>
@@ -228,7 +229,7 @@ function Hero() {
 
 function About() {
   return (
-    <section id="about" style={{ background: "#080810", padding: "120px 48px", position: "relative", overflow: "hidden" }}>
+    <section id="about" style={{ background: "#EEEEF2", padding: "120px 48px", position: "relative", overflow: "hidden" }}>
       <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
         <AnimatedSection>
           <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "13px", letterSpacing: "5px", color: "#FF6B00", marginBottom: "16px" }}>
@@ -237,7 +238,7 @@ function About() {
           <h2 style={{
             fontFamily: "'Bebas Neue', sans-serif",
             fontSize: "clamp(40px,6vw,72px)",
-            color: "#fff",
+            color: "#1a1a1a",
             lineHeight: 1,
             marginBottom: "64px",
           }}>
@@ -251,14 +252,14 @@ function About() {
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "18px", lineHeight: 1.8,
-              color: "rgba(255,255,255,0.65)",
+              color: "rgba(0,0,0,0.65)",
             }}>
               VibeCircle is a location-powered social discovery platform. We combine social feeds, live events, interactive maps, creator tools, business advertising, and community groups --- all inside one ecosystem.
             </p>
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "18px", lineHeight: 1.8,
-              color: "rgba(255,255,255,0.65)",
+              color: "rgba(0,0,0,0.65)",
               marginTop: "24px",
             }}>
               From campus pop-ups to club nights. From digital livestreams to street markets. From creators to brands. VibeCircle makes energy visible.
@@ -275,7 +276,7 @@ function About() {
                   border: "1px solid rgba(255,107,0,0.12)",
                   borderRadius: "4px",
                   fontFamily: "'DM Sans', sans-serif",
-                  fontSize: "15px", color: "rgba(255,255,255,0.8)",
+                  fontSize: "15px", color: "rgba(0,0,0,0.85)",
                   transition: "border-color 0.3s, background 0.3s",
                   cursor: "default",
                 }}
@@ -315,7 +316,7 @@ function Manifesto() {
                 fontFamily: "'Bebas Neue', sans-serif",
                 fontSize: "clamp(28px,4.5vw,58px)",
                 letterSpacing: "1px",
-                color: "#05050A",
+                color: "#1a1a1a",
                 lineHeight: 1.15,
                 display: "flex", alignItems: "center", gap: "20px",
               }}>
@@ -332,7 +333,7 @@ function Manifesto() {
 
 function FounderStory() {
   return (
-    <section style={{ background: "#05050A", padding: "120px 48px", position: "relative", overflow: "hidden" }}>
+    <section style={{ background: "#F6F6F9", padding: "120px 48px", position: "relative", overflow: "hidden" }}>
       <PulsingOrb style={{ width: 600, height: 600, top: "50%", right: "-15%", transform: "translateY(-50%)", background: "radial-gradient(circle, rgba(255,50,150,0.08) 0%, transparent 70%)" }} />
       <div style={{ maxWidth: "800px", margin: "0 auto", position: "relative" }}>
         <AnimatedSection>
@@ -342,7 +343,7 @@ function FounderStory() {
           <h2 style={{
             fontFamily: "'Bebas Neue', sans-serif",
             fontSize: "clamp(40px,5.5vw,66px)",
-            color: "#fff", lineHeight: 1.05,
+            color: "#1a1a1a", lineHeight: 1.05,
             marginBottom: "48px",
           }}>
             What if maps<br /><span style={{ color: "#FF6B00" }}>were alive?</span>
@@ -358,7 +359,7 @@ function FounderStory() {
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: "18px", lineHeight: 1.8,
-              color: i === 0 ? "rgba(255,255,255,0.8)" : "rgba(255,255,255,0.5)",
+              color: i === 0 ? "rgba(0,0,0,0.85)" : "rgba(0,0,0,0.6)",
               marginBottom: "24px",
               fontStyle: i === 1 ? "italic" : "normal",
             }}>{p}</p>
@@ -377,19 +378,19 @@ function Advertise() {
     ["----", "Promote Live Experiences", "Turn foot traffic into digital gravity."],
   ];
   return (
-    <section id="advertise" style={{ background: "#080810", padding: "120px 48px" }}>
+    <section id="advertise" style={{ background: "#EEEEF2", padding: "120px 48px" }}>
       <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
         <AnimatedSection>
           <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "13px", letterSpacing: "5px", color: "#FF6B00", marginBottom: "16px" }}>--- ADVERTISE</p>
           <h2 style={{
             fontFamily: "'Bebas Neue', sans-serif",
             fontSize: "clamp(36px,5.5vw,64px)",
-            color: "#fff", lineHeight: 1.05,
+            color: "#1a1a1a", lineHeight: 1.05,
             marginBottom: "24px",
           }}>
             Ads that integrate,<br />not <span style={{ color: "#FF6B00" }}>interrupt.</span>
           </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "18px", color: "rgba(255,255,255,0.5)", marginBottom: "72px", maxWidth: "500px", lineHeight: 1.7 }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "18px", color: "rgba(0,0,0,0.6)", marginBottom: "72px", maxWidth: "500px", lineHeight: 1.7 }}>
             We power discovery, not distraction. Perfect for restaurants, clubs, campuses, retail, and event organizers.
           </p>
         </AnimatedSection>
@@ -407,8 +408,8 @@ function Advertise() {
                 onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,107,0,0.03)"; e.currentTarget.style.borderColor = "rgba(255,107,0,0.1)"; e.currentTarget.style.transform = ""; }}
               >
                 <div style={{ fontSize: "28px", marginBottom: "16px" }}>{icon}</div>
-                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "20px", letterSpacing: "1px", color: "#fff", marginBottom: "12px" }}>{title}</div>
-                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: "rgba(255,255,255,0.45)", lineHeight: 1.7 }}>{desc}</div>
+                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "20px", letterSpacing: "1px", color: "#1a1a1a", marginBottom: "12px" }}>{title}</div>
+                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: "rgba(0,0,0,0.55)", lineHeight: 1.7 }}>{desc}</div>
               </div>
             </AnimatedSection>
           ))}
@@ -421,20 +422,20 @@ function Advertise() {
 function Business() {
   const tools = ["Claim Locations", "Run Promotions", "Host Events", "Go Live", "Track Engagement", "Launch Campaigns"];
   return (
-    <section id="business" style={{ background: "#05050A", padding: "120px 48px", position: "relative", overflow: "hidden" }}>
+    <section id="business" style={{ background: "#F6F6F9", padding: "120px 48px", position: "relative", overflow: "hidden" }}>
       <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }}>
         <div>
           <AnimatedSection>
             <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "13px", letterSpacing: "5px", color: "#FF6B00", marginBottom: "16px" }}>--- FOR BUSINESS</p>
-            <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px,5vw,60px)", color: "#fff", lineHeight: 1.05, marginBottom: "24px" }}>
+            <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px,5vw,60px)", color: "#1a1a1a", lineHeight: 1.05, marginBottom: "24px" }}>
               When your location<br /><span style={{ color: "#FF6B00" }}>pulses on the map,</span><br />people find you.
             </h2>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "17px", color: "rgba(255,255,255,0.5)", lineHeight: 1.7, marginBottom: "40px" }}>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "17px", color: "rgba(0,0,0,0.6)", lineHeight: 1.7, marginBottom: "40px" }}>
               Turn foot traffic into digital gravity with VibeCircle Business Tools.
             </p>
             <button style={{
               fontFamily: "'Bebas Neue', sans-serif", fontSize: "16px", letterSpacing: "3px",
-              padding: "14px 36px", background: "#FF6B00", color: "#05050A",
+              padding: "14px 36px", background: "#FF6B00", color: "#1a1a1a",
               border: "none", borderRadius: "2px", cursor: "pointer",
             }}>Get Started</button>
           </AnimatedSection>
@@ -445,14 +446,14 @@ function Business() {
               <div style={{
                 display: "flex", alignItems: "center", gap: "20px",
                 padding: "20px 28px",
-                background: "rgba(255,255,255,0.02)",
-                border: "1px solid rgba(255,255,255,0.06)",
+                background: "rgba(0,0,0,0.04)",
+                border: "1px solid rgba(0,0,0,0.08)",
                 borderRadius: "4px",
-                fontFamily: "'DM Sans', sans-serif", fontSize: "16px", color: "rgba(255,255,255,0.7)",
+                fontFamily: "'DM Sans', sans-serif", fontSize: "16px", color: "rgba(0,0,0,0.7)",
                 transition: "all 0.3s", cursor: "default",
               }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = "#FF6B00"; e.currentTarget.style.background = "rgba(255,107,0,0.06)"; e.currentTarget.style.color = "#fff"; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)"; e.currentTarget.style.background = "rgba(255,255,255,0.02)"; e.currentTarget.style.color = "rgba(255,255,255,0.7)"; }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = "#FF6B00"; e.currentTarget.style.background = "rgba(255,107,0,0.06)"; e.currentTarget.style.color = "#1a1a1a"; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(0,0,0,0.08)"; e.currentTarget.style.background = "rgba(0,0,0,0.04)"; e.currentTarget.style.color = "rgba(0,0,0,0.7)"; }}
               >
                 <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#FF6B00", boxShadow: "0 0 8px #FF6B00" }} />
                 {t}
@@ -467,14 +468,14 @@ function Business() {
 
 function Jobs() {
   return (
-    <section id="jobs" style={{ background: "#080810", padding: "120px 48px" }}>
+    <section id="jobs" style={{ background: "#EEEEF2", padding: "120px 48px" }}>
       <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
         <AnimatedSection>
           <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "13px", letterSpacing: "5px", color: "#FF6B00", marginBottom: "16px" }}>--- CAREERS</p>
-          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px,5.5vw,64px)", color: "#fff", lineHeight: 1.05, marginBottom: "16px" }}>
+          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(36px,5.5vw,64px)", color: "#1a1a1a", lineHeight: 1.05, marginBottom: "16px" }}>
             We don't hire for roles.<br /><span style={{ color: "#FF6B00" }}>We hire builders.</span>
           </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "17px", color: "rgba(255,255,255,0.45)", marginBottom: "72px", maxWidth: "480px", lineHeight: 1.7 }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "17px", color: "rgba(0,0,0,0.55)", marginBottom: "72px", maxWidth: "480px", lineHeight: 1.7 }}>
             Ambitious, fast-moving, impact-driven. Real ownership. Real responsibility. Equity opportunities.
           </p>
         </AnimatedSection>
@@ -483,20 +484,20 @@ function Jobs() {
             <AnimatedSection key={i} delay={i * 0.08}>
               <div style={{
                 padding: "28px 32px",
-                background: "rgba(255,255,255,0.02)",
-                border: "1px solid rgba(255,255,255,0.07)",
+                background: "rgba(0,0,0,0.02)",
+                border: "1px solid rgba(0,0,0,0.1)",
                 borderRadius: "4px",
                 display: "flex", justifyContent: "space-between", alignItems: "center",
                 transition: "all 0.3s", cursor: "pointer",
               }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = "#FF6B00"; e.currentTarget.style.background = "rgba(255,107,0,0.05)"; }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)"; e.currentTarget.style.background = "rgba(255,255,255,0.02)"; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(0,0,0,0.1)"; e.currentTarget.style.background = "rgba(0,0,0,0.02)"; }}
               >
                 <div>
-                  <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", color: "#fff", fontWeight: 600, marginBottom: "6px" }}>{job.title}</div>
+                  <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", color: "#1a1a1a", fontWeight: 600, marginBottom: "6px" }}>{job.title}</div>
                   <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "12px", letterSpacing: "1.5px", color: "#FF6B00", textTransform: "uppercase" }}>{job.tag}</div>
                 </div>
-                <div style={{ color: "rgba(255,255,255,0.3)", fontSize: "20px" }}>---</div>
+                <div style={{ color: "rgba(0,0,0,0.4)", fontSize: "20px" }}>---</div>
               </div>
             </AnimatedSection>
           ))}
@@ -509,70 +510,92 @@ function Jobs() {
 function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const submit = async () => {
+    if (!form.name || !form.email) return;
+    setLoading(true);
+    setError(false);
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/info@vibecircle.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ _subject: "Contact from VibeCircle", _template: "table", name: form.name, email: form.email, message: form.message }),
+      });
+      if (!res.ok) throw new Error("Send failed");
+      setSent(true);
+    } catch (e) {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
-    <section id="contact" style={{ background: "#05050A", padding: "120px 48px", position: "relative", overflow: "hidden" }}>
+    <section id="contact" style={{ background: "#F6F6F9", padding: "120px 48px", position: "relative", overflow: "hidden" }}>
       <PulsingOrb style={{ width: 500, height: 500, bottom: "-20%", left: "50%", transform: "translateX(-50%)", background: "radial-gradient(circle, rgba(255,107,0,0.1) 0%, transparent 70%)" }} />
       <div style={{ maxWidth: "680px", margin: "0 auto", position: "relative" }}>
         <AnimatedSection>
           <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "13px", letterSpacing: "5px", color: "#FF6B00", marginBottom: "16px" }}>--- CONTACT</p>
-          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(40px,6vw,72px)", color: "#fff", lineHeight: 1, marginBottom: "16px" }}>
+          <h2 style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "clamp(40px,6vw,72px)", color: "#1a1a1a", lineHeight: 1, marginBottom: "16px" }}>
             Let's build<br /><span style={{ color: "#FF6B00" }}>something real.</span>
           </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", color: "rgba(255,255,255,0.4)", marginBottom: "60px" }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", color: "rgba(0,0,0,0.4)", marginBottom: "60px" }}>
             info@vibecircle.com -- partners@vibecircle.com -- careers@vibecircle.com
           </p>
         </AnimatedSection>
         {sent ? (
           <AnimatedSection>
             <div style={{ textAlign: "center", padding: "80px 0" }}>
-              <div style={{ fontSize: "48px", marginBottom: "24px" }}>---</div>
+              <div style={{ fontSize: "48px", marginBottom: "24px" }}>✓</div>
               <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "36px", color: "#FF6B00", marginBottom: "12px" }}>Vibe Sent.</div>
-              <p style={{ fontFamily: "'DM Sans', sans-serif", color: "rgba(255,255,255,0.4)" }}>We'll be in touch soon.</p>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", color: C.dim }}>We'll be in touch soon.</p>
             </div>
           </AnimatedSection>
         ) : (
           <AnimatedSection delay={0.1}>
             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              {error && <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: C.pink }}>Something went wrong. Please try again or email us directly.</p>}
               {[["name", "Name"], ["email", "Email"]].map(([key, label]) => (
                 <input key={key} placeholder={label}
                   value={form[key]}
                   onChange={e => setForm({ ...form, [key]: e.target.value })}
                   style={{
-                    background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)",
+                    background: "rgba(0,0,0,0.03)", border: "1px solid rgba(0,0,0,0.1)",
                     borderRadius: "2px", padding: "18px 20px",
                     fontFamily: "'DM Sans', sans-serif", fontSize: "16px",
-                    color: "#fff", outline: "none",
+                    color: "#1a1a1a", outline: "none",
                     transition: "border-color 0.2s",
                   }}
                   onFocus={e => e.target.style.borderColor = "#FF6B00"}
-                  onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
+                  onBlur={e => e.target.style.borderColor = "rgba(0,0,0,0.1)"}
                 />
               ))}
               <textarea placeholder="Message" rows={5}
                 value={form.message}
                 onChange={e => setForm({ ...form, message: e.target.value })}
                 style={{
-                  background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)",
+                  background: "rgba(0,0,0,0.03)", border: "1px solid rgba(0,0,0,0.1)",
                   borderRadius: "2px", padding: "18px 20px",
                   fontFamily: "'DM Sans', sans-serif", fontSize: "16px",
-                  color: "#fff", outline: "none", resize: "vertical",
+                  color: "#1a1a1a", outline: "none", resize: "vertical",
                   transition: "border-color 0.2s",
                 }}
                 onFocus={e => e.target.style.borderColor = "#FF6B00"}
-                onBlur={e => e.target.style.borderColor = "rgba(255,255,255,0.1)"}
+                onBlur={e => e.target.style.borderColor = "rgba(0,0,0,0.1)"}
               />
               <button
-                onClick={() => { if (form.name && form.email) setSent(true); }}
+                onClick={submit}
+                disabled={loading || !form.name || !form.email}
                 style={{
                   fontFamily: "'Bebas Neue', sans-serif", fontSize: "17px", letterSpacing: "4px",
-                  padding: "18px", background: "#FF6B00", color: "#05050A",
-                  border: "none", borderRadius: "2px", cursor: "pointer",
+                  padding: "18px", background: "#FF6B00", color: "#1a1a1a",
+                  border: "none", borderRadius: "2px", cursor: loading ? "wait" : "pointer",
                   transition: "transform 0.2s, box-shadow 0.2s",
                 }}
-                onMouseEnter={e => { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 12px 40px rgba(255,107,0,0.4)"; }}
+                onMouseEnter={e => { if (!loading) { e.target.style.transform = "translateY(-2px)"; e.target.style.boxShadow = "0 12px 40px rgba(255,107,0,0.4)"; } }}
                 onMouseLeave={e => { e.target.style.transform = ""; e.target.style.boxShadow = ""; }}
               >
-                Send the Vibe
+                {loading ? "Sending…" : "Send the Vibe"}
               </button>
             </div>
           </AnimatedSection>
@@ -585,14 +608,14 @@ function Contact() {
 function Footer() {
   return (
     <footer style={{
-      background: "#02020A",
+      background: "#EEEEF2",
       borderTop: "1px solid rgba(255,107,0,0.12)",
       padding: "48px",
       display: "flex", justifyContent: "space-between", alignItems: "center",
       flexWrap: "wrap", gap: "24px",
     }}>
       <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "22px", letterSpacing: "3px", color: "#FF6B00" }}>VIBECIRCLE</div>
-      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: "rgba(255,255,255,0.25)", letterSpacing: "1px" }}>
+      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: "rgba(0,0,0,0.5)", letterSpacing: "1px" }}>
         -(c) 2026 VibeCircle. Making energy visible.
       </p>
       <div style={{ display: "flex", gap: "28px" }}>
@@ -600,11 +623,11 @@ function Footer() {
           <a key={e} href={`mailto:${e}@vibecircle.com`} style={{
             fontFamily: "'DM Sans', sans-serif", fontSize: "12px",
             letterSpacing: "1px", textTransform: "uppercase",
-            color: "rgba(255,255,255,0.3)", textDecoration: "none",
+            color: "rgba(0,0,0,0.4)", textDecoration: "none",
             transition: "color 0.2s",
           }}
             onMouseEnter={ev => ev.target.style.color = "#FF6B00"}
-            onMouseLeave={ev => ev.target.style.color = "rgba(255,255,255,0.3)"}
+            onMouseLeave={ev => ev.target.style.color = "rgba(0,0,0,0.4)"}
           >{e}</a>
         ))}
       </div>
@@ -616,12 +639,12 @@ export default function VibeCircle() {
   const [active, setActive] = useState("");
 
   return (
-    <div style={{ background: "#05050A", minHeight: "100vh", overflowX: "hidden" }}>
+    <div style={{ background: "#F6F6F9", minHeight: "100vh", overflowX: "hidden" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,400&display=swap');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        body { background: #05050A; }
+        body { background: #F6F6F9; }
         @keyframes orbPulse {
           0%, 100% { opacity: 0.6; transform: scale(1); }
           50% { opacity: 1; transform: scale(1.1); }
@@ -636,9 +659,9 @@ export default function VibeCircle() {
         }
         ::selection { background: rgba(255,107,0,0.3); }
         ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #05050A; }
+        ::-webkit-scrollbar-track { background: #F6F6F9; }
         ::-webkit-scrollbar-thumb { background: #FF6B00; border-radius: 2px; }
-        input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.25); }
+        input::placeholder, textarea::placeholder { color: rgba(0,0,0,0.4); }
       `}</style>
       <Nav active={active} setActive={setActive} />
       <Hero />

@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { C, SOCIALS } from "@/components/shared/vibeTheme";
 import { useWindowWidth } from "@/components/shared/hooks";
 
-const ALL_PAGES = ["About", "Team", "Creators", "Advertise", "Business", "Jobs", "Marketplace", "Contact"];
+const ALL_PAGES = ["About", "Team", "Creators", "Advertise", "Business", "Jobs", "Marketplace", "Pricing", "Contact"];
 const PRIMARY_NAV = ["About", "Creators", "Marketplace", "Business", "Jobs"];
-const MORE_NAV = ["Team", "Advertise", "Contact"];
+const MORE_NAV = ["Team", "Advertise", "Pricing", "Contact"];
 
 export function Nav({ current, setPage, openWaitlist }) {
   const [scrolled, setScrolled] = useState(false);
@@ -37,7 +37,7 @@ export function Nav({ current, setPage, openWaitlist }) {
           justifyContent: "space-between",
           padding: "0 clamp(20px,4vw,48px)",
           height: "68px",
-          background: scrolled || menuOpen ? "rgba(5,5,10,0.96)" : "rgba(5,5,10,0.5)",
+          background: scrolled || menuOpen ? "rgba(246,246,249,0.98)" : "rgba(246,246,249,0.85)",
           backdropFilter: "blur(20px)",
           borderBottom: `1px solid ${scrolled ? C.border : "transparent"}`,
           transition: "all .35s ease",
@@ -80,8 +80,8 @@ export function Nav({ current, setPage, openWaitlist }) {
                 }}
                 onMouseEnter={(e) => {
                   if (current !== p) {
-                    e.currentTarget.style.color = C.white;
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+                    e.currentTarget.style.color = C.text;
+                    e.currentTarget.style.borderColor = C.border;
                   }
                 }}
                 onMouseLeave={(e) => {
@@ -103,7 +103,7 @@ export function Nav({ current, setPage, openWaitlist }) {
                   fontSize: "12px",
                   letterSpacing: "1px",
                   textTransform: "uppercase",
-                  color: current === p ? C.orange : "rgba(255,255,255,0.28)",
+                  color: current === p ? C.orange : C.dim,
                   background: "transparent",
                   border: "1px solid transparent",
                   borderRadius: "2px",
@@ -111,9 +111,9 @@ export function Nav({ current, setPage, openWaitlist }) {
                   cursor: "pointer",
                   transition: "all .2s",
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = C.white)}
+                onMouseEnter={(e) => (e.currentTarget.style.color = C.text)}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = current === p ? C.orange : "rgba(255,255,255,0.28)";
+                  e.currentTarget.style.color = current === p ? C.orange : C.dim;
                 }}
               >
                 {p}
@@ -131,7 +131,7 @@ export function Nav({ current, setPage, openWaitlist }) {
                 letterSpacing: "3px",
                 padding: "9px 22px",
                 background: C.orange,
-                color: C.bg,
+                color: C.textOnAccent,
                 border: "none",
                 borderRadius: "2px",
                 cursor: "pointer",
@@ -146,6 +146,7 @@ export function Nav({ current, setPage, openWaitlist }) {
           {isMobile && (
             <button
               onClick={() => setMenuOpen(!menuOpen)}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
               style={{ background: "none", border: "none", cursor: "pointer", padding: "6px", display: "flex", flexDirection: "column", gap: "5px" }}
             >
               <span
@@ -153,7 +154,7 @@ export function Nav({ current, setPage, openWaitlist }) {
                   display: "block",
                   width: "22px",
                   height: "2px",
-                  background: menuOpen ? C.orange : C.white,
+                  background: menuOpen ? C.orange : C.text,
                   transition: "all .3s",
                   transform: menuOpen ? "rotate(45deg) translate(5px,5px)" : "",
                 }}
@@ -163,7 +164,7 @@ export function Nav({ current, setPage, openWaitlist }) {
                   display: "block",
                   width: "22px",
                   height: "2px",
-                  background: menuOpen ? C.orange : C.white,
+                  background: menuOpen ? C.orange : C.text,
                   transition: "all .3s",
                   opacity: menuOpen ? 0 : 1,
                 }}
@@ -173,7 +174,7 @@ export function Nav({ current, setPage, openWaitlist }) {
                   display: "block",
                   width: "22px",
                   height: "2px",
-                  background: menuOpen ? C.orange : C.white,
+                  background: menuOpen ? C.orange : C.text,
                   transition: "all .3s",
                   transform: menuOpen ? "rotate(-45deg) translate(5px,-5px)" : "",
                 }}
@@ -191,7 +192,7 @@ export function Nav({ current, setPage, openWaitlist }) {
             right: 0,
             bottom: 0,
             zIndex: 199,
-            background: "rgba(5,5,10,0.99)",
+            background: "rgba(246,246,249,0.98)",
             backdropFilter: "blur(20px)",
             animation: "menuSlide .3s ease",
             overflowY: "auto",
@@ -208,12 +209,12 @@ export function Nav({ current, setPage, openWaitlist }) {
                   fontSize: "clamp(28px,6vw,40px)",
                   letterSpacing: "2px",
                   textAlign: "left",
-                  color: current === p ? C.orange : C.white,
+                  color: current === p ? C.orange : C.text,
                   background: "none",
                   border: "none",
                   cursor: "pointer",
                   padding: "11px 0",
-                  borderBottom: "1px solid rgba(255,255,255,0.05)",
+                  borderBottom: "1px solid rgba(0,0,0,0.08)",
                   animation: `fadeUp .4s ease ${i * 0.04}s both`,
                 }}
               >
@@ -233,7 +234,7 @@ export function Nav({ current, setPage, openWaitlist }) {
               letterSpacing: "3px",
               padding: "16px",
               background: C.orange,
-              color: C.bg,
+              color: C.textOnAccent,
               border: "none",
               borderRadius: "2px",
               cursor: "pointer",
@@ -254,13 +255,13 @@ export function Footer({ setPage }) {
     window.scrollTo(0, 0);
   };
   const cols = [
-    { title: "Platform", links: ["About", "Team", "Creators", "Marketplace"] },
+    { title: "Platform", links: ["About", "Team", "Creators", "Marketplace", "Pricing"] },
     { title: "Business", links: ["Advertise", "Business", "Contact"] },
     { title: "Company", links: ["Jobs", "Team", "Contact"] },
     { title: "Legal", links: ["Privacy", "Terms", "Cookies"] },
   ];
   return (
-    <footer style={{ background: "#02020A", borderTop: `1px solid ${C.border}` }}>
+    <footer style={{ background: C.bg2, borderTop: `1px solid ${C.border}` }}>
       <div style={{ maxWidth: "1100px", margin: "0 auto", padding: w < 600 ? "48px 20px" : "56px 64px" }}>
         <div
           style={{
@@ -301,7 +302,7 @@ export function Footer({ setPage }) {
                   style={{
                     width: "30px",
                     height: "30px",
-                    border: "1px solid rgba(255,255,255,0.1)",
+                    border: `1px solid ${C.border}`,
                     borderRadius: "2px",
                     display: "flex",
                     alignItems: "center",
@@ -309,14 +310,14 @@ export function Footer({ setPage }) {
                     cursor: "pointer",
                     transition: "border-color .2s,background .2s,color .2s",
                     textDecoration: "none",
-                    color: "rgba(255,255,255,0.8)",
+                    color: C.text,
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.borderColor = C.orange;
                     e.currentTarget.style.background = "rgba(255,107,0,0.1)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+                    e.currentTarget.style.borderColor = C.border;
                     e.currentTarget.style.background = "transparent";
                   }}
                 >
@@ -346,7 +347,7 @@ export function Footer({ setPage }) {
                       transition: "color .2s",
                       padding: 0,
                     }}
-                    onMouseEnter={(e) => (e.target.style.color = C.white)}
+                    onMouseEnter={(e) => (e.target.style.color = C.text)}
                     onMouseLeave={(e) => (e.target.style.color = C.dimmer)}
                   >
                     {l}
@@ -356,9 +357,9 @@ export function Footer({ setPage }) {
             </div>
           ))}
         </div>
-        <div style={{ height: "1px", background: "rgba(255,255,255,0.05)", marginBottom: "22px" }} />
+        <div style={{ height: "1px", background: "rgba(0,0,0,0.08)", marginBottom: "22px" }} />
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
-          <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.18)" }}>
+          <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", color: C.dimmer }}>
             (c) 2026 VibeCircle (Pty) Ltd - Making energy visible.
           </p>
           <div style={{ display: "flex", gap: "20px" }}>
@@ -366,9 +367,9 @@ export function Footer({ setPage }) {
               <button
                 key={l}
                 onClick={() => go(l)}
-                style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", color: "rgba(255,255,255,0.18)", cursor: "pointer", background: "none", border: "none", padding: 0, transition: "color .2s" }}
+                style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", color: C.dimmer, cursor: "pointer", background: "none", border: "none", padding: 0, transition: "color .2s" }}
                 onMouseEnter={(e) => (e.target.style.color = C.orange)}
-                onMouseLeave={(e) => (e.target.style.color = "rgba(255,255,255,0.18)")}
+                onMouseLeave={(e) => (e.target.style.color = C.dimmer)}
               >
                 {l}
               </button>

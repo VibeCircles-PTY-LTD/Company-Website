@@ -4,13 +4,13 @@ export const GLOBAL_CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,400&display=swap');
   *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
   html { scroll-behavior:smooth; }
-  body { background:#05050A; overflow-x:hidden; }
+  body { background:#F6F6F9; overflow-x:hidden; }
   ::selection { background:rgba(255,107,0,0.3); }
   ::-webkit-scrollbar { width:3px; }
-  ::-webkit-scrollbar-track { background:#05050A; }
+  ::-webkit-scrollbar-track { background:#F6F6F9; }
   ::-webkit-scrollbar-thumb { background:#FF6B00; border-radius:2px; }
-  input::placeholder, textarea::placeholder { color:rgba(255,255,255,0.2); }
-  select option { background:#0C0C18; color:#fff; }
+  input::placeholder, textarea::placeholder { color:rgba(0,0,0,0.4); }
+  select option { background:#EEEEF2; color:#1a1a1a; }
 
   @keyframes fadeUp    { from{opacity:0;transform:translateY(36px);}  to{opacity:1;transform:translateY(0);} }
   @keyframes fadeIn    { from{opacity:0;} to{opacity:1;} }
@@ -23,13 +23,13 @@ export const GLOBAL_CSS = `
   @keyframes dotPulse  { 0%,100%{box-shadow:0 0 0 0 rgba(255,107,0,.5);} 50%{box-shadow:0 0 0 10px rgba(255,107,0,0);} }
   @keyframes toastIn   { from{opacity:0;transform:translateX(120%);} to{opacity:1;transform:translateX(0);} }
   @keyframes toastOut  { from{opacity:1;transform:translateX(0);} to{opacity:0;transform:translateX(120%);} }
-  @keyframes pageEnter { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
+  @keyframes pageEnter { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:translateY(0);} }
   @keyframes cookieUp  { from{opacity:0;transform:translateY(100%);} to{opacity:1;transform:translateY(0);} }
   @keyframes spin      { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
   @keyframes confetti  { 0%{transform:translateY(0) rotate(0deg);opacity:1;} 100%{transform:translateY(-80px) rotate(720deg);opacity:0;} }
   @keyframes checkPop  { 0%{transform:scale(0) rotate(-10deg);} 70%{transform:scale(1.2) rotate(5deg);} 100%{transform:scale(1) rotate(0deg);} }
 
-  .page-enter { animation:pageEnter .35s ease forwards; }
+  .page-enter { animation: pageEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards; will-change: opacity, transform; }
   .grid-2  { display:grid; grid-template-columns:1fr 1fr; gap:60px; }
   .grid-3  { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
   .grid-4  { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
@@ -53,18 +53,20 @@ export const GLOBAL_CSS = `
 `;
 
 export const C = {
-  bg: "#05050A",
-  bg2: "#080812",
-  bg3: "#0B0B18",
+  bg: "#F6F6F9",
+  bg2: "#EEEEF2",
+  bg3: "#E6E6EC",
   orange: "#FF6B00",
   pink: "#FF2D78",
   blue: "#00D4FF",
   purple: "#9B59FF",
   gold: "#FFD700",
   white: "#FFFFFF",
-  dim: "rgba(255,255,255,0.45)",
-  dimmer: "rgba(255,255,255,0.2)",
-  border: "rgba(255,107,0,0.12)",
+  text: "#1a1a1a",
+  textOnAccent: "#1a1a1a",
+  dim: "rgba(0,0,0,0.6)",
+  dimmer: "rgba(0,0,0,0.4)",
+  border: "rgba(255,107,0,0.2)",
 };
 
 export const SOCIALS = [
@@ -135,6 +137,7 @@ export const PAGE_TO_PATH = {
   Business: "/business",
   Jobs: "/jobs",
   Marketplace: "/marketplace",
+  Pricing: "/pricing",
   Contact: "/contact",
   Privacy: "/privacy",
   Terms: "/terms",

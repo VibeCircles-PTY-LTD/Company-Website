@@ -8,13 +8,13 @@ const GLOBAL_CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,400&display=swap');
   *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
   html { scroll-behavior:smooth; }
-  body { background:#05050A; overflow-x:hidden; }
+  body { background:#F6F6F9; overflow-x:hidden; }
   ::selection { background:rgba(255,107,0,0.3); }
   ::-webkit-scrollbar { width:3px; }
-  ::-webkit-scrollbar-track { background:#05050A; }
+  ::-webkit-scrollbar-track { background:#F6F6F9; }
   ::-webkit-scrollbar-thumb { background:#FF6B00; border-radius:2px; }
-  input::placeholder, textarea::placeholder { color:rgba(255,255,255,0.2); }
-  select option { background:#0C0C18; color:#fff; }
+  input::placeholder, textarea::placeholder { color:rgba(0,0,0,0.4); }
+  select option { background:#EEEEF2; color:#1a1a1a; }
 
   @keyframes fadeUp    { from{opacity:0;transform:translateY(36px);}  to{opacity:1;transform:translateY(0);} }
   @keyframes fadeIn    { from{opacity:0;} to{opacity:1;} }
@@ -57,11 +57,11 @@ const GLOBAL_CSS = `
 `;
 
 const C = {
-  bg:"#05050A", bg2:"#080812", bg3:"#0B0B18",
+  bg:"#F6F6F9", bg2:"#EEEEF2", bg3:"#E6E6EC",
   orange:"#FF6B00", pink:"#FF2D78",
   blue:"#00D4FF", purple:"#9B59FF", gold:"#FFD700",
-  white:"#FFFFFF", dim:"rgba(255,255,255,0.45)",
-  dimmer:"rgba(255,255,255,0.2)", border:"rgba(255,107,0,0.12)",
+  white:"#FFFFFF", text:"#1a1a1a", textOnAccent:"#1a1a1a",
+  dim:"rgba(0,0,0,0.6)", dimmer:"rgba(0,0,0,0.4)", border:"rgba(255,107,0,0.2)",
 };
 
 const SOCIALS = [
@@ -167,7 +167,7 @@ function PageHero({tag,title,accent,sub,children}){
       <Orb top="-10%" right="-5%" size={500}/><Orb bottom="-20%" left="30%" size={400} color={C.pink} opacity={0.07} delay="3s"/>
       <div style={{position:"relative",zIndex:2,maxWidth:"1100px",margin:"0 auto",width:"100%"}}>
         <div style={{animation:"fadeUp .6s ease forwards",opacity:0,marginBottom:"20px"}}><Tag>{tag}</Tag></div>
-        <h1 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(44px,8vw,96px)",lineHeight:.95,color:C.white,animation:"fadeUp .6s .1s ease forwards",opacity:0,marginBottom:"24px"}}>
+        <h1 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(44px,8vw,96px)",lineHeight:.95,color:C.text,animation:"fadeUp .6s .1s ease forwards",opacity:0,marginBottom:"24px"}}>
           {title}<br/><span style={{color:C.orange}}>{accent}</span>
         </h1>
         {sub&&<p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(15px,2vw,19px)",color:C.dim,maxWidth:"560px",lineHeight:1.75,animation:"fadeUp .6s .2s ease forwards",opacity:0}}>{sub}</p>}
@@ -182,9 +182,9 @@ function FAQ({items,accentColor=C.orange}){
     <div style={{display:"flex",flexDirection:"column",gap:"8px"}}>
       {items.map((item,i)=>(
         <Reveal key={i} delay={i*.06}>
-          <div style={{background:open===i?`${accentColor}08`:"rgba(255,255,255,0.02)",border:`1px solid ${open===i?accentColor+"40":"rgba(255,255,255,0.07)"}`,borderRadius:"4px",overflow:"hidden",transition:"all .3s"}}>
+          <div style={{background:open===i?`${accentColor}08`:"rgba(0,0,0,0.02)",border:`1px solid ${open===i?accentColor+"40":C.border}`,borderRadius:"4px",overflow:"hidden",transition:"all .3s"}}>
             <button onClick={()=>setOpen(open===i?null:i)} style={{width:"100%",display:"flex",justifyContent:"space-between",alignItems:"center",padding:"20px 28px",background:"none",border:"none",cursor:"pointer",textAlign:"left",gap:"16px"}}>
-              <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"15px",fontWeight:600,color:C.white}}>{item.q}</span>
+              <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"15px",fontWeight:600,color:C.text}}>{item.q}</span>
               <span style={{color:open===i?accentColor:C.dimmer,fontSize:"22px",transition:"transform .3s",transform:open===i?"rotate(45deg)":"none",flexShrink:0,fontWeight:300}}>+</span>
             </button>
             {open===i&&<div style={{padding:"0 28px 22px",animation:"fadeIn .25s ease"}}><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.dim,lineHeight:1.8}}>{item.a}</p></div>}
@@ -198,14 +198,14 @@ function PricingCard({plan,price,period="/mo",desc,features,cta,highlight=false,
   const displayPrice=annual&&annualPrice?annualPrice:price;
   return(
     <Reveal>
-      <div style={{padding:"40px 32px",background:highlight?`linear-gradient(160deg,${color}14,transparent)`:"rgba(255,255,255,0.02)",border:`1px solid ${highlight?color+"50":"rgba(255,255,255,0.08)"}`,borderRadius:"4px",height:"100%",display:"flex",flexDirection:"column",position:"relative",transition:"transform .3s"}}
+      <div style={{padding:"40px 32px",background:highlight?`linear-gradient(160deg,${color}14,transparent)`:"rgba(0,0,0,0.02)",border:`1px solid ${highlight?color+"50":C.border}`,borderRadius:"4px",height:"100%",display:"flex",flexDirection:"column",position:"relative",transition:"transform .3s"}}
         onMouseEnter={e=>e.currentTarget.style.transform="translateY(-4px)"}
         onMouseLeave={e=>e.currentTarget.style.transform=""}
       >
-        {highlight&&<div style={{position:"absolute",top:"-1px",left:"50%",transform:"translateX(-50%)",background:color,color:C.bg,fontFamily:"'Bebas Neue',sans-serif",fontSize:"11px",letterSpacing:"3px",padding:"4px 16px",borderRadius:"0 0 4px 4px"}}>MOST POPULAR</div>}
+        {highlight&&<div style={{position:"absolute",top:"-1px",left:"50%",transform:"translateX(-50%)",background:color,color:C.textOnAccent,fontFamily:"'Bebas Neue',sans-serif",fontSize:"11px",letterSpacing:"3px",padding:"4px 16px",borderRadius:"0 0 4px 4px"}}>MOST POPULAR</div>}
         <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",color,marginBottom:"16px"}}>{plan}</div>
         <div style={{display:"flex",alignItems:"baseline",gap:"4px",marginBottom:"6px"}}>
-          <span style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(40px,5vw,56px)",color:C.white,lineHeight:1}}>{displayPrice}</span>
+          <span style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(40px,5vw,56px)",color:C.text,lineHeight:1}}>{displayPrice}</span>
           <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.dim}}>{displayPrice==="Free"||displayPrice==="Custom"?"":period}</span>
         </div>
         {annual&&annualPrice&&<p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:color,marginBottom:"8px"}}>Save 20% -- billed annually</p>}
@@ -214,13 +214,13 @@ function PricingCard({plan,price,period="/mo",desc,features,cta,highlight=false,
           {features.map((f,i)=>(
             <div key={i} style={{display:"flex",gap:"10px",alignItems:"flex-start"}}>
               <span style={{color,fontSize:"14px",marginTop:"1px",flexShrink:0}}>---</span>
-              <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:"rgba(255,255,255,.7)"}}>{f}</span>
+              <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.dim}}>{f}</span>
             </div>
           ))}
         </div>
-        <button onClick={onCta} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"15px",letterSpacing:"3px",padding:"14px",background:highlight?color:"transparent",color:highlight?C.bg:C.white,border:`1px solid ${highlight?color:"rgba(255,255,255,0.2)"}`,borderRadius:"2px",cursor:"pointer",transition:"all .2s",width:"100%"}}
+        <button onClick={onCta} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"15px",letterSpacing:"3px",padding:"14px",background:highlight?color:"transparent",color:highlight?C.textOnAccent:C.text,border:`1px solid ${highlight?color:C.border}`,borderRadius:"2px",cursor:"pointer",transition:"all .2s",width:"100%"}}
           onMouseEnter={e=>{if(!highlight){e.currentTarget.style.borderColor=color;e.currentTarget.style.color=color;}else{e.currentTarget.style.boxShadow=`0 8px 28px ${color}45`;}}}
-          onMouseLeave={e=>{if(!highlight){e.currentTarget.style.borderColor="rgba(255,255,255,0.2)";e.currentTarget.style.color=C.white;}else{e.currentTarget.style.boxShadow="";}}}
+          onMouseLeave={e=>{if(!highlight){e.currentTarget.style.borderColor=C.border;e.currentTarget.style.color=C.text;}else{e.currentTarget.style.boxShadow="";}}}
         >{cta}</button>
       </div>
     </Reveal>
@@ -228,15 +228,15 @@ function PricingCard({plan,price,period="/mo",desc,features,cta,highlight=false,
 }
 function TestimonialCard({quote,name,role,avatar,color=C.orange}){
   return(
-    <div style={{padding:"30px 26px",background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.07)",borderRadius:"4px",display:"flex",flexDirection:"column",gap:"18px",height:"100%",transition:"all .3s"}}
+    <div style={{padding:"30px 26px",background:"rgba(0,0,0,0.02)",border:"1px solid "+C.border,borderRadius:"4px",display:"flex",flexDirection:"column",gap:"18px",height:"100%",transition:"all .3s"}}
       onMouseEnter={e=>{e.currentTarget.style.borderColor=color+"50";e.currentTarget.style.background=`${color}08`;}}
-      onMouseLeave={e=>{e.currentTarget.style.borderColor="rgba(255,255,255,0.07)";e.currentTarget.style.background="rgba(255,255,255,0.02)";}}
+      onMouseLeave={e=>{e.currentTarget.style.borderColor=C.border;e.currentTarget.style.background="rgba(0,0,0,0.02)";}}
     >
       <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"28px",color,lineHeight:1,opacity:.5}}>"</div>
-      <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:"rgba(255,255,255,.75)",lineHeight:1.8,flex:1}}>{quote}</p>
+      <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.dim,lineHeight:1.8,flex:1}}>{quote}</p>
       <div style={{display:"flex",alignItems:"center",gap:"12px"}}>
         <div style={{width:"38px",height:"38px",borderRadius:"50%",background:`${color}20`,border:`1px solid ${color}40`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"17px",flexShrink:0}}>{avatar}</div>
-        <div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",fontWeight:600,color:C.white}}>{name}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer,marginTop:"2px"}}>{role}</div></div>
+        <div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",fontWeight:600,color:C.text}}>{name}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer,marginTop:"2px"}}>{role}</div></div>
       </div>
     </div>
   );
@@ -249,9 +249,9 @@ function Toast({toast,onRemove}){
   const colors={success:C.orange,error:C.pink,info:C.blue};
   const icons={success:"---",error:"---",info:"i"};
   return(
-    <div style={{display:"flex",alignItems:"flex-start",gap:"12px",padding:"16px 20px",background:"#0F0F1E",border:`1px solid ${colors[toast.type]||C.orange}40`,borderLeft:`3px solid ${colors[toast.type]||C.orange}`,borderRadius:"4px",maxWidth:"340px",boxShadow:"0 8px 32px rgba(0,0,0,0.6)",animation:exit?"toastOut .4s ease forwards":"toastIn .4s ease forwards"}}>
+    <div style={{display:"flex",alignItems:"flex-start",gap:"12px",padding:"16px 20px",background:C.bg2,border:`1px solid ${colors[toast.type]||C.orange}40`,borderLeft:`3px solid ${colors[toast.type]||C.orange}`,borderRadius:"4px",maxWidth:"340px",boxShadow:"0 8px 32px rgba(0,0,0,0.6)",animation:exit?"toastOut .4s ease forwards":"toastIn .4s ease forwards"}}>
       <div style={{width:"22px",height:"22px",borderRadius:"50%",background:`${colors[toast.type]||C.orange}20`,border:`1px solid ${colors[toast.type]||C.orange}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"11px",color:colors[toast.type]||C.orange,flexShrink:0,fontWeight:"bold"}}>{icons[toast.type]||"i"}</div>
-      <div style={{flex:1}}><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"1px",color:C.white,marginBottom:"3px"}}>{toast.title}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.dim,lineHeight:1.5}}>{toast.message}</div></div>
+      <div style={{flex:1}}><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"1px",color:C.text,marginBottom:"3px"}}>{toast.title}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.dim,lineHeight:1.5}}>{toast.message}</div></div>
       <button onClick={()=>{setExit(true);setTimeout(()=>onRemove(toast.id),400);}} style={{background:"none",border:"none",color:C.dimmer,cursor:"pointer",fontSize:"16px",lineHeight:1,padding:"0",flexShrink:0}}>--</button>
     </div>
   );
@@ -291,11 +291,11 @@ function WaitlistModal({open,onClose,context,addToast}){
   if(!open)return null;
   return(
     <div style={{position:"fixed",inset:0,zIndex:600,background:"rgba(0,0,0,0.88)",backdropFilter:"blur(16px)",display:"flex",alignItems:"center",justifyContent:"center",padding:"24px",animation:"fadeIn .2s ease"}} onClick={e=>{if(e.target===e.currentTarget)onClose();}}>
-      <div style={{background:"#0A0A16",border:`1px solid ${C.orange}35`,borderRadius:"6px",padding:"48px",maxWidth:"480px",width:"100%",position:"relative",animation:"fadeUp .3s ease",maxHeight:"90vh",overflowY:"auto"}}>
+      <div style={{background:C.bg,border:`1px solid ${C.orange}35`,borderRadius:"6px",padding:"48px",maxWidth:"480px",width:"100%",position:"relative",animation:"fadeUp .3s ease",maxHeight:"90vh",overflowY:"auto"}}>
         <button onClick={onClose} style={{position:"absolute",top:"18px",right:"20px",background:"none",border:"none",color:C.dim,fontSize:"22px",cursor:"pointer",lineHeight:1}}>--</button>
         {step===1?(
           <>
-            <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(28px,4vw,40px)",color:C.white,lineHeight:1,marginBottom:"8px"}}>
+            <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(28px,4vw,40px)",color:C.text,lineHeight:1,marginBottom:"8px"}}>
               Join the <span style={{color:C.orange}}>Movement.</span>
             </div>
             {context&&<div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",letterSpacing:"1px",color:C.orange,textTransform:"uppercase",marginBottom:"16px"}}>{context}</div>}
@@ -305,7 +305,7 @@ function WaitlistModal({open,onClose,context,addToast}){
               <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",letterSpacing:"2px",textTransform:"uppercase",color:C.dimmer,marginBottom:"10px"}}>I am a...</div>
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px"}}>
                 {roles.map(r=>(
-                  <button key={r} onClick={()=>{setRole(r);setForm(f=>({...f,role:r}));}} style={{padding:"12px 10px",fontFamily:"'DM Sans',sans-serif",fontSize:"13px",background:role===r?`${C.orange}18`:"rgba(255,255,255,0.03)",border:`1px solid ${role===r?C.orange+"60":"rgba(255,255,255,0.1)"}`,borderRadius:"3px",color:role===r?C.white:C.dim,cursor:"pointer",transition:"all .2s",textAlign:"left"}}>
+                  <button key={r} onClick={()=>{setRole(r);setForm(f=>({...f,role:r}));}} style={{padding:"12px 10px",fontFamily:"'DM Sans',sans-serif",fontSize:"13px",background:role===r?`${C.orange}18`:"rgba(0,0,0,0.03)",border:`1px solid ${role===r?C.orange+"60":C.border}`,borderRadius:"3px",color:role===r?C.textOnAccent:C.dim,cursor:"pointer",transition:"all .2s",textAlign:"left"}}>
                     {r===roles[0]&&"--- "}{r===roles[1]&&"---- "}{r===roles[2]&&"------- "}{r===roles[3]&&"---- "}{r}
                   </button>
                 ))}
@@ -315,30 +315,30 @@ function WaitlistModal({open,onClose,context,addToast}){
               {[["name","Your Name","----"],["email","Email Address","------"],["city","Your City (optional)","----"]].map(([k,ph,ic])=>(
                 <div key={k} style={{position:"relative"}}>
                   <span style={{position:"absolute",left:"14px",top:"50%",transform:"translateY(-50%)",fontSize:"14px",opacity:.4}}>{ic}</span>
-                  <input placeholder={ph} value={form[k]} onChange={e=>setForm(f=>({...f,[k]:e.target.value}))} style={{width:"100%",background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.1)",borderRadius:"3px",padding:"13px 14px 13px 40px",fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.white,outline:"none",transition:"border-color .2s"}} onFocus={e=>e.target.style.borderColor=C.orange} onBlur={e=>e.target.style.borderColor="rgba(255,255,255,0.1)"}/>
+                  <input placeholder={ph} value={form[k]} onChange={e=>setForm(f=>({...f,[k]:e.target.value}))} style={{width:"100%",background:C.bg3,border:`1px solid ${C.border}`,borderRadius:"3px",padding:"13px 14px 13px 40px",fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.text,outline:"none",transition:"border-color .2s"}} onFocus={e=>e.target.style.borderColor=C.orange} onBlur={e=>e.target.style.borderColor=C.border}/>
                 </div>
               ))}
             </div>
-            <button onClick={submit} disabled={loading||!form.name||!form.email||!role} style={{width:"100%",fontFamily:"'Bebas Neue',sans-serif",fontSize:"16px",letterSpacing:"3px",padding:"16px",background:(!form.name||!form.email||!role)?"rgba(255,107,0,0.3)":C.orange,color:C.bg,border:"none",borderRadius:"3px",cursor:(!form.name||!form.email||!role)?"not-allowed":"pointer",transition:"box-shadow .2s",display:"flex",alignItems:"center",justifyContent:"center",gap:"10px"}}
+            <button onClick={submit} disabled={loading||!form.name||!form.email||!role} style={{width:"100%",fontFamily:"'Bebas Neue',sans-serif",fontSize:"16px",letterSpacing:"3px",padding:"16px",background:(!form.name||!form.email||!role)?"rgba(255,107,0,0.3)":C.orange,color:C.textOnAccent,border:"none",borderRadius:"3px",cursor:(!form.name||!form.email||!role)?"not-allowed":"pointer",transition:"box-shadow .2s",display:"flex",alignItems:"center",justifyContent:"center",gap:"10px"}}
               onMouseEnter={e=>{if(!loading&&form.name&&form.email&&role)e.target.style.boxShadow=`0 10px 32px ${C.orange}45`;}}
               onMouseLeave={e=>e.target.style.boxShadow=""}
             >
-              {loading?<span style={{display:"inline-block",width:"16px",height:"16px",border:"2px solid rgba(5,5,10,0.4)",borderTopColor:"#05050A",borderRadius:"50%",animation:"spin 0.6s linear infinite"}}/>:""}
+              {loading?<span style={{display:"inline-block",width:"16px",height:"16px",border:"2px solid rgba(0,0,0,0.2)",borderTopColor:C.textOnAccent,borderRadius:"50%",animation:"spin 0.6s linear infinite"}}/>:""}
               {loading?"Joining...":"Secure My Spot ---"}
             </button>
-            <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:"rgba(255,255,255,0.2)",textAlign:"center",marginTop:"12px"}}>No spam. Unsubscribe anytime.</p>
+            <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer,textAlign:"center",marginTop:"12px"}}>No spam. Unsubscribe anytime.</p>
           </>
         ):(
           <div style={{textAlign:"center",padding:"20px 0"}}>
             <div style={{fontSize:"56px",marginBottom:"20px",animation:"checkPop .5s ease"}}>----</div>
             <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"36px",color:C.orange,lineHeight:1,marginBottom:"12px"}}>You're on the list.</div>
             <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"15px",color:C.dim,lineHeight:1.7,marginBottom:"8px"}}>
-              Welcome to VibeCircle, <span style={{color:C.white,fontWeight:600}}>{form.name}</span>.
+              Welcome to VibeCircle, <span style={{color:C.text,fontWeight:600}}>{form.name}</span>.
             </p>
             <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.dimmer,lineHeight:1.7,marginBottom:"32px"}}>
               We'll email you at <span style={{color:C.orange}}>{form.email}</span> the moment we launch in your city.
             </p>
-            <button onClick={onClose} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"13px 36px",background:C.orange,color:C.bg,border:"none",borderRadius:"3px",cursor:"pointer"}}>Close</button>
+            <button onClick={onClose} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"13px 36px",background:C.orange,color:C.textOnAccent,border:"none",borderRadius:"3px",cursor:"pointer"}}>Close</button>
           </div>
         )}
       </div>
@@ -350,14 +350,14 @@ function WaitlistModal({open,onClose,context,addToast}){
 function CookieBanner({onAccept,onDecline,setPage}){
   const w=useWindowWidth();
   return(
-    <div style={{position:"fixed",bottom:0,left:0,right:0,zIndex:500,background:"rgba(8,8,18,0.98)",backdropFilter:"blur(20px)",borderTop:`1px solid ${C.border}`,padding:w<600?"20px":"20px 48px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:"20px",flexWrap:"wrap",animation:"cookieUp .4s ease"}}>
+    <div style={{position:"fixed",bottom:0,left:0,right:0,zIndex:500,background:"rgba(246,246,249,0.98)",backdropFilter:"blur(20px)",borderTop:`1px solid ${C.border}`,padding:w<600?"20px":"20px 48px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:"20px",flexWrap:"wrap",animation:"cookieUp .4s ease"}}>
       <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.dim,flex:1,minWidth:"240px",lineHeight:1.6}}>
         We use cookies to improve your experience, personalise content, and analyse site traffic.{" "}
         <button onClick={()=>setPage("Privacy")} style={{background:"none",border:"none",color:C.orange,cursor:"pointer",fontFamily:"'DM Sans',sans-serif",fontSize:"13px",padding:0,textDecoration:"underline"}}>Learn more</button>
       </p>
       <div style={{display:"flex",gap:"10px",flexShrink:0}}>
-        <button onClick={onDecline} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"2px",padding:"10px 22px",background:"transparent",color:C.dimmer,border:"1px solid rgba(255,255,255,0.12)",borderRadius:"2px",cursor:"pointer",transition:"all .2s"}} onMouseEnter={e=>{e.currentTarget.style.color=C.white;e.currentTarget.style.borderColor="rgba(255,255,255,0.3)";}} onMouseLeave={e=>{e.currentTarget.style.color=C.dimmer;e.currentTarget.style.borderColor="rgba(255,255,255,0.12)";}}>Decline</button>
-        <button onClick={onAccept} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"2px",padding:"10px 22px",background:C.orange,color:C.bg,border:"none",borderRadius:"2px",cursor:"pointer",transition:"box-shadow .2s"}} onMouseEnter={e=>e.target.style.boxShadow=`0 4px 16px ${C.orange}40`} onMouseLeave={e=>e.target.style.boxShadow=""}>Accept All</button>
+        <button onClick={onDecline} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"2px",padding:"10px 22px",background:"transparent",color:C.dimmer,border:`1px solid ${C.border}`,borderRadius:"2px",cursor:"pointer",transition:"all .2s"}} onMouseEnter={e=>{e.currentTarget.style.color=C.text;e.currentTarget.style.borderColor=C.orange;}} onMouseLeave={e=>{e.currentTarget.style.color=C.dimmer;e.currentTarget.style.borderColor=C.border;}}>Decline</button>
+        <button onClick={onAccept} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"2px",padding:"10px 22px",background:C.orange,color:C.textOnAccent,border:"none",borderRadius:"2px",cursor:"pointer",transition:"box-shadow .2s"}} onMouseEnter={e=>e.target.style.boxShadow=`0 4px 16px ${C.orange}40`} onMouseLeave={e=>e.target.style.boxShadow=""}>Accept All</button>
       </div>
     </div>
   );
@@ -369,7 +369,7 @@ function BackToTop(){
   useEffect(()=>{const h=()=>setShow(window.scrollY>400);window.addEventListener("scroll",h);return()=>window.removeEventListener("scroll",h);},[]);
   if(!show)return null;
   return(
-    <button onClick={()=>window.scrollTo({top:0,behavior:"smooth"})} style={{position:"fixed",bottom:"80px",right:"24px",zIndex:400,width:"44px",height:"44px",borderRadius:"50%",background:C.orange,color:C.bg,border:"none",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"18px",boxShadow:`0 4px 20px ${C.orange}50`,transition:"transform .2s,box-shadow .2s",animation:"fadeIn .3s ease"}} onMouseEnter={e=>{e.target.style.transform="translateY(-3px)";e.target.style.boxShadow=`0 8px 28px ${C.orange}60`;}} onMouseLeave={e=>{e.target.style.transform="";e.target.style.boxShadow=`0 4px 20px ${C.orange}50`;}}>---</button>
+    <button onClick={()=>window.scrollTo({top:0,behavior:"smooth"})} style={{position:"fixed",bottom:"80px",right:"24px",zIndex:400,width:"44px",height:"44px",borderRadius:"50%",background:C.orange,color:C.textOnAccent,border:"none",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"18px",boxShadow:`0 4px 20px ${C.orange}50`,transition:"transform .2s,box-shadow .2s",animation:"fadeIn .3s ease"}} onMouseEnter={e=>{e.target.style.transform="translateY(-3px)";e.target.style.boxShadow=`0 8px 28px ${C.orange}60`;}} onMouseLeave={e=>{e.target.style.transform="";e.target.style.boxShadow=`0 4px 20px ${C.orange}50`;}}>---</button>
   );
 }
 
@@ -387,31 +387,31 @@ function Nav({current,setPage,openWaitlist}){
   const go=(p)=>{setPage(p);window.scrollTo(0,0);setMenuOpen(false);};
   return(
     <>
-      <nav style={{position:"fixed",top:0,left:0,right:0,zIndex:200,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"0 clamp(20px,4vw,48px)",height:"68px",background:scrolled||menuOpen?"rgba(5,5,10,0.96)":"rgba(5,5,10,0.5)",backdropFilter:"blur(20px)",borderBottom:`1px solid ${scrolled?C.border:"transparent"}`,transition:"all .35s ease"}}>
+      <nav style={{position:"fixed",top:0,left:0,right:0,zIndex:200,display:"flex",alignItems:"center",justifyContent:"space-between",padding:"0 clamp(20px,4vw,48px)",height:"68px",background:scrolled||menuOpen?"rgba(246,246,249,0.98)":"rgba(246,246,249,0.85)",backdropFilter:"blur(20px)",borderBottom:`1px solid ${scrolled?C.border:"transparent"}`,transition:"all .35s ease"}}>
         <button onClick={()=>go("home")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"24px",letterSpacing:"3px",color:C.orange,background:"none",border:"none",cursor:"pointer",padding:0,flexShrink:0}}>VIBECIRCLE</button>
         {!isMobile&&(
           <div style={{display:"flex",gap:"3px",alignItems:"center"}}>
             {PRIMARY_NAV.map(p=>(
               <button key={p} onClick={()=>go(p)} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",letterSpacing:"1px",textTransform:"uppercase",color:current===p?C.orange:C.dim,background:current===p?`${C.orange}12`:"transparent",border:current===p?`1px solid ${C.orange}30`:"1px solid transparent",borderRadius:"2px",padding:"7px 12px",cursor:"pointer",transition:"all .2s"}}
-                onMouseEnter={e=>{if(current!==p){e.currentTarget.style.color=C.white;e.currentTarget.style.borderColor="rgba(255,255,255,0.1)";}}}
+                onMouseEnter={e=>{if(current!==p){e.currentTarget.style.color=C.text;e.currentTarget.style.borderColor=C.border;}}}
                 onMouseLeave={e=>{if(current!==p){e.currentTarget.style.color=C.dim;e.currentTarget.style.borderColor="transparent";}}}
               >{p}</button>
             ))}
             {MORE_NAV.map(p=>(
-              <button key={p} onClick={()=>go(p)} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",letterSpacing:"1px",textTransform:"uppercase",color:current===p?C.orange:"rgba(255,255,255,0.28)",background:"transparent",border:"1px solid transparent",borderRadius:"2px",padding:"7px 10px",cursor:"pointer",transition:"all .2s"}}
-                onMouseEnter={e=>e.currentTarget.style.color=C.white}
-                onMouseLeave={e=>e.currentTarget.style.color=current===p?C.orange:"rgba(255,255,255,0.28)"}
+              <button key={p} onClick={()=>go(p)} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",letterSpacing:"1px",textTransform:"uppercase",color:current===p?C.orange:C.dim,background:"transparent",border:"1px solid transparent",borderRadius:"2px",padding:"7px 10px",cursor:"pointer",transition:"all .2s"}}
+                onMouseEnter={e=>e.currentTarget.style.color=C.text}
+                onMouseLeave={e=>e.currentTarget.style.color=current===p?C.orange:C.dim}
               >{p}</button>
             ))}
           </div>
         )}
         <div style={{display:"flex",gap:"10px",alignItems:"center"}}>
-          {!isMobile&&<button onClick={()=>openWaitlist("Early Access")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"3px",padding:"9px 22px",background:C.orange,color:C.bg,border:"none",borderRadius:"2px",cursor:"pointer",transition:"box-shadow .2s"}} onMouseEnter={e=>e.target.style.boxShadow=`0 6px 20px ${C.orange}40`} onMouseLeave={e=>e.target.style.boxShadow=""}>Join Now</button>}
+          {!isMobile&&<button onClick={()=>openWaitlist("Early Access")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"3px",padding:"9px 22px",background:C.orange,color:C.textOnAccent,border:"none",borderRadius:"2px",cursor:"pointer",transition:"box-shadow .2s"}} onMouseEnter={e=>e.target.style.boxShadow=`0 6px 20px ${C.orange}40`} onMouseLeave={e=>e.target.style.boxShadow=""}>Join Now</button>}
           {isMobile&&(
             <button onClick={()=>setMenuOpen(!menuOpen)} style={{background:"none",border:"none",cursor:"pointer",padding:"6px",display:"flex",flexDirection:"column",gap:"5px"}}>
-              <span style={{display:"block",width:"22px",height:"2px",background:menuOpen?C.orange:C.white,transition:"all .3s",transform:menuOpen?"rotate(45deg) translate(5px,5px)":""}}/>
-              <span style={{display:"block",width:"22px",height:"2px",background:menuOpen?C.orange:C.white,transition:"all .3s",opacity:menuOpen?0:1}}/>
-              <span style={{display:"block",width:"22px",height:"2px",background:menuOpen?C.orange:C.white,transition:"all .3s",transform:menuOpen?"rotate(-45deg) translate(5px,-5px)":""}}/>
+              <span style={{display:"block",width:"22px",height:"2px",background:menuOpen?C.orange:C.text,transition:"all .3s",transform:menuOpen?"rotate(45deg) translate(5px,5px)":""}}/>
+              <span style={{display:"block",width:"22px",height:"2px",background:menuOpen?C.orange:C.text,transition:"all .3s",opacity:menuOpen?0:1}}/>
+              <span style={{display:"block",width:"22px",height:"2px",background:menuOpen?C.orange:C.text,transition:"all .3s",transform:menuOpen?"rotate(-45deg) translate(5px,-5px)":""}}/>
             </button>
           )}
         </div>
@@ -420,10 +420,10 @@ function Nav({current,setPage,openWaitlist}){
         <div style={{position:"fixed",top:"68px",left:0,right:0,bottom:0,zIndex:199,background:"rgba(5,5,10,0.99)",backdropFilter:"blur(20px)",animation:"menuSlide .3s ease",overflowY:"auto",padding:"32px 28px 80px"}}>
           <div style={{display:"flex",flexDirection:"column",gap:"2px",marginBottom:"32px"}}>
             {ALL_PAGES.map((p,i)=>(
-              <button key={p} onClick={()=>go(p)} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(28px,6vw,40px)",letterSpacing:"2px",textAlign:"left",color:current===p?C.orange:C.white,background:"none",border:"none",cursor:"pointer",padding:"11px 0",borderBottom:"1px solid rgba(255,255,255,0.05)",animation:`fadeUp .4s ease ${i*.04}s both`}}>{p}</button>
+              <button key={p} onClick={()=>go(p)} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(28px,6vw,40px)",letterSpacing:"2px",textAlign:"left",color:current===p?C.orange:C.text,background:"none",border:"none",cursor:"pointer",padding:"11px 0",borderBottom:`1px solid ${C.border}`,animation:`fadeUp .4s ease ${i*.04}s both`}}>{p}</button>
             ))}
           </div>
-          <button onClick={()=>{openWaitlist("Mobile Nav");setMenuOpen(false);}} style={{width:"100%",fontFamily:"'Bebas Neue',sans-serif",fontSize:"18px",letterSpacing:"3px",padding:"16px",background:C.orange,color:C.bg,border:"none",borderRadius:"2px",cursor:"pointer"}}>Join Now</button>
+          <button onClick={()=>{openWaitlist("Mobile Nav");setMenuOpen(false);}} style={{width:"100%",fontFamily:"'Bebas Neue',sans-serif",fontSize:"18px",letterSpacing:"3px",padding:"16px",background:C.orange,color:C.textOnAccent,border:"none",borderRadius:"2px",cursor:"pointer"}}>Join Now</button>
         </div>
       )}
     </>
@@ -441,7 +441,7 @@ function Footer({setPage,openWaitlist}){
     {title:"Legal",links:["Privacy","Terms","Cookies"]},
   ];
   return(
-    <footer style={{background:"#02020A",borderTop:`1px solid ${C.border}`}}>
+    <footer style={{background:C.bg2,borderTop:`1px solid ${C.border}`}}>
       <div style={{maxWidth:"1100px",margin:"0 auto",padding:w<600?"48px 20px":"56px 64px"}}>
         <div style={{display:"grid",gridTemplateColumns:w<600?"1fr 1fr":w<960?"1fr 1fr 1fr":"1fr 1fr 1fr 1fr 1fr",gap:"36px",marginBottom:"52px"}}>
           <div>
@@ -449,9 +449,9 @@ function Footer({setPage,openWaitlist}){
             <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.dimmer,lineHeight:1.7,maxWidth:"180px",marginBottom:"18px"}}>Where creators, cities, events, and businesses collide in real life.</p>
             <div style={{display:"flex",gap:"8px"}}>
               {SOCIALS.map((s,i)=>(
-                <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} style={{width:"30px",height:"30px",border:"1px solid rgba(255,255,255,0.1)",borderRadius:"2px",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",transition:"border-color .2s,background .2s,color .2s",textDecoration:"none",color:"rgba(255,255,255,0.8)"}}
+                <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} style={{width:"30px",height:"30px",border:"1px solid rgba(0,0,0,0.08)",borderRadius:"2px",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",transition:"border-color .2s,background .2s,color .2s",textDecoration:"none",color:C.text}}
                   onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.background="rgba(255,107,0,0.1)";}}
-                  onMouseLeave={e=>{e.currentTarget.style.borderColor="rgba(255,255,255,0.1)";e.currentTarget.style.background="transparent";}}
+                  onMouseLeave={e=>{e.currentTarget.style.borderColor=C.border;e.currentTarget.style.background="transparent";}}
                 >{s.icon}</a>
               ))}
             </div>
@@ -462,7 +462,7 @@ function Footer({setPage,openWaitlist}){
               <div style={{display:"flex",flexDirection:"column",gap:"9px"}}>
                 {col.links.map(l=>(
                   <button key={l} onClick={()=>go(l)} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.dimmer,background:"none",border:"none",cursor:"pointer",textAlign:"left",transition:"color .2s",padding:0}}
-                    onMouseEnter={e=>e.target.style.color=C.white}
+                    onMouseEnter={e=>e.target.style.color=C.text}
                     onMouseLeave={e=>e.target.style.color=C.dimmer}
                   >{l}</button>
                 ))}
@@ -470,14 +470,14 @@ function Footer({setPage,openWaitlist}){
             </div>
           ))}
         </div>
-        <div style={{height:"1px",background:"rgba(255,255,255,0.05)",marginBottom:"22px"}}/>
+        <div style={{height:"1px",background:"rgba(0,0,0,0.08)",marginBottom:"22px"}}/>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",flexWrap:"wrap",gap:"12px"}}>
-          <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:"rgba(255,255,255,0.18)"}}>(c) 2026 VibeCircle (Pty) Ltd - Making energy visible.</p>
+          <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer}}>(c) 2026 VibeCircle (Pty) Ltd - Making energy visible.</p>
           <div style={{display:"flex",gap:"20px"}}>
             {["Privacy","Terms","Cookies"].map(l=>(
-              <button key={l} onClick={()=>go(l)} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:"rgba(255,255,255,0.18)",cursor:"pointer",background:"none",border:"none",padding:0,transition:"color .2s"}}
+              <button key={l} onClick={()=>go(l)} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer, cursor:"pointer",background:"none",border:"none",padding:0,transition:"color .2s"}}
                 onMouseEnter={e=>e.target.style.color=C.orange}
-                onMouseLeave={e=>e.target.style.color="rgba(255,255,255,0.18)"}
+                onMouseLeave={e=>e.target.style.color=C.dimmer}
               >{l}</button>
             ))}
           </div>
@@ -514,36 +514,40 @@ function HomePage({setPage,openWaitlist}){
             <span key={wi} style={{display:"inline-block",animation:"fadeUp .4s ease forwards",opacity:0}}>{words[wi%words.length]}</span>
             <span style={{width:40,height:1,background:C.orange,display:"inline-block"}}/>
           </div>
-          <h1 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(52px,10vw,118px)",lineHeight:.9,color:C.white,marginBottom:"16px"}}>
+          <h1 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(52px,10vw,118px)",lineHeight:.9,color:C.text,marginBottom:"16px"}}>
             IT'S NOT<br/><span style={{WebkitTextStroke:"2px #FF6B00",color:"transparent"}}>SOCIAL MEDIA.</span><br/>IT'S SOCIAL<br/><span style={{color:C.orange}}>GRAVITY.</span>
           </h1>
           <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(15px,2vw,19px)",color:C.dim,margin:"32px auto 48px",maxWidth:"520px",lineHeight:1.75}}>Where creators, cities, events, and businesses connect in real time.</p>
           <div style={{display:"flex",gap:"14px",justifyContent:"center",flexWrap:"wrap",marginBottom:"56px"}}>
-            <button onClick={()=>openWaitlist("Creator Waitlist")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"16px",letterSpacing:"3px",padding:"16px 44px",background:C.orange,color:C.bg,border:"none",borderRadius:"2px",cursor:"pointer",transition:"transform .2s,box-shadow .2s"}} onMouseEnter={e=>{e.target.style.transform="translateY(-2px)";e.target.style.boxShadow=`0 16px 40px ${C.orange}45`;}} onMouseLeave={e=>{e.target.style.transform="";e.target.style.boxShadow="";}}>Join the Movement</button>
-            <button onClick={()=>go("Marketplace")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"16px",letterSpacing:"3px",padding:"16px 44px",background:"transparent",color:C.white,border:"1px solid rgba(255,255,255,0.22)",borderRadius:"2px",cursor:"pointer",transition:"all .2s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.color=C.orange;}} onMouseLeave={e=>{e.currentTarget.style.borderColor="rgba(255,255,255,0.22)";e.currentTarget.style.color=C.white;}}>Explore Marketplace</button>
+            <button onClick={()=>openWaitlist("Creator Waitlist")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"16px",letterSpacing:"3px",padding:"16px 44px",background:C.orange,color:C.textOnAccent,border:"none",borderRadius:"2px",cursor:"pointer",transition:"transform .2s,box-shadow .2s"}} onMouseEnter={e=>{e.target.style.transform="translateY(-2px)";e.target.style.boxShadow=`0 16px 40px ${C.orange}45`;}} onMouseLeave={e=>{e.target.style.transform="";e.target.style.boxShadow="";}}>Join the Movement</button>
+            <button onClick={()=>go("Marketplace")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"16px",letterSpacing:"3px",padding:"16px 44px",background:"transparent",color:C.text,border:`1px solid ${C.border}`,borderRadius:"2px",cursor:"pointer",transition:"all .2s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.color=C.orange;}} onMouseLeave={e=>{e.currentTarget.style.borderColor=C.border;e.currentTarget.style.color=C.text;}}>Explore Marketplace</button>
           </div>
           <div style={{display:"flex",gap:"10px",justifyContent:"center",flexWrap:"wrap"}}>
             {[{l:"About",p:"About",i:"----"},{l:"Creators",p:"Creators",i:"---"},{l:"Marketplace",p:"Marketplace",i:"----"},{l:"For Business",p:"Business",i:"----"},{l:"Contact",p:"Contact",i:"------"}].map(({l,p,i})=>(
-              <button key={p} onClick={()=>go(p)} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",padding:"10px 18px",background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.1)",borderRadius:"2px",color:C.dim,cursor:"pointer",display:"flex",alignItems:"center",gap:"7px",transition:"all .25s"}}
-                onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.color=C.white;e.currentTarget.style.background="rgba(255,107,0,0.08)";}}
-                onMouseLeave={e=>{e.currentTarget.style.borderColor="rgba(255,255,255,0.1)";e.currentTarget.style.color=C.dim;e.currentTarget.style.background="rgba(255,255,255,0.04)";}}
+              <button key={p} onClick={()=>go(p)} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",padding:"10px 18px",background:"rgba(0,0,0,0.04)",border:"1px solid "+C.border,borderRadius:"2px",color:C.dim,cursor:"pointer",display:"flex",alignItems:"center",gap:"7px",transition:"all .25s"}}
+                onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.color=C.text;e.currentTarget.style.background="rgba(255,107,0,0.08)";}}
+                onMouseLeave={e=>{e.currentTarget.style.borderColor=C.border;e.currentTarget.style.color=C.dim;e.currentTarget.style.background="rgba(0,0,0,0.04)";}}
               >{i} {l}</button>
             ))}
           </div>
         </div>
       </section>
-      {/* TESTIMONIALS */}
+      {/* WHAT WE ENVISION */}
       <section className="sec-pad" style={{background:C.bg2}}>
         <div style={{maxWidth:"1100px",margin:"0 auto"}}>
-          <Reveal style={{marginBottom:"52px"}}><Tag>What people say</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(32px,5vw,56px)",color:C.white,lineHeight:1,marginTop:"16px"}}>The vibe is <span style={{color:C.orange}}>real.</span></h2></Reveal>
-          <div className="grid-4">{TESTIMONIALS.map((t,i)=><Reveal key={i} delay={i*.1}><TestimonialCard {...t}/></Reveal>)}</div>
+          <Reveal style={{marginBottom:"52px"}}><Tag>What we envision</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(32px,5vw,56px)",color:C.text,lineHeight:1,marginTop:"16px"}}>The vibe is <span style={{color:C.orange}}>real.</span></h2></Reveal>
+          <div style={{maxWidth:"720px"}}>
+            <Reveal delay={0.1}><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(15px,1.8vw,18px)",color:C.dim,lineHeight:1.85,marginBottom:"24px"}}>VibeCircles envisions a digital world where people connect through shared energy, not just profiles and posts. We aim to build a platform where conversations feel human, communities feel like home, and creativity moves faster than algorithms. In a noisy internet chasing attention, VibeCircles exists to cultivate presence — a space where students, creators, hustlers, and everyday explorers can find their people, express their vibe, and turn moments into movements.</p></Reveal>
+            <Reveal delay={0.2}><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(15px,1.8vw,18px)",color:C.dim,lineHeight:1.85,marginBottom:"24px"}}>VibeCircles isn't just a social platform; it's an ecosystem for belonging in the modern age — where technology amplifies authenticity instead of replacing it.</p></Reveal>
+            <Reveal delay={0.3}><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(15px,1.8vw,18px)",color:C.dim,lineHeight:1.85,marginBottom:0}}>The strange truth about online spaces is that the more "connected" we become, the more fragmented we often feel. A platform that optimizes for vibe — shared context, mood, and intent — is less about features and more about social physics: lowering friction between humans who were already meant to find each other.</p></Reveal>
+          </div>
         </div>
       </section>
       {/* BRAND MARQUEE */}
       <div style={{background:C.bg,borderTop:`1px solid ${C.border}`,borderBottom:`1px solid ${C.border}`,padding:"18px 0",overflow:"hidden"}}>
         <div style={{display:"flex",animation:"marquee 20s linear infinite",whiteSpace:"nowrap"}}>
           {[...Array(3)].map((_,x)=>["NEON BREW CO.","--","APEX STREETWEAR","--","SOLSTICE FESTIVAL","--","PULSE FITNESS","--","URBAN EATS","--","CTRL AUDIO","--","MIRAGE CLUB GROUP","--"].map((wd,i)=>(
-            <span key={`${x}-${i}`} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"3px",color:wd==="--"?C.orange:"rgba(255,255,255,0.22)",marginRight:"28px"}}>{wd}</span>
+            <span key={`${x}-${i}`} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"3px",color:wd==="--"?C.orange:C.dimmer,marginRight:"28px"}}>{wd}</span>
           )))}
         </div>
       </div>
@@ -568,18 +572,18 @@ function StatCard({val,suffix,label,active}){
 function AboutPage({openWaitlist}){
   const[sRef,sInView]=useInView(.3);
   return(
-    <div style={{background:C.bg,color:C.white}}>
+    <div style={{background:C.bg,color:C.text}}>
       <PageHero tag="About VibeCircle" title="We build infrastructure" accent="for modern city culture." sub="Not just online conversations --- offline moments. From campus pop-ups to club nights."/>
       <Divider/>
       <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"1100px",margin:"0 auto"}}><Reveal style={{marginBottom:"52px"}}><Tag>By the numbers</Tag></Reveal><div ref={sRef} className="grid-4">{STATS.map((s,i)=><StatCard key={i} {...s} active={sInView}/>)}</div></div></section>
       <Divider/>
-      <section className="sec-pad" style={{position:"relative",overflow:"hidden"}}><Orb top="20%" left="-8%" size={400} opacity={0.09}/><div style={{maxWidth:"1100px",margin:"0 auto"}} className="grid-2"><div><Reveal><Tag>Mission</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,4vw,48px)",color:C.white,lineHeight:1.05,margin:"16px 0 18px"}}>Turn digital energy into<br/><span style={{color:C.orange}}>real-world connection.</span></h2><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"16px",color:C.dim,lineHeight:1.8}}>VibeCircle connects people not just by what they post --- but by where they are, what they love, and what's happening right now.</p></Reveal></div><div><Reveal delay={.15}><Tag>Vision</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,4vw,48px)",color:C.white,lineHeight:1.05,margin:"16px 0 18px"}}>A world where every city has<br/><span style={{color:C.orange}}>a visible heartbeat.</span></h2><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"16px",color:C.dim,lineHeight:1.8}}>We're building the living map of culture --- the layer on top of the city that shows you where energy actually lives.</p></Reveal></div></div></section>
+      <section className="sec-pad" style={{position:"relative",overflow:"hidden"}}><Orb top="20%" left="-8%" size={400} opacity={0.09}/><div style={{maxWidth:"1100px",margin:"0 auto"}} className="grid-2"><div><Reveal><Tag>Mission</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,4vw,48px)",color:C.text,lineHeight:1.05,margin:"16px 0 18px"}}>Turn digital energy into<br/><span style={{color:C.orange}}>real-world connection.</span></h2><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"16px",color:C.dim,lineHeight:1.8}}>VibeCircle connects people not just by what they post --- but by where they are, what they love, and what's happening right now.</p></Reveal></div><div><Reveal delay={.15}><Tag>Vision</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,4vw,48px)",color:C.text,lineHeight:1.05,margin:"16px 0 18px"}}>A world where every city has<br/><span style={{color:C.orange}}>a visible heartbeat.</span></h2><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"16px",color:C.dim,lineHeight:1.8}}>We're building the living map of culture --- the layer on top of the city that shows you where energy actually lives.</p></Reveal></div></div></section>
       <Divider/>
-      <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"1000px",margin:"0 auto"}}><Reveal style={{marginBottom:"44px"}}><Tag>Manifesto</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,56px)",color:C.white,marginTop:"16px",lineHeight:1}}>We <span style={{color:C.orange}}>believe</span></h2></Reveal>{MANIFESTO.map((line,i)=><Reveal key={i} delay={i*.09}><div style={{display:"flex",alignItems:"center",gap:"24px",padding:"22px 0",borderBottom:"1px solid rgba(255,255,255,0.06)"}}><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(22px,3.5vw,42px)",color:C.white,flex:1}}>{line}</div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"11px",letterSpacing:"3px",color:C.orange,opacity:.6}}>0{i+1}</div></div></Reveal>)}</div></section>
+      <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"1000px",margin:"0 auto"}}><Reveal style={{marginBottom:"44px"}}><Tag>Manifesto</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,56px)",color:C.text,marginTop:"16px",lineHeight:1}}>We <span style={{color:C.orange}}>believe</span></h2></Reveal>{MANIFESTO.map((line,i)=><Reveal key={i} delay={i*.09}><div style={{display:"flex",alignItems:"center",gap:"24px",padding:"22px 0",borderBottom:"1px solid rgba(0,0,0,0.08)"}}><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(22px,3.5vw,42px)",color:C.text,flex:1}}>{line}</div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"11px",letterSpacing:"3px",color:C.orange,opacity:.6}}>0{i+1}</div></div></Reveal>)}</div></section>
       <Divider/>
-      <section className="sec-pad"><div style={{maxWidth:"1100px",margin:"0 auto"}}><Reveal style={{marginBottom:"48px"}}><Tag>Community voices</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(28px,4vw,52px)",color:C.white,lineHeight:1,marginTop:"16px"}}>Don't take our word <span style={{color:C.orange}}>for it.</span></h2></Reveal><div className="grid-4">{TESTIMONIALS.map((t,i)=><Reveal key={i} delay={i*.1}><TestimonialCard {...t}/></Reveal>)}</div></div></section>
+      <section className="sec-pad"><div style={{maxWidth:"1100px",margin:"0 auto"}}><Reveal style={{marginBottom:"48px"}}><Tag>What we envision</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(28px,4vw,52px)",color:C.text,lineHeight:1,marginTop:"16px"}}>The vibe is <span style={{color:C.orange}}>real.</span></h2></Reveal><div style={{maxWidth:"720px"}}><Reveal delay={0.1}><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(15px,1.8vw,18px)",color:C.dim,lineHeight:1.85,marginBottom:"24px"}}>VibeCircles envisions a digital world where people connect through shared energy, not just profiles and posts. We aim to build a platform where conversations feel human, communities feel like home, and creativity moves faster than algorithms. In a noisy internet chasing attention, VibeCircles exists to cultivate presence — a space where students, creators, hustlers, and everyday explorers can find their people, express their vibe, and turn moments into movements.</p></Reveal><Reveal delay={0.2}><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(15px,1.8vw,18px)",color:C.dim,lineHeight:1.85,marginBottom:"24px"}}>VibeCircles isn't just a social platform; it's an ecosystem for belonging in the modern age — where technology amplifies authenticity instead of replacing it.</p></Reveal><Reveal delay={0.3}><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(15px,1.8vw,18px)",color:C.dim,lineHeight:1.85,marginBottom:0}}>The strange truth about online spaces is that the more "connected" we become, the more fragmented we often feel. A platform that optimizes for vibe — shared context, mood, and intent — is less about features and more about social physics: lowering friction between humans who were already meant to find each other.</p></Reveal></div></div></section>
       <Divider/>
-      <section className="sec-pad" style={{background:C.bg2,position:"relative",overflow:"hidden"}}><Orb bottom="-20%" right="-5%" size={500} color={C.pink} opacity={0.08} delay="2s"/><div style={{maxWidth:"780px",margin:"0 auto",position:"relative"}}><Reveal><Tag>Founder's Story</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,56px)",color:C.white,lineHeight:1,margin:"16px 0 36px"}}>What if maps<br/><span style={{color:C.orange}}>were alive?</span></h2></Reveal>{["VibeCircle started with a simple realization: social media shows opinions --- but not what's happening around you.","Scrolling felt endless. Cities felt invisible. Events felt disconnected.","So we imagined something different. What if social media had a pulse? What if creators could light up a city?","VibeCircle was built to connect digital expression to physical reality. We're not chasing trends. We're building infrastructure for culture."].map((p,i)=><Reveal key={i} delay={i*.1}><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:i===1?"20px":"17px",fontStyle:i===1?"italic":"normal",color:i===0?"rgba(255,255,255,0.8)":C.dim,lineHeight:1.8,marginBottom:"18px"}}>{p}</p></Reveal>)}</div></section>
+      <section className="sec-pad" style={{background:C.bg2,position:"relative",overflow:"hidden"}}><Orb bottom="-20%" right="-5%" size={500} color={C.pink} opacity={0.08} delay="2s"/><div style={{maxWidth:"780px",margin:"0 auto",position:"relative"}}><Reveal><Tag>Founder's Story</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,56px)",color:C.text,lineHeight:1,margin:"16px 0 36px"}}>What if maps<br/><span style={{color:C.orange}}>were alive?</span></h2></Reveal>{["VibeCircle started with a simple realization: social media shows opinions --- but not what's happening around you.","Scrolling felt endless. Cities felt invisible. Events felt disconnected.","So we imagined something different. What if social media had a pulse? What if creators could light up a city?","VibeCircle was built to connect digital expression to physical reality. We're not chasing trends. We're building infrastructure for culture."].map((p,i)=><Reveal key={i} delay={i*.1}><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:i===1?"20px":"17px",fontStyle:i===1?"italic":"normal",color:i===0?C.dim:C.dim,lineHeight:1.8,marginBottom:"18px"}}>{p}</p></Reveal>)}</div></section>
     </div>
   );
 }
@@ -598,14 +602,14 @@ const TEAM=[
 function TeamPage({openWaitlist,setPage}){
   const[active,setActive]=useState(null);
   return(
-    <div style={{background:C.bg,color:C.white}}>
+    <div style={{background:C.bg,color:C.text}}>
       <PageHero tag="The Team" title="Meet the builders" accent="of the vibe." sub="Developers, designers, strategists, creatives --- building a living ecosystem, not just an app."/>
       <Divider/>
-      <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"1100px",margin:"0 auto"}}><Reveal style={{marginBottom:"52px"}}><Tag>Core Team</Tag></Reveal><div className="grid-3" style={{gap:"18px"}}>{TEAM.map((m,i)=><Reveal key={i} delay={i*.08}><div onClick={()=>setActive(active===i?null:i)} style={{padding:"30px 26px",background:active===i?`${m.color}0A`:"rgba(255,255,255,0.02)",border:`1px solid ${active===i?m.color+"50":"rgba(255,255,255,0.07)"}`,borderRadius:"4px",cursor:"pointer",transition:"all .3s",height:"100%"}} onMouseEnter={e=>{if(active!==i){e.currentTarget.style.borderColor=m.color+"30";e.currentTarget.style.background=`${m.color}05`;}}} onMouseLeave={e=>{if(active!==i){e.currentTarget.style.borderColor="rgba(255,255,255,0.07)";e.currentTarget.style.background="rgba(255,255,255,0.02)";}}}><div style={{display:"flex",alignItems:"center",gap:"14px",marginBottom:"14px"}}><div style={{width:"48px",height:"48px",borderRadius:"50%",background:`${m.color}20`,border:`2px solid ${m.color}40`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"21px",flexShrink:0}}>{m.emoji}</div><div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"15px",fontWeight:600,color:C.white}}>{m.name}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:m.color,marginTop:"2px"}}>{m.role}</div></div></div><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",fontStyle:"italic",color:"rgba(255,255,255,.5)",lineHeight:1.7,marginBottom:active===i?"14px":"0"}}>"{m.quote}"</p>{active===i&&<div style={{animation:"fadeUp .3s ease"}}><div style={{height:"1px",background:`${m.color}30`,margin:"14px 0"}}/><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.dim,lineHeight:1.7}}>{m.bio}</p></div>}</div></Reveal>)}</div></div></section>
+      <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"1100px",margin:"0 auto"}}><Reveal style={{marginBottom:"52px"}}><Tag>Core Team</Tag></Reveal><div className="grid-3" style={{gap:"18px"}}>{TEAM.map((m,i)=><Reveal key={i} delay={i*.08}><div onClick={()=>setActive(active===i?null:i)} style={{padding:"30px 26px",background:active===i?`${m.color}0A`:"rgba(0,0,0,0.02)",border:`1px solid ${active===i?m.color+"50":C.border}`,borderRadius:"4px",cursor:"pointer",transition:"all .3s",height:"100%"}} onMouseEnter={e=>{if(active!==i){e.currentTarget.style.borderColor=m.color+"30";e.currentTarget.style.background=`${m.color}05`;}}} onMouseLeave={e=>{if(active!==i){e.currentTarget.style.borderColor=C.border;e.currentTarget.style.background="rgba(0,0,0,0.02)";}}}><div style={{display:"flex",alignItems:"center",gap:"14px",marginBottom:"14px"}}><div style={{width:"48px",height:"48px",borderRadius:"50%",background:`${m.color}20`,border:`2px solid ${m.color}40`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"21px",flexShrink:0}}>{m.emoji}</div><div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"15px",fontWeight:600,color:C.text}}>{m.name}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:m.color,marginTop:"2px"}}>{m.role}</div></div></div><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",fontStyle:"italic",color:"rgba(255,255,255,.5)",lineHeight:1.7,marginBottom:active===i?"14px":"0"}}>"{m.quote}"</p>{active===i&&<div style={{animation:"fadeUp .3s ease"}}><div style={{height:"1px",background:`${m.color}30`,margin:"14px 0"}}/><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.dim,lineHeight:1.7}}>{m.bio}</p></div>}</div></Reveal>)}</div></div></section>
       <Divider/>
-      <section className="sec-pad"><div style={{maxWidth:"1100px",margin:"0 auto"}} className="grid-2"><div><Reveal><Tag>How we work</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,52px)",color:C.white,lineHeight:1,margin:"16px 0 20px"}}>Culture isn't built in<br/><span style={{color:C.orange}}>conference rooms.</span></h2><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"16px",color:C.dim,lineHeight:1.8}}>We work embedded in cities. We ship fast. We talk to creators and businesses every day. We build what we'd actually want to use.</p></Reveal></div><div style={{display:"flex",flexDirection:"column",gap:"10px"}}>{[["----","Remote-first","Work from the cities you're building for."],["---","Ship weekly","Real output, real feedback, real iteration."],["----","Direct impact","No layers. Your work ships to 50K+ users."],["----","Equity for all","Every full-time employee is an owner."]].map(([ic,t,d],i)=><Reveal key={i} delay={i*.08}><div style={{display:"flex",gap:"14px",alignItems:"flex-start",padding:"18px 22px",background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.07)",borderRadius:"4px",transition:"all .3s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.background="rgba(255,107,0,0.06)";}} onMouseLeave={e=>{e.currentTarget.style.borderColor="rgba(255,255,255,0.07)";e.currentTarget.style.background="rgba(255,255,255,0.02)";}}><span style={{fontSize:"18px"}}>{ic}</span><div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"16px",color:C.white}}>{t}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.dim,marginTop:"3px"}}>{d}</div></div></div></Reveal>)}</div></div></section>
+      <section className="sec-pad"><div style={{maxWidth:"1100px",margin:"0 auto"}} className="grid-2"><div><Reveal><Tag>How we work</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,52px)",color:C.text,lineHeight:1,margin:"16px 0 20px"}}>Culture isn't built in<br/><span style={{color:C.orange}}>conference rooms.</span></h2><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"16px",color:C.dim,lineHeight:1.8}}>We work embedded in cities. We ship fast. We talk to creators and businesses every day. We build what we'd actually want to use.</p></Reveal></div><div style={{display:"flex",flexDirection:"column",gap:"10px"}}>{[["----","Remote-first","Work from the cities you're building for."],["---","Ship weekly","Real output, real feedback, real iteration."],["----","Direct impact","No layers. Your work ships to 50K+ users."],["----","Equity for all","Every full-time employee is an owner."]].map(([ic,t,d],i)=><Reveal key={i} delay={i*.08}><div style={{display:"flex",gap:"14px",alignItems:"flex-start",padding:"18px 22px",background:"rgba(0,0,0,0.02)",border:`1px solid ${C.border}`,borderRadius:"4px",transition:"all .3s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.background="rgba(255,107,0,0.06)";}} onMouseLeave={e=>{e.currentTarget.style.borderColor=C.border;e.currentTarget.style.background="rgba(0,0,0,0.02)";}}><span style={{fontSize:"18px"}}>{ic}</span><div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"16px",color:C.text}}>{t}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.dim,marginTop:"3px"}}>{d}</div></div></div></Reveal>)}</div></div></section>
       <Divider/>
-      <section className="sec-pad-sm" style={{background:C.bg2,textAlign:"center"}}><Reveal><Tag>Join us</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(28px,5vw,52px)",color:C.white,lineHeight:1,margin:"16px auto 20px",maxWidth:"500px"}}>Want to be on this page?<br/><span style={{color:C.orange}}>We're hiring.</span></h2><div style={{display:"flex",gap:"12px",justifyContent:"center",flexWrap:"wrap"}}><button onClick={()=>{setPage("Jobs");window.scrollTo(0,0);}} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"13px 32px",background:C.orange,color:C.bg,border:"none",borderRadius:"2px",cursor:"pointer"}}>See Open Roles</button><button onClick={()=>openWaitlist("Team Interest")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"13px 32px",background:"transparent",color:C.white,border:"1px solid rgba(255,255,255,0.2)",borderRadius:"2px",cursor:"pointer",transition:"all .2s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.color=C.orange;}} onMouseLeave={e=>{e.currentTarget.style.borderColor="rgba(255,255,255,0.2)";e.currentTarget.style.color=C.white;}}>Join Waitlist</button></div></Reveal></section>
+      <section className="sec-pad-sm" style={{background:C.bg2,textAlign:"center"}}><Reveal><Tag>Join us</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(28px,5vw,52px)",color:C.text,lineHeight:1,margin:"16px auto 20px",maxWidth:"500px"}}>Want to be on this page?<br/><span style={{color:C.orange}}>We're hiring.</span></h2><div style={{display:"flex",gap:"12px",justifyContent:"center",flexWrap:"wrap"}}><button onClick={()=>{setPage("Jobs");window.scrollTo(0,0);}} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"13px 32px",background:C.orange,color:C.textOnAccent,border:"none",borderRadius:"2px",cursor:"pointer"}}>See Open Roles</button><button onClick={()=>openWaitlist("Team Interest")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"13px 32px",background:"transparent",color:C.text,border:`1px solid ${C.border}`,borderRadius:"2px",cursor:"pointer",transition:"all .2s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.color=C.orange;}} onMouseLeave={e=>{e.currentTarget.style.borderColor=C.border;e.currentTarget.style.color=C.text;}}>Join Waitlist</button></div></Reveal></section>
     </div>
   );
 }
@@ -629,19 +633,19 @@ const CREATOR_FAQS=[
 function CreatorsPage({openWaitlist}){
   const[annual,setAnnual]=useState(false);
   return(
-    <div style={{background:C.bg,color:C.white}}>
+    <div style={{background:C.bg,color:C.text}}>
       <PageHero tag="For Creators" title="Your city is your" accent="stage. Own it." sub="VibeCircle gives creators tools to build a real local following, get discovered on the live city map, and earn from brand partnerships."/>
       <Divider/>
       <section className="sec-pad-sm" style={{background:C.bg2}}><div style={{maxWidth:"1100px",margin:"0 auto"}}><div className="grid-4">{[["50K+","Active Creators"],["R38M+","Creator Earnings"],["3,200+","Brand Deals"],["48hrs","Avg Deal Response"]].map(([v,l],i)=><Reveal key={i} delay={i*.1}><div style={{padding:"26px",background:"rgba(255,107,0,0.04)",border:`1px solid ${C.border}`,borderRadius:"4px",textAlign:"center"}}><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,4vw,46px)",color:C.orange,lineHeight:1}}>{v}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",letterSpacing:"1.5px",textTransform:"uppercase",color:C.dim,marginTop:"5px"}}>{l}</div></div></Reveal>)}</div></div></section>
       <Divider/>
-      <section className="sec-pad"><div style={{maxWidth:"1100px",margin:"0 auto"}}><Reveal style={{marginBottom:"52px"}}><Tag>Creator Tools</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,56px)",color:C.white,lineHeight:1,marginTop:"16px"}}>Everything you need to<br/><span style={{color:C.orange}}>light up your city.</span></h2></Reveal><div className="grid-3">{CREATOR_TOOLS.map((t,i)=><Reveal key={i} delay={i*.08}><div style={{padding:"30px 26px",background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.07)",borderRadius:"4px",height:"100%",transition:"all .3s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.background="rgba(255,107,0,0.06)";e.currentTarget.style.transform="translateY(-4px)";}} onMouseLeave={e=>{e.currentTarget.style.borderColor="rgba(255,255,255,0.07)";e.currentTarget.style.background="rgba(255,255,255,0.02)";e.currentTarget.style.transform="";}}><div style={{fontSize:"24px",marginBottom:"14px"}}>{t.icon}</div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"19px",color:C.white,marginBottom:"9px"}}>{t.title}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.dim,lineHeight:1.7}}>{t.desc}</div></div></Reveal>)}</div></div></section>
+      <section className="sec-pad"><div style={{maxWidth:"1100px",margin:"0 auto"}}><Reveal style={{marginBottom:"52px"}}><Tag>Creator Tools</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,56px)",color:C.text,lineHeight:1,marginTop:"16px"}}>Everything you need to<br/><span style={{color:C.orange}}>light up your city.</span></h2></Reveal><div className="grid-3">{CREATOR_TOOLS.map((t,i)=><Reveal key={i} delay={i*.08}><div style={{padding:"30px 26px",background:"rgba(0,0,0,0.02)",border:"1px solid "+C.border,borderRadius:"4px",height:"100%",transition:"all .3s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.background="rgba(255,107,0,0.06)";e.currentTarget.style.transform="translateY(-4px)";}} onMouseLeave={e=>{e.currentTarget.style.borderColor=C.border;e.currentTarget.style.background="rgba(0,0,0,0.02)";e.currentTarget.style.transform="";}}><div style={{fontSize:"24px",marginBottom:"14px"}}>{t.icon}</div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"19px",color:C.text,marginBottom:"9px"}}>{t.title}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.dim,lineHeight:1.7}}>{t.desc}</div></div></Reveal>)}</div></div></section>
       <Divider/>
       <section className="sec-pad" style={{background:C.bg2}}>
         <div style={{maxWidth:"1100px",margin:"0 auto"}}>
-          <Reveal style={{marginBottom:"16px",textAlign:"center"}}><Tag>Creator Plans</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,56px)",color:C.white,lineHeight:1,marginTop:"16px",marginBottom:"28px"}}>Start free. Scale <span style={{color:C.orange}}>when ready.</span></h2></Reveal>
+          <Reveal style={{marginBottom:"16px",textAlign:"center"}}><Tag>Creator Plans</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,56px)",color:C.text,lineHeight:1,marginTop:"16px",marginBottom:"28px"}}>Start free. Scale <span style={{color:C.orange}}>when ready.</span></h2></Reveal>
           <Reveal style={{textAlign:"center",marginBottom:"40px"}}>
-            <div style={{display:"inline-flex",background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.1)",borderRadius:"3px",padding:"4px"}}>
-              {["Monthly","Annual"].map(t=><button key={t} onClick={()=>setAnnual(t==="Annual")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"2px",padding:"9px 24px",background:((t==="Annual")===(annual))?C.orange:"transparent",color:((t==="Annual")===(annual))?C.bg:C.dim,border:"none",borderRadius:"2px",cursor:"pointer",transition:"all .2s"}}>{t}{t==="Annual"&&<span style={{fontSize:"10px",marginLeft:"6px",background:C.orange+"30",color:C.orange,padding:"2px 6px",borderRadius:"2px"}}>-20%</span>}</button>)}
+            <div style={{display:"inline-flex",background:"rgba(0,0,0,0.04)",border:"1px solid "+C.border,borderRadius:"3px",padding:"4px"}}>
+              {["Monthly","Annual"].map(t=><button key={t} onClick={()=>setAnnual(t==="Annual")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"2px",padding:"9px 24px",background:((t==="Annual")===(annual))?C.orange:"transparent",color:((t==="Annual")===(annual))?C.textOnAccent:C.dim,border:"none",borderRadius:"2px",cursor:"pointer",transition:"all .2s"}}>{t}{t==="Annual"&&<span style={{fontSize:"10px",marginLeft:"6px",background:C.orange+"30",color:C.orange,padding:"2px 6px",borderRadius:"2px"}}>-20%</span>}</button>)}
             </div>
           </Reveal>
           <div className="grid-3">{CREATOR_TIERS.map((t,i)=><PricingCard key={i} {...t} annual={annual} onCta={()=>openWaitlist(`Creator ${t.plan} Plan`)}/>)}</div>
@@ -649,7 +653,7 @@ function CreatorsPage({openWaitlist}){
         </div>
       </section>
       <Divider/>
-      <section className="sec-pad"><div style={{maxWidth:"800px",margin:"0 auto"}}><Reveal style={{marginBottom:"44px"}}><Tag>Creator FAQ</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(26px,4vw,46px)",color:C.white,lineHeight:1,marginTop:"16px"}}>Questions, <span style={{color:C.orange}}>answered.</span></h2></Reveal><FAQ items={CREATOR_FAQS}/></div></section>
+      <section className="sec-pad"><div style={{maxWidth:"800px",margin:"0 auto"}}><Reveal style={{marginBottom:"44px"}}><Tag>Creator FAQ</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(26px,4vw,46px)",color:C.text,lineHeight:1,marginTop:"16px"}}>Questions, <span style={{color:C.orange}}>answered.</span></h2></Reveal><FAQ items={CREATOR_FAQS}/></div></section>
       <div style={{background:C.orange,padding:"22px 64px",overflow:"hidden"}}><div style={{display:"flex",animation:"marquee 18s linear infinite",whiteSpace:"nowrap"}}>{[...Array(4)].map((_,x)=>["City Map","--","Brand Deals","--","Go Live","--","Creator Fund","--","Real Discovery","--"].map((wd,i)=><span key={`${x}-${i}`} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",color:"rgba(5,5,10,0.65)",marginRight:"26px"}}>{wd}</span>))}</div></div>
     </div>
   );
@@ -673,14 +677,14 @@ const AD_FAQS=[
 ];
 function AdvertisePage({openWaitlist}){
   return(
-    <div style={{background:C.bg,color:C.white}}>
+    <div style={{background:C.bg,color:C.text}}>
       <PageHero tag="Advertise" title="Ads that integrate," accent="not interrupt." sub="Traditional ads interrupt. VibeCircle ads integrate. We power discovery, not distraction."/>
       <Divider/>
-      <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"1100px",margin:"0 auto"}}><Reveal style={{marginBottom:"52px"}}><Tag>Ad Products</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,56px)",color:C.white,lineHeight:1,marginTop:"16px"}}>Every tool to make your<br/><span style={{color:C.orange}}>energy visible.</span></h2></Reveal><div className="grid-3">{AD_FEATURES.map((f,i)=><Reveal key={i} delay={i*.08}><div style={{padding:"30px 26px",borderRadius:"4px",background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.07)",height:"100%",transition:"all .3s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=f.color;e.currentTarget.style.background=`${f.color}0D`;e.currentTarget.style.transform="translateY(-4px)";}} onMouseLeave={e=>{e.currentTarget.style.borderColor="rgba(255,255,255,0.07)";e.currentTarget.style.background="rgba(255,255,255,0.02)";e.currentTarget.style.transform="";}}><div style={{fontSize:"24px",marginBottom:"13px"}}>{f.icon}</div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"19px",color:f.color,marginBottom:"9px"}}>{f.title}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.dim,lineHeight:1.7}}>{f.desc}</div></div></Reveal>)}</div></div></section>
+      <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"1100px",margin:"0 auto"}}><Reveal style={{marginBottom:"52px"}}><Tag>Ad Products</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,56px)",color:C.text,lineHeight:1,marginTop:"16px"}}>Every tool to make your<br/><span style={{color:C.orange}}>energy visible.</span></h2></Reveal><div className="grid-3">{AD_FEATURES.map((f,i)=><Reveal key={i} delay={i*.08}><div style={{padding:"30px 26px",borderRadius:"4px",background:"rgba(0,0,0,0.02)",border:"1px solid "+C.border,height:"100%",transition:"all .3s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=f.color;e.currentTarget.style.background=`${f.color}0D`;e.currentTarget.style.transform="translateY(-4px)";}} onMouseLeave={e=>{e.currentTarget.style.borderColor=C.border;e.currentTarget.style.background="rgba(0,0,0,0.02)";e.currentTarget.style.transform="";}}><div style={{fontSize:"24px",marginBottom:"13px"}}>{f.icon}</div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"19px",color:f.color,marginBottom:"9px"}}>{f.title}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.dim,lineHeight:1.7}}>{f.desc}</div></div></Reveal>)}</div></div></section>
       <Divider/>
-      <section className="sec-pad"><div style={{maxWidth:"1100px",margin:"0 auto"}}><Reveal style={{marginBottom:"52px",textAlign:"center"}}><Tag>Advertising Plans</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,56px)",color:C.white,lineHeight:1,marginTop:"16px"}}>Pick your level of <span style={{color:C.orange}}>dominance.</span></h2></Reveal><div className="grid-3">{AD_PRICING.map((p,i)=><PricingCard key={i} {...p} onCta={()=>openWaitlist(`Advertise ${p.plan} Plan`)}/>)}</div></div></section>
+      <section className="sec-pad"><div style={{maxWidth:"1100px",margin:"0 auto"}}><Reveal style={{marginBottom:"52px",textAlign:"center"}}><Tag>Advertising Plans</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,56px)",color:C.text,lineHeight:1,marginTop:"16px"}}>Pick your level of <span style={{color:C.orange}}>dominance.</span></h2></Reveal><div className="grid-3">{AD_PRICING.map((p,i)=><PricingCard key={i} {...p} onCta={()=>openWaitlist(`Advertise ${p.plan} Plan`)}/>)}</div></div></section>
       <Divider/>
-      <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"800px",margin:"0 auto"}}><Reveal style={{marginBottom:"44px"}}><Tag>Advertiser FAQ</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(26px,4vw,44px)",color:C.white,lineHeight:1,marginTop:"16px"}}>Your questions, <span style={{color:C.orange}}>answered.</span></h2></Reveal><FAQ items={AD_FAQS}/></div></section>
+      <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"800px",margin:"0 auto"}}><Reveal style={{marginBottom:"44px"}}><Tag>Advertiser FAQ</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(26px,4vw,44px)",color:C.text,lineHeight:1,marginTop:"16px"}}>Your questions, <span style={{color:C.orange}}>answered.</span></h2></Reveal><FAQ items={AD_FAQS}/></div></section>
       <div style={{background:C.orange,padding:"20px 0",overflow:"hidden"}}><div style={{display:"flex",animation:"marquee 18s linear infinite",whiteSpace:"nowrap"}}>{[...Array(3)].map((_,x)=>["Geo-Targeted","--","Creator Moments","--","Event Promotion","--","Live Ads","--","Real Analytics","--"].map((wd,i)=><span key={`${x}-${i}`} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"15px",letterSpacing:"3px",color:"rgba(5,5,10,0.7)",marginRight:"30px"}}>{wd}</span>))}</div></div>
     </div>
   );
@@ -699,15 +703,15 @@ const BIZ_FAQS=[{q:"What does 'claiming a location' mean?",a:"Claiming your loca
 function BusinessPage({openWaitlist}){
   const[active,setActive]=useState(0);
   return(
-    <div style={{background:C.bg,color:C.white}}>
+    <div style={{background:C.bg,color:C.text}}>
       <PageHero tag="VibeCircle for Business" title="Turn foot traffic into" accent="digital gravity." sub="When your location pulses on the map, people don't just see you --- they find you."/>
       <Divider/>
-      <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"1100px",margin:"0 auto"}}><Reveal style={{marginBottom:"52px"}}><Tag>Business Tools</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,54px)",color:C.white,lineHeight:1,marginTop:"16px"}}>Everything you need<br/><span style={{color:C.orange}}>in one place.</span></h2></Reveal><div style={{display:"grid",gridTemplateColumns:"1fr 1.4fr",gap:"24px"}}><div style={{display:"flex",flexDirection:"column",gap:"8px"}}>{BIZ_TOOLS.map((t,i)=><div key={i} onClick={()=>setActive(i)} style={{padding:"16px 20px",background:active===i?"rgba(255,107,0,0.1)":"rgba(255,255,255,0.02)",border:`1px solid ${active===i?C.orange+"60":"rgba(255,255,255,0.06)"}`,borderRadius:"4px",display:"flex",alignItems:"center",gap:"12px",cursor:"pointer",transition:"all .25s"}} onMouseEnter={e=>{if(active!==i){e.currentTarget.style.background="rgba(255,255,255,0.04)";e.currentTarget.style.borderColor="rgba(255,255,255,0.12)";}}} onMouseLeave={e=>{if(active!==i){e.currentTarget.style.background="rgba(255,255,255,0.02)";e.currentTarget.style.borderColor="rgba(255,255,255,0.06)";}}}>  <span style={{fontSize:"16px"}}>{t.icon}</span><div style={{flex:1}}><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"15px",color:active===i?C.orange:C.white}}>{t.title}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"10px",letterSpacing:"2px",color:C.dimmer,textTransform:"uppercase",marginTop:"1px"}}>{t.num}</div></div>{active===i&&<div style={{color:C.orange,fontSize:"13px"}}>---</div>}</div>)}</div><div key={active} style={{padding:"40px",background:"rgba(255,255,255,0.02)",border:`1px solid ${C.border}`,borderRadius:"4px",animation:"fadeIn .3s ease",position:"relative",overflow:"hidden"}}><Orb top="-30%" right="-20%" size={280} opacity={0.15}/><div style={{fontSize:"40px",marginBottom:"18px"}}>{BIZ_TOOLS[active].icon}</div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(22px,3vw,38px)",color:C.orange,lineHeight:1,marginBottom:"14px"}}>{BIZ_TOOLS[active].title}</div><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"16px",color:C.dim,lineHeight:1.8,marginBottom:"24px"}}>{BIZ_TOOLS[active].desc}</p><div style={{width:"100%",height:"2px",background:`linear-gradient(90deg,${C.orange},${C.pink})`,borderRadius:"1px",transformOrigin:"left",animation:"lineGrow .4s ease forwards"}}/></div></div></div></section>
+      <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"1100px",margin:"0 auto"}}><Reveal style={{marginBottom:"52px"}}><Tag>Business Tools</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,54px)",color:C.text,lineHeight:1,marginTop:"16px"}}>Everything you need<br/><span style={{color:C.orange}}>in one place.</span></h2></Reveal><div style={{display:"grid",gridTemplateColumns:"1fr 1.4fr",gap:"24px"}}><div style={{display:"flex",flexDirection:"column",gap:"8px"}}>{BIZ_TOOLS.map((t,i)=><div key={i} onClick={()=>setActive(i)} style={{padding:"16px 20px",background:active===i?"rgba(255,107,0,0.1)":"rgba(0,0,0,0.02)",border:`1px solid ${active===i?C.orange+"60":C.border}`,borderRadius:"4px",display:"flex",alignItems:"center",gap:"12px",cursor:"pointer",transition:"all .25s"}} onMouseEnter={e=>{if(active!==i){e.currentTarget.style.background="rgba(0,0,0,0.04)";e.currentTarget.style.borderColor=C.border;}}} onMouseLeave={e=>{if(active!==i){e.currentTarget.style.background="rgba(0,0,0,0.02)";e.currentTarget.style.borderColor=C.border;}}}>  <span style={{fontSize:"16px"}}>{t.icon}</span><div style={{flex:1}}><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"15px",color:active===i?C.orange:C.text}}>{t.title}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"10px",letterSpacing:"2px",color:C.dimmer,textTransform:"uppercase",marginTop:"1px"}}>{t.num}</div></div>{active===i&&<div style={{color:C.orange,fontSize:"13px"}}>---</div>}</div>)}</div><div key={active} style={{padding:"40px",background:"rgba(0,0,0,0.02)",border:`1px solid ${C.border}`,borderRadius:"4px",animation:"fadeIn .3s ease",position:"relative",overflow:"hidden"}}><Orb top="-30%" right="-20%" size={280} opacity={0.15}/><div style={{fontSize:"40px",marginBottom:"18px"}}>{BIZ_TOOLS[active].icon}</div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(22px,3vw,38px)",color:C.orange,lineHeight:1,marginBottom:"14px"}}>{BIZ_TOOLS[active].title}</div><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"16px",color:C.dim,lineHeight:1.8,marginBottom:"24px"}}>{BIZ_TOOLS[active].desc}</p><div style={{width:"100%",height:"2px",background:`linear-gradient(90deg,${C.orange},${C.pink})`,borderRadius:"1px",transformOrigin:"left",animation:"lineGrow .4s ease forwards"}}/></div></div></div></section>
       <Divider/>
-      <section className="sec-pad"><div style={{maxWidth:"1100px",margin:"0 auto"}}><Reveal style={{marginBottom:"52px",textAlign:"center"}}><Tag>Business Plans</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,54px)",color:C.white,lineHeight:1,marginTop:"16px"}}>Choose your level of <span style={{color:C.orange}}>gravity.</span></h2></Reveal><div className="grid-3">{BIZ_PRICING.map((p,i)=><PricingCard key={i} {...p} onCta={()=>openWaitlist(`Business ${p.plan} Plan`)}/>)}</div></div></section>
+      <section className="sec-pad"><div style={{maxWidth:"1100px",margin:"0 auto"}}><Reveal style={{marginBottom:"52px",textAlign:"center"}}><Tag>Business Plans</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,54px)",color:C.text,lineHeight:1,marginTop:"16px"}}>Choose your level of <span style={{color:C.orange}}>gravity.</span></h2></Reveal><div className="grid-3">{BIZ_PRICING.map((p,i)=><PricingCard key={i} {...p} onCta={()=>openWaitlist(`Business ${p.plan} Plan`)}/>)}</div></div></section>
       <Divider/>
-      <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"800px",margin:"0 auto"}}><Reveal style={{marginBottom:"44px"}}><Tag>Business FAQ</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(26px,4vw,44px)",color:C.white,lineHeight:1,marginTop:"16px"}}>Everything you need <span style={{color:C.orange}}>to know.</span></h2></Reveal><FAQ items={BIZ_FAQS}/></div></section>
-      <section className="sec-pad-sm" style={{background:C.bg3}}><Reveal><div style={{maxWidth:"1100px",margin:"0 auto",padding:"48px 52px",background:`linear-gradient(135deg,rgba(255,107,0,0.12) 0%,rgba(255,45,120,0.06) 100%)`,border:`1px solid ${C.orange}25`,borderRadius:"4px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:"24px",flexWrap:"wrap"}}><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(24px,4vw,44px)",color:C.white,lineHeight:1}}>Ready to make your<br/>location <span style={{color:C.orange}}>pulse?</span></div><div style={{display:"flex",gap:"12px",flexWrap:"wrap"}}><button onClick={()=>openWaitlist("Business Get Started")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"13px 32px",background:C.orange,color:C.bg,border:"none",borderRadius:"2px",cursor:"pointer",transition:"box-shadow .2s"}} onMouseEnter={e=>e.target.style.boxShadow=`0 10px 32px ${C.orange}40`} onMouseLeave={e=>e.target.style.boxShadow=""}>Get Started Free</button><button onClick={()=>openWaitlist("Business Demo")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"13px 32px",background:"transparent",color:C.white,border:"1px solid rgba(255,255,255,0.2)",borderRadius:"2px",cursor:"pointer",transition:"all .2s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.color=C.orange;}} onMouseLeave={e=>{e.currentTarget.style.borderColor="rgba(255,255,255,0.2)";e.currentTarget.style.color=C.white;}}>Book a Demo</button></div></div></Reveal></section>
+      <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"800px",margin:"0 auto"}}><Reveal style={{marginBottom:"44px"}}><Tag>Business FAQ</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(26px,4vw,44px)",color:C.text,lineHeight:1,marginTop:"16px"}}>Everything you need <span style={{color:C.orange}}>to know.</span></h2></Reveal><FAQ items={BIZ_FAQS}/></div></section>
+      <section className="sec-pad-sm" style={{background:C.bg3}}><Reveal><div style={{maxWidth:"1100px",margin:"0 auto",padding:"48px 52px",background:`linear-gradient(135deg,rgba(255,107,0,0.12) 0%,rgba(255,45,120,0.06) 100%)`,border:`1px solid ${C.orange}25`,borderRadius:"4px",display:"flex",alignItems:"center",justifyContent:"space-between",gap:"24px",flexWrap:"wrap"}}><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(24px,4vw,44px)",color:C.textOnAccent,lineHeight:1}}>Ready to make your<br/>location <span style={{color:C.orange}}>pulse?</span></div><div style={{display:"flex",gap:"12px",flexWrap:"wrap"}}><button onClick={()=>openWaitlist("Business Get Started")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"13px 32px",background:C.orange,color:C.textOnAccent,border:"none",borderRadius:"2px",cursor:"pointer",transition:"box-shadow .2s"}} onMouseEnter={e=>e.target.style.boxShadow=`0 10px 32px ${C.orange}40`} onMouseLeave={e=>e.target.style.boxShadow=""}>Get Started Free</button><button onClick={()=>openWaitlist("Business Demo")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"13px 32px",background:"transparent",color:C.text,border:`1px solid ${C.border}`,borderRadius:"2px",cursor:"pointer",transition:"all .2s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.color=C.orange;}} onMouseLeave={e=>{e.currentTarget.style.borderColor=C.border;e.currentTarget.style.color=C.text;}}>Book a Demo</button></div></div></Reveal></section>
     </div>
   );
 }
@@ -816,19 +820,19 @@ function JobsPage({openWaitlist,addToast}){
   const getTab=(i)=>jobTab[i]||"Overview";
   const setTab=(i,t)=>setJobTab(p=>({...p,[i]:t}));
   return(
-    <div style={{background:C.bg,color:C.white}}>
+    <div style={{background:C.bg,color:C.text}}>
       <PageHero tag="Careers" title="We don't hire for roles." accent="We hire builders." sub="Ambitious, fast-moving, impact-driven. Join the team building infrastructure for modern city culture."/>
       <Divider/>
       {/* PERKS */}
-      <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"1100px",margin:"0 auto"}}><Reveal style={{marginBottom:"44px"}}><Tag>What You Get</Tag></Reveal><div className="grid-4">{[{icon:"-------",t:"Real Ownership",d:"Every role carries real responsibility. No busywork, no hand-holding."},{icon:"----",t:"Equity Opportunities",d:"Build something you co-own. Equity offered across all full-time roles."},{icon:"----",t:"Meaningful Impact",d:"Your work shapes how cities move. Every line of code matters."},{icon:"---",t:"Move Fast",d:"We ship, learn, iterate. No corporate slowdown."}].map((p,i)=><Reveal key={i} delay={i*.1}><div style={{padding:"28px 22px",background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.07)",borderRadius:"4px",height:"100%",transition:"all .3s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.background="rgba(255,107,0,0.06)";e.currentTarget.style.transform="translateY(-4px)";}} onMouseLeave={e=>{e.currentTarget.style.borderColor="rgba(255,255,255,0.07)";e.currentTarget.style.background="rgba(255,255,255,0.02)";e.currentTarget.style.transform="";}}><div style={{fontSize:"24px",marginBottom:"12px"}}>{p.icon}</div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"18px",color:C.white,marginBottom:"8px"}}>{p.t}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.dim,lineHeight:1.7}}>{p.d}</div></div></Reveal>)}</div></div></section>
+      <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"1100px",margin:"0 auto"}}><Reveal style={{marginBottom:"44px"}}><Tag>What You Get</Tag></Reveal><div className="grid-4">{[{icon:"-------",t:"Real Ownership",d:"Every role carries real responsibility. No busywork, no hand-holding."},{icon:"----",t:"Equity Opportunities",d:"Build something you co-own. Equity offered across all full-time roles."},{icon:"----",t:"Meaningful Impact",d:"Your work shapes how cities move. Every line of code matters."},{icon:"---",t:"Move Fast",d:"We ship, learn, iterate. No corporate slowdown."}].map((p,i)=><Reveal key={i} delay={i*.1}><div style={{padding:"28px 22px",background:"rgba(0,0,0,0.02)",border:`1px solid ${C.border}`,borderRadius:"4px",height:"100%",transition:"all .3s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.background="rgba(255,107,0,0.06)";e.currentTarget.style.transform="translateY(-4px)";}} onMouseLeave={e=>{e.currentTarget.style.borderColor=C.border;e.currentTarget.style.background="rgba(0,0,0,0.02)";e.currentTarget.style.transform="";}}><div style={{fontSize:"24px",marginBottom:"12px"}}>{p.icon}</div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"18px",color:C.text,marginBottom:"8px"}}>{p.t}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.dim,lineHeight:1.7}}>{p.d}</div></div></Reveal>)}</div></div></section>
       <Divider/>
       {/* ROLES */}
       <section className="sec-pad" style={{position:"relative",overflow:"hidden"}}>
         <Orb top="0%" right="-5%" size={450} opacity={0.08}/>
         <div style={{maxWidth:"1100px",margin:"0 auto"}}>
-          <Reveal style={{marginBottom:"36px"}}><Tag>Open Roles</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,54px)",color:C.white,lineHeight:1,marginTop:"16px"}}>Find your position<br/><span style={{color:C.orange}}>in the vibe.</span></h2></Reveal>
+          <Reveal style={{marginBottom:"36px"}}><Tag>Open Roles</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,54px)",color:C.text,lineHeight:1,marginTop:"16px"}}>Find your position<br/><span style={{color:C.orange}}>in the vibe.</span></h2></Reveal>
           <div style={{display:"flex",gap:"7px",flexWrap:"wrap",marginBottom:"32px"}}>
-            {depts.map(d=><button key={d} onClick={()=>{setFilter(d);setExpanded(null);}} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"12px",letterSpacing:"2px",padding:"8px 16px",background:filter===d?(DEPT_COLORS[d]||C.orange):"transparent",color:filter===d?C.bg:C.dim,border:`1px solid ${filter===d?(DEPT_COLORS[d]||C.orange):"rgba(255,255,255,0.12)"}`,borderRadius:"2px",cursor:"pointer",transition:"all .2s"}}>{d}</button>)}
+            {depts.map(d=><button key={d} onClick={()=>{setFilter(d);setExpanded(null);}} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"12px",letterSpacing:"2px",padding:"8px 16px",background:filter===d?(DEPT_COLORS[d]||C.orange):"transparent",color:filter===d?C.textOnAccent:C.dim,border:`1px solid ${filter===d?(DEPT_COLORS[d]||C.orange):C.border}`,borderRadius:"2px",cursor:"pointer",transition:"all .2s"}}>{d}</button>)}
           </div>
           <div style={{display:"flex",flexDirection:"column",gap:"10px"}}>
             {filtered.map((role,i)=>{
@@ -838,11 +842,11 @@ function JobsPage({openWaitlist,addToast}){
               const TABS=["Overview","Responsibilities","Requirements","Stack & Perks"];
               return(
                 <Reveal key={role.title+filter} delay={i*.05}>
-                  <div style={{background:isOpen?`${dc}07`:"rgba(255,255,255,0.02)",border:`1px solid ${isOpen?dc+"50":"rgba(255,255,255,0.07)"}`,borderRadius:"4px",overflow:"hidden",transition:"all .3s"}}>
+                  <div style={{background:isOpen?`${dc}07`:"rgba(0,0,0,0.02)",border:`1px solid ${isOpen?dc+"50":C.border}`,borderRadius:"4px",overflow:"hidden",transition:"all .3s"}}>
                     {/* HEADER ROW */}
                     <div onClick={()=>setExpanded(isOpen?null:i)} style={{padding:"20px 26px",display:"flex",alignItems:"center",gap:"16px",cursor:"pointer"}}>
                       <div style={{flex:1}}>
-                        <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"16px",fontWeight:600,color:C.white,marginBottom:"6px"}}>{role.title}</div>
+                        <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"16px",fontWeight:600,color:C.text,marginBottom:"6px"}}>{role.title}</div>
                         <div style={{display:"flex",gap:"8px",flexWrap:"wrap",alignItems:"center"}}>
                           <span style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"10px",letterSpacing:"2px",color:dc,background:`${dc}18`,padding:"3px 9px",borderRadius:"2px"}}>{role.dept}</span>
                           <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer}}>--</span>
@@ -853,7 +857,7 @@ function JobsPage({openWaitlist,addToast}){
                           <span style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"12px",letterSpacing:"1px",color:C.orange}}>{role.salary}</span>
                         </div>
                       </div>
-                      <div style={{width:"26px",height:"26px",border:`1px solid ${isOpen?dc:"rgba(255,255,255,0.12)"}`,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",color:isOpen?dc:C.dimmer,fontSize:"16px",transition:"all .3s",transform:isOpen?"rotate(45deg)":"none",flexShrink:0,fontWeight:300}}>+</div>
+                      <div style={{width:"26px",height:"26px",border:`1px solid ${isOpen?dc:C.border}`,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",color:isOpen?dc:C.dimmer,fontSize:"16px",transition:"all .3s",transform:isOpen?"rotate(45deg)":"none",flexShrink:0,fontWeight:300}}>+</div>
                     </div>
                     {/* EXPANDED BODY */}
                     {isOpen&&(
@@ -862,18 +866,18 @@ function JobsPage({openWaitlist,addToast}){
                         {/* INTERNAL TABS */}
                         <div style={{display:"flex",gap:"4px",marginBottom:"24px",flexWrap:"wrap"}}>
                           {TABS.map(t=>(
-                            <button key={t} onClick={()=>setTab(i,t)} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",letterSpacing:".5px",padding:"7px 14px",background:tab===t?dc:"rgba(255,255,255,0.04)",color:tab===t?C.bg:C.dim,border:`1px solid ${tab===t?dc:"rgba(255,255,255,0.08)"}`,borderRadius:"2px",cursor:"pointer",transition:"all .2s"}}>{t}</button>
+                            <button key={t} onClick={()=>setTab(i,t)} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",letterSpacing:".5px",padding:"7px 14px",background:tab===t?dc:"rgba(0,0,0,0.04)",color:tab===t?C.textOnAccent:C.dim,border:`1px solid ${tab===t?dc:C.border}`,borderRadius:"2px",cursor:"pointer",transition:"all .2s"}}>{t}</button>
                           ))}
                         </div>
                         {/* TAB CONTENT */}
                         {tab==="Overview"&&(
                           <div>
-                            <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"15px",color:"rgba(255,255,255,0.8)",lineHeight:1.8,marginBottom:"20px"}}>{role.summary}</p>
+                            <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"15px",color:C.dim,lineHeight:1.8,marginBottom:"20px"}}>{role.summary}</p>
                             <div style={{display:"flex",gap:"10px",flexWrap:"wrap",marginBottom:"20px"}}>
                               {[{l:"---- Location",v:role.location},{l:"--- Type",v:role.type},{l:"---- Level",v:role.level},{l:"---- Deadline",v:role.deadline}].map(({l,v})=>(
-                                <div key={l} style={{padding:"10px 16px",background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.08)",borderRadius:"3px"}}>
+                                <div key={l} style={{padding:"10px 16px",background:"rgba(0,0,0,0.03)",border:"1px solid rgba(0,0,0,0.08)",borderRadius:"3px"}}>
                                   <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"10px",color:C.dimmer,letterSpacing:"1px",textTransform:"uppercase"}}>{l}</div>
-                                  <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.white,marginTop:"3px",fontWeight:600}}>{v}</div>
+                                  <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.text,marginTop:"3px",fontWeight:600}}>{v}</div>
                                 </div>
                               ))}
                             </div>
@@ -882,9 +886,9 @@ function JobsPage({openWaitlist,addToast}){
                         {tab==="Responsibilities"&&(
                           <div style={{display:"flex",flexDirection:"column",gap:"10px"}}>
                             {role.responsibilities.map((r,idx)=>(
-                              <div key={idx} style={{display:"flex",gap:"12px",alignItems:"flex-start",padding:"12px 16px",background:"rgba(255,255,255,0.02)",borderRadius:"3px",border:"1px solid rgba(255,255,255,0.06)"}}>
+                              <div key={idx} style={{display:"flex",gap:"12px",alignItems:"flex-start",padding:"12px 16px",background:"rgba(0,0,0,0.02)",borderRadius:"3px",border:`1px solid ${C.border}`}}>
                                 <span style={{color:dc,fontSize:"14px",marginTop:"1px",flexShrink:0}}>---</span>
-                                <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:"rgba(255,255,255,0.75)",lineHeight:1.6}}>{r}</span>
+                                <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.dim,lineHeight:1.6}}>{r}</span>
                               </div>
                             ))}
                           </div>
@@ -897,7 +901,7 @@ function JobsPage({openWaitlist,addToast}){
                                 {role.requirements.map((r,idx)=>(
                                   <div key={idx} style={{display:"flex",gap:"10px",alignItems:"flex-start"}}>
                                     <span style={{color:dc,fontSize:"14px",flexShrink:0,marginTop:"1px"}}>---</span>
-                                    <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:"rgba(255,255,255,0.75)",lineHeight:1.6}}>{r}</span>
+                                    <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.dim,lineHeight:1.6}}>{r}</span>
                                   </div>
                                 ))}
                               </div>
@@ -907,21 +911,21 @@ function JobsPage({openWaitlist,addToast}){
                         )}
                         {tab==="Stack & Perks"&&(
                           <div>
-                            {role.techStack&&<div style={{marginBottom:"24px"}}><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"2px",color:dc,marginBottom:"12px"}}>Tech Stack</div><div style={{display:"flex",gap:"8px",flexWrap:"wrap"}}>{role.techStack.map(t=><span key={t} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.white,padding:"6px 14px",background:`${dc}15`,border:`1px solid ${dc}30`,borderRadius:"2px"}}>{t}</span>)}</div></div>}
-                            <div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"2px",color:dc,marginBottom:"12px"}}>Benefits</div><div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px"}}>{["Equity for all full-time roles","Remote-first & flexible hours","R30,000/yr learning budget","Medical aid stipend","Home office stipend (R7,500)","Quarterly team retreats","Unlimited PTO (we mean it)","Free VibeCircle Orbit plan"].map(b=><div key={b} style={{display:"flex",gap:"8px",alignItems:"center",padding:"10px 14px",background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.06)",borderRadius:"3px"}}><span style={{color:dc,fontSize:"12px",flexShrink:0}}>---</span><span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:"rgba(255,255,255,0.7)"}}>{b}</span></div>)}</div></div>
+                            {role.techStack&&<div style={{marginBottom:"24px"}}><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"2px",color:dc,marginBottom:"12px"}}>Tech Stack</div><div style={{display:"flex",gap:"8px",flexWrap:"wrap"}}>{role.techStack.map(t=><span key={t} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.text,padding:"6px 14px",background:`${dc}15`,border:`1px solid ${dc}30`,borderRadius:"2px"}}>{t}</span>)}</div></div>}
+                            <div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"2px",color:dc,marginBottom:"12px"}}>Benefits</div><div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px"}}>{["Equity for all full-time roles","Remote-first & flexible hours","R30,000/yr learning budget","Medical aid stipend","Home office stipend (R7,500)","Quarterly team retreats","Unlimited PTO (we mean it)","Free VibeCircle Orbit plan"].map(b=><div key={b} style={{display:"flex",gap:"8px",alignItems:"center",padding:"10px 14px",background:"rgba(0,0,0,0.02)",border:`1px solid ${C.border}`,borderRadius:"3px"}}><span style={{color:dc,fontSize:"12px",flexShrink:0}}>---</span><span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.dim}}>{b}</span></div>)}</div></div>
                           </div>
                         )}
                         <div style={{marginTop:"24px"}}>
                           <button
                             onClick={()=>setApplyOpen(applyOpen===i?null:i)}
-                            style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"3px",padding:"12px 28px",background:dc,color:C.bg,border:"none",borderRadius:"2px",cursor:"pointer",transition:"box-shadow .2s,transform .2s",marginRight:"10px"}}
+                            style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"3px",padding:"12px 28px",background:dc,color:C.textOnAccent,border:"none",borderRadius:"2px",cursor:"pointer",transition:"box-shadow .2s,transform .2s",marginRight:"10px"}}
                             onMouseEnter={e=>{e.target.style.boxShadow=`0 8px 24px ${dc}45`;e.target.style.transform="translateY(-2px)";}}
                             onMouseLeave={e=>{e.target.style.boxShadow="";e.target.style.transform="";}}
                           >{applyOpen===i?"Close Form":"Apply Now"}</button>
                           <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer}}>or email <a href="mailto:careers@vibecircle.com" style={{color:dc,textDecoration:"none"}}>careers@vibecircle.com</a></span>
                         </div>
                         {applyOpen===i&&(
-                          <div style={{marginTop:"20px",padding:"20px",background:"rgba(255,255,255,0.02)",border:`1px solid ${dc}30`,borderRadius:"4px",animation:"fadeUp .3s ease"}}>
+                          <div style={{marginTop:"20px",padding:"20px",background:"rgba(0,0,0,0.02)",border:`1px solid ${dc}30`,borderRadius:"4px",animation:"fadeUp .3s ease"}}>
                             <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",gap:"12px",marginBottom:"12px"}}>
                               {[
                                 {label:"Full Name",type:"text",placeholder:"Alex Rivera"},
@@ -931,30 +935,30 @@ function JobsPage({openWaitlist,addToast}){
                               ].map((f)=>(
                                 <label key={f.label} style={{display:"flex",flexDirection:"column",gap:"8px"}}>
                                   <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer,letterSpacing:"1px",textTransform:"uppercase"}}>{f.label}</span>
-                                  <input type={f.type} placeholder={f.placeholder} style={{height:"42px",padding:"0 12px",background:"#0C0C18",border:`1px solid rgba(255,255,255,0.12)`,color:C.white,borderRadius:"3px",fontFamily:"'DM Sans',sans-serif",fontSize:"13px",outline:"none"}}/>
+                                  <input type={f.type} placeholder={f.placeholder} style={{height:"42px",padding:"0 12px",background:C.bg3,border:`1px solid ${C.border}`,color:C.text,borderRadius:"3px",fontFamily:"'DM Sans',sans-serif",fontSize:"13px",outline:"none"}}/>
                                 </label>
                               ))}
                             </div>
                             <label style={{display:"flex",flexDirection:"column",gap:"8px",marginBottom:"12px"}}>
                               <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer,letterSpacing:"1px",textTransform:"uppercase"}}>Why VibeCircle?</span>
-                              <textarea rows={4} placeholder="Tell us what you want to build." style={{padding:"10px 12px",background:"#0C0C18",border:`1px solid rgba(255,255,255,0.12)`,color:C.white,borderRadius:"3px",fontFamily:"'DM Sans',sans-serif",fontSize:"13px",outline:"none",resize:"vertical"}}/>
+                              <textarea rows={4} placeholder="Tell us what you want to build." style={{padding:"10px 12px",background:C.bg3,border:`1px solid ${C.border}`,color:C.text,borderRadius:"3px",fontFamily:"'DM Sans',sans-serif",fontSize:"13px",outline:"none",resize:"vertical"}}/>
                             </label>
                             <label
-                              style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:"16px",padding:"14px 16px",background:"rgba(255,255,255,0.02)",border:`1px dashed ${dc}55`,borderRadius:"4px",cursor:"pointer",transition:"all .2s"}}
+                              style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:"16px",padding:"14px 16px",background:"rgba(0,0,0,0.02)",border:`1px dashed ${dc}55`,borderRadius:"4px",cursor:"pointer",transition:"all .2s"}}
                               onMouseEnter={e=>{e.currentTarget.style.background=`${dc}10`;e.currentTarget.style.borderColor=dc;}}
-                              onMouseLeave={e=>{e.currentTarget.style.background="rgba(255,255,255,0.02)";e.currentTarget.style.borderColor=`${dc}55`;}}
+                              onMouseLeave={e=>{e.currentTarget.style.background="rgba(0,0,0,0.02)";e.currentTarget.style.borderColor=`${dc}55`;}}
                             >
                               <div>
                                 <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",color:dc}}>Upload CV</div>
                                 <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.dimmer,marginTop:"4px"}}>PDF or DOCX -- up to 10MB</div>
                               </div>
-                              <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.white,background:`${dc}18`,border:`1px solid ${dc}40`,padding:"6px 12px",borderRadius:"3px"}}>Choose File</div>
+                              <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.text,background:`${dc}18`,border:`1px solid ${dc}40`,padding:"6px 12px",borderRadius:"3px"}}>Choose File</div>
                               <input type="file" accept=".pdf,.doc,.docx" style={{display:"none"}}/>
                             </label>
                             <div style={{display:"flex",gap:"10px",alignItems:"center",marginTop:"16px",flexWrap:"wrap"}}>
                               <button
                                 onClick={()=>{addToast({type:"success",title:"Application Received!",message:`We'll review your application for ${role.title} within 5 business days.`});setApplyOpen(null);}}
-                                style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"3px",padding:"12px 26px",background:dc,color:C.bg,border:"none",borderRadius:"2px",cursor:"pointer",transition:"box-shadow .2s"}}
+                                style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"3px",padding:"12px 26px",background:dc,color:C.textOnAccent,border:"none",borderRadius:"2px",cursor:"pointer",transition:"box-shadow .2s"}}
                                 onMouseEnter={e=>e.target.style.boxShadow=`0 8px 24px ${dc}45`}
                                 onMouseLeave={e=>e.target.style.boxShadow=""}
                               >Submit Application</button>
@@ -972,8 +976,8 @@ function JobsPage({openWaitlist,addToast}){
         </div>
       </section>
       <Divider/>
-      <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"800px",margin:"0 auto"}}><Reveal style={{marginBottom:"44px"}}><Tag>Hiring FAQ</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(26px,4vw,44px)",color:C.white,lineHeight:1,marginTop:"16px"}}>About joining <span style={{color:C.orange}}>VibeCircle.</span></h2></Reveal><FAQ items={JOBS_FAQS}/></div></section>
-      <section style={{background:C.orange,padding:"64px clamp(20px,6vw,64px)"}}><div style={{maxWidth:"1100px",margin:"0 auto",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:"24px"}}><div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(24px,4vw,44px)",color:C.bg,lineHeight:1}}>Don't see your role?<br/>Build your own.</div><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:"rgba(5,5,10,0.6)",marginTop:"8px"}}>careers@vibecircle.com</p></div><button onClick={()=>openWaitlist("Custom Role")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"14px 36px",background:C.bg,color:C.orange,border:"none",borderRadius:"2px",cursor:"pointer",transition:"transform .2s"}} onMouseEnter={e=>e.target.style.transform="translateY(-2px)"} onMouseLeave={e=>e.target.style.transform=""}>Get in Touch</button></div></section>
+      <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"800px",margin:"0 auto"}}><Reveal style={{marginBottom:"44px"}}><Tag>Hiring FAQ</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(26px,4vw,44px)",color:C.text,lineHeight:1,marginTop:"16px"}}>About joining <span style={{color:C.orange}}>VibeCircle.</span></h2></Reveal><FAQ items={JOBS_FAQS}/></div></section>
+      <section style={{background:C.orange,padding:"64px clamp(20px,6vw,64px)"}}><div style={{maxWidth:"1100px",margin:"0 auto",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:"24px"}}><div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(24px,4vw,44px)",color:C.textOnAccent,lineHeight:1}}>Don't see your role?<br/>Build your own.</div><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:"rgba(0,0,0,0.6)",marginTop:"8px"}}>careers@vibecircle.com</p></div><button onClick={()=>openWaitlist("Custom Role")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"14px 36px",background:C.bg,color:C.orange,border:"none",borderRadius:"2px",cursor:"pointer",transition:"transform .2s"}} onMouseEnter={e=>e.target.style.transform="translateY(-2px)"} onMouseLeave={e=>e.target.style.transform=""}>Get in Touch</button></div></section>
     </div>
   );
 }
@@ -996,18 +1000,18 @@ const BADGE_COLORS={"HOT":C.orange,"FEATURED":C.pink,"NEW":C.blue,"PREMIUM":C.pu
 const MKT_FAQS=[{q:"How do creators get paid?",a:"Payments go through VibeCircle's secure escrow. Once a brand approves your content, payment is released within 3---5 business days via bank transfer, PayPal, or Venmo."},{q:"Is there a follower minimum?",a:"No follower minimum. Brands care about city presence, authenticity, and engagement quality --- not just counts."},{q:"What if a brand doesn't respond?",a:"Brands must respond within 72 hours. If they don't, we re-open the slot and follow up on your behalf."},{q:"Can brands contact me directly?",a:"Yes. Growth or Enterprise plan brands can send you a direct collaboration proposal based on your creator profile."},{q:"How do I post a deal as a brand?",a:"Switch to the 'I'm a Brand' tab, fill out the deal form, and submit for review. Deals go live within 24 hours."}];
 function ProgressBar({filled,slots,color}){
   const pct=Math.round((filled/slots)*100);const full=filled>=slots;
-  return(<div style={{marginTop:"10px"}}><div style={{display:"flex",justifyContent:"space-between",marginBottom:"4px"}}><span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"10px",color:"rgba(255,255,255,0.28)"}}>{filled}/{slots} slots</span><span style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"10px",letterSpacing:"2px",color:full?C.pink:color}}>{full?"FULL":`${slots-filled} LEFT`}</span></div><div style={{height:"3px",background:"rgba(255,255,255,0.07)",borderRadius:"2px",overflow:"hidden"}}><div style={{height:"100%",width:`${pct}%`,background:full?C.pink:color,borderRadius:"2px",transition:"width .6s ease"}}/></div></div>);
+  return(<div style={{marginTop:"10px"}}><div style={{display:"flex",justifyContent:"space-between",marginBottom:"4px"}}><span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"10px",color:C.dimmer}}>{filled}/{slots} slots</span><span style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"10px",letterSpacing:"2px",color:full?C.pink:color}}>{full?"FULL":`${slots-filled} LEFT`}</span></div><div style={{height:"3px",background:"rgba(0,0,0,0.08)",borderRadius:"2px",overflow:"hidden"}}><div style={{height:"100%",width:`${pct}%`,background:full?C.pink:color,borderRadius:"2px",transition:"width .6s ease"}}/></div></div>);
 }
 function BrandCard({brand,onApply}){
   const[h,setH]=useState(false);const full=brand.filled>=brand.slots;
-  return(<div onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)} style={{background:h?`${brand.color}08`:"rgba(255,255,255,0.02)",border:`1px solid ${h?brand.color+"50":"rgba(255,255,255,0.07)"}`,borderRadius:"4px",padding:"24px",transition:"all .3s",transform:h?"translateY(-4px)":"none",display:"flex",flexDirection:"column",height:"100%",position:"relative",overflow:"hidden"}}>
+  return(<div onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)} style={{background:h?`${brand.color}08`:"rgba(0,0,0,0.02)",border:`1px solid ${h?brand.color+"50":C.border}`,borderRadius:"4px",padding:"24px",transition:"all .3s",transform:h?"translateY(-4px)":"none",display:"flex",flexDirection:"column",height:"100%",position:"relative",overflow:"hidden"}}>
     {h&&<div style={{position:"absolute",top:0,right:0,width:90,height:90,background:`radial-gradient(circle at top right,${brand.color}14,transparent 70%)`,pointerEvents:"none"}}/>}
-    <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",marginBottom:"12px"}}><div style={{display:"flex",alignItems:"center",gap:"10px"}}><div style={{width:"38px",height:"38px",borderRadius:"4px",background:`${brand.color}18`,border:`1px solid ${brand.color}30`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"17px"}}>{brand.logo}</div><div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",color:C.white,letterSpacing:".5px"}}>{brand.name}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"10px",color:"rgba(255,255,255,0.28)",letterSpacing:"1px",textTransform:"uppercase",marginTop:"1px"}}>{brand.category}</div></div></div>{brand.badge&&<span style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"9px",letterSpacing:"2px",padding:"3px 8px",borderRadius:"2px",background:`${BADGE_COLORS[brand.badge]}22`,border:`1px solid ${BADGE_COLORS[brand.badge]}60`,color:BADGE_COLORS[brand.badge],flexShrink:0}}>{brand.badge}</span>}</div>
+    <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",marginBottom:"12px"}}><div style={{display:"flex",alignItems:"center",gap:"10px"}}><div style={{width:"38px",height:"38px",borderRadius:"4px",background:`${brand.color}18`,border:`1px solid ${brand.color}30`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"17px"}}>{brand.logo}</div><div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",color:C.text,letterSpacing:".5px"}}>{brand.name}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"10px",color:C.dimmer,letterSpacing:"1px",textTransform:"uppercase",marginTop:"1px"}}>{brand.category}</div></div></div>{brand.badge&&<span style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"9px",letterSpacing:"2px",padding:"3px 8px",borderRadius:"2px",background:`${BADGE_COLORS[brand.badge]}22`,border:`1px solid ${BADGE_COLORS[brand.badge]}60`,color:BADGE_COLORS[brand.badge],flexShrink:0}}>{brand.badge}</span>}</div>
     <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.dim,lineHeight:1.7,flex:1,marginBottom:"12px"}}>{brand.desc}</p>
-    <div style={{display:"flex",gap:"5px",flexWrap:"wrap",marginBottom:"12px"}}>{brand.tags.map(t=><span key={t} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"10px",color:"rgba(255,255,255,0.32)",padding:"2px 8px",background:"rgba(255,255,255,0.05)",borderRadius:"2px"}}>#{t}</span>)}</div>
-    <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:"8px",flexWrap:"wrap"}}><div style={{display:"flex",gap:"12px"}}><div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",color:brand.color}}>{brand.budget}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"9px",color:"rgba(255,255,255,0.22)",textTransform:"uppercase",letterSpacing:"1px"}}>Budget</div></div><div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",color:C.white}}>{brand.type}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"9px",color:"rgba(255,255,255,0.22)",textTransform:"uppercase",letterSpacing:"1px"}}>Type</div></div></div><button onClick={()=>!full&&onApply(brand)} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"11px",letterSpacing:"2px",padding:"7px 14px",background:full?"transparent":brand.color,color:full?"rgba(255,255,255,0.2)":C.bg,border:full?"1px solid rgba(255,255,255,0.08)":"none",borderRadius:"2px",cursor:full?"not-allowed":"pointer",transition:"all .2s",flexShrink:0}}>{full?"Full":"Apply"}</button></div>
+    <div style={{display:"flex",gap:"5px",flexWrap:"wrap",marginBottom:"12px"}}>{brand.tags.map(t=><span key={t} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"10px",color:C.dim,padding:"2px 8px",background:"rgba(0,0,0,0.05)",borderRadius:"2px"}}>#{t}</span>)}</div>
+    <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:"8px",flexWrap:"wrap"}}><div style={{display:"flex",gap:"12px"}}><div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",color:brand.color}}>{brand.budget}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"9px",color:C.dimmer, textTransform:"uppercase",letterSpacing:"1px"}}>Budget</div></div><div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",color:C.text}}>{brand.type}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"9px",color:C.dimmer, textTransform:"uppercase",letterSpacing:"1px"}}>Type</div></div></div><button onClick={()=>!full&&onApply(brand)} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"11px",letterSpacing:"2px",padding:"7px 14px",background:full?"transparent":brand.color,color:full?C.dimmer:C.textOnAccent,border:full?`1px solid ${C.border}`:"none",borderRadius:"2px",cursor:full?"not-allowed":"pointer",transition:"all .2s",flexShrink:0}}>{full?"Full":"Apply"}</button></div>
     <ProgressBar filled={brand.filled} slots={brand.slots} color={brand.color}/>
-    <div style={{display:"flex",alignItems:"center",gap:"5px",marginTop:"9px"}}><span style={{fontSize:"10px"}}>----</span><span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"10px",color:"rgba(255,255,255,0.24)"}}>{brand.location}</span></div>
+    <div style={{display:"flex",alignItems:"center",gap:"5px",marginTop:"9px"}}><span style={{fontSize:"10px"}}>----</span><span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"10px",color:C.dim}}>{brand.location}</span></div>
   </div>);
 }
 function ApplyModal({brand,onClose,addToast}){
@@ -1022,14 +1026,14 @@ function ApplyModal({brand,onClose,addToast}){
     addToast({type:"success",title:"Application sent!",message:`${brand.name} will respond within 48 hours.`});
   };
   return(<div style={{position:"fixed",inset:0,zIndex:500,background:"rgba(0,0,0,0.87)",backdropFilter:"blur(14px)",display:"flex",alignItems:"center",justifyContent:"center",padding:"24px",animation:"fadeIn .2s ease"}} onClick={e=>{if(e.target===e.currentTarget)onClose();}}>
-    <div style={{background:"#0C0C18",border:`1px solid ${brand.color}40`,borderRadius:"4px",padding:"40px",maxWidth:"480px",width:"100%",position:"relative",animation:"fadeUp .3s ease",maxHeight:"90vh",overflowY:"auto"}}>
+    <div style={{background:C.bg,border:`1px solid ${brand.color}40`,borderRadius:"4px",padding:"40px",maxWidth:"480px",width:"100%",position:"relative",animation:"fadeUp .3s ease",maxHeight:"90vh",overflowY:"auto"}}>
       <button onClick={onClose} style={{position:"absolute",top:"16px",right:"18px",background:"none",border:"none",color:C.dim,fontSize:"20px",cursor:"pointer",lineHeight:1}}>--</button>
-      {step===1?(<><div style={{display:"flex",alignItems:"center",gap:"12px",marginBottom:"22px"}}><div style={{width:"42px",height:"42px",borderRadius:"4px",background:`${brand.color}18`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"19px"}}>{brand.logo}</div><div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"17px",color:C.white}}>{brand.name}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:brand.color,letterSpacing:"1px"}}>{brand.type} -- {brand.budget}</div></div></div>
-      <h3 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"24px",color:C.white,marginBottom:"5px"}}>Apply for this deal</h3><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.dim,lineHeight:1.7,marginBottom:"20px"}}>Brands typically respond within 48 hours.</p>
-      <div style={{display:"flex",flexDirection:"column",gap:"10px"}}>{[["name","Your Name"],["handle","VibeCircle Handle (@...)"],["city","Your City"],["audience","Audience Size (e.g. 5K)"]].map(([k,ph])=><input key={k} placeholder={ph} value={form[k]} onChange={e=>setForm(f=>({...f,[k]:e.target.value}))} style={{background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.1)",borderRadius:"2px",padding:"12px 14px",fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.white,outline:"none",transition:"border-color .2s"}} onFocus={e=>e.target.style.borderColor=brand.color} onBlur={e=>e.target.style.borderColor="rgba(255,255,255,0.1)"}/>)}
-      <textarea placeholder="Why are you right for this brand?" rows={3} value={form.why} onChange={e=>setForm(f=>({...f,why:e.target.value}))} style={{background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.1)",borderRadius:"2px",padding:"12px 14px",fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.white,outline:"none",resize:"vertical",transition:"border-color .2s"}} onFocus={e=>e.target.style.borderColor=brand.color} onBlur={e=>e.target.style.borderColor="rgba(255,255,255,0.1)"}/>
-      <button onClick={submit} disabled={loading||!form.name||!form.handle} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"14px",background:brand.color,color:C.bg,border:"none",borderRadius:"2px",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:"8px"}}>{loading&&<span style={{width:"14px",height:"14px",border:`2px solid ${C.bg}40`,borderTopColor:C.bg,borderRadius:"50%",animation:"spin .6s linear infinite",display:"inline-block"}}/>}{loading?"Submitting...":"Submit Application"}</button></div></>)
-      :(<div style={{textAlign:"center",padding:"20px 0"}}><div style={{fontSize:"48px",marginBottom:"16px",animation:"checkPop .5s ease"}}>----</div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"32px",color:brand.color,marginBottom:"10px"}}>Application Sent!</div><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.dim,lineHeight:1.7,marginBottom:"24px"}}>{brand.name} will review your profile and respond within 48 hours.</p><button onClick={onClose} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"3px",padding:"12px 28px",background:brand.color,color:C.bg,border:"none",borderRadius:"2px",cursor:"pointer"}}>Back to Marketplace</button></div>)}
+      {step===1?(<><div style={{display:"flex",alignItems:"center",gap:"12px",marginBottom:"22px"}}><div style={{width:"42px",height:"42px",borderRadius:"4px",background:`${brand.color}18`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"19px"}}>{brand.logo}</div><div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"17px",color:C.text}}>{brand.name}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:brand.color,letterSpacing:"1px"}}>{brand.type} -- {brand.budget}</div></div></div>
+      <h3 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"24px",color:C.text,marginBottom:"5px"}}>Apply for this deal</h3><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.dim,lineHeight:1.7,marginBottom:"20px"}}>Brands typically respond within 48 hours.</p>
+      <div style={{display:"flex",flexDirection:"column",gap:"10px"}}>{[["name","Your Name"],["handle","VibeCircle Handle (@...)"],["city","Your City"],["audience","Audience Size (e.g. 5K)"]].map(([k,ph])=><input key={k} placeholder={ph} value={form[k]} onChange={e=>setForm(f=>({...f,[k]:e.target.value}))} style={{background:C.bg3,border:`1px solid ${C.border}`,borderRadius:"2px",padding:"12px 14px",fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.text,outline:"none",transition:"border-color .2s"}} onFocus={e=>e.target.style.borderColor=brand.color} onBlur={e=>e.target.style.borderColor=C.border}/>)}
+      <textarea placeholder="Why are you right for this brand?" rows={3} value={form.why} onChange={e=>setForm(f=>({...f,why:e.target.value}))} style={{background:"rgba(0,0,0,0.04)",border:"1px solid "+C.border,borderRadius:"2px",padding:"12px 14px",fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.text,outline:"none",resize:"vertical",transition:"border-color .2s"}} onFocus={e=>e.target.style.borderColor=brand.color} onBlur={e=>e.target.style.borderColor=C.border}/>
+      <button onClick={submit} disabled={loading||!form.name||!form.handle} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"14px",background:brand.color,color:C.textOnAccent,border:"none",borderRadius:"2px",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:"8px"}}>{loading&&<span style={{width:"14px",height:"14px",border:`2px solid ${C.textOnAccent}40`,borderTopColor:C.textOnAccent,borderRadius:"50%",animation:"spin .6s linear infinite",display:"inline-block"}}/>}{loading?"Submitting...":"Submit Application"}</button></div></>)
+      :(<div style={{textAlign:"center",padding:"20px 0"}}><div style={{fontSize:"48px",marginBottom:"16px",animation:"checkPop .5s ease"}}>----</div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"32px",color:brand.color,marginBottom:"10px"}}>Application Sent!</div><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.dim,lineHeight:1.7,marginBottom:"24px"}}>{brand.name} will review your profile and respond within 48 hours.</p><button onClick={onClose} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"3px",padding:"12px 28px",background:brand.color,color:C.textOnAccent,border:"none",borderRadius:"2px",cursor:"pointer"}}>Back to Marketplace</button></div>)}
     </div>
   </div>);
 }
@@ -1053,16 +1057,16 @@ function MarketplacePage({openWaitlist,addToast}){
     addToast({type:"success",title:"Deal Submitted!",message:"Your campaign goes live within 24 hours."});
   };
   return(
-    <div style={{background:C.bg,color:C.white}}>
+    <div style={{background:C.bg,color:C.text}}>
       {applyBrand&&<ApplyModal brand={applyBrand} onClose={()=>setApplyBrand(null)} addToast={addToast}/>}
       <section style={{minHeight:"50vh",display:"flex",flexDirection:"column",justifyContent:"flex-end",padding:w<600?"100px 20px 60px":"138px 64px 68px",position:"relative",overflow:"hidden",background:C.bg}}>
         <div style={{position:"absolute",inset:0,backgroundImage:`linear-gradient(${C.orange}06 1px,transparent 1px),linear-gradient(90deg,${C.orange}06 1px,transparent 1px)`,backgroundSize:"60px 60px"}}/><Orb top="-5%" right="5%" size={550} opacity={0.13}/><Orb bottom="-15%" left="25%" size={400} color={C.pink} opacity={0.08} delay="2s"/>
         <div style={{position:"relative",zIndex:2,maxWidth:"1100px",margin:"0 auto",width:"100%"}}>
           <div style={{animation:"fadeUp .5s ease forwards",opacity:0,marginBottom:"16px"}}><Tag>Brand Marketplace</Tag></div>
-          <h1 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(44px,8vw,92px)",lineHeight:.92,color:C.white,animation:"fadeUp .55s .08s ease forwards",opacity:0,marginBottom:"18px"}}>Where brands meet<br/><span style={{color:C.orange}}>creators who live it.</span></h1>
+          <h1 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(44px,8vw,92px)",lineHeight:.92,color:C.text,animation:"fadeUp .55s .08s ease forwards",opacity:0,marginBottom:"18px"}}>Where brands meet<br/><span style={{color:C.orange}}>creators who live it.</span></h1>
           <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"clamp(14px,1.8vw,18px)",color:C.dim,maxWidth:"520px",lineHeight:1.75,animation:"fadeUp .55s .16s ease forwards",opacity:0}}>Browse live brand deals, apply in seconds, and turn your city presence into paid partnerships.</p>
           <div style={{display:"flex",gap:"24px",marginTop:"32px",flexWrap:"wrap",animation:"fadeUp .55s .24s ease forwards",opacity:0}}>
-            {[["140+","Active Deals"],["3,200+","Creators Matched"],["R38M+","Paid Out"],["48hrs","Avg Response"]].map(([v,l])=><div key={l}><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(18px,2.5vw,26px)",color:C.orange,lineHeight:1}}>{v}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"10px",letterSpacing:"1.5px",color:C.dimmer,textTransform:"uppercase",marginTop:"3px"}}>{l}</div></div>)}
+            {[["TBD","Active Deals"],["TBD","Creators Matched"],["TBD","Paid Out"],["TBD","Avg Response"]].map(([v,l])=><div key={l}><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(18px,2.5vw,26px)",color:C.orange,lineHeight:1}}>{v}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"10px",letterSpacing:"1.5px",color:C.dimmer,textTransform:"uppercase",marginTop:"3px"}}>{l}</div></div>)}
           </div>
         </div>
       </section>
@@ -1070,30 +1074,30 @@ function MarketplacePage({openWaitlist,addToast}){
       {activeTab==="Creator"?(
         <>
           <section style={{padding:`36px ${w<600?"20px":"64px"} 0`,background:C.bg2}}><div style={{maxWidth:"1100px",margin:"0 auto"}}>
-            <div style={{position:"relative",marginBottom:"20px"}}><span style={{position:"absolute",left:"14px",top:"50%",transform:"translateY(-50%)",fontSize:"14px",opacity:.35}}>----</span><input placeholder="Search brand name or vibe tag..." value={search} onChange={e=>setSearch(e.target.value)} style={{width:"100%",background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.1)",borderRadius:"2px",padding:"13px 16px 13px 42px",fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.white,outline:"none",transition:"border-color .2s"}} onFocus={e=>e.target.style.borderColor=C.orange} onBlur={e=>e.target.style.borderColor="rgba(255,255,255,0.1)"}/></div>
-            <div style={{display:"flex",gap:"7px",flexWrap:"wrap",alignItems:"center",paddingBottom:"22px"}}><div style={{display:"flex",gap:"5px",flexWrap:"wrap",flex:1}}>{MKT_CATS.map(c=><button key={c} onClick={()=>setCatFilter(c)} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",padding:"6px 11px",borderRadius:"2px",cursor:"pointer",background:catFilter===c?C.orange:"rgba(255,255,255,0.04)",color:catFilter===c?C.bg:C.dim,border:catFilter===c?"none":"1px solid rgba(255,255,255,0.1)",transition:"all .2s"}}>{c}</button>)}</div><select value={sortBy} onChange={e=>setSortBy(e.target.value)} style={{background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.1)",color:C.dim,padding:"7px 12px",borderRadius:"2px",fontFamily:"'DM Sans',sans-serif",fontSize:"12px",outline:"none",cursor:"pointer"}}>{["Featured","Slots Left"].map(s=><option key={s} value={s}>{s}</option>)}</select></div>
+            <div style={{position:"relative",marginBottom:"20px"}}><span style={{position:"absolute",left:"14px",top:"50%",transform:"translateY(-50%)",fontSize:"14px",opacity:.35}}>----</span><input placeholder="Search brand name or vibe tag..." value={search} onChange={e=>setSearch(e.target.value)} style={{width:"100%",background:C.bg3,border:`1px solid ${C.border}`,borderRadius:"2px",padding:"13px 16px 13px 42px",fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.text,outline:"none",transition:"border-color .2s"}} onFocus={e=>e.target.style.borderColor=C.orange} onBlur={e=>e.target.style.borderColor=C.border}/></div>
+            <div style={{display:"flex",gap:"7px",flexWrap:"wrap",alignItems:"center",paddingBottom:"22px"}}><div style={{display:"flex",gap:"5px",flexWrap:"wrap",flex:1}}>{MKT_CATS.map(c=><button key={c} onClick={()=>setCatFilter(c)} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",padding:"6px 11px",borderRadius:"2px",cursor:"pointer",background:catFilter===c?C.orange:"rgba(0,0,0,0.04)",color:catFilter===c?C.textOnAccent:C.dim,border:catFilter===c?"none":`1px solid ${C.border}`,transition:"all .2s"}}>{c}</button>)}</div><select value={sortBy} onChange={e=>setSortBy(e.target.value)} style={{background:"rgba(0,0,0,0.04)",border:"1px solid "+C.border,color:C.dim,padding:"7px 12px",borderRadius:"2px",fontFamily:"'DM Sans',sans-serif",fontSize:"12px",outline:"none",cursor:"pointer"}}>{["Featured","Slots Left"].map(s=><option key={s} value={s}>{s}</option>)}</select></div>
           </div></section>
           <section style={{padding:`20px ${w<600?"20px":"64px"} 80px`,background:C.bg2}}><div style={{maxWidth:"1100px",margin:"0 auto"}}>
             <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.dimmer,marginBottom:"20px"}}>Showing <span style={{color:C.orange}}>{filtered.length}</span> deals</p>
-            {filtered.length>0?<div className="grid-auto">{filtered.map((brand,i)=><Reveal key={brand.id} delay={i*.05}><BrandCard brand={brand} onApply={setApplyBrand}/></Reveal>)}</div>:<div style={{textAlign:"center",padding:"64px",color:C.dimmer}}><div style={{fontSize:"32px",marginBottom:"12px"}}>----</div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"20px",color:C.white,marginBottom:"6px"}}>No deals found</div><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px"}}>Try adjusting your filters.</p></div>}
+            {filtered.length>0?<div className="grid-auto">{filtered.map((brand,i)=><Reveal key={brand.id} delay={i*.05}><BrandCard brand={brand} onApply={setApplyBrand}/></Reveal>)}</div>:<div style={{textAlign:"center",padding:"64px",color:C.dimmer}}><div style={{fontSize:"32px",marginBottom:"12px"}}>----</div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"20px",color:C.text,marginBottom:"6px"}}>No deals found</div><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px"}}>Try adjusting your filters.</p></div>}
           </div></section>
         </>
       ):(
         <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"1100px",margin:"0 auto"}} className="grid-2">
-          <div><Reveal><Tag>For Brands</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,54px)",color:C.white,lineHeight:1,margin:"16px 0 18px"}}>Post a deal.<br/><span style={{color:C.orange}}>Find your creators.</span></h2><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"16px",color:C.dim,lineHeight:1.8,marginBottom:"28px"}}>Access thousands of verified city creators. No agencies, no overhead --- direct creative partnerships.</p></Reveal>
-          {[["01","-------","Post a Deal","Describe your campaign, set budget, define your ideal creator."],["02","----","Get Discovered","Your deal surfaces to matching creators in your target cities."],["03","---","Review & Accept","Browse applicants and pick creators who match your brand."],["04","----","Track Results","Monitor campaign performance in real time."]].map(([n,i,t,d],idx)=><Reveal key={idx} delay={idx*.08}><div style={{display:"flex",gap:"12px",alignItems:"flex-start",marginBottom:"16px"}}><div style={{width:"30px",height:"30px",borderRadius:"2px",flexShrink:0,background:"rgba(255,107,0,0.12)",border:`1px solid ${C.orange}30`,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Bebas Neue',sans-serif",fontSize:"12px",color:C.orange}}>{n}</div><div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"16px",color:C.white,marginBottom:"2px"}}>{i} {t}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.dim,lineHeight:1.6}}>{d}</div></div></div></Reveal>)}</div>
-          <Reveal delay={.1}><div style={{padding:"36px",background:"rgba(255,255,255,0.02)",border:`1px solid ${C.border}`,borderRadius:"4px",position:"sticky",top:"80px"}}>
-            {postSent?(<div style={{textAlign:"center",padding:"28px 0"}}><div style={{fontSize:"44px",marginBottom:"14px",animation:"checkPop .5s ease"}}>----</div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"28px",color:C.orange,marginBottom:"10px"}}>Deal Posted!</div><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.dim,lineHeight:1.7}}>Your campaign goes live within 24 hours.</p><button onClick={()=>{setPostSent(false);setPostForm({brand:"",budget:"",location:"",desc:""});}} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"12px",letterSpacing:"2px",padding:"10px 24px",background:C.orange,color:C.bg,border:"none",borderRadius:"2px",cursor:"pointer",marginTop:"20px"}}>Post Another Deal</button></div>)
-            :(<><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"20px",color:C.white,marginBottom:"20px"}}>Post a Campaign Deal</div><div style={{display:"flex",flexDirection:"column",gap:"11px"}}>
-              {[["brand","Brand Name"],["budget","Budget Range"],["location","Target Location(s)"]].map(([k,ph])=><input key={k} placeholder={ph} value={postForm[k]} onChange={e=>setPostForm(f=>({...f,[k]:e.target.value}))} style={{background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.1)",borderRadius:"2px",padding:"12px 14px",fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.white,outline:"none",transition:"border-color .2s"}} onFocus={e=>e.target.style.borderColor=C.orange} onBlur={e=>e.target.style.borderColor="rgba(255,255,255,0.1)"}/>)}
-              <textarea placeholder="Describe your campaign..." rows={3} value={postForm.desc} onChange={e=>setPostForm(f=>({...f,desc:e.target.value}))} style={{background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.1)",borderRadius:"2px",padding:"12px 14px",fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.white,outline:"none",resize:"vertical",transition:"border-color .2s"}} onFocus={e=>e.target.style.borderColor=C.orange} onBlur={e=>e.target.style.borderColor="rgba(255,255,255,0.1)"}/>
-              <button onClick={submitPost} disabled={postLoading} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"14px",background:C.orange,color:C.bg,border:"none",borderRadius:"2px",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:"8px"}}>{postLoading&&<span style={{width:"14px",height:"14px",border:`2px solid ${C.bg}40`,borderTopColor:C.bg,borderRadius:"50%",animation:"spin .6s linear infinite",display:"inline-block"}}/>}{postLoading?"Submitting...":"Post My Deal"}</button>
+          <div><Reveal><Tag>For Brands</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,54px)",color:C.text,lineHeight:1,margin:"16px 0 18px"}}>Post a deal.<br/><span style={{color:C.orange}}>Find your creators.</span></h2><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"16px",color:C.dim,lineHeight:1.8,marginBottom:"28px"}}>Access thousands of verified city creators. No agencies, no overhead --- direct creative partnerships.</p></Reveal>
+          {[["01","-------","Post a Deal","Describe your campaign, set budget, define your ideal creator."],["02","----","Get Discovered","Your deal surfaces to matching creators in your target cities."],["03","---","Review & Accept","Browse applicants and pick creators who match your brand."],["04","----","Track Results","Monitor campaign performance in real time."]].map(([n,i,t,d],idx)=><Reveal key={idx} delay={idx*.08}><div style={{display:"flex",gap:"12px",alignItems:"flex-start",marginBottom:"16px"}}><div style={{width:"30px",height:"30px",borderRadius:"2px",flexShrink:0,background:"rgba(255,107,0,0.12)",border:`1px solid ${C.orange}30`,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:"'Bebas Neue',sans-serif",fontSize:"12px",color:C.orange}}>{n}</div><div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"16px",color:C.text,marginBottom:"2px"}}>{i} {t}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.dim,lineHeight:1.6}}>{d}</div></div></div></Reveal>)}</div>
+          <Reveal delay={.1}><div style={{padding:"36px",background:"rgba(0,0,0,0.02)",border:`1px solid ${C.border}`,borderRadius:"4px",position:"sticky",top:"80px"}}>
+            {postSent?(<div style={{textAlign:"center",padding:"28px 0"}}><div style={{fontSize:"44px",marginBottom:"14px",animation:"checkPop .5s ease"}}>----</div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"28px",color:C.orange,marginBottom:"10px"}}>Deal Posted!</div><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.dim,lineHeight:1.7}}>Your campaign goes live within 24 hours.</p><button onClick={()=>{setPostSent(false);setPostForm({brand:"",budget:"",location:"",desc:""});}} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"12px",letterSpacing:"2px",padding:"10px 24px",background:C.orange,color:C.textOnAccent,border:"none",borderRadius:"2px",cursor:"pointer",marginTop:"20px"}}>Post Another Deal</button></div>)
+            :(<><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"20px",color:C.text,marginBottom:"20px"}}>Post a Campaign Deal</div><div style={{display:"flex",flexDirection:"column",gap:"11px"}}>
+              {[["brand","Brand Name"],["budget","Budget Range"],["location","Target Location(s)"]].map(([k,ph])=><input key={k} placeholder={ph} value={postForm[k]} onChange={e=>setPostForm(f=>({...f,[k]:e.target.value}))} style={{background:"rgba(0,0,0,0.04)",border:"1px solid "+C.border,borderRadius:"2px",padding:"12px 14px",fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.text,outline:"none",transition:"border-color .2s"}} onFocus={e=>e.target.style.borderColor=C.orange} onBlur={e=>e.target.style.borderColor=C.border}/>)}
+              <textarea placeholder="Describe your campaign..." rows={3} value={postForm.desc} onChange={e=>setPostForm(f=>({...f,desc:e.target.value}))} style={{background:"rgba(0,0,0,0.04)",border:"1px solid "+C.border,borderRadius:"2px",padding:"12px 14px",fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.text,outline:"none",resize:"vertical",transition:"border-color .2s"}} onFocus={e=>e.target.style.borderColor=C.orange} onBlur={e=>e.target.style.borderColor=C.border}/>
+              <button onClick={submitPost} disabled={postLoading} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"14px",background:C.orange,color:C.textOnAccent,border:"none",borderRadius:"2px",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:"8px"}}>{postLoading&&<span style={{width:"14px",height:"14px",border:`2px solid ${C.textOnAccent}40`,borderTopColor:C.textOnAccent,borderRadius:"50%",animation:"spin .6s linear infinite",display:"inline-block"}}/>}{postLoading?"Submitting...":"Post My Deal"}</button>
             </div></>)}
           </div></Reveal>
         </div></section>
       )}
       <Divider/>
-      <section className="sec-pad" style={{background:C.bg}}><div style={{maxWidth:"800px",margin:"0 auto"}}><Reveal style={{marginBottom:"44px"}}><Tag>Marketplace FAQ</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(26px,4vw,44px)",color:C.white,lineHeight:1,marginTop:"16px"}}>How the marketplace <span style={{color:C.orange}}>works.</span></h2></Reveal><FAQ items={MKT_FAQS}/></div></section>
+      <section className="sec-pad" style={{background:C.bg}}><div style={{maxWidth:"800px",margin:"0 auto"}}><Reveal style={{marginBottom:"44px"}}><Tag>Marketplace FAQ</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(26px,4vw,44px)",color:C.text,lineHeight:1,marginTop:"16px"}}>How the marketplace <span style={{color:C.orange}}>works.</span></h2></Reveal><FAQ items={MKT_FAQS}/></div></section>
       <div style={{background:C.orange,padding:"20px 0",overflow:"hidden"}}><div style={{display:"flex",animation:"marquee 22s linear infinite",whiteSpace:"nowrap"}}>{[...Array(4)].map((_,x)=>["Brand Deals","--","Creator Matching","--","Real Payments","--","City Culture","--","Authentic Collabs","--"].map((wd,i)=><span key={`${x}-${i}`} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",color:"rgba(5,5,10,0.65)",marginRight:"26px"}}>{wd}</span>))}</div></div>
     </div>
   );
@@ -1129,37 +1133,37 @@ function ContactPage({addToast}){
     addToast({type:"success",title:"Message sent!",message:`The ${selectedDept?.label} team will respond within 24---48 hours.`});
   };
   return(
-    <div style={{background:C.bg,color:C.white}}>
+    <div style={{background:C.bg,color:C.text}}>
       <PageHero tag="Contact" title="Let's build" accent="something real." sub="Whether you're a creator, a business, or a curious human --- we're here."/>
       <Divider/>
       <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"1100px",margin:"0 auto"}} className="grid-2">
         <div>
           <Reveal style={{marginBottom:"28px"}}><Tag>Choose Department</Tag></Reveal>
           <div style={{display:"flex",flexDirection:"column",gap:"8px",marginBottom:"40px"}}>
-            {CONTACT_DEPTS.map((d,i)=><Reveal key={d.key} delay={i*.07}><div onClick={()=>setDept(d.key)} style={{padding:"16px 20px",background:dept===d.key?"rgba(255,107,0,0.1)":"rgba(255,255,255,0.02)",border:`1px solid ${dept===d.key?C.orange+"50":"rgba(255,255,255,0.07)"}`,borderRadius:"4px",cursor:"pointer",transition:"all .25s",display:"flex",alignItems:"flex-start",gap:"12px"}} onMouseEnter={e=>{if(dept!==d.key){e.currentTarget.style.background="rgba(255,255,255,0.04)";e.currentTarget.style.borderColor="rgba(255,255,255,0.14)";}}} onMouseLeave={e=>{if(dept!==d.key){e.currentTarget.style.background="rgba(255,255,255,0.02)";e.currentTarget.style.borderColor="rgba(255,255,255,0.07)";}}}>
-              <span style={{fontSize:"18px",flexShrink:0}}>{d.icon}</span><div style={{flex:1}}><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"15px",color:dept===d.key?C.orange:C.white,letterSpacing:".5px"}}>{d.label}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer,marginTop:"2px"}}>{d.desc}</div></div>{dept===d.key&&<div style={{color:C.orange,fontSize:"13px",flexShrink:0}}>---</div>}
+            {CONTACT_DEPTS.map((d,i)=><Reveal key={d.key} delay={i*.07}><div onClick={()=>setDept(d.key)} style={{padding:"16px 20px",background:dept===d.key?"rgba(255,107,0,0.1)":"rgba(0,0,0,0.02)",border:`1px solid ${dept===d.key?C.orange+"50":C.border}`,borderRadius:"4px",cursor:"pointer",transition:"all .25s",display:"flex",alignItems:"flex-start",gap:"12px"}} onMouseEnter={e=>{if(dept!==d.key){e.currentTarget.style.background="rgba(0,0,0,0.04)";e.currentTarget.style.borderColor=C.border;}}} onMouseLeave={e=>{if(dept!==d.key){e.currentTarget.style.background="rgba(0,0,0,0.02)";e.currentTarget.style.borderColor=C.border;}}}>
+              <span style={{fontSize:"18px",flexShrink:0}}>{d.icon}</span><div style={{flex:1}}><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"15px",color:dept===d.key?C.orange:C.text,letterSpacing:".5px"}}>{d.label}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer,marginTop:"2px"}}>{d.desc}</div></div>{dept===d.key&&<div style={{color:C.orange,fontSize:"13px",flexShrink:0}}>---</div>}
             </div></Reveal>)}
           </div>
-          <Reveal><div style={{padding:"24px",background:"rgba(255,255,255,0.02)",border:`1px solid ${C.border}`,borderRadius:"4px"}}>
+          <Reveal><div style={{padding:"24px",background:"rgba(0,0,0,0.02)",border:`1px solid ${C.border}`,borderRadius:"4px"}}>
             <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"12px",letterSpacing:"3px",color:C.orange,marginBottom:"10px"}}>All contacts</div>
-            {CONTACT_DEPTS.map(d=><div key={d.key} style={{display:"flex",justifyContent:"space-between",padding:"7px 0",borderBottom:"1px solid rgba(255,255,255,0.05)"}}><span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer}}>{d.label}</span><a href={`mailto:${d.email}`} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dim,textDecoration:"none",transition:"color .2s"}} onMouseEnter={e=>e.target.style.color=C.orange} onMouseLeave={e=>e.target.style.color=C.dim}>{d.email}</a></div>)}
+            {CONTACT_DEPTS.map(d=><div key={d.key} style={{display:"flex",justifyContent:"space-between",padding:"7px 0",borderBottom:"1px solid rgba(0,0,0,0.08)"}}><span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer}}>{d.label}</span><a href={`mailto:${d.email}`} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dim,textDecoration:"none",transition:"color .2s"}} onMouseEnter={e=>e.target.style.color=C.orange} onMouseLeave={e=>e.target.style.color=C.dim}>{d.email}</a></div>)}
           </div></Reveal>
         </div>
-        <Reveal delay={.1}><div style={{padding:"40px",background:"rgba(255,255,255,0.02)",border:`1px solid ${C.border}`,borderRadius:"4px",position:"sticky",top:"80px"}}>
+        <Reveal delay={.1}><div style={{padding:"40px",background:"rgba(0,0,0,0.02)",border:`1px solid ${C.border}`,borderRadius:"4px",position:"sticky",top:"80px"}}>
           {sent?(<div style={{textAlign:"center",padding:"36px 0"}}>
             <div style={{fontSize:"48px",marginBottom:"16px",animation:"checkPop .5s ease"}}>------</div>
             <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"30px",color:C.orange,marginBottom:"10px"}}>Message Sent.</div>
             <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.dim,lineHeight:1.7,marginBottom:"24px"}}>The {selectedDept?.label} team will get back to you at <span style={{color:C.orange}}>{form.email}</span> within 24---48 hours.</p>
-            <button onClick={()=>{setSent(false);setForm({name:"",email:"",subject:"",message:"",});}} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"12px",letterSpacing:"2px",padding:"11px 24px",background:C.orange,color:C.bg,border:"none",borderRadius:"2px",cursor:"pointer"}}>Send Another</button>
+            <button onClick={()=>{setSent(false);setForm({name:"",email:"",subject:"",message:"",});}} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"12px",letterSpacing:"2px",padding:"11px 24px",background:C.orange,color:C.textOnAccent,border:"none",borderRadius:"2px",cursor:"pointer"}}>Send Another</button>
           </div>):(<>
             <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"24px"}}><span style={{fontSize:"20px"}}>{selectedDept?.icon}</span><div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"18px",color:C.orange}}>{selectedDept?.label}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer}}>{selectedDept?.email}</div></div></div>
             <div style={{display:"flex",flexDirection:"column",gap:"12px"}}>
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px"}}>
-                {[["name","Your Name"],["email","Email Address"]].map(([k,ph])=><input key={k} placeholder={ph} value={form[k]} onChange={e=>setForm(f=>({...f,[k]:e.target.value}))} style={{background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.1)",borderRadius:"2px",padding:"12px 14px",fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.white,outline:"none",transition:"border-color .2s"}} onFocus={e=>e.target.style.borderColor=C.orange} onBlur={e=>e.target.style.borderColor="rgba(255,255,255,0.1)"}/>)}
+                {[["name","Your Name"],["email","Email Address"]].map(([k,ph])=><input key={k} placeholder={ph} value={form[k]} onChange={e=>setForm(f=>({...f,[k]:e.target.value}))} style={{background:"rgba(0,0,0,0.04)",border:"1px solid "+C.border,borderRadius:"2px",padding:"12px 14px",fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.text,outline:"none",transition:"border-color .2s"}} onFocus={e=>e.target.style.borderColor=C.orange} onBlur={e=>e.target.style.borderColor=C.border}/>)}
               </div>
-              <input placeholder="Subject" value={form.subject} onChange={e=>setForm(f=>({...f,subject:e.target.value}))} style={{background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.1)",borderRadius:"2px",padding:"12px 14px",fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.white,outline:"none",transition:"border-color .2s"}} onFocus={e=>e.target.style.borderColor=C.orange} onBlur={e=>e.target.style.borderColor="rgba(255,255,255,0.1)"}/>
-              <textarea placeholder="Your message..." rows={5} value={form.message} onChange={e=>setForm(f=>({...f,message:e.target.value}))} style={{background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.1)",borderRadius:"2px",padding:"12px 14px",fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.white,outline:"none",resize:"vertical",transition:"border-color .2s"}} onFocus={e=>e.target.style.borderColor=C.orange} onBlur={e=>e.target.style.borderColor="rgba(255,255,255,0.1)"}/>
-              <button onClick={submit} disabled={loading||!form.name||!form.email||!form.message} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"15px",letterSpacing:"3px",padding:"15px",background:(!form.name||!form.email||!form.message)?"rgba(255,107,0,0.3)":C.orange,color:C.bg,border:"none",borderRadius:"2px",cursor:(!form.name||!form.email||!form.message)?"not-allowed":"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:"8px"}}>{loading&&<span style={{width:"14px",height:"14px",border:`2px solid ${C.bg}40`,borderTopColor:C.bg,borderRadius:"50%",animation:"spin .6s linear infinite",display:"inline-block"}}/>}{loading?"Sending...":"Send Message ---"}</button>
+              <input placeholder="Subject" value={form.subject} onChange={e=>setForm(f=>({...f,subject:e.target.value}))} style={{background:"rgba(0,0,0,0.04)",border:"1px solid "+C.border,borderRadius:"2px",padding:"12px 14px",fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.text,outline:"none",transition:"border-color .2s"}} onFocus={e=>e.target.style.borderColor=C.orange} onBlur={e=>e.target.style.borderColor=C.border}/>
+              <textarea placeholder="Your message..." rows={5} value={form.message} onChange={e=>setForm(f=>({...f,message:e.target.value}))} style={{background:"rgba(0,0,0,0.04)",border:"1px solid "+C.border,borderRadius:"2px",padding:"12px 14px",fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.text,outline:"none",resize:"vertical",transition:"border-color .2s"}} onFocus={e=>e.target.style.borderColor=C.orange} onBlur={e=>e.target.style.borderColor=C.border}/>
+              <button onClick={submit} disabled={loading||!form.name||!form.email||!form.message} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"15px",letterSpacing:"3px",padding:"15px",background:(!form.name||!form.email||!form.message)?"rgba(255,107,0,0.3)":C.orange,color:C.textOnAccent,border:"none",borderRadius:"2px",cursor:(!form.name||!form.email||!form.message)?"not-allowed":"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:"8px"}}>{loading&&<span style={{width:"14px",height:"14px",border:`2px solid ${C.textOnAccent}40`,borderTopColor:C.textOnAccent,borderRadius:"50%",animation:"spin .6s linear infinite",display:"inline-block"}}/>}{loading?"Sending...":"Send Message ---"}</button>
               <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer,textAlign:"center"}}>Typical response: 24---48 hours</p>
             </div>
           </>)}
@@ -1167,12 +1171,12 @@ function ContactPage({addToast}){
       </div></section>
       <Divider/>
       <section className="sec-pad"><div style={{maxWidth:"1100px",margin:"0 auto"}}>
-        <Reveal style={{marginBottom:"44px"}}><Tag>Find Us</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(26px,4vw,46px)",color:C.white,lineHeight:1,marginTop:"16px"}}>We're in the <span style={{color:C.orange}}>cities we're building for.</span></h2></Reveal>
+        <Reveal style={{marginBottom:"44px"}}><Tag>Find Us</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(26px,4vw,46px)",color:C.text,lineHeight:1,marginTop:"16px"}}>We're in the <span style={{color:C.orange}}>cities we're building for.</span></h2></Reveal>
         <div className="grid-4">
           {[{city:"Johannesburg",addr:"HQ - Sandton",emoji:"HQ",status:"Main Office"},{city:"Cape Town",addr:"Woodstock Creative Hub",emoji:"COAST",status:"Western Cape"},{city:"Durban",addr:"Umhlanga Ridge",emoji:"COAST",status:"KwaZulu-Natal"},{city:"Pretoria",addr:"Menlyn Maine",emoji:"CAPITOL",status:"Gauteng North"}].map((o,i)=><Reveal key={i} delay={i*.1}>
-            <div style={{padding:"26px 22px",background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.07)",borderRadius:"4px",transition:"all .3s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.background="rgba(255,107,0,0.06)";}} onMouseLeave={e=>{e.currentTarget.style.borderColor="rgba(255,255,255,0.07)";e.currentTarget.style.background="rgba(255,255,255,0.02)";}}>
+            <div style={{padding:"26px 22px",background:"rgba(0,0,0,0.02)",border:"1px solid "+C.border,borderRadius:"4px",transition:"all .3s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.background="rgba(255,107,0,0.06)";}} onMouseLeave={e=>{e.currentTarget.style.borderColor=C.border;e.currentTarget.style.background="rgba(0,0,0,0.02)";}}>
               <div style={{fontSize:"26px",marginBottom:"10px"}}>{o.emoji}</div>
-              <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"19px",color:C.white,marginBottom:"3px"}}>{o.city}</div>
+              <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"19px",color:C.text,marginBottom:"3px"}}>{o.city}</div>
               <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dim,marginBottom:"10px"}}>{o.addr}</div>
               <div style={{display:"inline-flex",alignItems:"center",gap:"6px"}}><div style={{width:6,height:6,borderRadius:"50%",background:C.orange,animation:"dotPulse 2s infinite"}}/><span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"10px",letterSpacing:"1px",color:C.orange,textTransform:"uppercase"}}>{o.status}</span></div>
             </div>
@@ -1191,12 +1195,12 @@ function ContactPage({addToast}){
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function LegalPage({title,tag,lastUpdated,sections}){
   return(
-    <div style={{background:C.bg,color:C.white}}>
+    <div style={{background:C.bg,color:C.text}}>
       <section style={{padding:"130px 64px 60px",position:"relative",overflow:"hidden",background:C.bg}}>
         <div style={{position:"absolute",inset:0,backgroundImage:`linear-gradient(${C.orange}04 1px,transparent 1px),linear-gradient(90deg,${C.orange}04 1px,transparent 1px)`,backgroundSize:"60px 60px"}}/><Orb top="-10%" right="-5%" size={400} opacity={0.08}/>
         <div style={{position:"relative",zIndex:2,maxWidth:"800px",margin:"0 auto"}}>
           <div style={{animation:"fadeUp .5s ease forwards",opacity:0,marginBottom:"16px"}}><Tag>{tag}</Tag></div>
-          <h1 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(40px,6vw,72px)",lineHeight:.95,color:C.white,animation:"fadeUp .55s .08s ease forwards",opacity:0,marginBottom:"16px"}}>{title}</h1>
+          <h1 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(40px,6vw,72px)",lineHeight:.95,color:C.text,animation:"fadeUp .55s .08s ease forwards",opacity:0,marginBottom:"16px"}}>{title}</h1>
           <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.dimmer,animation:"fadeUp .55s .16s ease forwards",opacity:0}}>Last updated: {lastUpdated}</p>
         </div>
       </section>
@@ -1252,15 +1256,15 @@ const COOKIES_SECTIONS=[
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function NotFoundPage({setPage}){
   return(
-    <div style={{background:C.bg,color:C.white,minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",position:"relative",overflow:"hidden",padding:"120px 24px"}}>
+    <div style={{background:C.bg,color:C.text,minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",position:"relative",overflow:"hidden",padding:"120px 24px"}}>
       <Orb top="10%" left="-5%" size={500} opacity={0.1}/><Orb bottom="10%" right="-5%" size={400} color={C.pink} opacity={0.08} delay="2s"/>
       <div style={{position:"relative",zIndex:2,textAlign:"center",maxWidth:"600px"}}>
         <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(80px,15vw,160px)",lineHeight:1,WebkitTextStroke:"2px rgba(255,107,0,0.25)",color:"rgba(255,107,0,0.08)",marginBottom:"-20px"}}>404</div>
-        <h1 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(32px,5vw,56px)",color:C.white,lineHeight:1,marginBottom:"18px"}}>This vibe<br/><span style={{color:C.orange}}>doesn't exist.</span></h1>
+        <h1 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(32px,5vw,56px)",color:C.text,lineHeight:1,marginBottom:"18px"}}>This vibe<br/><span style={{color:C.orange}}>doesn't exist.</span></h1>
         <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"16px",color:C.dim,lineHeight:1.7,marginBottom:"36px"}}>The page you're looking for has either moved or never existed.</p>
         <div style={{display:"flex",gap:"12px",justifyContent:"center",flexWrap:"wrap"}}>
-          <button onClick={()=>{setPage("home");window.scrollTo(0,0);}} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"13px 32px",background:C.orange,color:C.bg,border:"none",borderRadius:"2px",cursor:"pointer",transition:"transform .2s,box-shadow .2s"}} onMouseEnter={e=>{e.target.style.transform="translateY(-2px)";e.target.style.boxShadow=`0 12px 32px ${C.orange}40`;}} onMouseLeave={e=>{e.target.style.transform="";e.target.style.boxShadow="";}}>Back to Home</button>
-          <button onClick={()=>{setPage("Contact");window.scrollTo(0,0);}} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"13px 32px",background:"transparent",color:C.white,border:"1px solid rgba(255,255,255,0.2)",borderRadius:"2px",cursor:"pointer",transition:"all .2s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.color=C.orange;}} onMouseLeave={e=>{e.currentTarget.style.borderColor="rgba(255,255,255,0.2)";e.currentTarget.style.color=C.white;}}>Report an Issue</button>
+          <button onClick={()=>{setPage("home");window.scrollTo(0,0);}} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"13px 32px",background:C.orange,color:C.textOnAccent,border:"none",borderRadius:"2px",cursor:"pointer",transition:"transform .2s,box-shadow .2s"}} onMouseEnter={e=>{e.target.style.transform="translateY(-2px)";e.target.style.boxShadow=`0 12px 32px ${C.orange}40`;}} onMouseLeave={e=>{e.target.style.transform="";e.target.style.boxShadow="";}}>Back to Home</button>
+          <button onClick={()=>{setPage("Contact");window.scrollTo(0,0);}} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"13px 32px",background:"transparent",color:C.text,border:`1px solid ${C.border}`,borderRadius:"2px",cursor:"pointer",transition:"all .2s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.color=C.orange;}} onMouseLeave={e=>{e.currentTarget.style.borderColor=C.border;e.currentTarget.style.color=C.text;}}>Report an Issue</button>
         </div>
       </div>
     </div>

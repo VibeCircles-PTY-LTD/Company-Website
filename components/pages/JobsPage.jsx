@@ -4,7 +4,7 @@ import { useState } from "react";
 import { C } from "@/components/shared/vibeTheme";
 import { Divider, FAQ, Orb, PageHero, Reveal, Tag } from "@/components/shared/ui";
 
-const ROLES_DISABLED=true;
+const ROLES_DISABLED = false;
 const ROLES=[
   {
     title:"Frontend Engineer",dept:"Engineering",type:"Full-Time",level:"Mid---Senior",
@@ -102,12 +102,14 @@ export default function JobsPage({openWaitlist,addToast}){
   const[expanded,setExpanded]=useState(null);
   const[jobTab,setJobTab]=useState({});
   const[applyOpen,setApplyOpen]=useState(null);
+  const[applyForm,setApplyForm]=useState({name:"",email:"",location:"",portfolio:"",message:""});
+  const[applyLoading,setApplyLoading]=useState(false);
   const depts=["All",...Object.keys(DEPT_COLORS)];
   const filtered=filter==="All"?ROLES:ROLES.filter(r=>r.dept===filter);
   const getTab=(i)=>jobTab[i]||"Overview";
   const setTab=(i,t)=>setJobTab(p=>({...p,[i]:t}));
   return(
-    <div style={{background:C.bg,color:C.white}}>
+    <div style={{background:C.bg,color:C.text}}>
       <PageHero tag="Careers" title="We don't hire for roles." accent="We hire builders." sub="Ambitious, fast-moving, impact-driven. Join the team building infrastructure for modern city culture."/>
       <Divider/>
       {/* PERKS */}
@@ -116,20 +118,20 @@ export default function JobsPage({openWaitlist,addToast}){
         {icon:"----",t:"Serious Skill Growth",d:"You build real features, solve real problems, and level up fast."},
         {icon:"----",t:"Creative Freedom",d:"Ideas are welcomed. Experiments are encouraged. Ownership is real."},
         {icon:"---",t:"A Team That Builds Bold",d:"No ego. No politics. Just smart people creating something meaningful."}
-        ].map((p,i)=><Reveal key={i} delay={i*.1}><div style={{padding:"28px 22px",background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.07)",borderRadius:"4px",height:"100%",transition:"all .3s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.background="rgba(255,107,0,0.06)";e.currentTarget.style.transform="translateY(-4px)";}} onMouseLeave={e=>{e.currentTarget.style.borderColor="rgba(255,255,255,0.07)";e.currentTarget.style.background="rgba(255,255,255,0.02)";e.currentTarget.style.transform="";}}><div style={{fontSize:"24px",marginBottom:"12px"}}>{p.icon}</div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"18px",color:C.white,marginBottom:"8px"}}>{p.t}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.dim,lineHeight:1.7}}>{p.d}</div></div></Reveal>)}</div></div></section>
+        ].map((p,i)=><Reveal key={i} delay={i*.1}><div style={{padding:"28px 22px",background:"rgba(0,0,0,0.02)",border:`1px solid ${C.border}`,borderRadius:"4px",height:"100%",transition:"all .3s"}} onMouseEnter={e=>{e.currentTarget.style.borderColor=C.orange;e.currentTarget.style.background="rgba(255,107,0,0.06)";e.currentTarget.style.transform="translateY(-4px)";}} onMouseLeave={e=>{e.currentTarget.style.borderColor=C.border;e.currentTarget.style.background="rgba(0,0,0,0.02)";e.currentTarget.style.transform="";}}><div style={{fontSize:"24px",marginBottom:"12px"}}>{p.icon}</div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"18px",color:C.text,marginBottom:"8px"}}>{p.t}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.dim,lineHeight:1.7}}>{p.d}</div></div></Reveal>)}</div></div></section>
       <Divider/>
       {/* ROLES */}
       <section className="sec-pad" style={{position:"relative",overflow:"hidden"}}>
         <Orb top="0%" right="-5%" size={450} opacity={0.08}/>
         <div style={{maxWidth:"1100px",margin:"0 auto"}}>
-          <Reveal style={{marginBottom:"36px"}}><Tag>Open Roles</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,54px)",color:C.white,lineHeight:1,marginTop:"16px"}}>Find your position<br/><span style={{color:C.orange}}>in the vibe.</span></h2></Reveal>
+          <Reveal style={{marginBottom:"36px"}}><Tag>Open Roles</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(30px,5vw,54px)",color:C.text,lineHeight:1,marginTop:"16px"}}>Find your position<br/><span style={{color:C.orange}}>in the vibe.</span></h2></Reveal>
           {!ROLES_DISABLED&&ROLES.length>0&&(
             <div style={{display:"flex",gap:"7px",flexWrap:"wrap",marginBottom:"32px"}}>
-              {depts.map(d=><button key={d} onClick={()=>{setFilter(d);setExpanded(null);}} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"12px",letterSpacing:"2px",padding:"8px 16px",background:filter===d?(DEPT_COLORS[d]||C.orange):"transparent",color:filter===d?C.bg:C.dim,border:`1px solid ${filter===d?(DEPT_COLORS[d]||C.orange):"rgba(255,255,255,0.12)"}`,borderRadius:"2px",cursor:"pointer",transition:"all .2s"}}>{d}</button>)}
+              {depts.map(d=><button key={d} onClick={()=>{setFilter(d);setExpanded(null);}} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"12px",letterSpacing:"2px",padding:"8px 16px",background:filter===d?(DEPT_COLORS[d]||C.orange):"transparent",color:filter===d?C.textOnAccent:C.dim,border:`1px solid ${filter===d?(DEPT_COLORS[d]||C.orange):C.border}`,borderRadius:"2px",cursor:"pointer",transition:"all .2s"}}>{d}</button>)}
             </div>
           )}
           {ROLES_DISABLED||ROLES.length===0?(
-            <div style={{padding:"22px 24px",background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.08)",borderRadius:"4px"}}>
+            <div style={{padding:"22px 24px",background:"rgba(0,0,0,0.03)",border:`1px solid ${C.border}`,borderRadius:"4px"}}>
               <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"18px",letterSpacing:"2px",color:C.orange,marginBottom:"8px"}}>No openings at the moment</div>
               <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.dim,lineHeight:1.6}}>We are not hiring right now. Check back soon.</div>
             </div>
@@ -142,11 +144,11 @@ export default function JobsPage({openWaitlist,addToast}){
               const TABS=["Overview","Responsibilities","Requirements","Stack & Perks"];
               return(
                 <Reveal key={role.title+filter} delay={i*.05}>
-                  <div style={{background:isOpen?`${dc}07`:"rgba(255,255,255,0.02)",border:`1px solid ${isOpen?dc+"50":"rgba(255,255,255,0.07)"}`,borderRadius:"4px",overflow:"hidden",transition:"all .3s"}}>
+                  <div style={{background:isOpen?`${dc}07`:"rgba(0,0,0,0.02)",border:`1px solid ${isOpen?dc+"50":C.border}`,borderRadius:"4px",overflow:"hidden",transition:"all .3s"}}>
                     {/* HEADER ROW */}
                     <div onClick={()=>setExpanded(isOpen?null:i)} style={{padding:"20px 26px",display:"flex",alignItems:"center",gap:"16px",cursor:"pointer"}}>
                       <div style={{flex:1}}>
-                        <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"16px",fontWeight:600,color:C.white,marginBottom:"6px"}}>{role.title}</div>
+                        <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"16px",fontWeight:600,color:C.text,marginBottom:"6px"}}>{role.title}</div>
                         <div style={{display:"flex",gap:"8px",flexWrap:"wrap",alignItems:"center"}}>
                           <span style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"10px",letterSpacing:"2px",color:dc,background:`${dc}18`,padding:"3px 9px",borderRadius:"2px"}}>{role.dept}</span>
                           <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer}}>--</span>
@@ -157,7 +159,7 @@ export default function JobsPage({openWaitlist,addToast}){
                           <span style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"12px",letterSpacing:"1px",color:C.orange}}>{role.salary}</span>
                         </div>
                       </div>
-                      <div style={{width:"26px",height:"26px",border:`1px solid ${isOpen?dc:"rgba(255,255,255,0.12)"}`,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",color:isOpen?dc:C.dimmer,fontSize:"16px",transition:"all .3s",transform:isOpen?"rotate(45deg)":"none",flexShrink:0,fontWeight:300}}>+</div>
+                      <div style={{width:"26px",height:"26px",border:`1px solid ${isOpen?dc:C.border}`,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",color:isOpen?dc:C.dimmer,fontSize:"16px",transition:"all .3s",transform:isOpen?"rotate(45deg)":"none",flexShrink:0,fontWeight:300}}>+</div>
                     </div>
                     {/* EXPANDED BODY */}
                     {isOpen&&(
@@ -166,18 +168,18 @@ export default function JobsPage({openWaitlist,addToast}){
                         {/* INTERNAL TABS */}
                         <div style={{display:"flex",gap:"4px",marginBottom:"24px",flexWrap:"wrap"}}>
                           {TABS.map(t=>(
-                            <button key={t} onClick={()=>setTab(i,t)} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",letterSpacing:".5px",padding:"7px 14px",background:tab===t?dc:"rgba(255,255,255,0.04)",color:tab===t?C.bg:C.dim,border:`1px solid ${tab===t?dc:"rgba(255,255,255,0.08)"}`,borderRadius:"2px",cursor:"pointer",transition:"all .2s"}}>{t}</button>
+                            <button key={t} onClick={()=>setTab(i,t)} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",letterSpacing:".5px",padding:"7px 14px",background:tab===t?dc:"rgba(0,0,0,0.04)",color:tab===t?C.textOnAccent:C.dim,border:`1px solid ${tab===t?dc:C.border}`,borderRadius:"2px",cursor:"pointer",transition:"all .2s"}}>{t}</button>
                           ))}
                         </div>
                         {/* TAB CONTENT */}
                         {tab==="Overview"&&(
                           <div>
-                            <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"15px",color:"rgba(255,255,255,0.8)",lineHeight:1.8,marginBottom:"20px"}}>{role.summary}</p>
+                            <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"15px",color:C.dim,lineHeight:1.8,marginBottom:"20px"}}>{role.summary}</p>
                             <div style={{display:"flex",gap:"10px",flexWrap:"wrap",marginBottom:"20px"}}>
                               {[{l:"---- Location",v:role.location},{l:"--- Type",v:role.type},{l:"---- Level",v:role.level},{l:"---- Deadline",v:role.deadline}].map(({l,v})=>(
-                                <div key={l} style={{padding:"10px 16px",background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.08)",borderRadius:"3px"}}>
+                                <div key={l} style={{padding:"10px 16px",background:"rgba(0,0,0,0.03)",border:`1px solid ${C.border}`,borderRadius:"3px"}}>
                                   <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"10px",color:C.dimmer,letterSpacing:"1px",textTransform:"uppercase"}}>{l}</div>
-                                  <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.white,marginTop:"3px",fontWeight:600}}>{v}</div>
+                                  <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px",color:C.text,marginTop:"3px",fontWeight:600}}>{v}</div>
                                 </div>
                               ))}
                             </div>
@@ -186,9 +188,9 @@ export default function JobsPage({openWaitlist,addToast}){
                         {tab==="Responsibilities"&&(
                           <div style={{display:"flex",flexDirection:"column",gap:"10px"}}>
                             {role.responsibilities.map((r,idx)=>(
-                              <div key={idx} style={{display:"flex",gap:"12px",alignItems:"flex-start",padding:"12px 16px",background:"rgba(255,255,255,0.02)",borderRadius:"3px",border:"1px solid rgba(255,255,255,0.06)"}}>
+                              <div key={idx} style={{display:"flex",gap:"12px",alignItems:"flex-start",padding:"12px 16px",background:"rgba(0,0,0,0.02)",borderRadius:"3px",border:`1px solid ${C.border}`}}>
                                 <span style={{color:dc,fontSize:"14px",marginTop:"1px",flexShrink:0}}>---</span>
-                                <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:"rgba(255,255,255,0.75)",lineHeight:1.6}}>{r}</span>
+                                <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.dim,lineHeight:1.6}}>{r}</span>
                               </div>
                             ))}
                           </div>
@@ -201,7 +203,7 @@ export default function JobsPage({openWaitlist,addToast}){
                                 {role.requirements.map((r,idx)=>(
                                   <div key={idx} style={{display:"flex",gap:"10px",alignItems:"flex-start"}}>
                                     <span style={{color:dc,fontSize:"14px",flexShrink:0,marginTop:"1px"}}>---</span>
-                                    <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:"rgba(255,255,255,0.75)",lineHeight:1.6}}>{r}</span>
+                                    <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.dim,lineHeight:1.6}}>{r}</span>
                                   </div>
                                 ))}
                               </div>
@@ -211,57 +213,71 @@ export default function JobsPage({openWaitlist,addToast}){
                         )}
                         {tab==="Stack & Perks"&&(
                           <div>
-                            {role.techStack&&<div style={{marginBottom:"24px"}}><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"2px",color:dc,marginBottom:"12px"}}>Tech Stack</div><div style={{display:"flex",gap:"8px",flexWrap:"wrap"}}>{role.techStack.map(t=><span key={t} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.white,padding:"6px 14px",background:`${dc}15`,border:`1px solid ${dc}30`,borderRadius:"2px"}}>{t}</span>)}</div></div>}
-                            <div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"2px",color:dc,marginBottom:"12px"}}>Benefits</div><div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px"}}>{["Equity for all full-time roles","Remote-first & flexible hours","R30,000/yr learning budget","Medical aid stipend","Home office stipend (R7,500)","Quarterly team retreats","Unlimited PTO (we mean it)","Free VibeCircle Orbit plan"].map(b=><div key={b} style={{display:"flex",gap:"8px",alignItems:"center",padding:"10px 14px",background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.06)",borderRadius:"3px"}}><span style={{color:dc,fontSize:"12px",flexShrink:0}}>---</span><span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:"rgba(255,255,255,0.7)"}}>{b}</span></div>)}</div></div>
+                            {role.techStack&&<div style={{marginBottom:"24px"}}><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"2px",color:dc,marginBottom:"12px"}}>Tech Stack</div><div style={{display:"flex",gap:"8px",flexWrap:"wrap"}}>{role.techStack.map(t=><span key={t} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.text,padding:"6px 14px",background:`${dc}15`,border:`1px solid ${dc}30`,borderRadius:"2px"}}>{t}</span>)}</div></div>}
+                            <div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"2px",color:dc,marginBottom:"12px"}}>Benefits</div><div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"8px"}}>{["Equity for all full-time roles","Remote-first & flexible hours","R30,000/yr learning budget","Medical aid stipend","Home office stipend (R7,500)","Quarterly team retreats","Unlimited PTO (we mean it)","Free VibeCircle Orbit plan"].map(b=><div key={b} style={{display:"flex",gap:"8px",alignItems:"center",padding:"10px 14px",background:"rgba(0,0,0,0.02)",border:`1px solid ${C.border}`,borderRadius:"3px"}}><span style={{color:dc,fontSize:"12px",flexShrink:0}}>---</span><span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.dim,lineHeight:1.6}}>{b}</span></div>)}</div></div>
                           </div>
                         )}
                         <div style={{marginTop:"24px"}}>
                           <button
                             onClick={()=>setApplyOpen(applyOpen===i?null:i)}
-                            style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"3px",padding:"12px 28px",background:dc,color:C.bg,border:"none",borderRadius:"2px",cursor:"pointer",transition:"box-shadow .2s,transform .2s",marginRight:"10px"}}
+                            style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"3px",padding:"12px 28px",background:dc,color:C.textOnAccent,border:"none",borderRadius:"2px",cursor:"pointer",transition:"box-shadow .2s,transform .2s",marginRight:"10px"}}
                             onMouseEnter={e=>{e.target.style.boxShadow=`0 8px 24px ${dc}45`;e.target.style.transform="translateY(-2px)";}}
                             onMouseLeave={e=>{e.target.style.boxShadow="";e.target.style.transform="";}}
                           >{applyOpen===i?"Close Form":"Apply Now"}</button>
                           <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer}}>or email <a href="mailto:careers@vibecircle.com" style={{color:dc,textDecoration:"none"}}>careers@vibecircle.com</a></span>
                         </div>
                         {applyOpen===i&&(
-                          <div style={{marginTop:"20px",padding:"20px",background:"rgba(255,255,255,0.02)",border:`1px solid ${dc}30`,borderRadius:"4px",animation:"fadeUp .3s ease"}}>
+                          <div style={{marginTop:"20px",padding:"20px",background:"rgba(0,0,0,0.02)",border:`1px solid ${dc}30`,borderRadius:"4px",animation:"fadeUp .3s ease"}}>
                             <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(220px,1fr))",gap:"12px",marginBottom:"12px"}}>
                               {[
-                                {label:"Full Name",type:"text",placeholder:"Alex Rivera"},
-                                {label:"Email",type:"email",placeholder:"alex@email.com"},
-                                {label:"Location",type:"text",placeholder:"City, Country"},
-                                {label:"Portfolio / LinkedIn",type:"url",placeholder:"https://"},
+                                {key:"name",label:"Full Name",type:"text",placeholder:"Alex Rivera"},
+                                {key:"email",label:"Email",type:"email",placeholder:"alex@email.com"},
+                                {key:"location",label:"Location",type:"text",placeholder:"City, Country"},
+                                {key:"portfolio",label:"Portfolio / LinkedIn",type:"url",placeholder:"https://"},
                               ].map((f)=>(
-                                <label key={f.label} style={{display:"flex",flexDirection:"column",gap:"8px"}}>
+                                <label key={f.key} style={{display:"flex",flexDirection:"column",gap:"8px"}}>
                                   <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer,letterSpacing:"1px",textTransform:"uppercase"}}>{f.label}</span>
-                                  <input type={f.type} placeholder={f.placeholder} style={{height:"42px",padding:"0 12px",background:"#0C0C18",border:`1px solid rgba(255,255,255,0.12)`,color:C.white,borderRadius:"3px",fontFamily:"'DM Sans',sans-serif",fontSize:"13px",outline:"none"}}/>
+                                  <input type={f.type} placeholder={f.placeholder} value={applyForm[f.key]} onChange={e=>setApplyForm(p=>({...p,[f.key]:e.target.value}))} style={{height:"42px",padding:"0 12px",background:C.bg3,border:`1px solid ${C.border}`,color:C.text,borderRadius:"3px",fontFamily:"'DM Sans',sans-serif",fontSize:"13px",outline:"none"}}/>
                                 </label>
                               ))}
                             </div>
                             <label style={{display:"flex",flexDirection:"column",gap:"8px",marginBottom:"12px"}}>
                               <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer,letterSpacing:"1px",textTransform:"uppercase"}}>Why VibeCircle?</span>
-                              <textarea rows={4} placeholder="Tell us what you want to build." style={{padding:"10px 12px",background:"#0C0C18",border:`1px solid rgba(255,255,255,0.12)`,color:C.white,borderRadius:"3px",fontFamily:"'DM Sans',sans-serif",fontSize:"13px",outline:"none",resize:"vertical"}}/>
+                              <textarea rows={4} placeholder="Tell us what you want to build." value={applyForm.message} onChange={e=>setApplyForm(p=>({...p,message:e.target.value}))} style={{padding:"10px 12px",background:C.bg3,border:`1px solid ${C.border}`,color:C.text,borderRadius:"3px",fontFamily:"'DM Sans',sans-serif",fontSize:"13px",outline:"none",resize:"vertical"}}/>
                             </label>
                             <label
-                              style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:"16px",padding:"14px 16px",background:"rgba(255,255,255,0.02)",border:`1px dashed ${dc}55`,borderRadius:"4px",cursor:"pointer",transition:"all .2s"}}
+                              style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:"16px",padding:"14px 16px",background:"rgba(0,0,0,0.02)",border:`1px dashed ${dc}55`,borderRadius:"4px",cursor:"pointer",transition:"all .2s"}}
                               onMouseEnter={e=>{e.currentTarget.style.background=`${dc}10`;e.currentTarget.style.borderColor=dc;}}
-                              onMouseLeave={e=>{e.currentTarget.style.background="rgba(255,255,255,0.02)";e.currentTarget.style.borderColor=`${dc}55`;}}
+                              onMouseLeave={e=>{e.currentTarget.style.background="rgba(0,0,0,0.02)";e.currentTarget.style.borderColor=`${dc}55`;}}
                             >
                               <div>
                                 <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",color:dc}}>Upload CV</div>
                                 <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.dimmer,marginTop:"4px"}}>PDF or DOCX -- up to 10MB</div>
                               </div>
-                              <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.white,background:`${dc}18`,border:`1px solid ${dc}40`,padding:"6px 12px",borderRadius:"3px"}}>Choose File</div>
+                              <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.text,background:`${dc}18`,border:`1px solid ${dc}40`,padding:"6px 12px",borderRadius:"3px"}}>Choose File</div>
                               <input type="file" accept=".pdf,.doc,.docx" style={{display:"none"}}/>
                             </label>
                             <div style={{display:"flex",gap:"10px",alignItems:"center",marginTop:"16px",flexWrap:"wrap"}}>
                               <button
-                                onClick={()=>{addToast({type:"success",title:"Application Received!",message:`We'll review your application for ${role.title} within 5 business days.`});setApplyOpen(null);}}
-                                style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"3px",padding:"12px 26px",background:dc,color:C.bg,border:"none",borderRadius:"2px",cursor:"pointer",transition:"box-shadow .2s"}}
-                                onMouseEnter={e=>e.target.style.boxShadow=`0 8px 24px ${dc}45`}
+                                onClick={async()=>{
+                                  if(!applyForm.name||!applyForm.email){addToast({type:"error",title:"Required",message:"Please enter your name and email."});return;}
+                                  setApplyLoading(true);
+                                  try{
+                                    const res=await fetch("/api/careers",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:applyForm.name,email:applyForm.email,role:role.title,message:applyForm.message||undefined,location:applyForm.location||undefined,portfolio:applyForm.portfolio||undefined})});
+                                    const data=await res.json().catch(()=>({}));
+                                    if(!res.ok) throw new Error(data.error||"Submit failed");
+                                    addToast({type:"success",title:"Application Received!",message:`We'll review your application for ${role.title} within 5 business days.`});
+                                    setApplyOpen(null);
+                                    setApplyForm({name:"",email:"",location:"",portfolio:"",message:""});
+                                  }catch(e){
+                                    addToast({type:"error",title:"Something went wrong",message:"Please try again or email careers@vibecircle.com."});
+                                  }finally{ setApplyLoading(false); }
+                                }}
+                                disabled={applyLoading||!applyForm.name||!applyForm.email}
+                                style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"3px",padding:"12px 26px",background:(applyLoading||!applyForm.name||!applyForm.email)?C.dimmer:dc,color:C.textOnAccent,border:"none",borderRadius:"2px",cursor:(applyLoading||!applyForm.name||!applyForm.email)?"not-allowed":"pointer",transition:"box-shadow .2s"}}
+                                onMouseEnter={e=>!applyLoading&&applyForm.name&&applyForm.email&&(e.target.style.boxShadow=`0 8px 24px ${dc}45`)}
                                 onMouseLeave={e=>e.target.style.boxShadow=""}
-                              >Submit Application</button>
+                              >{applyLoading?"Submitting...":"Submit Application"}</button>
                               <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",color:C.dimmer}}>We respond within 5 business days.</span>
                             </div>
                           </div>
@@ -277,8 +293,8 @@ export default function JobsPage({openWaitlist,addToast}){
         </div>
       </section>
       <Divider/>
-      <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"800px",margin:"0 auto"}}><Reveal style={{marginBottom:"44px"}}><Tag>Hiring FAQ</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(26px,4vw,44px)",color:C.white,lineHeight:1,marginTop:"16px"}}>About joining <span style={{color:C.orange}}>VibeCircle.</span></h2></Reveal><FAQ items={JOBS_FAQS}/></div></section>
-      <section style={{background:C.orange,padding:"64px clamp(20px,6vw,64px)"}}><div style={{maxWidth:"1100px",margin:"0 auto",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:"24px"}}><div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(24px,4vw,44px)",color:C.bg,lineHeight:1}}>Don't see your role?<br/>Build your own.</div><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:"rgba(5,5,10,0.6)",marginTop:"8px"}}>careers@vibecircle.com</p></div><button onClick={()=>openWaitlist("Custom Role")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"14px 36px",background:C.bg,color:C.orange,border:"none",borderRadius:"2px",cursor:"pointer",transition:"transform .2s"}} onMouseEnter={e=>e.target.style.transform="translateY(-2px)"} onMouseLeave={e=>e.target.style.transform=""}>Get in Touch</button></div></section>
+      <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"800px",margin:"0 auto"}}><Reveal style={{marginBottom:"44px"}}><Tag>Hiring FAQ</Tag><h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(26px,4vw,44px)",color:C.text,lineHeight:1,marginTop:"16px"}}>About joining <span style={{color:C.orange}}>VibeCircle.</span></h2></Reveal><FAQ items={JOBS_FAQS}/></div></section>
+      <section style={{background:C.orange,padding:"64px clamp(20px,6vw,64px)"}}><div style={{maxWidth:"1100px",margin:"0 auto",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:"24px"}}><div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(24px,4vw,44px)",color:C.textOnAccent,lineHeight:1}}>Don't see your role?<br/>Build your own.</div><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:"rgba(0,0,0,0.6)",marginTop:"8px"}}>careers@vibecircle.com</p></div><button onClick={()=>openWaitlist("Custom Role")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"14px",letterSpacing:"3px",padding:"14px 36px",background:C.bg,color:C.orange,border:"none",borderRadius:"2px",cursor:"pointer",transition:"transform .2s"}} onMouseEnter={e=>e.target.style.transform="translateY(-2px)"} onMouseLeave={e=>e.target.style.transform=""}>Get in Touch</button></div></section>
     </div>
   );
 }

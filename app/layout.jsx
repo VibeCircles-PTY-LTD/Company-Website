@@ -8,7 +8,7 @@ export const metadata = {
   title: "VibeCircle - Culture in Motion",
   description:
     "VibeCircle is a culture-first discovery platform where creators, businesses, and communities meet in real life.",
-  metadataBase: new URL("https://example.com"),
+  metadataBase: new URL("https://vibecircle.com"),
   openGraph: {
     title: "VibeCircle - Culture in Motion",
     description:

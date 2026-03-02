@@ -1,37 +1,60 @@
 "use client";
 
-import { Children, cloneElement, isValidElement, useCallback, useEffect, useState } from "react";
+import { Children, cloneElement, isValidElement, useCallback, useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { GLOBAL_CSS, PAGE_TO_PATH, PATH_TO_PAGE } from "@/components/shared/vibeTheme";
 import { Nav, Footer } from "@/components/shared/layout";
 import { BackToTop, CookieBanner, ToastContainer, WaitlistModal } from "@/components/shared/overlays";
 
+function smoothScrollToTop(durationMs = 400) {
+  let rafId = null;
+  let cancel = () => {};
+  const startStep = () => {
+    const start = performance.now();
+    const startY = typeof window !== "undefined" ? window.scrollY : 0;
+    if (startY <= 0) return;
+    const step = (now) => {
+      const elapsed = now - start;
+      const t = Math.min(elapsed / durationMs, 1);
+      const eased = 1 - (1 - t) ** 2;
+      if (typeof window !== "undefined") window.scrollTo(0, startY * (1 - eased));
+      if (t < 1) {
+        rafId = requestAnimationFrame(step);
+      }
+    };
+    rafId = requestAnimationFrame(step);
+    cancel = () => {
+      if (rafId != null) cancelAnimationFrame(rafId);
+      rafId = null;
+    };
+  };
+  requestAnimationFrame(startStep);
+  return () => cancel();
+}
+
 export default function AppShell({ children }) {
   const router = useRouter();
   const pathname = usePathname();
-  const [mounted, setMounted] = useState(false);
   const [waitlistOpen, setWaitlistOpen] = useState(false);
   const [waitlistContext, setWaitlistContext] = useState("");
   const [toasts, setToasts] = useState([]);
   const [cookieState, setCookieState] = useState("pending");
-  const [transitionKey, setTransitionKey] = useState(0);
+  const scrollCancelRef = useRef(null);
 
   useEffect(() => {
-    setMounted(true);
+    const load = async () => {
+      try {
+        if (typeof window.storage?.get === "function") {
+          const r = await window.storage.get("vc_cookie_consent");
+          if (r?.value) setCookieState(r.value);
+        } else if (typeof localStorage !== "undefined") {
+          const v = localStorage.getItem("vc_cookie_consent");
+          if (v) setCookieState(v);
+        }
+      } catch (_) {}
+    };
+    load();
   }, []);
-
-  useEffect(() => {
-    window.storage
-      ?.get("vc_cookie_consent")
-      .then((r) => {
-        if (r) setCookieState(r.value);
-      })
-      .catch(() => {});
-  }, []);
-
-  useEffect(() => {
-    setTransitionKey((k) => k + 1);
-  }, [pathname]);
 
   const openWaitlist = useCallback((ctx = "") => {
     setWaitlistContext(ctx);
@@ -42,31 +65,46 @@ export default function AppShell({ children }) {
 
   const goPage = (p) => {
     const nextPath = PAGE_TO_PATH[p] || "/";
-    if (pathname !== nextPath) router.push(nextPath);
-    window.scrollTo(0, 0);
+    if (scrollCancelRef.current) scrollCancelRef.current();
+    if (pathname !== nextPath) {
+      scrollCancelRef.current = smoothScrollToTop(380);
+      router.push(nextPath);
+    } else {
+      scrollCancelRef.current = smoothScrollToTop(480);
+    }
   };
 
   const acceptCookies = () => {
     setCookieState("accepted");
-    window.storage?.set("vc_cookie_consent", "accepted").catch(() => {});
+    try {
+      if (typeof window.storage?.set === "function") {
+        window.storage.set("vc_cookie_consent", "accepted").catch(() => {});
+      } else if (typeof localStorage !== "undefined") {
+        localStorage.setItem("vc_cookie_consent", "accepted");
+      }
+    } catch (_) {}
     addToast({ type: "info", title: "Cookies accepted", message: "Your preferences have been saved." });
   };
   const declineCookies = () => {
     setCookieState("declined");
-    window.storage?.set("vc_cookie_consent", "declined").catch(() => {});
+    try {
+      if (typeof window.storage?.set === "function") {
+        window.storage.set("vc_cookie_consent", "declined").catch(() => {});
+      } else if (typeof localStorage !== "undefined") {
+        localStorage.setItem("vc_cookie_consent", "declined");
+      }
+    } catch (_) {}
   };
 
   const sharedProps = { setPage: goPage, openWaitlist, addToast };
   const content = Children.map(children, (child) => (isValidElement(child) ? cloneElement(child, sharedProps) : child));
   const currentPage = PATH_TO_PAGE[pathname] || "home";
 
-  if (!mounted) return null;
-
   return (
     <>
       <style>{GLOBAL_CSS}</style>
       <Nav current={currentPage} setPage={goPage} openWaitlist={openWaitlist} />
-      <main key={transitionKey} className="page-enter">
+      <main key={pathname} className="page-enter">
         {content}
       </main>
       <Footer setPage={goPage} openWaitlist={openWaitlist} />

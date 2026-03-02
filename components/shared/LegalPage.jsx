@@ -5,7 +5,7 @@ import { Divider, Orb, Reveal, Tag } from "@/components/shared/ui";
 
 export function LegalPage({ title, tag, lastUpdated, sections }) {
   return (
-    <div style={{ background: C.bg, color: C.white }}>
+    <div style={{ background: C.bg, color: C.text }}>
       <section style={{ padding: "130px 64px 60px", position: "relative", overflow: "hidden", background: C.bg }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(${C.orange}04 1px,transparent 1px),linear-gradient(90deg,${C.orange}04 1px,transparent 1px)`, backgroundSize: "60px 60px" }} />
         <Orb top="-10%" right="-5%" size={400} opacity={0.08} />
@@ -13,7 +13,7 @@ export function LegalPage({ title, tag, lastUpdated, sections }) {
           <div style={{ animation: "fadeUp .5s ease forwards", opacity: 0, marginBottom: "16px" }}>
             <Tag>{tag}</Tag>
           </div>
-          <h1 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(40px,6vw,72px)", lineHeight: 0.95, color: C.white, animation: "fadeUp .55s .08s ease forwards", opacity: 0, marginBottom: "16px" }}>
+          <h1 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(40px,6vw,72px)", lineHeight: 0.95, color: C.text, animation: "fadeUp .55s .08s ease forwards", opacity: 0, marginBottom: "16px" }}>
             {title}
           </h1>
           <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "13px", color: C.dimmer, animation: "fadeUp .55s .16s ease forwards", opacity: 0 }}>

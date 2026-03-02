@@ -1,0 +1,53 @@
+// Prisma schema – VibeCircle
+// https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Join the Movement / waitlist signups
+model WaitlistSignup {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  city      String?
+  role      String   // Creator | Business Owner | Brand / Agency | Just Curious
+  context   String?  // e.g. "Website", "Careers", job title
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@index([createdAt])
+}
+
+// Contact form submissions
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String
+  department String  // general | partnerships | careers | support | press
+  createdAt DateTime @default(now())
+
+  @@index([department])
+  @@index([createdAt])
+}
+
+// Job / career applications
+model JobApplication {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  role      String   // job title applied for
+  message   String?
+  resume   String?   // file URL or base64 if you store inline
+  extra     Json?    // flexible field for role-specific data
+  createdAt DateTime @default(now())
+
+  @@index([role])
+  @@index([createdAt])
+}

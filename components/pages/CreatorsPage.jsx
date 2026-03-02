@@ -40,14 +40,14 @@ const CREATOR_FAQS = [
 export default function CreatorsPage({ openWaitlist }) {
   const [annual, setAnnual] = useState(false);
   return (
-    <div style={{ background: C.bg, color: C.white }}>
+    <div style={{ background: C.bg, color: C.text }}>
       <PageHero tag="For Creators" title="Your city is your" accent="stage. Own it." sub="VibeCircle gives creators tools to build a real local following, get discovered on the live city map, and earn from brand partnerships." />
       <Divider />
       <section className="sec-pad">
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <Reveal style={{ marginBottom: "52px" }}>
             <Tag>Creator Tools</Tag>
-            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.white, lineHeight: 1, marginTop: "16px" }}>
+            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>
               Everything you need to
               <br />
               <span style={{ color: C.orange }}>light up your city.</span>
@@ -56,20 +56,20 @@ export default function CreatorsPage({ openWaitlist }) {
           <div className="grid-3">{CREATOR_TOOLS.map((t, i) => (
             <Reveal key={i} delay={i * 0.08}>
               <div
-                style={{ padding: "30px 26px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "4px", height: "100%", transition: "all .3s" }}
+                style={{ padding: "30px 26px", background: "rgba(0,0,0,0.02)", border: `1px solid ${C.border}`, borderRadius: "4px", height: "100%", transition: "all .3s" }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = C.orange;
                   e.currentTarget.style.background = "rgba(255,107,0,0.06)";
                   e.currentTarget.style.transform = "translateY(-4px)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
-                  e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                  e.currentTarget.style.borderColor = C.border;
+                  e.currentTarget.style.background = "rgba(0,0,0,0.02)";
                   e.currentTarget.style.transform = "";
                 }}
               >
                 <div style={{ fontSize: "24px", marginBottom: "14px" }}>{t.icon}</div>
-                <div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "19px", color: C.white, marginBottom: "9px" }}>{t.title}</div>
+                <div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "19px", color: C.text, marginBottom: "9px" }}>{t.title}</div>
                 <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "13px", color: C.dim, lineHeight: 1.7 }}>{t.desc}</div>
               </div>
             </Reveal>
@@ -81,12 +81,12 @@ export default function CreatorsPage({ openWaitlist }) {
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <Reveal style={{ marginBottom: "16px", textAlign: "center" }}>
             <Tag>Creator Plans</Tag>
-            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.white, lineHeight: 1, marginTop: "16px", marginBottom: "28px" }}>
+            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.text, lineHeight: 1, marginTop: "16px", marginBottom: "28px" }}>
               Start free. Scale <span style={{ color: C.orange }}>when ready.</span>
             </h2>
           </Reveal>
           <Reveal style={{ textAlign: "center", marginBottom: "40px" }}>
-            <div style={{ display: "inline-flex", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "3px", padding: "4px" }}>
+            <div style={{ display: "inline-flex", background: "rgba(0,0,0,0.04)", border: `1px solid ${C.border}`, borderRadius: "3px", padding: "4px" }}>
               {["Monthly", "Annual"].map((t) => (
                 <button
                   key={t}
@@ -97,7 +97,7 @@ export default function CreatorsPage({ openWaitlist }) {
                     letterSpacing: "2px",
                     padding: "9px 24px",
                     background: (t === "Annual") === annual ? C.orange : "transparent",
-                    color: (t === "Annual") === annual ? C.bg : C.dim,
+                    color: (t === "Annual") === annual ? C.textOnAccent : C.dim,
                     border: "none",
                     borderRadius: "2px",
                     cursor: "pointer",
@@ -111,7 +111,12 @@ export default function CreatorsPage({ openWaitlist }) {
             </div>
           </Reveal>
           <div className="grid-3">{CREATOR_TIERS.map((t, i) => (
-            <PricingCard key={i} {...t} annual={annual} onCta={() => openWaitlist(`Creator ${t.plan} Plan`)} />
+            <PricingCard
+              key={i}
+              {...t}
+              cta="Coming Soon"
+              annual={annual}
+            />
           ))}</div>
           <Reveal>
             <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "12px", color: C.dimmer, textAlign: "center", marginTop: "24px" }}>
@@ -125,7 +130,7 @@ export default function CreatorsPage({ openWaitlist }) {
         <div style={{ maxWidth: "800px", margin: "0 auto" }}>
           <Reveal style={{ marginBottom: "44px" }}>
             <Tag>Creator FAQ</Tag>
-            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(26px,4vw,46px)", color: C.white, lineHeight: 1, marginTop: "16px" }}>
+            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(26px,4vw,46px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>
               Questions, <span style={{ color: C.orange }}>answered.</span>
             </h2>
           </Reveal>

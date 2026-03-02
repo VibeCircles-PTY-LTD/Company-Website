@@ -6,8 +6,8 @@ import { AD_PRICING } from "@/components/data/pricing";
 
 const AD_FEATURES = [
   { icon: "----", title: "Geo-Targeted Campaigns", desc: "Reach people physically near your location. Pinpoint precision, zero waste.", color: C.orange },
-  { icon: "---", title: "Sponsor Creator Moments", desc: "Embed your brand inside cultural moments --- not beside them.", color: C.pink },
-  { icon: "-------", title: "Event Promotion", desc: "Put your event on the live map. Watch RSVPs grow as your pin pulses.", color: C.blue },
+  { icon: "----", title: "Sponsor Creator Moments", desc: "Embed your brand inside cultural moments --- not beside them.", color: C.pink },
+  { icon: "----", title: "Event Promotion", desc: "Put your event on the live map. Watch RSVPs grow as your pin pulses.", color: C.blue },
   { icon: "----", title: "Boost Local Visibility", desc: "Climb the discovery feed for your neighborhood. Be impossible to miss.", color: C.orange },
   { icon: "----", title: "Live Experience Ads", desc: "Promote while the experience is happening. Capture FOMO at its peak.", color: C.pink },
   { icon: "----", title: "Real-Time Analytics", desc: "Track impressions, foot traffic, and engagement as they happen.", color: C.blue },
@@ -23,14 +23,14 @@ const AD_FAQS = [
 
 export default function AdvertisePage({ openWaitlist }) {
   return (
-    <div style={{ background: C.bg, color: C.white }}>
+    <div style={{ background: C.bg, color: C.text }}>
       <PageHero tag="Advertise" title="Ads that integrate," accent="not interrupt." sub="Traditional ads interrupt. VibeCircle ads integrate. We power discovery, not distraction." />
       <Divider />
       <section className="sec-pad" style={{ background: C.bg2 }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <Reveal style={{ marginBottom: "52px" }}>
             <Tag>Ad Products</Tag>
-            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.white, lineHeight: 1, marginTop: "16px" }}>
+            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>
               Every tool to make your
               <br />
               <span style={{ color: C.orange }}>energy visible.</span>
@@ -39,15 +39,15 @@ export default function AdvertisePage({ openWaitlist }) {
           <div className="grid-3">{AD_FEATURES.map((f, i) => (
             <Reveal key={i} delay={i * 0.08}>
               <div
-                style={{ padding: "30px 26px", borderRadius: "4px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)", height: "100%", transition: "all .3s" }}
+                style={{ padding: "30px 26px", borderRadius: "4px", background: "rgba(0,0,0,0.02)", border: `1px solid ${C.border}`, height: "100%", transition: "all .3s" }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = f.color;
                   e.currentTarget.style.background = `${f.color}0D`;
                   e.currentTarget.style.transform = "translateY(-4px)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
-                  e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                  e.currentTarget.style.borderColor = C.border;
+                  e.currentTarget.style.background = "rgba(0,0,0,0.02)";
                   e.currentTarget.style.transform = "";
                 }}
               >
@@ -64,12 +64,16 @@ export default function AdvertisePage({ openWaitlist }) {
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <Reveal style={{ marginBottom: "52px", textAlign: "center" }}>
             <Tag>Advertising Plans</Tag>
-            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.white, lineHeight: 1, marginTop: "16px" }}>
+            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>
               Pick your level of <span style={{ color: C.orange }}>dominance.</span>
             </h2>
           </Reveal>
           <div className="grid-3">{AD_PRICING.map((p, i) => (
-            <PricingCard key={i} {...p} onCta={() => openWaitlist(`Advertise ${p.plan} Plan`)} />
+            <PricingCard
+              key={i}
+              {...p}
+              cta="Coming Soon"
+            />
           ))}</div>
         </div>
       </section>
@@ -78,7 +82,7 @@ export default function AdvertisePage({ openWaitlist }) {
         <div style={{ maxWidth: "800px", margin: "0 auto" }}>
           <Reveal style={{ marginBottom: "44px" }}>
             <Tag>Advertiser FAQ</Tag>
-            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(26px,4vw,44px)", color: C.white, lineHeight: 1, marginTop: "16px" }}>
+            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(26px,4vw,44px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>
               Your questions, <span style={{ color: C.orange }}>answered.</span>
             </h2>
           </Reveal>

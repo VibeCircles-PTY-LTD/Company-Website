@@ -137,7 +137,7 @@ export function PageHero({ tag, title, accent, sub, children }) {
             fontFamily: "'Bebas Neue',sans-serif",
             fontSize: "clamp(44px,8vw,96px)",
             lineHeight: 0.95,
-            color: C.white,
+            color: C.text,
             animation: "fadeUp .6s .1s ease forwards",
             opacity: 0,
             marginBottom: "24px",
@@ -176,8 +176,8 @@ export function FAQ({ items, accentColor = C.orange }) {
         <Reveal key={i} delay={i * 0.06}>
           <div
             style={{
-              background: open === i ? `${accentColor}08` : "rgba(255,255,255,0.02)",
-              border: `1px solid ${open === i ? accentColor + "40" : "rgba(255,255,255,0.07)"}`,
+              background: open === i ? `${accentColor}08` : "rgba(0,0,0,0.02)",
+              border: `1px solid ${open === i ? accentColor + "40" : C.border}`,
               borderRadius: "4px",
               overflow: "hidden",
               transition: "all .3s",
@@ -203,7 +203,7 @@ export function FAQ({ items, accentColor = C.orange }) {
                   fontFamily: "'DM Sans',sans-serif",
                   fontSize: "15px",
                   fontWeight: 600,
-                  color: C.white,
+                  color: C.text,
                 }}
               >
                 {item.q}
@@ -256,13 +256,14 @@ export function PricingCard({
   annualPrice,
 }) {
   const displayPrice = annual && annualPrice ? annualPrice : price;
+  const isDisabled = !onCta || String(cta || "").toLowerCase() === "coming soon";
   return (
     <Reveal>
       <div
         style={{
           padding: "40px 32px",
-          background: highlight ? `linear-gradient(160deg,${color}14,transparent)` : "rgba(255,255,255,0.02)",
-          border: `1px solid ${highlight ? color + "50" : "rgba(255,255,255,0.08)"}`,
+          background: highlight ? `linear-gradient(160deg,${color}14,transparent)` : "rgba(0,0,0,0.02)",
+          border: `1px solid ${highlight ? color + "50" : C.border}`,
           borderRadius: "4px",
           height: "100%",
           display: "flex",
@@ -285,7 +286,7 @@ export function PricingCard({
               left: "50%",
               transform: "translateX(-50%)",
               background: color,
-              color: C.bg,
+              color: C.textOnAccent,
               fontFamily: "'Bebas Neue',sans-serif",
               fontSize: "11px",
               letterSpacing: "3px",
@@ -312,7 +313,7 @@ export function PricingCard({
             style={{
               fontFamily: "'Bebas Neue',sans-serif",
               fontSize: "clamp(40px,5vw,56px)",
-              color: C.white,
+              color: C.text,
               lineHeight: 1,
             }}
           >
@@ -334,26 +335,29 @@ export function PricingCard({
           {features.map((f, i) => (
             <div key={i} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
               <span style={{ color, fontSize: "14px", marginTop: "1px", flexShrink: 0 }}>---</span>
-              <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: "rgba(255,255,255,.7)" }}>{f}</span>
+              <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: C.dim }}>{f}</span>
             </div>
           ))}
         </div>
         <button
-          onClick={onCta}
+          onClick={isDisabled ? undefined : onCta}
+          disabled={isDisabled}
           style={{
             fontFamily: "'Bebas Neue',sans-serif",
             fontSize: "15px",
             letterSpacing: "3px",
             padding: "14px",
             background: highlight ? color : "transparent",
-            color: highlight ? C.bg : C.white,
-            border: `1px solid ${highlight ? color : "rgba(255,255,255,0.2)"}`,
+            color: highlight ? C.textOnAccent : C.text,
+            border: `1px solid ${highlight ? color : C.border}`,
             borderRadius: "2px",
-            cursor: "pointer",
+            cursor: isDisabled ? "not-allowed" : "pointer",
             transition: "all .2s",
             width: "100%",
+            opacity: isDisabled ? 0.6 : 1,
           }}
           onMouseEnter={(e) => {
+            if (isDisabled) return;
             if (!highlight) {
               e.currentTarget.style.borderColor = color;
               e.currentTarget.style.color = color;
@@ -362,9 +366,10 @@ export function PricingCard({
             }
           }}
           onMouseLeave={(e) => {
+            if (isDisabled) return;
             if (!highlight) {
-              e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)";
-              e.currentTarget.style.color = C.white;
+              e.currentTarget.style.borderColor = C.border;
+              e.currentTarget.style.color = C.text;
             } else {
               e.currentTarget.style.boxShadow = "";
             }
@@ -382,8 +387,8 @@ export function TestimonialCard({ quote, name, role, avatar, color = C.orange })
     <div
       style={{
         padding: "30px 26px",
-        background: "rgba(255,255,255,0.02)",
-        border: "1px solid rgba(255,255,255,0.07)",
+        background: "rgba(0,0,0,0.02)",
+        border: `1px solid ${C.border}`,
         borderRadius: "4px",
         display: "flex",
         flexDirection: "column",
@@ -396,14 +401,14 @@ export function TestimonialCard({ quote, name, role, avatar, color = C.orange })
         e.currentTarget.style.background = `${color}08`;
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
-        e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+        e.currentTarget.style.borderColor = C.border;
+        e.currentTarget.style.background = "rgba(0,0,0,0.02)";
       }}
     >
       <div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "28px", color, lineHeight: 1, opacity: 0.5 }}>
         "
       </div>
-      <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: "rgba(255,255,255,.75)", lineHeight: 1.8, flex: 1 }}>
+      <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: C.dim, lineHeight: 1.8, flex: 1 }}>
         {quote}
       </p>
       <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
@@ -424,7 +429,7 @@ export function TestimonialCard({ quote, name, role, avatar, color = C.orange })
           {avatar}
         </div>
         <div>
-          <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", fontWeight: 600, color: C.white }}>{name}</div>
+          <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", fontWeight: 600, color: C.text }}>{name}</div>
           <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", color: C.dimmer, marginTop: "2px" }}>{role}</div>
         </div>
       </div>

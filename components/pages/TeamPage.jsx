@@ -6,95 +6,21 @@ import { Divider, PageHero, Reveal, Tag } from "@/components/shared/ui";
 
 const TEAM = [
   {
-    name: "Marcus Webb",
+    name: "Kojo Papo",
     role: "CEO & Co-Founder",
     dept: "Leadership",
-    photo: "/team/marcus-webb.svg",
+    photo: "/team/kojopapo.jpg",
     socials: {
-      facebook: "https://facebook.com/marcuswebb",
-      twitter: "https://twitter.com/marcuswebb",
-      github: "https://github.com/marcuswebb",
-      linkedin: "https://linkedin.com/in/marcuswebb",
+      facebook: "https://www.facebook.com/kagisolesibakojo.papo",
+      twitter: "https://x.com/kojopapo",
+      github: "https://github.com/KojoPapo-Hub",
+      linkedin: "https://www.linkedin.com/in/kojopapo/",
     },
     quote: "We're not building an app. We're building the infrastructure for how cities feel alive.",
-    bio: "Former urban planner turned tech founder. Marcus spent 8 years mapping city culture before deciding maps should move in real time.",
+    bio: "Just a very passionate versionary building the future of urban experiences.",
     color: C.orange,
   },
-  {
-    name: "Layla Chen",
-    role: "CTO & Co-Founder",
-    dept: "Engineering",
-    photo: "/team/layla-chen.svg",
-    socials: {
-      facebook: "https://facebook.com/laylachen",
-      twitter: "https://twitter.com/laylachen",
-      github: "https://github.com/laylachen",
-      linkedin: "https://linkedin.com/in/laylachen",
-    },
-    quote: "The hardest technical problems are always the most human ones.",
-    bio: "Ex-Google Maps engineer. Layla designed the real-time geo-layer that powers VibeCircle's living map system.",
-    color: C.blue,
-  },
-  {
-    name: "Devon Price",
-    role: "Head of Design",
-    dept: "Design",
-    photo: "/team/devon-price.svg",
-    socials: {
-      facebook: "https://facebook.com/devonprice",
-      twitter: "https://twitter.com/devonprice",
-      github: "https://github.com/devonprice",
-      linkedin: "https://linkedin.com/in/devonprice",
-    },
-    quote: "If the design doesn't make you feel something, we start over.",
-    bio: "Previously led design at Spotify and Snap. Devon's philosophy: every pixel should have a pulse.",
-    color: C.pink,
-  },
-  {
-    name: "Amara Osei",
-    role: "Head of Creator Partnerships",
-    dept: "Creators",
-    photo: "/team/amara-osei.svg",
-    socials: {
-      facebook: "https://facebook.com/amaraosei",
-      twitter: "https://twitter.com/amaraosei",
-      github: "https://github.com/amaraosei",
-      linkedin: "https://linkedin.com/in/amaraosei",
-    },
-    quote: "Creators aren't users. They're the energy source. Treat them like it.",
-    bio: "Built creator programs at TikTok and YouTube. Amara signed VibeCircle's first 10,000 creators in 90 days.",
-    color: C.gold,
-  },
-  {
-    name: "Rishi Kapoor",
-    role: "Head of Growth",
-    dept: "Growth",
-    photo: "/team/rishi-kapoor.svg",
-    socials: {
-      facebook: "https://facebook.com/rishikapoor",
-      twitter: "https://twitter.com/rishikapoor",
-      github: "https://github.com/rishikapoor",
-      linkedin: "https://linkedin.com/in/rishikapoor",
-    },
-    quote: "Growth that doesn't compound isn't growth. It's just noise.",
-    bio: "3x YC startup growth lead. Rishi built the ambassador network that took VibeCircle to 50 cities in one semester.",
-    color: C.purple,
-  },
-  {
-    name: "Sofia Reyes",
-    role: "Head of Business Dev",
-    dept: "Business",
-    photo: "/team/sofia-reyes.svg",
-    socials: {
-      facebook: "https://facebook.com/sofiareyes",
-      twitter: "https://twitter.com/sofiareyes",
-      github: "https://github.com/sofiareyes",
-      linkedin: "https://linkedin.com/in/sofiareyes",
-    },
-    quote: "Every brand has a vibe. Our job is to help them find it and amplify it.",
-    bio: "Ex-Salesforce enterprise sales, now building the business ecosystem that funds VibeCircle's creator economy.",
-    color: C.orange,
-  },
+
 ];
 
 export default function TeamPage({ openWaitlist, setPage }) {
@@ -105,7 +31,7 @@ export default function TeamPage({ openWaitlist, setPage }) {
     display: "block",
   };
   return (
-    <div style={{ background: C.bg, color: C.white }}>
+    <div style={{ background: C.bg, color: C.text }}>
       <PageHero tag="The Team" title="Meet the builders" accent="of the vibe." sub="Developers, designers, strategists, creatives --- building a living ecosystem, not just an app." />
       <Divider />
       <section className="sec-pad" style={{ background: C.bg2 }}>
@@ -120,8 +46,8 @@ export default function TeamPage({ openWaitlist, setPage }) {
                   onClick={() => setActive(active === i ? null : i)}
                   style={{
                     padding: "30px 26px",
-                    background: active === i ? `${m.color}0A` : "rgba(255,255,255,0.02)",
-                    border: `1px solid ${active === i ? m.color + "50" : "rgba(255,255,255,0.07)"}`,
+                    background: active === i ? `${m.color}0A` : "rgba(0,0,0,0.02)",
+                    border: `1px solid ${active === i ? m.color + "50" : C.border}`,
                     borderRadius: "4px",
                     cursor: "pointer",
                     transition: "all .3s",
@@ -135,8 +61,8 @@ export default function TeamPage({ openWaitlist, setPage }) {
                   }}
                   onMouseLeave={(e) => {
                     if (active !== i) {
-                      e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
-                      e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                      e.currentTarget.style.borderColor = C.border;
+                      e.currentTarget.style.background = "rgba(0,0,0,0.02)";
                     }
                   }}
                 >
@@ -158,11 +84,11 @@ export default function TeamPage({ openWaitlist, setPage }) {
                       <img src={m.photo} alt={`${m.name} portrait`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                     </div>
                     <div>
-                      <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "15px", fontWeight: 600, color: C.white }}>{m.name}</div>
+                      <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "15px", fontWeight: 600, color: C.text }}>{m.name}</div>
                       <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", color: m.color, marginTop: "2px" }}>{m.role}</div>
                     </div>
                   </div>
-                  <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "13px", fontStyle: "italic", color: "rgba(255,255,255,.5)", lineHeight: 1.7, marginBottom: active === i ? "14px" : "0" }}>
+                  <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "13px", fontStyle: "italic", color: C.dim, lineHeight: 1.7, marginBottom: active === i ? "14px" : "0" }}>
                     "{m.quote}"
                   </p>
                   {active === i && (
@@ -176,7 +102,7 @@ export default function TeamPage({ openWaitlist, setPage }) {
                             target="_blank"
                             rel="noreferrer"
                             style={{
-                              color: C.white,
+                              color: C.text,
                               border: `1px solid ${m.color}40`,
                               padding: "6px",
                               borderRadius: "2px",
@@ -201,7 +127,7 @@ export default function TeamPage({ openWaitlist, setPage }) {
                             target="_blank"
                             rel="noreferrer"
                             style={{
-                              color: C.white,
+                              color: C.text,
                               border: `1px solid ${m.color}40`,
                               padding: "6px",
                               borderRadius: "2px",
@@ -226,7 +152,7 @@ export default function TeamPage({ openWaitlist, setPage }) {
                             target="_blank"
                             rel="noreferrer"
                             style={{
-                              color: C.white,
+                              color: C.text,
                               border: `1px solid ${m.color}40`,
                               padding: "6px",
                               borderRadius: "2px",
@@ -251,7 +177,7 @@ export default function TeamPage({ openWaitlist, setPage }) {
                             target="_blank"
                             rel="noreferrer"
                             style={{
-                              color: C.white,
+                              color: C.text,
                               border: `1px solid ${m.color}40`,
                               padding: "6px",
                               borderRadius: "2px",
@@ -285,7 +211,7 @@ export default function TeamPage({ openWaitlist, setPage }) {
           <div>
             <Reveal>
               <Tag>How we work</Tag>
-              <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,52px)", color: C.white, lineHeight: 1, margin: "16px 0 20px" }}>
+              <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,52px)", color: C.text, lineHeight: 1, margin: "16px 0 20px" }}>
                 Culture isn't built in
                 <br />
                 <span style={{ color: C.orange }}>conference rooms.</span>
@@ -304,19 +230,19 @@ export default function TeamPage({ openWaitlist, setPage }) {
             ].map(([ic, t, d], i) => (
               <Reveal key={i} delay={i * 0.08}>
                 <div
-                  style={{ display: "flex", gap: "14px", alignItems: "flex-start", padding: "18px 22px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "4px", transition: "all .3s" }}
+                  style={{ display: "flex", gap: "14px", alignItems: "flex-start", padding: "18px 22px", background: "rgba(0,0,0,0.02)", border: `1px solid ${C.border}`, borderRadius: "4px", transition: "all .3s" }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.borderColor = C.orange;
                     e.currentTarget.style.background = "rgba(255,107,0,0.06)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
-                    e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                    e.currentTarget.style.borderColor = C.border;
+                    e.currentTarget.style.background = "rgba(0,0,0,0.02)";
                   }}
                 >
                   <span style={{ fontSize: "18px" }}>{ic}</span>
                   <div>
-                    <div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "16px", color: C.white }}>{t}</div>
+                    <div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "16px", color: C.text }}>{t}</div>
                     <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "12px", color: C.dim, marginTop: "3px" }}>{d}</div>
                   </div>
                 </div>
@@ -329,7 +255,7 @@ export default function TeamPage({ openWaitlist, setPage }) {
       <section className="sec-pad-sm" style={{ background: C.bg2, textAlign: "center" }}>
         <Reveal>
           <Tag>Join us</Tag>
-          <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(28px,5vw,52px)", color: C.white, lineHeight: 1, margin: "16px auto 20px", maxWidth: "500px" }}>
+          <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(28px,5vw,52px)", color: C.text, lineHeight: 1, margin: "16px auto 20px", maxWidth: "500px" }}>
             Want to be on this page?
             <br />
             <span style={{ color: C.orange }}>We're hiring.</span>
@@ -340,20 +266,20 @@ export default function TeamPage({ openWaitlist, setPage }) {
                 setPage("Jobs");
                 window.scrollTo(0, 0);
               }}
-              style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "13px 32px", background: C.orange, color: C.bg, border: "none", borderRadius: "2px", cursor: "pointer" }}
+              style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "13px 32px", background: C.orange, color: C.textOnAccent, border: "none", borderRadius: "2px", cursor: "pointer" }}
             >
               See Open Roles
             </button>
             <button
               onClick={() => openWaitlist("Team Interest")}
-              style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "13px 32px", background: "transparent", color: C.white, border: "1px solid rgba(255,255,255,0.2)", borderRadius: "2px", cursor: "pointer", transition: "all .2s" }}
+              style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "13px 32px", background: "transparent", color: C.text, border: `1px solid ${C.border}`, borderRadius: "2px", cursor: "pointer", transition: "all .2s" }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = C.orange;
                 e.currentTarget.style.color = C.orange;
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)";
-                e.currentTarget.style.color = C.white;
+                e.currentTarget.style.borderColor = C.border;
+                e.currentTarget.style.color = C.text;
               }}
             >
               Join Waitlist

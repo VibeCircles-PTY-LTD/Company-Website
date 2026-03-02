@@ -5,7 +5,7 @@ import { Divider, Orb, PageHero, Reveal, Tag } from "@/components/shared/ui";
 
 export default function AboutPage() {
   return (
-    <div style={{ background: C.bg, color: C.white }}>
+    <div style={{ background: C.bg, color: C.text }}>
       <PageHero
         tag="About VibeCircles"
         title="We build real-world"
@@ -18,7 +18,7 @@ export default function AboutPage() {
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <Reveal>
             <Tag>About VibeCircles</Tag>
-            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.white, marginTop: "16px", lineHeight: 1 }}>
+            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.text, marginTop: "16px", lineHeight: 1 }}>
               VibeCircles isn’t just building another app. We’re building a living ecosystem.
             </h2>
           </Reveal>
@@ -48,8 +48,8 @@ export default function AboutPage() {
                 "Digital conversations translate into physical experiences",
               ].map((line, i) => (
                 <Reveal key={line} delay={0.35 + i * 0.05}>
-                  <div style={{ padding: "18px 20px", border: `1px solid ${C.border}`, background: "rgba(255,255,255,0.02)" }}>
-                    <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "15px", color: C.white }}>{line}</div>
+                  <div style={{ padding: "18px 20px", border: `1px solid ${C.border}`, background: "rgba(0,0,0,0.02)" }}>
+                    <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "15px", color: C.text }}>{line}</div>
                   </div>
                 </Reveal>
               ))}
@@ -62,7 +62,7 @@ export default function AboutPage() {
         <div style={{ maxWidth: "980px", margin: "0 auto" }}>
           <Reveal>
             <Tag>At Our Core</Tag>
-            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(28px,4.5vw,52px)", color: C.white, marginTop: "16px", lineHeight: 1 }}>
+            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(28px,4.5vw,52px)", color: C.text, marginTop: "16px", lineHeight: 1 }}>
               The world is full of energy — but it’s scattered.
             </h2>
           </Reveal>
@@ -80,7 +80,7 @@ export default function AboutPage() {
           <div>
             <Reveal>
               <Tag>Our Vision</Tag>
-              <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,4vw,48px)", color: C.white, lineHeight: 1.1, margin: "16px 0 18px" }}>
+              <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,4vw,48px)", color: C.text, lineHeight: 1.1, margin: "16px 0 18px" }}>
                 Power how people discover
                 <br />
                 <span style={{ color: C.orange }}>what’s happening around them.</span>
@@ -94,7 +94,7 @@ export default function AboutPage() {
           <div>
             <Reveal delay={0.15}>
               <Tag>Our Mission</Tag>
-              <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,4vw,48px)", color: C.white, lineHeight: 1.1, margin: "16px 0 18px" }}>
+              <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,4vw,48px)", color: C.text, lineHeight: 1.1, margin: "16px 0 18px" }}>
                 Build a seamless
                 <br />
                 <span style={{ color: C.orange }}>real‑world technology ecosystem.</span>
@@ -107,8 +107,8 @@ export default function AboutPage() {
                   "Blends maps, media, and live interaction into one seamless experience",
                 ].map((line, i) => (
                   <Reveal key={line} delay={0.2 + i * 0.05}>
-                    <div style={{ padding: "14px 16px", border: `1px solid ${C.border}`, background: "rgba(255,255,255,0.02)" }}>
-                      <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "15px", color: C.white }}>{line}</div>
+                    <div style={{ padding: "14px 16px", border: `1px solid ${C.border}`, background: "rgba(0,0,0,0.02)" }}>
+                      <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "15px", color: C.text }}>{line}</div>
                     </div>
                   </Reveal>
                 ))}
@@ -122,7 +122,7 @@ export default function AboutPage() {
         <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
           <Reveal>
             <Tag>What Makes Us Different</Tag>
-            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.white, marginTop: "16px", lineHeight: 1 }}>
+            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.text, marginTop: "16px", lineHeight: 1 }}>
               VibeCircles is built as an ecosystem — not a feature.
             </h2>
           </Reveal>
@@ -142,8 +142,8 @@ export default function AboutPage() {
               "Discovery algorithms",
             ].map((line, i) => (
               <Reveal key={line} delay={0.15 + i * 0.05}>
-                <div style={{ padding: "16px 18px", border: `1px solid ${C.border}`, background: "rgba(255,255,255,0.02)" }}>
-                  <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "15px", color: C.white }}>{line}</div>
+                <div style={{ padding: "16px 18px", border: `1px solid ${C.border}`, background: "rgba(0,0,0,0.02)" }}>
+                  <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "15px", color: C.text }}>{line}</div>
                 </div>
               </Reveal>
             ))}
@@ -155,7 +155,7 @@ export default function AboutPage() {
         <div style={{ maxWidth: "960px", margin: "0 auto" }}>
           <Reveal>
             <Tag>Our Philosophy</Tag>
-            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.white, marginTop: "16px", lineHeight: 1 }}>
+            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.text, marginTop: "16px", lineHeight: 1 }}>
               Technology should:
             </h2>
           </Reveal>
@@ -166,8 +166,8 @@ export default function AboutPage() {
               "Enable growth, not distraction.",
             ].map((line, i) => (
               <Reveal key={line} delay={0.1 + i * 0.05}>
-                <div style={{ padding: "16px 18px", border: `1px solid ${C.border}`, background: "rgba(255,255,255,0.02)" }}>
-                  <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "16px", color: C.white }}>{line}</div>
+                <div style={{ padding: "16px 18px", border: `1px solid ${C.border}`, background: "rgba(0,0,0,0.02)" }}>
+                  <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "16px", color: C.text }}>{line}</div>
                 </div>
               </Reveal>
             ))}

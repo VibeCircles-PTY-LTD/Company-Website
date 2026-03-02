@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import { C } from "@/components/shared/vibeTheme";
 import { useWindowWidth } from "@/components/shared/hooks";
-import { Orb, Reveal, Tag, TestimonialCard } from "@/components/shared/ui";
-import { TESTIMONIALS } from "@/components/data/testimonials";
+import { Orb, Reveal, Tag } from "@/components/shared/ui";
 
 export default function HomePage({ setPage, openWaitlist }) {
   const words = ["Pulse", "Gravity", "Energy", "Discovery", "Movement", "Culture", "Alive"];
@@ -62,7 +61,7 @@ export default function HomePage({ setPage, openWaitlist }) {
             </span>
             <span style={{ width: 40, height: 1, background: C.orange, display: "inline-block" }} />
           </div>
-          <h1 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(52px,10vw,118px)", lineHeight: 0.9, color: C.white, marginBottom: "16px" }}>
+          <h1 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(52px,10vw,118px)", lineHeight: 0.9, color: C.text, marginBottom: "16px" }}>
             IT'S NOT
             <br />
             <span style={{ WebkitTextStroke: "2px #FF6B00", color: "transparent" }}>SOCIAL MEDIA.</span>
@@ -83,7 +82,7 @@ export default function HomePage({ setPage, openWaitlist }) {
                 letterSpacing: "3px",
                 padding: "16px 44px",
                 background: C.orange,
-                color: C.bg,
+                color: C.textOnAccent,
                 border: "none",
                 borderRadius: "2px",
                 cursor: "pointer",
@@ -108,8 +107,8 @@ export default function HomePage({ setPage, openWaitlist }) {
                 letterSpacing: "3px",
                 padding: "16px 44px",
                 background: "transparent",
-                color: C.white,
-                border: "1px solid rgba(255,255,255,0.22)",
+                color: C.text,
+                border: `1px solid ${C.border}`,
                 borderRadius: "2px",
                 cursor: "pointer",
                 transition: "all .2s",
@@ -119,8 +118,8 @@ export default function HomePage({ setPage, openWaitlist }) {
                 e.currentTarget.style.color = C.orange;
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "rgba(255,255,255,0.22)";
-                e.currentTarget.style.color = C.white;
+                e.currentTarget.style.borderColor = C.border;
+                e.currentTarget.style.color = C.text;
               }}
             >
               Explore Marketplace
@@ -141,8 +140,8 @@ export default function HomePage({ setPage, openWaitlist }) {
                   fontFamily: "'DM Sans',sans-serif",
                   fontSize: "13px",
                   padding: "10px 18px",
-                  background: "rgba(255,255,255,0.04)",
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  background: "rgba(0,0,0,0.04)",
+                  border: `1px solid ${C.border}`,
                   borderRadius: "2px",
                   color: C.dim,
                   cursor: "pointer",
@@ -153,13 +152,13 @@ export default function HomePage({ setPage, openWaitlist }) {
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = C.orange;
-                  e.currentTarget.style.color = C.white;
+                  e.currentTarget.style.color = C.text;
                   e.currentTarget.style.background = "rgba(255,107,0,0.08)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+                  e.currentTarget.style.borderColor = C.border;
                   e.currentTarget.style.color = C.dim;
-                  e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+                  e.currentTarget.style.background = "rgba(0,0,0,0.04)";
                 }}
               >
                 {i} {l}
@@ -171,38 +170,54 @@ export default function HomePage({ setPage, openWaitlist }) {
       <section className="sec-pad" style={{ background: C.bg2 }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <Reveal style={{ marginBottom: "52px" }}>
-            <Tag>What people say</Tag>
-            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(32px,5vw,56px)", color: C.white, lineHeight: 1, marginTop: "16px" }}>
+            <Tag>What we envision</Tag>
+            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(32px,5vw,56px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>
               The vibe is <span style={{ color: C.orange }}>real.</span>
             </h2>
           </Reveal>
-          <div className="grid-4">{TESTIMONIALS.map((t, i) => (
-            <Reveal key={i} delay={i * 0.1}>
-              <TestimonialCard {...t} />
+          <div style={{ maxWidth: "720px" }}>
+            <Reveal delay={0.1}>
+              <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "clamp(15px,1.8vw,18px)", color: C.dim, lineHeight: 1.85, marginBottom: "24px" }}>
+                VibeCircles envisions a digital world where people connect through shared energy, not just profiles and posts. We aim to build a platform where conversations feel human, communities feel like home, and creativity moves faster than algorithms. In a noisy internet chasing attention, VibeCircles exists to cultivate presence — a space where students, creators, hustlers, and everyday explorers can find their people, express their vibe, and turn moments into movements.
+              </p>
             </Reveal>
-          ))}</div>
+            <Reveal delay={0.2}>
+              <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "clamp(15px,1.8vw,18px)", color: C.dim, lineHeight: 1.85, marginBottom: "24px" }}>
+                VibeCircles isn't just a social platform; it's an ecosystem for belonging in the modern age — where technology amplifies authenticity instead of replacing it.
+              </p>
+            </Reveal>
+            <Reveal delay={0.3}>
+              <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "clamp(15px,1.8vw,18px)", color: C.dim, lineHeight: 1.85, marginBottom: 0 }}>
+                The strange truth about online spaces is that the more "connected" we become, the more fragmented we often feel. A platform that optimizes for vibe — shared context, mood, and intent — is less about features and more about social physics: lowering friction between humans who were already meant to find each other.
+              </p>
+            </Reveal>
+          </div>
         </div>
       </section>
       <div style={{ background: C.bg, borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}`, padding: "18px 0", overflow: "hidden" }}>
         <div style={{ display: "flex", animation: "marquee 20s linear infinite", whiteSpace: "nowrap" }}>
           {[...Array(3)].map((_, x) =>
             [
-              "NEON BREW CO.",
+              "",
               "--",
-              "APEX STREETWEAR",
+              "",
               "--",
-              "SOLSTICE FESTIVAL",
+              "",
               "--",
-              "PULSE FITNESS",
+              "",
               "--",
-              "URBAN EATS",
+              "",
               "--",
-              "CTRL AUDIO",
+              "",
               "--",
-              "MIRAGE CLUB GROUP",
+              "",
+              "--",
+              "",
+              "--",
+              "",
               "--",
             ].map((wd, i) => (
-              <span key={`${x}-${i}`} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "13px", letterSpacing: "3px", color: wd === "--" ? C.orange : "rgba(255,255,255,0.22)", marginRight: "28px" }}>
+              <span key={`${x}-${i}`} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "13px", letterSpacing: "3px", color: wd === "--" ? C.orange : C.dimmer, marginRight: "28px" }}>
                 {wd}
               </span>
             ))

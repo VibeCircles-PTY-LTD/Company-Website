@@ -1,0 +1,38 @@
+diff --git a/c:\Users\kagis\OneDrive\Desktop\New folder\vibecircle-web\components/pages/MarketplacePage.jsx b/c:\Users\kagis\OneDrive\Desktop\New folder\vibecircle-web\components/pages/MarketplacePage.jsx
+--- a/c:\Users\kagis\OneDrive\Desktop\New folder\vibecircle-web\components/pages/MarketplacePage.jsx
++++ b/c:\Users\kagis\OneDrive\Desktop\New folder\vibecircle-web\components/pages/MarketplacePage.jsx
+@@ -93,14 +93,22 @@
+       <div style={{background:C.bg2,borderTop:`1px solid ${C.border}`,borderBottom:`1px solid ${C.border}`}}><div style={{maxWidth:"1100px",margin:"0 auto",padding:`0 ${w<600?"20px":"64px"}`,display:"flex"}}>{["Creator","Brand"].map(tab=><button key={tab} onClick={()=>setActiveTab(tab)} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"3px",padding:"17px 26px",background:"none",color:activeTab===tab?C.orange:C.dimmer,border:"none",borderBottom:`2px solid ${activeTab===tab?C.orange:"transparent"}`,cursor:"pointer",transition:"all .2s"}}>{tab==="Creator"?"I'm a Creator":"I'm a Brand"}</button>)}</div></div>
+-      {activeTab==="Creator"?(
+-        <>
+-          <section style={{padding:`36px ${w<600?"20px":"64px"} 0`,background:C.bg2}}><div style={{maxWidth:"1100px",margin:"0 auto"}}>
+-            <div style={{position:"relative",marginBottom:"20px"}}><span style={{position:"absolute",left:"14px",top:"50%",transform:"translateY(-50%)",fontSize:"14px",opacity:.35}}>----</span><input placeholder="Search brand name or vibe tag..." value={search} onChange={e=>setSearch(e.target.value)} style={{width:"100%",background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.1)",borderRadius:"2px",padding:"13px 16px 13px 42px",fontFamily:"'DM Sans',sans-serif",fontSize:"14px",color:C.white,outline:"none",transition:"border-color .2s"}} onFocus={e=>e.target.style.borderColor=C.orange} onBlur={e=>e.target.style.borderColor="rgba(255,255,255,0.1)"}/></div>
+-            <div style={{display:"flex",gap:"7px",flexWrap:"wrap",alignItems:"center",paddingBottom:"22px"}}><div style={{display:"flex",gap:"5px",flexWrap:"wrap",flex:1}}>{MKT_CATS.map(c=><button key={c} onClick={()=>setCatFilter(c)} style={{fontFamily:"'DM Sans',sans-serif",fontSize:"11px",padding:"6px 11px",borderRadius:"2px",cursor:"pointer",background:catFilter===c?C.orange:"rgba(255,255,255,0.04)",color:catFilter===c?C.bg:C.dim,border:catFilter===c?"none":"1px solid rgba(255,255,255,0.1)",transition:"all .2s"}}>{c}</button>)}</div><select value={sortBy} onChange={e=>setSortBy(e.target.value)} style={{background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.1)",color:C.dim,padding:"7px 12px",borderRadius:"2px",fontFamily:"'DM Sans',sans-serif",fontSize:"12px",outline:"none",cursor:"pointer"}}>{["Featured","Slots Left"].map(s=><option key={s} value={s}>{s}</option>)}</select></div>
+-          </div></section>
+-          <section style={{padding:`20px ${w<600?"20px":"64px"} 80px`,background:C.bg2}}><div style={{maxWidth:"1100px",margin:"0 auto"}}>
+-            <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"12px",color:C.dimmer,marginBottom:"20px"}}>Showing <span style={{color:C.orange}}>{filtered.length}</span> deals</p>
+-            {filtered.length>0?<div className="grid-auto">{filtered.map((brand,i)=><Reveal key={brand.id} delay={i*.05}><BrandCard brand={brand} onApply={setApplyBrand}/></Reveal>)}</div>:<div style={{textAlign:"center",padding:"64px",color:C.dimmer}}><div style={{fontSize:"32px",marginBottom:"12px"}}>----</div><div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"20px",color:C.white,marginBottom:"6px"}}>No deals found</div><p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"13px"}}>Try adjusting your filters.</p></div>}
+-          </div></section>
+-        </>
+-      ):(
++      {activeTab==="Creator"?(
++        <section style={{padding:`56px ${w<600?"20px":"64px"} 96px`,background:C.bg2}}>
++          <div style={{maxWidth:"920px",margin:"0 auto"}}>
++            <Reveal>
++              <div style={{border:`1px solid ${C.border}`,background:"rgba(255,255,255,0.02)",borderRadius:"6px",padding:w<600?"28px":"44px",position:"relative",overflow:"hidden"}}>
++                <div style={{position:"absolute",inset:0,background:`radial-gradient(circle at top right,${C.orange}18,transparent 55%)`,pointerEvents:"none"}}/>
++                <div style={{position:"relative",zIndex:2}}>
++                  <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"12px",letterSpacing:"3px",color:C.orange,marginBottom:"10px"}}>Creator Marketplace</div>
++                  <h2 style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"clamp(28px,5vw,48px)",color:C.white,lineHeight:1,marginBottom:"12px"}}>Coming soon for creators.</h2>
++                  <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:"16px",color:C.dim,lineHeight:1.8,marginBottom:"24px",maxWidth:"640px"}}>We’re finishing the creator experience: verified profiles, deal matching, and a faster apply flow. Join the waitlist and you’ll be first in when it opens.</p>
++                  <div style={{display:"flex",gap:"12px",flexWrap:"wrap"}}>
++                    <button onClick={openWaitlist} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"13px",letterSpacing:"3px",padding:"12px 22px",background:C.orange,color:C.bg,border:"none",borderRadius:"2px",cursor:"pointer"}}>Join Waitlist</button>
++                    <button onClick={()=>setActiveTab("Brand")} style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:"12px",letterSpacing:"3px",padding:"12px 18px",background:"transparent",color:C.white,border:`1px solid ${C.border}`,borderRadius:"2px",cursor:"pointer"}}>I’m a Brand Instead</button>
++                  </div>
++                </div>
++              </div>
++            </Reveal>
++          </div>
++        </section>
++      ):(
+         <section className="sec-pad" style={{background:C.bg2}}><div style={{maxWidth:"1100px",margin:"0 auto"}} className="grid-2">

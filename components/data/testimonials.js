@@ -1,14 +1,11 @@
-"use client";
-
 import { C } from "@/components/shared/vibeTheme";
 
 export const TESTIMONIALS = [
   {
     quote:
-      "VibeCircle changed how I grow as a creator. I booked my first brand deal in 3 days and my local following tripled in a month.",
-    name: "Jordan Lee",
-    role: "Music Creator - Johannesburg",
-    avatar: "MIC",
+      "VibeCircle isn’t about collecting followers — it’s about forming circles that actually matter. Discover communities that match your energy, collaborate on ideas, and turn shared interests into real-world momentum. Social media should feel like belonging, not broadcasting.",
+    name: "Find your people. Build your vibe.",
+    role: "HOOK",
     color: C.orange,
   },
   {
