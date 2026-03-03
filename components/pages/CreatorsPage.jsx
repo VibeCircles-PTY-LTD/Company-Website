@@ -17,7 +17,7 @@ const CREATOR_TOOLS = [
 const CREATOR_FAQS = [
   {
     q: "How does the city map placement work?",
-    a: "When you post content tagged to a location, it appears as a live pin on the VibeCircle map for users in that area. The map is real-time --- people nearby can discover you while they're actually in your city.",
+    a: "When you post content tagged to a location, it appears as a live pin on the VibeCircles map for users in that area. The map is real-time --- people nearby can discover you while they're actually in your city.",
   },
   {
     q: "How do I get my first brand deal?",
@@ -25,15 +25,15 @@ const CREATOR_FAQS = [
   },
   {
     q: "Is there a follower minimum to join?",
-    a: "None. VibeCircle isn't about follower counts --- it's about city presence and energy. We've seen creators with 500 followers land brand deals because they own their local scene.",
+    a: "None. VibeCircles isn't about follower counts --- it's about city presence and energy. We've seen creators with 500 followers land brand deals because they own their local scene.",
   },
   {
     q: "How does the Creator Fund work?",
-    a: "Orbit creators are eligible for VibeCircle's Creator Fund, which pays based on verified map impressions, discovery reach, and engagement from real-world posts. Payouts are monthly.",
+    a: "Orbit creators are eligible for VibeCircles's Creator Fund, which pays based on verified map impressions, discovery reach, and engagement from real-world posts. Payouts are monthly.",
   },
   {
-    q: "Can I use VibeCircle alongside Instagram or TikTok?",
-    a: "Absolutely. VibeCircle is complementary, not competitive. Most creators cross-post content and use VC for local discovery and brand deals.",
+    q: "Can I use VibeCircles alongside Instagram or TikTok?",
+    a: "Absolutely. VibeCircles is complementary, not competitive. Most creators cross-post content and use VC for local discovery and brand deals.",
   },
 ];
 
@@ -41,7 +41,7 @@ export default function CreatorsPage({ openWaitlist }) {
   const [annual, setAnnual] = useState(false);
   return (
     <div style={{ background: C.bg, color: C.text }}>
-      <PageHero tag="For Creators" title="Your city is your" accent="stage. Own it." sub="VibeCircle gives creators tools to build a real local following, get discovered on the live city map, and earn from brand partnerships." />
+      <PageHero tag="For Creators" title="Your city is your" accent="stage. Own it." sub="VibeCircles gives creators tools to build a real local following, get discovered on the live city map, and earn from brand partnerships." />
       <Divider />
       <section className="sec-pad">
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>

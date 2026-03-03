@@ -79,7 +79,7 @@ function Nav({ active, setActive }) {
       transition: "all 0.4s ease",
     }}>
       <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "26px", letterSpacing: "3px", color: "#FF6B00" }}>
-        VIBECIRCLE
+        VIBECIRCLES
       </div>
       <div style={{ display: "flex", gap: "36px" }}>
         {NAV_LINKS.map(l => (
@@ -233,7 +233,7 @@ function About() {
       <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
         <AnimatedSection>
           <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "13px", letterSpacing: "5px", color: "#FF6B00", marginBottom: "16px" }}>
-            --- ABOUT VIBECIRCLE
+            --- ABOUT VIBECIRCLES
           </p>
           <h2 style={{
             fontFamily: "'Bebas Neue', sans-serif",
@@ -254,7 +254,7 @@ function About() {
               fontSize: "18px", lineHeight: 1.8,
               color: "rgba(0,0,0,0.65)",
             }}>
-              VibeCircle is a location-powered social discovery platform. We combine social feeds, live events, interactive maps, creator tools, business advertising, and community groups --- all inside one ecosystem.
+              VibeCircles is a location-powered social discovery platform. We combine social feeds, live events, interactive maps, creator tools, business advertising, and community groups --- all inside one ecosystem.
             </p>
             <p style={{
               fontFamily: "'DM Sans', sans-serif",
@@ -262,7 +262,7 @@ function About() {
               color: "rgba(0,0,0,0.65)",
               marginTop: "24px",
             }}>
-              From campus pop-ups to club nights. From digital livestreams to street markets. From creators to brands. VibeCircle makes energy visible.
+              From campus pop-ups to club nights. From digital livestreams to street markets. From creators to brands. VibeCircles makes energy visible.
             </p>
           </AnimatedSection>
 
@@ -350,10 +350,10 @@ function FounderStory() {
           </h2>
         </AnimatedSection>
         {[
-          "VibeCircle started with a simple realization: social media shows opinions --- but not what's happening around you.",
+          "VibeCircles started with a simple realization: social media shows opinions --- but not what's happening around you.",
           "Scrolling felt endless. Cities felt invisible. Events felt disconnected.",
           "So we imagined something different. What if social media had a pulse? What if creators could light up a city?",
-          "VibeCircle was built to connect digital expression to physical reality. We're not chasing trends. We're building infrastructure for culture.",
+          "VibeCircles was built to connect digital expression to physical reality. We're not chasing trends. We're building infrastructure for culture.",
         ].map((p, i) => (
           <AnimatedSection key={i} delay={i * 0.1}>
             <p style={{
@@ -431,7 +431,7 @@ function Business() {
               When your location<br /><span style={{ color: "#FF6B00" }}>pulses on the map,</span><br />people find you.
             </h2>
             <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "17px", color: "rgba(0,0,0,0.6)", lineHeight: 1.7, marginBottom: "40px" }}>
-              Turn foot traffic into digital gravity with VibeCircle Business Tools.
+              Turn foot traffic into digital gravity with VibeCircles Business Tools.
             </p>
             <button style={{
               fontFamily: "'Bebas Neue', sans-serif", fontSize: "16px", letterSpacing: "3px",
@@ -614,9 +614,9 @@ function Footer() {
       display: "flex", justifyContent: "space-between", alignItems: "center",
       flexWrap: "wrap", gap: "24px",
     }}>
-      <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "22px", letterSpacing: "3px", color: "#FF6B00" }}>VIBECIRCLE</div>
+      <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "22px", letterSpacing: "3px", color: "#FF6B00" }}>VIBECIRCLES</div>
       <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "13px", color: "rgba(0,0,0,0.5)", letterSpacing: "1px" }}>
-        -(c) 2026 VibeCircle. Making energy visible.
+        -(c) 2026 VibeCircles. Making energy visible.
       </p>
       <div style={{ display: "flex", gap: "28px" }}>
         {["info", "partners", "careers", "support"].map(e => (

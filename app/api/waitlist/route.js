@@ -1,4 +1,5 @@
-import { getPrisma } from "../../../lib/db";
+import { query } from "../../../lib/db";
+import crypto from "node:crypto";
 
 export async function POST(request) {
   try {
@@ -10,27 +11,33 @@ export async function POST(request) {
         { status: 400 }
       );
     }
-    const prisma = getPrisma();
-    if (!prisma) {
-      return Response.json(
-        { error: "Database not configured" },
-        { status: 503 }
-      );
-    }
-    const signup = await prisma.waitlistSignup.create({
-      data: {
-        name: String(name).trim(),
-        email: String(email).trim().toLowerCase(),
-        city: city ? String(city).trim() : null,
-        role: String(role).trim(),
-        context: context ? String(context).trim() : null,
-      },
-    });
+
+    const id = crypto.randomUUID();
+    const sql = `
+      INSERT INTO "WaitlistSignup" ("id", "name", "email", "city", "role", "context", "createdAt")
+      VALUES ($1, $2, $3, $4, $5, $6, NOW())
+      RETURNING "id"
+    `;
+    const params = [
+      id,
+      String(name).trim(),
+      String(email).trim().toLowerCase(),
+      city ? String(city).trim() : null,
+      String(role).trim(),
+      context ? String(context).trim() : null,
+    ];
+
+    console.log("[api/waitlist] Executing SQL:", sql);
+    console.log("[api/waitlist] With params:", params);
+
+    const result = await query(sql, params);
+    const signup = result.rows[0];
+
     return Response.json({ ok: true, id: signup.id });
   } catch (e) {
     console.error("[api/waitlist]", e);
     return Response.json(
-      { error: "Failed to save signup" },
+      { error: "Failed to save signup", details: e.message },
       { status: 500 }
     );
   }

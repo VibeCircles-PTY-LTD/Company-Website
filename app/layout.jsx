@@ -5,12 +5,12 @@ import "./globals.css";
 
 
 export const metadata = {
-  title: "VibeCircle - Culture in Motion",
+  title: "VibeCircles - Culture in Motion",
   description:
-    "VibeCircle is a culture-first discovery platform where creators, businesses, and communities meet in real life.",
+    "VibeCircles is a culture-first discovery platform where creators, businesses, and communities meet in real life.",
   metadataBase: new URL("https://vibecircle.com"),
   openGraph: {
-    title: "VibeCircle - Culture in Motion",
+    title: "VibeCircles - Culture in Motion",
     description:
       "A culture-first discovery platform: creators, businesses, and communities - mapped into real life.",
     images: ["/og-image.png"],
@@ -18,7 +18,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "VibeCircle - Culture in Motion",
+    title: "VibeCircles - Culture in Motion",
     description:
       "A culture-first discovery platform: creators, businesses, and communities - mapped into real life.",
     images: ["/og-image.png"],

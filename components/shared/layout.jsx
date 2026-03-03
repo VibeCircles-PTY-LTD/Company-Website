@@ -35,85 +35,61 @@ export function Nav({ current, setPage, openWaitlist }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "0 clamp(20px,4vw,48px)",
-          height: "68px",
-          background: scrolled || menuOpen ? "rgba(246,246,249,0.98)" : "rgba(246,246,249,0.85)",
+          padding: "0 clamp(20px,4vw,64px)",
+          height: "72px",
+          background: scrolled || menuOpen ? "rgba(247,244,238,0.98)" : "rgba(247,244,238,0.8)",
           backdropFilter: "blur(20px)",
           borderBottom: `1px solid ${scrolled ? C.border : "transparent"}`,
-          transition: "all .35s ease",
+          transition: "all .4s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       >
         <button
           onClick={() => go("home")}
           style={{
-            fontFamily: "'Bebas Neue',sans-serif",
-            fontSize: "24px",
-            letterSpacing: "3px",
+            fontFamily: "'Syne', sans-serif",
+            fontWeight: 700,
+            fontSize: "20px",
+            letterSpacing: "2px",
             color: C.orange,
             background: "none",
             border: "none",
             cursor: "pointer",
             padding: 0,
             flexShrink: 0,
+            textTransform: "uppercase"
           }}
         >
-          VIBECIRCLE
+          VIBECIRCLES
         </button>
         {!isMobile && (
-          <div style={{ display: "flex", gap: "3px", alignItems: "center" }}>
+          <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
             {PRIMARY_NAV.map((p) => (
               <button
                 key={p}
                 onClick={() => go(p)}
                 style={{
-                  fontFamily: "'DM Sans',sans-serif",
-                  fontSize: "12px",
-                  letterSpacing: "1px",
-                  textTransform: "uppercase",
+                  fontFamily: "'Instrument Sans', sans-serif",
+                  fontSize: "13px",
+                  fontWeight: 500,
                   color: current === p ? C.orange : C.dim,
-                  background: current === p ? `${C.orange}12` : "transparent",
-                  border: current === p ? `1px solid ${C.orange}30` : "1px solid transparent",
-                  borderRadius: "2px",
-                  padding: "7px 12px",
+                  background: current === p ? `${C.orange}08` : "transparent",
+                  border: "none",
+                  borderRadius: "99px",
+                  padding: "8px 16px",
                   cursor: "pointer",
-                  transition: "all .2s",
+                  transition: "all .25s ease",
                 }}
                 onMouseEnter={(e) => {
                   if (current !== p) {
                     e.currentTarget.style.color = C.text;
-                    e.currentTarget.style.borderColor = C.border;
+                    e.currentTarget.style.background = "rgba(0,0,0,0.03)";
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (current !== p) {
                     e.currentTarget.style.color = C.dim;
-                    e.currentTarget.style.borderColor = "transparent";
+                    e.currentTarget.style.background = "transparent";
                   }
-                }}
-              >
-                {p}
-              </button>
-            ))}
-            {MORE_NAV.map((p) => (
-              <button
-                key={p}
-                onClick={() => go(p)}
-                style={{
-                  fontFamily: "'DM Sans',sans-serif",
-                  fontSize: "12px",
-                  letterSpacing: "1px",
-                  textTransform: "uppercase",
-                  color: current === p ? C.orange : C.dim,
-                  background: "transparent",
-                  border: "1px solid transparent",
-                  borderRadius: "2px",
-                  padding: "7px 10px",
-                  cursor: "pointer",
-                  transition: "all .2s",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = C.text)}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = current === p ? C.orange : C.dim;
                 }}
               >
                 {p}
@@ -121,40 +97,33 @@ export function Nav({ current, setPage, openWaitlist }) {
             ))}
           </div>
         )}
-        <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+        <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
           {!isMobile && (
             <button
               onClick={() => openWaitlist("Early Access")}
+              className="bg-vc-orange text-vc-white font-body uppercase tracking-[0.15em] py-3 px-8 rounded-full transition-all hover:shadow-xl hover:-translate-y-1"
               style={{
-                fontFamily: "'Bebas Neue',sans-serif",
-                fontSize: "13px",
-                letterSpacing: "3px",
-                padding: "9px 22px",
-                background: C.orange,
-                color: C.textOnAccent,
+                fontSize: "11px",
+                fontWeight: 600,
                 border: "none",
-                borderRadius: "2px",
                 cursor: "pointer",
-                transition: "box-shadow .2s",
               }}
-              onMouseEnter={(e) => (e.target.style.boxShadow = `0 6px 20px ${C.orange}40`)}
-              onMouseLeave={(e) => (e.target.style.boxShadow = "")}
             >
-              Join Now
+              Start Vibeing
             </button>
           )}
           {isMobile && (
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label={menuOpen ? "Close menu" : "Open menu"}
-              style={{ background: "none", border: "none", cursor: "pointer", padding: "6px", display: "flex", flexDirection: "column", gap: "5px" }}
+              style={{ background: "none", border: "none", cursor: "pointer", padding: "8px", display: "flex", flexDirection: "column", gap: "6px" }}
             >
               <span
                 style={{
                   display: "block",
-                  width: "22px",
-                  height: "2px",
-                  background: menuOpen ? C.orange : C.text,
+                  width: "24px",
+                  height: "1.5px",
+                  background: C.text,
                   transition: "all .3s",
                   transform: menuOpen ? "rotate(45deg) translate(5px,5px)" : "",
                 }}
@@ -162,9 +131,9 @@ export function Nav({ current, setPage, openWaitlist }) {
               <span
                 style={{
                   display: "block",
-                  width: "22px",
-                  height: "2px",
-                  background: menuOpen ? C.orange : C.text,
+                  width: "24px",
+                  height: "1.5px",
+                  background: C.text,
                   transition: "all .3s",
                   opacity: menuOpen ? 0 : 1,
                 }}
@@ -172,11 +141,11 @@ export function Nav({ current, setPage, openWaitlist }) {
               <span
                 style={{
                   display: "block",
-                  width: "22px",
-                  height: "2px",
-                  background: menuOpen ? C.orange : C.text,
+                  width: "24px",
+                  height: "1.5px",
+                  background: C.text,
                   transition: "all .3s",
-                  transform: menuOpen ? "rotate(-45deg) translate(5px,-5px)" : "",
+                  transform: menuOpen ? "rotate(-45deg) translate(6px,-6px)" : "",
                 }}
               />
             </button>
@@ -261,37 +230,39 @@ export function Footer({ setPage }) {
     { title: "Legal", links: ["Privacy", "Terms", "Cookies"] },
   ];
   return (
-    <footer style={{ background: C.bg2, borderTop: `1px solid ${C.border}` }}>
-      <div style={{ maxWidth: "1100px", margin: "0 auto", padding: w < 600 ? "48px 20px" : "56px 64px" }}>
+    <footer style={{ background: C.bg2, borderTop: `1px solid ${C.border}`, marginTop: "64px" }}>
+      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: w < 600 ? "64px 24px" : "80px 64px" }}>
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: w < 600 ? "1fr 1fr" : w < 960 ? "1fr 1fr 1fr" : "1fr 1fr 1fr 1fr 1fr",
-            gap: "36px",
-            marginBottom: "52px",
+            gridTemplateColumns: w < 600 ? "1fr" : w < 1060 ? "1fr 1fr" : "2fr 1fr 1fr 1fr 1fr",
+            gap: "64px",
+            marginBottom: "64px",
           }}
         >
-          <div>
+          <div style={{ gridColumn: w < 1060 ? "1 / -1" : "span 2" }}>
             <button
               onClick={() => go("home")}
               style={{
-                fontFamily: "'Bebas Neue',sans-serif",
+                fontFamily: "'Syne', sans-serif",
+                fontWeight: 700,
                 fontSize: "22px",
-                letterSpacing: "3px",
+                letterSpacing: "2px",
                 color: C.orange,
                 background: "none",
                 border: "none",
                 cursor: "pointer",
-                marginBottom: "14px",
+                marginBottom: "20px",
                 display: "block",
+                textTransform: "uppercase"
               }}
             >
-              VIBECIRCLE
+              VIBECIRCLES
             </button>
-            <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "12px", color: C.dimmer, lineHeight: 1.7, maxWidth: "180px", marginBottom: "18px" }}>
-              Where creators, cities, events, and businesses collide in real life.
+            <p style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "14px", color: C.dim, lineHeight: 1.6, maxWidth: "320px", marginBottom: "24px" }}>
+              The social gravity engine. Connecting brands with the communities that move culture across Africa and the diaspora.
             </p>
-            <div style={{ display: "flex", gap: "8px" }}>
+            <div style={{ display: "flex", gap: "12px" }}>
               {SOCIALS.map((s, i) => (
                 <a
                   key={i}
@@ -300,24 +271,27 @@ export function Footer({ setPage }) {
                   rel="noopener noreferrer"
                   aria-label={s.label}
                   style={{
-                    width: "30px",
-                    height: "30px",
+                    width: "36px",
+                    height: "36px",
                     border: `1px solid ${C.border}`,
-                    borderRadius: "2px",
+                    borderRadius: "50%",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     cursor: "pointer",
-                    transition: "border-color .2s,background .2s,color .2s",
+                    transition: "all .2s ease",
                     textDecoration: "none",
-                    color: C.text,
+                    color: C.dim,
+                    background: "transparent"
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.borderColor = C.orange;
-                    e.currentTarget.style.background = "rgba(255,107,0,0.1)";
+                    e.currentTarget.style.color = C.orange;
+                    e.currentTarget.style.background = "rgba(232, 81, 26, 0.05)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.borderColor = C.border;
+                    e.currentTarget.style.color = C.dim;
                     e.currentTarget.style.background = "transparent";
                   }}
                 >
@@ -328,52 +302,45 @@ export function Footer({ setPage }) {
           </div>
           {cols.map((col) => (
             <div key={col.title}>
-              <div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "12px", letterSpacing: "3px", color: C.orange, marginBottom: "14px" }}>
+              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", textTransform: "uppercase", letterSpacing: "2px", color: C.dim, marginBottom: "20px", fontWeight: 500 }}>
                 {col.title}
               </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: "9px" }}>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
                 {col.links.map((l) => (
-                  <button
-                    key={l}
-                    onClick={() => go(l)}
-                    style={{
-                      fontFamily: "'DM Sans',sans-serif",
-                      fontSize: "12px",
-                      color: C.dimmer,
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
-                      textAlign: "left",
-                      transition: "color .2s",
-                      padding: 0,
-                    }}
-                    onMouseEnter={(e) => (e.target.style.color = C.text)}
-                    onMouseLeave={(e) => (e.target.style.color = C.dimmer)}
-                  >
-                    {l}
-                  </button>
+                  <li key={l}>
+                    <button
+                      onClick={() => go(l)}
+                      style={{
+                        fontFamily: "'Instrument Sans', sans-serif",
+                        fontSize: "14px",
+                        color: C.dim,
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                        textAlign: "left",
+                        transition: "color .2s ease",
+                        padding: 0,
+                      }}
+                      onMouseEnter={(e) => (e.target.style.color = C.text)}
+                      onMouseLeave={(e) => (e.target.style.color = C.dim)}
+                    >
+                      {l}
+                    </button>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           ))}
         </div>
-        <div style={{ height: "1px", background: "rgba(0,0,0,0.08)", marginBottom: "22px" }} />
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
-          <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", color: C.dimmer }}>
-            (c) 2026 VibeCircle (Pty) Ltd - Making energy visible.
+        <div style={{ height: "1px", background: C.border, opacity: 0.5, marginBottom: "32px" }} />
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "24px" }}>
+          <p style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "12px", color: C.dim }}>
+            © {new Date().getFullYear()} VibeCircles. Making energy visible. Johannesburg, South Africa.
           </p>
-          <div style={{ display: "flex", gap: "20px" }}>
-            {["Privacy", "Terms", "Cookies"].map((l) => (
-              <button
-                key={l}
-                onClick={() => go(l)}
-                style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", color: C.dimmer, cursor: "pointer", background: "none", border: "none", padding: 0, transition: "color .2s" }}
-                onMouseEnter={(e) => (e.target.style.color = C.orange)}
-                onMouseLeave={(e) => (e.target.style.color = C.dimmer)}
-              >
-                {l}
-              </button>
-            ))}
+          <div style={{ display: "flex", gap: "24px" }}>
+            <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: C.dim, opacity: 0.6 }}>
+              v1.0.4
+            </span>
           </div>
         </div>
       </div>

@@ -14,7 +14,7 @@ const AD_FEATURES = [
 ];
 
 const AD_FAQS = [
-  { q: "How does geo-targeting work?", a: "VibeCircle uses precise real-time location data to serve your ad to users within your defined radius --- a block, neighborhood, or whole city." },
+  { q: "How does geo-targeting work?", a: "VibeCircles uses precise real-time location data to serve your ad to users within your defined radius --- a block, neighborhood, or whole city." },
   { q: "What's the minimum budget?", a: "The Local plan starts at R2,999/month. No minimum ad spend commitment. Cancel anytime." },
   { q: "Can I sponsor a specific creator?", a: "Yes. On Growth and City plans, you can browse the creator marketplace and propose direct sponsorships. Creators typically respond within 48 hours." },
   { q: "What analytics do I get?", a: "All plans include impression counts and engagement metrics. Growth and City add heat maps, audience demographics, and foot-traffic correlation data." },
@@ -24,7 +24,7 @@ const AD_FAQS = [
 export default function AdvertisePage({ openWaitlist }) {
   return (
     <div style={{ background: C.bg, color: C.text }}>
-      <PageHero tag="Advertise" title="Ads that integrate," accent="not interrupt." sub="Traditional ads interrupt. VibeCircle ads integrate. We power discovery, not distraction." />
+      <PageHero tag="Advertise" title="Ads that integrate," accent="not interrupt." sub="Traditional ads interrupt. VibeCircles ads integrate. We power discovery, not distraction." />
       <Divider />
       <section className="sec-pad" style={{ background: C.bg2 }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>

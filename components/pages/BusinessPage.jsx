@@ -6,9 +6,9 @@ import { Divider, FAQ, Orb, PageHero, PricingCard, Reveal, Tag } from "@/compone
 import { BIZ_PRICING } from "@/components/data/pricing";
 
 const BIZ_TOOLS = [
-  { num: "01", title: "Claim Your Location", desc: "Take ownership of your spot on the VibeCircle map. Your location becomes a living destination.", icon: "----" },
+  { num: "01", title: "Claim Your Location", desc: "Take ownership of your spot on the VibeCircles map. Your location becomes a living destination.", icon: "----" },
   { num: "02", title: "Run Promotions", desc: "Launch time-limited offers that pulse to nearby users. Create urgency. Drive traffic.", icon: "----" },
-  { num: "03", title: "Host Events", desc: "Create events that appear on the live map. Tap into VibeCircle's discovery engine.", icon: "----" },
+  { num: "03", title: "Host Events", desc: "Create events that appear on the live map. Tap into VibeCircles's discovery engine.", icon: "----" },
   { num: "04", title: "Go Live", desc: "Stream directly from your location. Let people see the energy before they arrive.", icon: "----" },
   { num: "05", title: "Track Engagement", desc: "See who's viewing, saving, and visiting your location in real time.", icon: "----" },
   { num: "06", title: "Launch Campaigns", desc: "Combine all tools into targeted campaigns that grow with your business.", icon: "----" },
@@ -26,7 +26,7 @@ export default function BusinessPage({ openWaitlist }) {
   const [active, setActive] = useState(0);
   return (
     <div style={{ background: C.bg, color: C.text }}>
-      <PageHero tag="VibeCircle for Business" title="Turn foot traffic into" accent="digital gravity." sub="When your location pulses on the map, people don't just see you --- they find you." />
+      <PageHero tag="VibeCircles for Business" title="Turn foot traffic into" accent="digital gravity." sub="When your location pulses on the map, people don't just see you --- they find you." />
       <Divider />
       <section className="sec-pad" style={{ background: C.bg2 }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>

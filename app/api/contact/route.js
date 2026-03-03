@@ -1,4 +1,5 @@
-import { getPrisma } from "../../../lib/db";
+import { query } from "../../../lib/db";
+import crypto from "node:crypto";
 
 const ALLOWED_DEPTS = ["general", "partnerships", "careers", "support", "press"];
 
@@ -15,27 +16,30 @@ export async function POST(request) {
     const dept = department && ALLOWED_DEPTS.includes(String(department).toLowerCase())
       ? String(department).toLowerCase()
       : "general";
-    const prisma = getPrisma();
-    if (!prisma) {
-      return Response.json(
-        { error: "Database not configured" },
-        { status: 503 }
-      );
-    }
-    const submission = await prisma.contactSubmission.create({
-      data: {
-        name: String(name).trim(),
-        email: String(email).trim().toLowerCase(),
-        subject: subject ? String(subject).trim() : null,
-        message: String(message).trim(),
-        department: dept,
-      },
-    });
+
+    const id = crypto.randomUUID();
+    const sql = `
+      INSERT INTO "ContactSubmission" ("id", "name", "email", "subject", "message", "department", "createdAt")
+      VALUES ($1, $2, $3, $4, $5, $6, NOW())
+      RETURNING "id"
+    `;
+    const params = [
+      id,
+      String(name).trim(),
+      String(email).trim().toLowerCase(),
+      subject ? String(subject).trim() : null,
+      String(message).trim(),
+      dept
+    ];
+
+    const result = await query(sql, params);
+    const submission = result.rows[0];
+
     return Response.json({ ok: true, id: submission.id });
   } catch (e) {
     console.error("[api/contact]", e);
     return Response.json(
-      { error: "Failed to save message" },
+      { error: "Failed to save message", details: e.message },
       { status: 500 }
     );
   }

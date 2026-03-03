@@ -2,7 +2,7 @@ import AppShell from "@/components/AppShell";
 import { LegalPage } from "@/components/shared/LegalPage";
 import { PRIVACY_SECTIONS } from "@/components/data/legal";
 
-export const metadata = { title: "Privacy Policy - VibeCircle" };
+export const metadata = { title: "Privacy Policy - VibeCircles" };
 
 export default function PrivacyPageRoute() {
   return (
