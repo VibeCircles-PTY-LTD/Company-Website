@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { C } from "@/components/shared/vibeTheme";
 import { useInView, useWindowWidth } from "@/components/shared/hooks";
 
@@ -165,80 +164,6 @@ export function PageHero({ tag, title, accent, sub, children }) {
         {children}
       </div>
     </section>
-  );
-}
-
-export function FAQ({ items, accentColor = C.orange }) {
-  const [open, setOpen] = useState(null);
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-      {items.map((item, i) => (
-        <Reveal key={i} delay={i * 0.06}>
-          <div
-            style={{
-              background: open === i ? `${accentColor}08` : "rgba(0,0,0,0.02)",
-              border: `1px solid ${open === i ? accentColor + "40" : C.border}`,
-              borderRadius: "4px",
-              overflow: "hidden",
-              transition: "all .3s",
-            }}
-          >
-            <button
-              onClick={() => setOpen(open === i ? null : i)}
-              style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "20px 28px",
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                textAlign: "left",
-                gap: "16px",
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: "'DM Sans',sans-serif",
-                  fontSize: "15px",
-                  fontWeight: 600,
-                  color: C.text,
-                }}
-              >
-                {item.q}
-              </span>
-              <span
-                style={{
-                  color: open === i ? accentColor : C.dimmer,
-                  fontSize: "22px",
-                  transition: "transform .3s",
-                  transform: open === i ? "rotate(45deg)" : "none",
-                  flexShrink: 0,
-                  fontWeight: 300,
-                }}
-              >
-                +
-              </span>
-            </button>
-            {open === i && (
-              <div style={{ padding: "0 28px 22px", animation: "fadeIn .25s ease" }}>
-                <p
-                  style={{
-                    fontFamily: "'DM Sans',sans-serif",
-                    fontSize: "14px",
-                    color: C.dim,
-                    lineHeight: 1.8,
-                  }}
-                >
-                  {item.a}
-                </p>
-              </div>
-            )}
-          </div>
-        </Reveal>
-      ))}
-    </div>
   );
 }
 

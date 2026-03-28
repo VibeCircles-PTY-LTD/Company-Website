@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { C } from "@/components/shared/vibeTheme";
 import { useWindowWidth } from "@/components/shared/hooks";
-import { Divider, FAQ, Orb, Reveal, Tag } from "@/components/shared/ui";
+import { Orb, Reveal, Tag } from "@/components/shared/ui";
 
 const MARKETPLACE_BRANDS = [
   { id: 1, name: "NEON BREW CO.", category: "Food & Drink", budget: "R8K-R35K", type: "Sponsored Post", location: "Nationwide (South Africa)", badge: "HOT", desc: "Indie craft energy drink built for the late-night creator. Looking for authentic city-based creators to showcase our cans in real environments.", tags: ["Nightlife", "Creators", "Urban"], color: C.orange, slots: 12, filled: 8, logo: "JUICE" },
@@ -17,7 +17,6 @@ const MARKETPLACE_BRANDS = [
 ];
 const MKT_CATS = ["All", "Food & Drink", "Fashion", "Health & Wellness", "Entertainment", "Tech", "Beauty & Grooming", "Events"];
 const BADGE_COLORS = { "HOT": C.orange, "FEATURED": C.pink, "NEW": C.blue, "PREMIUM": C.purple };
-const MKT_FAQS = [{ q: "How do creators get paid?", a: "Payments go through VibeCircles's secure escrow. Once a brand approves your content, payment is released within 3---5 business days via bank transfer, PayPal, or Venmo." }, { q: "Is there a follower minimum?", a: "No follower minimum. Brands care about city presence, authenticity, and engagement quality --- not just counts." }, { q: "What if a brand doesn't respond?", a: "Brands must respond within 72 hours. If they don't, we re-open the slot and follow up on your behalf." }, { q: "Can brands contact me directly?", a: "Yes. Growth or Enterprise plan brands can send you a direct collaboration proposal based on your creator profile." }, { q: "How do I post a deal as a brand?", a: "Switch to the 'I'm a Brand' tab, fill out the deal form, and submit for review. Deals go live within 24 hours." }];
 function ProgressBar({ filled, slots, color }) {
   const pct = Math.round((filled / slots) * 100); const full = filled >= slots;
   return (<div style={{ marginTop: "10px" }}><div style={{ display: "flex", justifyContent: "space-between", marginBottom: "4px" }}><span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "10px", color: C.dimmer }}>{filled}/{slots} slots</span><span style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "10px", letterSpacing: "2px", color: full ? C.pink : color }}>{full ? "FULL" : `${slots - filled} LEFT`}</span></div><div style={{ height: "3px", background: "rgba(0,0,0,0.08)", borderRadius: "2px", overflow: "hidden" }}><div style={{ height: "100%", width: `${pct}%`, background: full ? C.pink : color, borderRadius: "2px", transition: "width .6s ease" }} /></div></div>);
@@ -130,8 +129,6 @@ export default function MarketplacePage({ openWaitlist, addToast }) {
           </div>
         </section>
       )}
-      <Divider />
-      <section className="sec-pad" style={{ background: C.bg }}><div style={{ maxWidth: "800px", margin: "0 auto" }}><Reveal style={{ marginBottom: "44px" }}><Tag>Marketplace FAQ</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(26px,4vw,44px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>How the marketplace <span style={{ color: C.orange }}>works.</span></h2></Reveal><FAQ items={MKT_FAQS} /></div></section>
       <div style={{ background: C.orange, padding: "20px 0", overflow: "hidden" }}><div style={{ display: "flex", animation: "marquee 22s linear infinite", whiteSpace: "nowrap" }}>{[...Array(4)].map((_, x) => ["Brand Deals", "--", "Creator Matching", "--", "Real Payments", "--", "City Culture", "--", "Authentic Collabs", "--"].map((wd, i) => <span key={`${x}-${i}`} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", color: "rgba(5,5,10,0.65)", marginRight: "26px" }}>{wd}</span>))}</div></div>
     </div>
   );

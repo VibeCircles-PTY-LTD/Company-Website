@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { C } from "@/components/shared/vibeTheme";
-import { Divider, FAQ, Orb, PageHero, Reveal, Tag } from "@/components/shared/ui";
+import { Divider, Orb, PageHero, Reveal, Tag } from "@/components/shared/ui";
 
-const ROLES_DISABLED = false;
+const ROLES_DISABLED = true;
 const ROLES = [
   {
     title: "Frontend Engineer", dept: "Engineering", type: "Full-Time", level: "Mid---Senior",
@@ -88,15 +88,6 @@ const ROLES = [
   },
 ];
 const DEPT_COLORS = { Engineering: C.orange, Design: C.blue, Marketing: C.pink, Community: C.purple, Creators: C.gold, Business: C.orange };
-const JOBS_FAQS = [
-  { q: "How do I apply?", a: "Applications must be submitted through the Careers page. We do not accept applications via email or social media. Only shortlisted candidates will be contacted.." },
-  { q: "Where is VibeCircles based?", a: "Remote-first with hub in South Africa." },
-  { q: "Can non-South African citizens apply?", a: "At this time, we only consider applicants who are South African citizens or hold valid authorization to work in South Africa. We do not offer visa sponsorship." },
-  { q: "What does the interview process look like?", a: "Intro call (30 min) ? skills review ? take-home project (2---4 hours) ? final team interview. We complete the process within 2 weeks." },
-  { q: "Do you offer internships?", a: "Yes. We offer internships and graduate opportunities throughout the year. Internship openings will be listed on the Careers page when available." },
-  { q: "I don't see a role that fits. Can I still apply?", a: "Absolutely. Send your story to careers@vibecircle.com. We care more about builders who are excited about our mission than fitting into a specific job description. If your background and passion align, we want to hear from you." },
-];
-
 export default function JobsPage({ openWaitlist, addToast }) {
   const [filter, setFilter] = useState("All");
   const [expanded, setExpanded] = useState(null);
@@ -292,8 +283,6 @@ export default function JobsPage({ openWaitlist, addToast }) {
           )}
         </div>
       </section>
-      <Divider />
-      <section className="sec-pad" style={{ background: C.bg2 }}><div style={{ maxWidth: "800px", margin: "0 auto" }}><Reveal style={{ marginBottom: "44px" }}><Tag>Hiring FAQ</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(26px,4vw,44px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>About joining <span style={{ color: C.orange }}>VibeCircles.</span></h2></Reveal><FAQ items={JOBS_FAQS} /></div></section>
       <section style={{ background: C.orange, padding: "64px clamp(20px,6vw,64px)" }}><div style={{ maxWidth: "1100px", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "24px" }}><div><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(24px,4vw,44px)", color: C.textOnAccent, lineHeight: 1 }}>Don't see your role?<br />Build your own.</div><p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: "rgba(0,0,0,0.6)", marginTop: "8px" }}>careers@vibecircle.com</p></div><button onClick={() => openWaitlist("Custom Role")} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "14px 36px", background: C.bg, color: C.orange, border: "none", borderRadius: "2px", cursor: "pointer", transition: "transform .2s" }} onMouseEnter={e => e.target.style.transform = "translateY(-2px)"} onMouseLeave={e => e.target.style.transform = ""}>Get in Touch</button></div></section>
     </div>
   );

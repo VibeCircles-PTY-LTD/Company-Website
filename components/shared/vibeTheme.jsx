@@ -1,37 +1,5 @@
 "use client";
 
-export const GLOBAL_CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
-  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-  html { scroll-behavior:smooth; }
-  body { background:#F7F4EE; overflow-x:hidden; }
-  ::selection { background:rgba(232, 81, 26, 0.2); }
-  ::-webkit-scrollbar { width:6px; }
-  ::-webkit-scrollbar-track { background:#E8E4DC; }
-  ::-webkit-scrollbar-thumb { background:#C8B89A; border-radius:3px; }
-  ::-webkit-scrollbar-thumb:hover { background:#E8511A; }
-  input::placeholder, textarea::placeholder { color:rgba(28, 28, 26, 0.4); }
-
-  @keyframes fadeUp    { from{opacity:0;transform:translateY(20px);}  to{opacity:1;transform:translateY(0);} }
-  @keyframes fadeIn    { from{opacity:0;} to{opacity:1;} }
-  @keyframes fadeOut   { from{opacity:1;} to{opacity:0;} }
-  @keyframes orbFloat  { 0%,100%{transform:scale(1) translateY(0);opacity:.6;} 50%{transform:scale(1.1) translateY(-8px);opacity:1;} }
-  @keyframes marquee   { from{transform:translateX(0);} to{transform:translateX(-50%);} }
-  @keyframes pageEnter { from{opacity:0;transform:translateY(12px);} to{opacity:1;transform:translateY(0);} }
-  @keyframes toastIn   { from{opacity:0;transform:translateX(120%);} to{opacity:1;transform:translateX(0);} }
-  @keyframes toastOut  { from{opacity:1;transform:translateX(0);} to{opacity:0;transform:translateX(120%);} }
-
-  .page-enter { animation: pageEnter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; will-change: opacity, transform; }
-  .grid-2  { display:grid; grid-template-columns:1fr 1fr; gap:60px; }
-  .grid-3  { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
-  .sec-pad   { padding:100px 64px; }
-
-  @media(max-width:960px){
-    .grid-2{grid-template-columns:1fr;gap:40px;}
-    .sec-pad{padding:72px 28px;}
-  }
-`;
-
 export const C = {
   bg: "#F7F4EE",
   bg2: "#F0EDE8",

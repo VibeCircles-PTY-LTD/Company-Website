@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { C } from "@/components/shared/vibeTheme";
 import { Divider, PageHero, Reveal, Tag } from "@/components/shared/ui";
 
@@ -81,7 +82,13 @@ export default function TeamPage({ openWaitlist, setPage }) {
                         flexShrink: 0,
                       }}
                     >
-                      <img src={m.photo} alt={`${m.name} portrait`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                      <Image
+                        src={m.photo}
+                        alt={`${m.name} portrait`}
+                        width={48}
+                        height={48}
+                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                      />
                     </div>
                     <div>
                       <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "15px", fontWeight: 600, color: C.text }}>{m.name}</div>
@@ -258,7 +265,7 @@ export default function TeamPage({ openWaitlist, setPage }) {
           <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(28px,5vw,52px)", color: C.text, lineHeight: 1, margin: "16px auto 20px", maxWidth: "500px" }}>
             Want to be on this page?
             <br />
-            <span style={{ color: C.orange }}>We're hiring.</span>
+            <span style={{ color: C.orange }}>No open roles right now.</span>
           </h2>
           <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
             <button
@@ -268,7 +275,7 @@ export default function TeamPage({ openWaitlist, setPage }) {
               }}
               style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "13px 32px", background: C.orange, color: C.textOnAccent, border: "none", borderRadius: "2px", cursor: "pointer" }}
             >
-              See Open Roles
+              Careers
             </button>
             <button
               onClick={() => openWaitlist("Team Interest")}

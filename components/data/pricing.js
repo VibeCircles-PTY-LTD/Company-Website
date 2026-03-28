@@ -101,6 +101,7 @@ export const BIZ_PRICING = [
   {
     plan: "STARTER",
     price: "R399",
+    period: "/mo",
     desc: "Get your business on the map and build a local following.",
     features: ["Claimed location profile", "Basic event hosting (2/month)", "Location analytics", "Promotion posts (4/month)", "Discovery map pin"],
     cta: "Coming Soon",
@@ -110,6 +111,7 @@ export const BIZ_PRICING = [
   {
     plan: "GROWTH",
     price: "R1,199",
+    period: "/mo",
     desc: "The full suite for businesses serious about owning their neighborhood.",
     features: [
       "Everything in Starter",

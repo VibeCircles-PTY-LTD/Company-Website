@@ -2,7 +2,7 @@
 
 import { Children, cloneElement, isValidElement, useCallback, useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { GLOBAL_CSS, PAGE_TO_PATH, PATH_TO_PAGE } from "@/components/shared/vibeTheme";
+import { PAGE_TO_PATH, PATH_TO_PAGE } from "@/components/shared/vibeTheme";
 import { Nav, Footer } from "@/components/shared/layout";
 import { BackToTop, CookieBanner, ToastContainer, WaitlistModal } from "@/components/shared/overlays";
 
@@ -97,12 +97,15 @@ export default function AppShell({ children }) {
   };
 
   const sharedProps = { setPage: goPage, openWaitlist, addToast };
-  const content = Children.map(children, (child) => (isValidElement(child) ? cloneElement(child, sharedProps) : child));
+  /* eslint-disable react-hooks/refs -- inject navigation props into route page roots via cloneElement */
+  const content = Children.map(children, (child) =>
+    isValidElement(child) ? cloneElement(child, sharedProps) : child
+  );
+  /* eslint-enable react-hooks/refs */
   const currentPage = PATH_TO_PAGE[pathname] || "home";
 
   return (
     <>
-      <style>{GLOBAL_CSS}</style>
       <Nav current={currentPage} setPage={goPage} openWaitlist={openWaitlist} />
       <main key={pathname} className="page-enter">
         {content}

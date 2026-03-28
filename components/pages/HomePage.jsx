@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { C } from "@/components/shared/vibeTheme";
 import { useWindowWidth } from "@/components/shared/hooks";
 import { Orb, Reveal, Tag } from "@/components/shared/ui";
@@ -173,7 +174,13 @@ export default function HomePage({ setPage, openWaitlist }) {
           </div>
           <Reveal delay={0.4}>
             <div style={{ position: "relative", borderRadius: "8px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.02)", aspectRatio: "1/1", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <img src="/social_gravity_vis_premium.png" alt="Social Gravity Visualization" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.8 }} />
+              <Image
+                src="/social_gravity_vis_premium.png"
+                alt="Social Gravity Visualization"
+                fill
+                sizes="(max-width: 960px) 100vw, 520px"
+                style={{ objectFit: "cover", opacity: 0.8 }}
+              />
               <div style={{ position: "absolute", inset: 0, boxShadow: "inset 0 0 100px rgba(0,0,0,0.8)" }} />
               {/* Decorative elements */}
               <div style={{ position: "absolute", top: "20%", left: "20%", width: "2px", height: "20%", background: `linear-gradient(to bottom, ${C.orange}, transparent)`, animation: "pageEnter 2s infinite" }} />

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 export function useInView(t = 0.1) {
   const ref = useRef(null);
@@ -35,13 +35,23 @@ export function useCounter(target, dur = 1800, active = false) {
   return v;
 }
 
+function subscribeWindowWidth(onStoreChange) {
+  window.addEventListener("resize", onStoreChange);
+  return () => window.removeEventListener("resize", onStoreChange);
+}
+
+function getWindowWidthSnapshot() {
+  return window.innerWidth;
+}
+
+function getWindowWidthServerSnapshot() {
+  return 1200;
+}
+
 export function useWindowWidth() {
-  const [w, setW] = useState(1200);
-  useEffect(() => {
-    setW(window.innerWidth);
-    const h = () => setW(window.innerWidth);
-    window.addEventListener("resize", h);
-    return () => window.removeEventListener("resize", h);
-  }, []);
-  return w;
+  return useSyncExternalStore(
+    subscribeWindowWidth,
+    getWindowWidthSnapshot,
+    getWindowWidthServerSnapshot
+  );
 }

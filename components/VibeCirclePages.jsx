@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { usePathname, useRouter } from "next/navigation";
-
 // --------- GLOBAL CSS ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const GLOBAL_CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,400&display=swap');
@@ -189,24 +188,6 @@ function PageHero({ tag, title, accent, sub, children }) {
         {children}
       </div>
     </section>
-  );
-}
-function FAQ({ items, accentColor = C.orange }) {
-  const [open, setOpen] = useState(null);
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-      {items.map((item, i) => (
-        <Reveal key={i} delay={i * .06}>
-          <div style={{ background: open === i ? `${accentColor}08` : "rgba(0,0,0,0.02)", border: `1px solid ${open === i ? accentColor + "40" : C.border}`, borderRadius: "4px", overflow: "hidden", transition: "all .3s" }}>
-            <button onClick={() => setOpen(open === i ? null : i)} style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: "20px 28px", background: "none", border: "none", cursor: "pointer", textAlign: "left", gap: "16px" }}>
-              <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "15px", fontWeight: 600, color: C.text }}>{item.q}</span>
-              <span style={{ color: open === i ? accentColor : C.dimmer, fontSize: "22px", transition: "transform .3s", transform: open === i ? "rotate(45deg)" : "none", flexShrink: 0, fontWeight: 300 }}>+</span>
-            </button>
-            {open === i && <div style={{ padding: "0 28px 22px", animation: "fadeIn .25s ease" }}><p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: C.dim, lineHeight: 1.8 }}>{item.a}</p></div>}
-          </div>
-        </Reveal>
-      ))}
-    </div>
   );
 }
 function PricingCard({ plan, price, period = "/mo", desc, features, cta, highlight = false, color = C.orange, onCta, annual = false, annualPrice }) {
@@ -624,7 +605,7 @@ function TeamPage({ openWaitlist, setPage }) {
       <Divider />
       <section className="sec-pad"><div style={{ maxWidth: "1100px", margin: "0 auto" }} className="grid-2"><div><Reveal><Tag>How we work</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,52px)", color: C.text, lineHeight: 1, margin: "16px 0 20px" }}>Culture isn't built in<br /><span style={{ color: C.orange }}>conference rooms.</span></h2><p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "16px", color: C.dim, lineHeight: 1.8 }}>We work embedded in cities. We ship fast. We talk to creators and businesses every day. We build what we'd actually want to use.</p></Reveal></div><div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>{[["----", "Remote-first", "Work from the cities you're building for."], ["---", "Ship weekly", "Real output, real feedback, real iteration."], ["----", "Direct impact", "No layers. Your work ships to 50K+ users."], ["----", "Equity for all", "Every full-time employee is an owner."]].map(([ic, t, d], i) => <Reveal key={i} delay={i * .08}><div style={{ display: "flex", gap: "14px", alignItems: "flex-start", padding: "18px 22px", background: "rgba(0,0,0,0.02)", border: `1px solid ${C.border}`, borderRadius: "4px", transition: "all .3s" }} onMouseEnter={e => { e.currentTarget.style.borderColor = C.orange; e.currentTarget.style.background = "rgba(255,107,0,0.06)"; }} onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.background = "rgba(0,0,0,0.02)"; }}><span style={{ fontSize: "18px" }}>{ic}</span><div><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "16px", color: C.text }}>{t}</div><div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "12px", color: C.dim, marginTop: "3px" }}>{d}</div></div></div></Reveal>)}</div></div></section>
       <Divider />
-      <section className="sec-pad-sm" style={{ background: C.bg2, textAlign: "center" }}><Reveal><Tag>Join us</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(28px,5vw,52px)", color: C.text, lineHeight: 1, margin: "16px auto 20px", maxWidth: "500px" }}>Want to be on this page?<br /><span style={{ color: C.orange }}>We're hiring.</span></h2><div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}><button onClick={() => { setPage("Jobs"); window.scrollTo(0, 0); }} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "13px 32px", background: C.orange, color: C.textOnAccent, border: "none", borderRadius: "2px", cursor: "pointer" }}>See Open Roles</button><button onClick={() => openWaitlist("Team Interest")} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "13px 32px", background: "transparent", color: C.text, border: `1px solid ${C.border}`, borderRadius: "2px", cursor: "pointer", transition: "all .2s" }} onMouseEnter={e => { e.currentTarget.style.borderColor = C.orange; e.currentTarget.style.color = C.orange; }} onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.text; }}>Join Waitlist</button></div></Reveal></section>
+      <section className="sec-pad-sm" style={{ background: C.bg2, textAlign: "center" }}><Reveal><Tag>Join us</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(28px,5vw,52px)", color: C.text, lineHeight: 1, margin: "16px auto 20px", maxWidth: "500px" }}>Want to be on this page?<br /><span style={{ color: C.orange }}>No open roles right now.</span></h2><div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}><button onClick={() => { setPage("Jobs"); window.scrollTo(0, 0); }} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "13px 32px", background: C.orange, color: C.textOnAccent, border: "none", borderRadius: "2px", cursor: "pointer" }}>Careers</button><button onClick={() => openWaitlist("Team Interest")} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "13px 32px", background: "transparent", color: C.text, border: `1px solid ${C.border}`, borderRadius: "2px", cursor: "pointer", transition: "all .2s" }} onMouseEnter={e => { e.currentTarget.style.borderColor = C.orange; e.currentTarget.style.color = C.orange; }} onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.text; }}>Join Waitlist</button></div></Reveal></section>
     </div>
   );
 }
@@ -633,20 +614,7 @@ function TeamPage({ openWaitlist, setPage }) {
 // CREATORS PAGE
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const CREATOR_TOOLS = [{ icon: "-------", title: "Live City Map", desc: "Your content appears on the real-time map of your city. People discover you by location, not algorithm." }, { icon: "---", title: "Creator Feed", desc: "A social feed that prioritizes creators in your city and culture niche. Built for discovery, not addiction." }, { icon: "-------", title: "Go Live Anywhere", desc: "Stream from any location. Your live appears on the map for nearby users to join in real time." }, { icon: "----", title: "Brand Marketplace", desc: "Browse and apply to paid brand deals directly. No middlemen, no agencies." }, { icon: "----", title: "Creator Analytics", desc: "Real metrics: map views, discovery impressions, location reach, and audience growth over time." }, { icon: "----", title: "Community Spaces", desc: "Create invite-only groups around your city scene, niche, or next event." }];
-const CREATOR_TIERS = [
-  { plan: "SPARK", price: "Free", period: "", desc: "Get on the map and start building your local following.", features: ["Live city map presence", "Basic creator profile", "Up to 3 posts/day", "Community access", "Basic analytics"], cta: "Start Free", highlight: false, color: C.orange },
-  { plan: "PULSE", price: "R99", annualPrice: "R79", desc: "The full creator toolkit for creators ready to grow and earn.", features: ["Everything in Spark", "Unlimited posting", "Priority map placement", "Brand Marketplace access", "Advanced analytics", "Go Live feature", "Verified creator badge"], cta: "Start Free Trial", highlight: true, color: C.orange },
-  { plan: "ORBIT", price: "R249", annualPrice: "R199", desc: "For creators turning VibeCircle into a primary income stream.", features: ["Everything in Pulse", "Featured map spotlight (3x/month)", "Direct brand deal inbox", "Creator fund eligibility", "Collab invite tools", "Early feature access", "Dedicated creator support"], cta: "Apply for Orbit", highlight: false, color: C.pink },
-];
-const CREATOR_FAQS = [
-  { q: "How does the city map placement work?", a: "When you post content tagged to a location, it appears as a live pin on the VibeCircle map for users in that area. The map is real-time --- people nearby can discover you while they're actually in your city." },
-  { q: "How do I get my first brand deal?", a: "On Pulse or Orbit, you gain access to the Brand Marketplace to browse live deals and apply directly. Brands typically respond within 48 hours. No follower minimum --- brands care about authenticity and city presence." },
-  { q: "Is there a follower minimum to join?", a: "None. VibeCircle isn't about follower counts --- it's about city presence and energy. We've seen creators with 500 followers land brand deals because they own their local scene." },
-  { q: "How does the Creator Fund work?", a: "Orbit creators are eligible for VibeCircle's Creator Fund, which pays based on verified map impressions, discovery reach, and engagement from real-world posts. Payouts are monthly." },
-  { q: "Can I use VibeCircle alongside Instagram or TikTok?", a: "Absolutely. VibeCircle is complementary, not competitive. Most creators cross-post content and use VC for local discovery and brand deals." },
-];
 function CreatorsPage({ openWaitlist }) {
-  const [annual, setAnnual] = useState(false);
   return (
     <div style={{ background: C.bg, color: C.text }}>
       <PageHero tag="For Creators" title="Your city is your" accent="stage. Own it." sub="VibeCircle gives creators tools to build a real local following, get discovered on the live city map, and earn from brand partnerships." />
@@ -655,20 +623,6 @@ function CreatorsPage({ openWaitlist }) {
       <Divider />
       <section className="sec-pad"><div style={{ maxWidth: "1100px", margin: "0 auto" }}><Reveal style={{ marginBottom: "52px" }}><Tag>Creator Tools</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>Everything you need to<br /><span style={{ color: C.orange }}>light up your city.</span></h2></Reveal><div className="grid-3">{CREATOR_TOOLS.map((t, i) => <Reveal key={i} delay={i * .08}><div style={{ padding: "30px 26px", background: "rgba(0,0,0,0.02)", border: "1px solid " + C.border, borderRadius: "4px", height: "100%", transition: "all .3s" }} onMouseEnter={e => { e.currentTarget.style.borderColor = C.orange; e.currentTarget.style.background = "rgba(255,107,0,0.06)"; e.currentTarget.style.transform = "translateY(-4px)"; }} onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.background = "rgba(0,0,0,0.02)"; e.currentTarget.style.transform = ""; }}><div style={{ fontSize: "24px", marginBottom: "14px" }}>{t.icon}</div><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "19px", color: C.text, marginBottom: "9px" }}>{t.title}</div><div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "13px", color: C.dim, lineHeight: 1.7 }}>{t.desc}</div></div></Reveal>)}</div></div></section>
       <Divider />
-      <section className="sec-pad" style={{ background: C.bg2 }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <Reveal style={{ marginBottom: "16px", textAlign: "center" }}><Tag>Creator Plans</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.text, lineHeight: 1, marginTop: "16px", marginBottom: "28px" }}>Start free. Scale <span style={{ color: C.orange }}>when ready.</span></h2></Reveal>
-          <Reveal style={{ textAlign: "center", marginBottom: "40px" }}>
-            <div style={{ display: "inline-flex", background: "rgba(0,0,0,0.04)", border: "1px solid " + C.border, borderRadius: "3px", padding: "4px" }}>
-              {["Monthly", "Annual"].map(t => <button key={t} onClick={() => setAnnual(t === "Annual")} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "13px", letterSpacing: "2px", padding: "9px 24px", background: ((t === "Annual") === (annual)) ? C.orange : "transparent", color: ((t === "Annual") === (annual)) ? C.textOnAccent : C.dim, border: "none", borderRadius: "2px", cursor: "pointer", transition: "all .2s" }}>{t}{t === "Annual" && <span style={{ fontSize: "10px", marginLeft: "6px", background: C.orange + "30", color: C.orange, padding: "2px 6px", borderRadius: "2px" }}>-20%</span>}</button>)}
-            </div>
-          </Reveal>
-          <div className="grid-3">{CREATOR_TIERS.map((t, i) => <PricingCard key={i} {...t} annual={annual} onCta={() => openWaitlist(`Creator ${t.plan} Plan`)} />)}</div>
-          <Reveal><p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "12px", color: C.dimmer, textAlign: "center", marginTop: "24px" }}>All plans include a 14-day free trial. No credit card required for Spark.</p></Reveal>
-        </div>
-      </section>
-      <Divider />
-      <section className="sec-pad"><div style={{ maxWidth: "800px", margin: "0 auto" }}><Reveal style={{ marginBottom: "44px" }}><Tag>Creator FAQ</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(26px,4vw,46px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>Questions, <span style={{ color: C.orange }}>answered.</span></h2></Reveal><FAQ items={CREATOR_FAQS} /></div></section>
       <div style={{ background: C.orange, padding: "22px 64px", overflow: "hidden" }}><div style={{ display: "flex", animation: "marquee 18s linear infinite", whiteSpace: "nowrap" }}>{[...Array(4)].map((_, x) => ["City Map", "--", "Brand Deals", "--", "Go Live", "--", "Creator Fund", "--", "Real Discovery", "--"].map((wd, i) => <span key={`${x}-${i}`} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", color: "rgba(5,5,10,0.65)", marginRight: "26px" }}>{wd}</span>))}</div></div>
     </div>
   );
@@ -683,13 +637,6 @@ const AD_PRICING = [
   { plan: "GROWTH", price: "R7,999", desc: "For businesses ready to own their neighborhood.", features: ["5 simultaneous campaigns", "Up to 25,000 daily impressions", "Priority map placement", "Creator sponsorship tools", "Unlimited events", "Advanced analytics + heat maps", "A/B creative testing"], cta: "Start Free Trial", highlight: true, color: C.orange },
   { plan: "CITY", price: "R24,999", desc: "Full-city dominance for brands and agencies at scale.", features: ["Unlimited campaigns", "Unlimited impressions", "Citywide spotlight", "Dedicated campaign manager", "Creator marketplace access", "White-label reporting", "API access"], cta: "Contact Sales", highlight: false, color: C.pink },
 ];
-const AD_FAQS = [
-  { q: "How does geo-targeting work?", a: "VibeCircle uses precise real-time location data to serve your ad to users within your defined radius --- a block, neighborhood, or whole city." },
-  { q: "What's the minimum budget?", a: "The Local plan starts at R2,999/month. No minimum ad spend commitment. Cancel anytime." },
-  { q: "Can I sponsor a specific creator?", a: "Yes. On Growth and City plans, you can browse the creator marketplace and propose direct sponsorships. Creators typically respond within 48 hours." },
-  { q: "What analytics do I get?", a: "All plans include impression counts and engagement metrics. Growth and City add heat maps, audience demographics, and foot-traffic correlation data." },
-  { q: "Is there a contract?", a: "No contracts. All plans are month-to-month. City plan clients can opt into annual billing for a 20% discount." }
-];
 function AdvertisePage({ openWaitlist }) {
   return (
     <div style={{ background: C.bg, color: C.text }}>
@@ -698,8 +645,6 @@ function AdvertisePage({ openWaitlist }) {
       <section className="sec-pad" style={{ background: C.bg2 }}><div style={{ maxWidth: "1100px", margin: "0 auto" }}><Reveal style={{ marginBottom: "52px" }}><Tag>Ad Products</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>Every tool to make your<br /><span style={{ color: C.orange }}>energy visible.</span></h2></Reveal><div className="grid-3">{AD_FEATURES.map((f, i) => <Reveal key={i} delay={i * .08}><div style={{ padding: "30px 26px", borderRadius: "4px", background: "rgba(0,0,0,0.02)", border: "1px solid " + C.border, height: "100%", transition: "all .3s" }} onMouseEnter={e => { e.currentTarget.style.borderColor = f.color; e.currentTarget.style.background = `${f.color}0D`; e.currentTarget.style.transform = "translateY(-4px)"; }} onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.background = "rgba(0,0,0,0.02)"; e.currentTarget.style.transform = ""; }}><div style={{ fontSize: "24px", marginBottom: "13px" }}>{f.icon}</div><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "19px", color: f.color, marginBottom: "9px" }}>{f.title}</div><div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "13px", color: C.dim, lineHeight: 1.7 }}>{f.desc}</div></div></Reveal>)}</div></div></section>
       <Divider />
       <section className="sec-pad"><div style={{ maxWidth: "1100px", margin: "0 auto" }}><Reveal style={{ marginBottom: "52px", textAlign: "center" }}><Tag>Advertising Plans</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>Pick your level of <span style={{ color: C.orange }}>dominance.</span></h2></Reveal><div className="grid-3">{AD_PRICING.map((p, i) => <PricingCard key={i} {...p} onCta={() => openWaitlist(`Advertise ${p.plan} Plan`)} />)}</div></div></section>
-      <Divider />
-      <section className="sec-pad" style={{ background: C.bg2 }}><div style={{ maxWidth: "800px", margin: "0 auto" }}><Reveal style={{ marginBottom: "44px" }}><Tag>Advertiser FAQ</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(26px,4vw,44px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>Your questions, <span style={{ color: C.orange }}>answered.</span></h2></Reveal><FAQ items={AD_FAQS} /></div></section>
       <div style={{ background: C.orange, padding: "20px 0", overflow: "hidden" }}><div style={{ display: "flex", animation: "marquee 18s linear infinite", whiteSpace: "nowrap" }}>{[...Array(3)].map((_, x) => ["Geo-Targeted", "--", "Creator Moments", "--", "Event Promotion", "--", "Live Ads", "--", "Real Analytics", "--"].map((wd, i) => <span key={`${x}-${i}`} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "15px", letterSpacing: "3px", color: "rgba(5,5,10,0.7)", marginRight: "30px" }}>{wd}</span>))}</div></div>
     </div>
   );
@@ -709,23 +654,14 @@ function AdvertisePage({ openWaitlist }) {
 // BUSINESS PAGE
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const BIZ_TOOLS = [{ num: "01", title: "Claim Your Location", desc: "Take ownership of your spot on the VibeCircle map. Your location becomes a living destination.", icon: "----" }, { num: "02", title: "Run Promotions", desc: "Launch time-limited offers that pulse to nearby users. Create urgency. Drive traffic.", icon: "----" }, { num: "03", title: "Host Events", desc: "Create events that appear on the live map. Tap into VibeCircle's discovery engine.", icon: "----" }, { num: "04", title: "Go Live", desc: "Stream directly from your location. Let people see the energy before they arrive.", icon: "----" }, { num: "05", title: "Track Engagement", desc: "See who's viewing, saving, and visiting your location in real time.", icon: "----" }, { num: "06", title: "Launch Campaigns", desc: "Combine all tools into targeted campaigns that grow with your business.", icon: "----" }];
-const BIZ_PRICING = [
-  { plan: "STARTER", price: "R399", desc: "Get your business on the map and build a local following.", features: ["Claimed location profile", "Basic event hosting (2/month)", "Location analytics", "Promotion posts (4/month)", "Discovery map pin"], cta: "Get Started", highlight: false, color: C.orange },
-  { plan: "GROWTH", price: "R1,199", desc: "The full suite for businesses serious about owning their neighborhood.", features: ["Everything in Starter", "Unlimited events", "Go Live feature", "Advanced engagement analytics", "Creator collaboration tools", "Priority map visibility", "Promotional boost (3/month)"], cta: "Start Free Trial", highlight: true, color: C.orange },
-  { plan: "ENTERPRISE", price: "Custom", period: "", desc: "For multi-location brands, chains, and franchise groups.", features: ["Everything in Growth", "Multi-location management", "Dedicated account manager", "Custom analytics reporting", "API & POS integrations", "White-label options", "SLA support"], cta: "Contact Sales", highlight: false, color: C.pink },
-];
-const BIZ_FAQS = [{ q: "What does 'claiming a location' mean?", a: "Claiming your location creates an official business profile linked to your real-world address. It appears as a branded pin on the map, and users can check in, leave reviews, and share content tagged to your venue." }, { q: "Can I manage multiple locations?", a: "Yes. The Enterprise plan supports multi-location management through a unified dashboard --- ideal for chains, franchises, and multi-venue operators." }, { q: "How does Go Live work for businesses?", a: "When you go live, your stream appears as a pulsing pin on the map for nearby users. Perfect for previewing tonight's event, showcasing a new menu item, or capturing a special moment." }, { q: "Is there a setup fee?", a: "No setup fees. Claim your location and go live the same day you sign up." }, { q: "Can I try it before committing?", a: "Growth plan comes with a 14-day free trial, no credit card required. Starter is month-to-month with no lock-in." }];
 function BusinessPage({ openWaitlist }) {
   const [active, setActive] = useState(0);
   return (
     <div style={{ background: C.bg, color: C.text }}>
       <PageHero tag="VibeCircle for Business" title="Turn foot traffic into" accent="digital gravity." sub="When your location pulses on the map, people don't just see you --- they find you." />
       <Divider />
-      <section className="sec-pad" style={{ background: C.bg2 }}><div style={{ maxWidth: "1100px", margin: "0 auto" }}><Reveal style={{ marginBottom: "52px" }}><Tag>Business Tools</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,54px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>Everything you need<br /><span style={{ color: C.orange }}>in one place.</span></h2></Reveal><div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: "24px" }}><div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>{BIZ_TOOLS.map((t, i) => <div key={i} onClick={() => setActive(i)} style={{ padding: "16px 20px", background: active === i ? "rgba(255,107,0,0.1)" : "rgba(0,0,0,0.02)", border: `1px solid ${active === i ? C.orange + "60" : C.border}`, borderRadius: "4px", display: "flex", alignItems: "center", gap: "12px", cursor: "pointer", transition: "all .25s" }} onMouseEnter={e => { if (active !== i) { e.currentTarget.style.background = "rgba(0,0,0,0.04)"; e.currentTarget.style.borderColor = C.border; } }} onMouseLeave={e => { if (active !== i) { e.currentTarget.style.background = "rgba(0,0,0,0.02)"; e.currentTarget.style.borderColor = C.border; } }}>  <span style={{ fontSize: "16px" }}>{t.icon}</span><div style={{ flex: 1 }}><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "15px", color: active === i ? C.orange : C.text }}>{t.title}</div><div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "10px", letterSpacing: "2px", color: C.dimmer, textTransform: "uppercase", marginTop: "1px" }}>{t.num}</div></div>{active === i && <div style={{ color: C.orange, fontSize: "13px" }}>---</div>}</div>)}</div><div key={active} style={{ padding: "40px", background: "rgba(0,0,0,0.02)", border: `1px solid ${C.border}`, borderRadius: "4px", animation: "fadeIn .3s ease", position: "relative", overflow: "hidden" }}><Orb top="-30%" right="-20%" size={280} opacity={0.15} /><div style={{ fontSize: "40px", marginBottom: "18px" }}>{BIZ_TOOLS[active].icon}</div><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(22px,3vw,38px)", color: C.orange, lineHeight: 1, marginBottom: "14px" }}>{BIZ_TOOLS[active].title}</div><p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "16px", color: C.dim, lineHeight: 1.8, marginBottom: "24px" }}>{BIZ_TOOLS[active].desc}</p><div style={{ width: "100%", height: "2px", background: `linear-gradient(90deg,${C.orange},${C.pink})`, borderRadius: "1px", transformOrigin: "left", animation: "lineGrow .4s ease forwards" }} /></div></div></div></section>
+      <section className="sec-pad" style={{ background: C.bg2 }}><div style={{ maxWidth: "1100px", margin: "0 auto" }}><Reveal style={{ marginBottom: "52px" }}><Tag>Business Tools</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,54px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>Everything you need<br /><span style={{ color: C.orange }}>in one place.</span></h2></Reveal><div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: "24px" }}><div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>{BIZ_TOOLS.map((t, i) => <div key={i} onClick={() => setActive(i)} style={{ padding: "16px 20px", background: active === i ? "rgba(255,107,0,0.1)" : "rgba(0,0,0,0.02)", border: `1px solid ${active === i ? C.orange + "60" : C.border}`, borderRadius: "4px", display: "flex", alignItems: "center", gap: "12px", cursor: "pointer", transition: "all .25s" }} onMouseEnter={e => { if (active !== i) { e.currentTarget.style.background = "rgba(0,0,0,0.04)"; e.currentTarget.style.borderColor = C.border; } }} onMouseLeave={e => { if (active !== i) { e.currentTarget.style.background = "rgba(0,0,0,0.02)"; e.currentTarget.style.borderColor = C.border; } }}>  <span style={{ fontSize: "16px" }}>{t.icon}</span><div style={{ flex: 1 }}><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "15px", color: active === i ? C.orange : C.text }}>{t.title}</div><div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "10px", letterSpacing: "2px", color: C.dimmer, textTransform: "uppercase", marginTop: "1px" }}>{t.num}</div></div>{active === i && <div style={{ color: C.orange, fontSize: "13px" }}>---</div>}</div>)}</div><div key={active} style={{ padding: "40px", background: "rgba(0,0,0,0.02)", border: `1px solid ${C.border}`, borderRadius: "4px", animation: "fadeIn .3s ease", position: "relative", overflow: "hidden" }}><Orb top="-30%" right="-20%" size={280} opacity={0.15} /><div style={{ fontSize: "40px", marginBottom: "18px" }}>{BIZ_TOOLS[active].icon}</div><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(22px,3vw,38px)", color: C.orange, lineHeight: 1, marginBottom: "14px" }}>{BIZ_TOOLS[active].title}</div><p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "16px", color: C.dim, lineHeight: 1.8, marginBottom: "24px" }}>{BIZ_TOOLS[active].desc}</p><div style={{ width: "100%", height: "2px", background: `linear-gradient(90deg,${C.orange},${C.pink})`, borderRadius: "1px", transformOrigin: "left", animation: "lineGrow .4s ease forwards" }} /></div></div></div>      </section>
       <Divider />
-      <section className="sec-pad"><div style={{ maxWidth: "1100px", margin: "0 auto" }}><Reveal style={{ marginBottom: "52px", textAlign: "center" }}><Tag>Business Plans</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,54px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>Choose your level of <span style={{ color: C.orange }}>gravity.</span></h2></Reveal><div className="grid-3">{BIZ_PRICING.map((p, i) => <PricingCard key={i} {...p} onCta={() => openWaitlist(`Business ${p.plan} Plan`)} />)}</div></div></section>
-      <Divider />
-      <section className="sec-pad" style={{ background: C.bg2 }}><div style={{ maxWidth: "800px", margin: "0 auto" }}><Reveal style={{ marginBottom: "44px" }}><Tag>Business FAQ</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(26px,4vw,44px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>Everything you need <span style={{ color: C.orange }}>to know.</span></h2></Reveal><FAQ items={BIZ_FAQS} /></div></section>
       <section className="sec-pad-sm" style={{ background: C.bg3 }}><Reveal><div style={{ maxWidth: "1100px", margin: "0 auto", padding: "48px 52px", background: `linear-gradient(135deg,rgba(255,107,0,0.12) 0%,rgba(255,45,120,0.06) 100%)`, border: `1px solid ${C.orange}25`, borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "24px", flexWrap: "wrap" }}><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(24px,4vw,44px)", color: C.textOnAccent, lineHeight: 1 }}>Ready to make your<br />location <span style={{ color: C.orange }}>pulse?</span></div><div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}><button onClick={() => openWaitlist("Business Get Started")} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "13px 32px", background: C.orange, color: C.textOnAccent, border: "none", borderRadius: "2px", cursor: "pointer", transition: "box-shadow .2s" }} onMouseEnter={e => e.target.style.boxShadow = `0 10px 32px ${C.orange}40`} onMouseLeave={e => e.target.style.boxShadow = ""}>Get Started Free</button><button onClick={() => openWaitlist("Business Demo")} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "13px 32px", background: "transparent", color: C.text, border: `1px solid ${C.border}`, borderRadius: "2px", cursor: "pointer", transition: "all .2s" }} onMouseEnter={e => { e.currentTarget.style.borderColor = C.orange; e.currentTarget.style.color = C.orange; }} onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.text; }}>Book a Demo</button></div></div></Reveal></section>
     </div>
   );
@@ -734,6 +670,7 @@ function BusinessPage({ openWaitlist }) {
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // JOBS PAGE --- RICH ROLES
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+const ROLES_DISABLED = true;
 const ROLES = [
   {
     title: "Frontend Engineer", dept: "Engineering", type: "Full-Time", level: "Mid---Senior",
@@ -817,14 +754,6 @@ const ROLES = [
   },
 ];
 const DEPT_COLORS = { Engineering: C.orange, Design: C.blue, Marketing: C.pink, Community: C.purple, Creators: C.gold, Business: C.orange };
-const JOBS_FAQS = [
-  { q: "Where is VibeCircle based?", a: "Remote-first." },
-  { q: "Do you offer visa sponsorship?", a: "Case-by-case for senior roles in South Africa. Contact careers@vibecircle.com." },
-  { q: "What does the interview process look like?", a: "Intro call (30 min) ? skills review ? take-home project (2---4 hours) ? final team interview. We complete the process within 2 weeks." },
-  { q: "Are internships paid?", a: "Yes. All internships are paid R150---R180/hr." },
-  { q: "I don't see a role that fits. Can I still apply?", a: "Absolutely. Send your story to careers@vibecircle.com. We've created roles for exceptional people who didn't fit existing job descriptions." }
-];
-
 function JobsPage({ openWaitlist, addToast }) {
   const [filter, setFilter] = useState("All");
   const [expanded, setExpanded] = useState(null);
@@ -846,9 +775,17 @@ function JobsPage({ openWaitlist, addToast }) {
         <Orb top="0%" right="-5%" size={450} opacity={0.08} />
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <Reveal style={{ marginBottom: "36px" }}><Tag>Open Roles</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,54px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>Find your position<br /><span style={{ color: C.orange }}>in the vibe.</span></h2></Reveal>
-          <div style={{ display: "flex", gap: "7px", flexWrap: "wrap", marginBottom: "32px" }}>
-            {depts.map(d => <button key={d} onClick={() => { setFilter(d); setExpanded(null); }} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "12px", letterSpacing: "2px", padding: "8px 16px", background: filter === d ? (DEPT_COLORS[d] || C.orange) : "transparent", color: filter === d ? C.textOnAccent : C.dim, border: `1px solid ${filter === d ? (DEPT_COLORS[d] || C.orange) : C.border}`, borderRadius: "2px", cursor: "pointer", transition: "all .2s" }}>{d}</button>)}
-          </div>
+          {!ROLES_DISABLED && ROLES.length > 0 && (
+            <div style={{ display: "flex", gap: "7px", flexWrap: "wrap", marginBottom: "32px" }}>
+              {depts.map(d => <button key={d} onClick={() => { setFilter(d); setExpanded(null); }} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "12px", letterSpacing: "2px", padding: "8px 16px", background: filter === d ? (DEPT_COLORS[d] || C.orange) : "transparent", color: filter === d ? C.textOnAccent : C.dim, border: `1px solid ${filter === d ? (DEPT_COLORS[d] || C.orange) : C.border}`, borderRadius: "2px", cursor: "pointer", transition: "all .2s" }}>{d}</button>)}
+            </div>
+          )}
+          {ROLES_DISABLED || ROLES.length === 0 ? (
+            <div style={{ padding: "22px 24px", background: "rgba(0,0,0,0.03)", border: `1px solid ${C.border}`, borderRadius: "4px" }}>
+              <div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "18px", letterSpacing: "2px", color: C.orange, marginBottom: "8px" }}>No openings at the moment</div>
+              <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: C.dim, lineHeight: 1.6 }}>We are not hiring right now. Check back soon.</div>
+            </div>
+          ) : (
           <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
             {filtered.map((role, i) => {
               const isOpen = expanded === i;
@@ -988,10 +925,9 @@ function JobsPage({ openWaitlist, addToast }) {
               );
             })}
           </div>
+          )}
         </div>
       </section>
-      <Divider />
-      <section className="sec-pad" style={{ background: C.bg2 }}><div style={{ maxWidth: "800px", margin: "0 auto" }}><Reveal style={{ marginBottom: "44px" }}><Tag>Hiring FAQ</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(26px,4vw,44px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>About joining <span style={{ color: C.orange }}>VibeCircle.</span></h2></Reveal><FAQ items={JOBS_FAQS} /></div></section>
       <section style={{ background: C.orange, padding: "64px clamp(20px,6vw,64px)" }}><div style={{ maxWidth: "1100px", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "24px" }}><div><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(24px,4vw,44px)", color: C.textOnAccent, lineHeight: 1 }}>Don't see your role?<br />Build your own.</div><p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: "rgba(0,0,0,0.6)", marginTop: "8px" }}>careers@vibecircle.com</p></div><button onClick={() => openWaitlist("Custom Role")} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "14px 36px", background: C.bg, color: C.orange, border: "none", borderRadius: "2px", cursor: "pointer", transition: "transform .2s" }} onMouseEnter={e => e.target.style.transform = "translateY(-2px)"} onMouseLeave={e => e.target.style.transform = ""}>Get in Touch</button></div></section>
     </div>
   );
@@ -1012,7 +948,6 @@ const MARKETPLACE_BRANDS = [
 ];
 const MKT_CATS = ["All", "Food & Drink", "Fashion", "Health & Wellness", "Entertainment", "Tech", "Beauty & Grooming", "Events"];
 const BADGE_COLORS = { "HOT": C.orange, "FEATURED": C.pink, "NEW": C.blue, "PREMIUM": C.purple };
-const MKT_FAQS = [{ q: "How do creators get paid?", a: "Payments go through VibeCircle's secure escrow. Once a brand approves your content, payment is released within 3---5 business days via bank transfer, PayPal, or Venmo." }, { q: "Is there a follower minimum?", a: "No follower minimum. Brands care about city presence, authenticity, and engagement quality --- not just counts." }, { q: "What if a brand doesn't respond?", a: "Brands must respond within 72 hours. If they don't, we re-open the slot and follow up on your behalf." }, { q: "Can brands contact me directly?", a: "Yes. Growth or Enterprise plan brands can send you a direct collaboration proposal based on your creator profile." }, { q: "How do I post a deal as a brand?", a: "Switch to the 'I'm a Brand' tab, fill out the deal form, and submit for review. Deals go live within 24 hours." }];
 function ProgressBar({ filled, slots, color }) {
   const pct = Math.round((filled / slots) * 100); const full = filled >= slots;
   return (<div style={{ marginTop: "10px" }}><div style={{ display: "flex", justifyContent: "space-between", marginBottom: "4px" }}><span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "10px", color: C.dimmer }}>{filled}/{slots} slots</span><span style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "10px", letterSpacing: "2px", color: full ? C.pink : color }}>{full ? "FULL" : `${slots - filled} LEFT`}</span></div><div style={{ height: "3px", background: "rgba(0,0,0,0.08)", borderRadius: "2px", overflow: "hidden" }}><div style={{ height: "100%", width: `${pct}%`, background: full ? C.pink : color, borderRadius: "2px", transition: "width .6s ease" }} /></div></div>);
@@ -1111,8 +1046,6 @@ function MarketplacePage({ openWaitlist, addToast }) {
           </div></Reveal>
         </div></section>
       )}
-      <Divider />
-      <section className="sec-pad" style={{ background: C.bg }}><div style={{ maxWidth: "800px", margin: "0 auto" }}><Reveal style={{ marginBottom: "44px" }}><Tag>Marketplace FAQ</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(26px,4vw,44px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>How the marketplace <span style={{ color: C.orange }}>works.</span></h2></Reveal><FAQ items={MKT_FAQS} /></div></section>
       <div style={{ background: C.orange, padding: "20px 0", overflow: "hidden" }}><div style={{ display: "flex", animation: "marquee 22s linear infinite", whiteSpace: "nowrap" }}>{[...Array(4)].map((_, x) => ["Brand Deals", "--", "Creator Matching", "--", "Real Payments", "--", "City Culture", "--", "Authentic Collabs", "--"].map((wd, i) => <span key={`${x}-${i}`} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", color: "rgba(5,5,10,0.65)", marginRight: "26px" }}>{wd}</span>))}</div></div>
     </div>
   );

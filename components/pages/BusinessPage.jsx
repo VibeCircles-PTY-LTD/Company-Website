@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { C } from "@/components/shared/vibeTheme";
-import { Divider, FAQ, Orb, PageHero, PricingCard, Reveal, Tag } from "@/components/shared/ui";
-import { BIZ_PRICING } from "@/components/data/pricing";
+import { Divider, Orb, PageHero, Reveal, Tag } from "@/components/shared/ui";
 
 const BIZ_TOOLS = [
   { num: "01", title: "Claim Your Location", desc: "Take ownership of your spot on the VibeCircles map. Your location becomes a living destination.", icon: "----" },
@@ -12,14 +11,6 @@ const BIZ_TOOLS = [
   { num: "04", title: "Go Live", desc: "Stream directly from your location. Let people see the energy before they arrive.", icon: "----" },
   { num: "05", title: "Track Engagement", desc: "See who's viewing, saving, and visiting your location in real time.", icon: "----" },
   { num: "06", title: "Launch Campaigns", desc: "Combine all tools into targeted campaigns that grow with your business.", icon: "----" },
-];
-
-const BIZ_FAQS = [
-  { q: "What does 'claiming a location' mean?", a: "Claiming your location creates an official business profile linked to your real-world address. It appears as a branded pin on the map, and users can check in, leave reviews, and share content tagged to your venue." },
-  { q: "Can I manage multiple locations?", a: "Yes. The Enterprise plan supports multi-location management through a unified dashboard --- ideal for chains, franchises, and multi-venue operators." },
-  { q: "How does Go Live work for businesses?", a: "When you go live, your stream appears as a pulsing pin on the map for nearby users. Perfect for previewing tonight's event, showcasing a new menu item, or capturing a special moment." },
-  { q: "Is there a setup fee?", a: "No setup fees. Claim your location and go live the same day you sign up." },
-  { q: "Can I try it before committing?", a: "Growth plan comes with a 14-day free trial, no credit card required. Starter is month-to-month with no lock-in." },
 ];
 
 export default function BusinessPage({ openWaitlist }) {
@@ -88,31 +79,6 @@ export default function BusinessPage({ openWaitlist }) {
         </div>
       </section>
       <Divider />
-      <section className="sec-pad">
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <Reveal style={{ marginBottom: "52px", textAlign: "center" }}>
-            <Tag>Business Plans</Tag>
-            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,54px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>
-              Choose your level of <span style={{ color: C.orange }}>gravity.</span>
-            </h2>
-          </Reveal>
-          <div className="grid-3">{BIZ_PRICING.map((p, i) => (
-            <PricingCard key={i} {...p} onCta={() => openWaitlist(`Business ${p.plan} Plan`)} />
-          ))}</div>
-        </div>
-      </section>
-      <Divider />
-      <section className="sec-pad" style={{ background: C.bg2 }}>
-        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-          <Reveal style={{ marginBottom: "44px" }}>
-            <Tag>Business FAQ</Tag>
-            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(26px,4vw,44px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>
-              Everything you need <span style={{ color: C.orange }}>to know.</span>
-            </h2>
-          </Reveal>
-          <FAQ items={BIZ_FAQS} />
-        </div>
-      </section>
       <section className="sec-pad-sm" style={{ background: C.bg3 }}>
         <Reveal>
           <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "48px 52px", background: `linear-gradient(135deg,rgba(255,107,0,0.12) 0%,rgba(255,45,120,0.06) 100%)`, border: `1px solid ${C.orange}25`, borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "24px", flexWrap: "wrap" }}>

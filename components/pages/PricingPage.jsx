@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { C } from "@/components/shared/vibeTheme";
-import { CREATOR_TIERS, AD_PRICING, BIZ_PRICING } from "@/components/data/pricing";
+import { CREATOR_TIERS, AD_PRICING } from "@/components/data/pricing";
 import { Divider, PageHero, PricingCard, Reveal, Tag } from "@/components/shared/ui";
 
 export default function PricingPage({ openWaitlist }) {
@@ -13,7 +13,7 @@ export default function PricingPage({ openWaitlist }) {
         tag="Pricing"
         title="Choose your"
         accent="level of gravity."
-        sub="Creator tiers, advertising plans, and business tools. One platform."
+        sub="Creator tiers and advertising plans. One platform."
       />
       <Divider />
       <section className="sec-pad" style={{ background: C.bg2 }}>
@@ -73,21 +73,6 @@ export default function PricingPage({ openWaitlist }) {
           <div className="grid-3">
             {AD_PRICING.map((p, i) => (
               <PricingCard key={i} {...p} onCta={() => openWaitlist(`Advertise ${p.plan} Plan`)} />
-            ))}
-          </div>
-        </div>
-      </section>
-      <section className="sec-pad" style={{ background: C.bg2 }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <Reveal style={{ marginBottom: "52px", textAlign: "center" }}>
-            <Tag>Business Plans</Tag>
-            <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,54px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>
-              Choose your level of <span style={{ color: C.orange }}>gravity.</span>
-            </h2>
-          </Reveal>
-          <div className="grid-3">
-            {BIZ_PRICING.map((p, i) => (
-              <PricingCard key={i} {...p} onCta={() => openWaitlist(`Business ${p.plan} Plan`)} />
             ))}
           </div>
         </div>
