@@ -1,19 +1,20 @@
-# Temporary files
-*.tmp
-*.swp
-*.swo
-*~
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Env (do not commit secrets)
+.env
+.env*.local
+
+# Next
+.next
+out
+
+# Prisma
+prisma/migrations/**/migration_lock.toml
+
+# Misc
 .DS_Store
-
-# Log files
-*.log
-
-# IDE files
-.vscode/
-.idea/
-*.iml
-
-# Build artifacts
-dist/
-build/
-node_modules/
+*.pem
+debug.log
