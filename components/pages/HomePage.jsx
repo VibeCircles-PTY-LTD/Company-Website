@@ -1,10 +1,201 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { C } from "@/components/shared/vibeTheme";
 import { useWindowWidth } from "@/components/shared/hooks";
 import { Orb, Reveal, Tag } from "@/components/shared/ui";
+
+const STORY_GRADIENTS = [
+  "conic-gradient(from 0deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888, #f09433)",
+  "conic-gradient(from 120deg, #00c6ff, #0072ff, #6a11cb, #00c6ff)",
+  "conic-gradient(from 60deg, #fce38a, #f38181, #aa96da, #fcbad3, #fce38a)",
+  "conic-gradient(from -40deg, #11998e, #38ef7d, #56ab2f, #11998e)",
+  "conic-gradient(from 200deg, #ff6b6b, #ee5a6f, #c44569, #f8b500, #ff6b6b)",
+  "conic-gradient(from 90deg, #667eea, #764ba2, #f093fb, #667eea)",
+  "conic-gradient(from 0deg, #E8511A, #f5a623, #ff6b35, #E8511A)",
+];
+
+function StoryAvatar({ label, ringGradient, size = 46 }) {
+  const inner = Math.max(0, size - 6);
+  return (
+    <div
+      style={{
+        padding: 3,
+        borderRadius: "50%",
+        background: ringGradient,
+        boxShadow: "0 4px 20px rgba(0,0,0,0.35)",
+      }}
+    >
+      <div
+        style={{
+          width: inner,
+          height: inner,
+          borderRadius: "50%",
+          background: "#0a0a12",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontFamily: "'Bebas Neue',sans-serif",
+          fontSize: size > 42 ? 15 : 13,
+          letterSpacing: "0.04em",
+          color: "rgba(255,255,255,0.92)",
+        }}
+      >
+        {label}
+      </div>
+    </div>
+  );
+}
+
+function SocialGravityOrbital() {
+  const outerR = "min(42vw, 168px)";
+  const innerR = "min(24vw, 96px)";
+  const outer = [
+    { label: "VC", g: STORY_GRADIENTS[0] },
+    { label: "SG", g: STORY_GRADIENTS[1] },
+    { label: "OM", g: STORY_GRADIENTS[2] },
+    { label: "++", g: STORY_GRADIENTS[3] },
+  ];
+  const inner = [
+    { label: "DM", g: STORY_GRADIENTS[4] },
+    { label: "RK", g: STORY_GRADIENTS[5] },
+    { label: "LY", g: STORY_GRADIENTS[6] },
+  ];
+  return (
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        aspectRatio: "1 / 1",
+        borderRadius: "8px",
+        overflow: "hidden",
+        border: "1px solid rgba(255,255,255,0.1)",
+        background: "radial-gradient(ellipse at 50% 45%, rgba(232,81,26,0.08) 0%, transparent 55%), #05050A",
+      }}
+    >
+      <svg
+        viewBox="0 0 400 400"
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none" }}
+        aria-hidden
+      >
+        <circle
+          cx="200"
+          cy="200"
+          r="178"
+          fill="none"
+          stroke="rgba(255,255,255,0.14)"
+          strokeWidth="1.5"
+          strokeDasharray="10 14"
+          strokeLinecap="round"
+        />
+        <circle
+          cx="200"
+          cy="200"
+          r="124"
+          fill="none"
+          stroke="rgba(255,255,255,0.1)"
+          strokeWidth="1.25"
+          strokeDasharray="8 12"
+          strokeLinecap="round"
+        />
+        <circle
+          cx="200"
+          cy="200"
+          r="72"
+          fill="none"
+          stroke="rgba(232,81,26,0.28)"
+          strokeWidth="1.25"
+          strokeDasharray="6 10"
+          strokeLinecap="round"
+        />
+      </svg>
+
+      {/* Outer track — clockwise */}
+      <div
+        className="sg-orbit-cw"
+        style={{
+          position: "absolute",
+          inset: 0,
+          transformOrigin: "50% 50%",
+        }}
+      >
+        {outer.map((a, i) => (
+          <div
+            key={`o-${i}`}
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              width: 52,
+              height: 52,
+              marginLeft: -26,
+              marginTop: -26,
+              transform: `rotate(${i * 90}deg) translateY(calc(-1 * ${outerR}))`,
+            }}
+          >
+            <div
+              className="sg-orbit-counter-ccw"
+              style={{
+                width: "100%",
+                height: "100%",
+                transformOrigin: "50% 50%",
+              }}
+            >
+              <StoryAvatar label={a.label} ringGradient={a.g} size={48} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Inner track — counter-clockwise */}
+      <div
+        className="sg-orbit-ccw"
+        style={{
+          position: "absolute",
+          inset: 0,
+          transformOrigin: "50% 50%",
+        }}
+      >
+        {inner.map((a, i) => (
+          <div
+            key={`i-${i}`}
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              width: 48,
+              height: 48,
+              marginLeft: -24,
+              marginTop: -24,
+              transform: `rotate(${i * 120}deg) translateY(calc(-1 * ${innerR}))`,
+            }}
+          >
+            <div
+              className="sg-orbit-counter-cw"
+              style={{
+                width: "100%",
+                height: "100%",
+                transformOrigin: "50% 50%",
+              }}
+            >
+              <StoryAvatar label={a.label} ringGradient={a.g} size={44} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          boxShadow: "inset 0 0 80px rgba(0,0,0,0.65)",
+          pointerEvents: "none",
+          borderRadius: "8px",
+        }}
+      />
+    </div>
+  );
+}
 
 export default function HomePage({ setPage, openWaitlist }) {
   const words = ["Pulse", "Gravity", "Energy", "Discovery", "Movement", "Culture", "Alive"];
@@ -75,35 +266,20 @@ export default function HomePage({ setPage, openWaitlist }) {
             Where creators, cities, events, and businesses connect in real time.
           </p>
           <div style={{ display: "flex", gap: "20px", justifyContent: "center", flexWrap: "wrap", marginBottom: "64px" }}>
-            <button
-              onClick={() => openWaitlist("Creator Waitlist")}
-              className="bg-vc-orange text-vc-white font-body uppercase tracking-[0.2em] py-4 px-12 rounded-full transition-all hover:shadow-2xl hover:-translate-y-1 flex items-center justify-center"
-              style={{ fontSize: "12px", fontWeight: 600, border: "none", cursor: "pointer" }}
-            >
+            <button type="button" onClick={() => openWaitlist("Creator Waitlist")} className="vc-btn vc-btn--primary" style={{ fontSize: "12px", padding: "16px 36px" }}>
               Join the Movement
             </button>
-            <button
-              onClick={() => go("Marketplace")}
-              className="border border-vc-ink/10 text-vc-ink font-body uppercase tracking-[0.2em] py-4 px-12 rounded-full transition-all hover:border-vc-orange hover:text-vc-orange bg-white/40 backdrop-blur-sm flex items-center justify-center"
-              style={{ fontSize: "12px", fontWeight: 600, cursor: "pointer" }}
-            >
+            <button type="button" onClick={() => go("Marketplace")} className="vc-btn vc-btn--outline" style={{ fontSize: "12px", padding: "16px 36px" }}>
               Explore Marketplace
             </button>
           </div>
           <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap", marginTop: "40px" }}>
             {[
               { l: "About", p: "About" },
-              { l: "Creators", p: "Creators" },
               { l: "Marketplace", p: "Marketplace" },
-              { l: "For Business", p: "Business" },
               { l: "Contact", p: "Contact" },
             ].map(({ l, p }) => (
-              <button
-                key={p}
-                onClick={() => go(p)}
-                className="font-body text-[11px] uppercase tracking-widest px-8 py-3.5 rounded-full border border-vc-ink/5 bg-white/50 text-vc-dim transition-all hover:border-vc-orange hover:text-vc-orange hover:bg-white shadow-sm"
-                style={{ cursor: "pointer", fontWeight: 500 }}
-              >
+              <button key={p} type="button" onClick={() => go(p)} className="vc-btn vc-btn--ghost-nav">
                 {l}
               </button>
             ))}
@@ -173,19 +349,7 @@ export default function HomePage({ setPage, openWaitlist }) {
             </Reveal>
           </div>
           <Reveal delay={0.4}>
-            <div style={{ position: "relative", borderRadius: "8px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.02)", aspectRatio: "1/1", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <Image
-                src="/social_gravity_vis_premium.png"
-                alt="Social Gravity Visualization"
-                fill
-                sizes="(max-width: 960px) 100vw, 520px"
-                style={{ objectFit: "cover", opacity: 0.8 }}
-              />
-              <div style={{ position: "absolute", inset: 0, boxShadow: "inset 0 0 100px rgba(0,0,0,0.8)" }} />
-              {/* Decorative elements */}
-              <div style={{ position: "absolute", top: "20%", left: "20%", width: "2px", height: "20%", background: `linear-gradient(to bottom, ${C.orange}, transparent)`, animation: "pageEnter 2s infinite" }} />
-              <div style={{ position: "absolute", bottom: "30%", right: "15%", width: "40%", height: "1px", background: `linear-gradient(to left, ${C.pink}, transparent)`, animation: "pageEnter 3s infinite alternate" }} />
-            </div>
+            <SocialGravityOrbital />
           </Reveal>
         </div>
       </section>

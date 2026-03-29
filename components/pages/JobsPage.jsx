@@ -118,7 +118,7 @@ export default function JobsPage({ openWaitlist, addToast }) {
           <Reveal style={{ marginBottom: "36px" }}><Tag>Open Roles</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,54px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>Find your position<br /><span style={{ color: C.orange }}>in the vibe.</span></h2></Reveal>
           {!ROLES_DISABLED && ROLES.length > 0 && (
             <div style={{ display: "flex", gap: "7px", flexWrap: "wrap", marginBottom: "32px" }}>
-              {depts.map(d => <button key={d} onClick={() => { setFilter(d); setExpanded(null); }} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "12px", letterSpacing: "2px", padding: "8px 16px", background: filter === d ? (DEPT_COLORS[d] || C.orange) : "transparent", color: filter === d ? C.textOnAccent : C.dim, border: `1px solid ${filter === d ? (DEPT_COLORS[d] || C.orange) : C.border}`, borderRadius: "2px", cursor: "pointer", transition: "all .2s" }}>{d}</button>)}
+              {depts.map(d => <button type="button" key={d} onClick={() => { setFilter(d); setExpanded(null); }} className="vc-btn vc-btn--chip vc-btn--sm" style={{ padding: "8px 16px", background: filter === d ? (DEPT_COLORS[d] || C.orange) : "transparent", color: filter === d ? C.textOnAccent : C.dim, border: `1px solid ${filter === d ? (DEPT_COLORS[d] || C.orange) : C.border}` }}>{d}</button>)}
             </div>
           )}
           {ROLES_DISABLED || ROLES.length === 0 ? (
@@ -159,7 +159,7 @@ export default function JobsPage({ openWaitlist, addToast }) {
                           {/* INTERNAL TABS */}
                           <div style={{ display: "flex", gap: "4px", marginBottom: "24px", flexWrap: "wrap" }}>
                             {TABS.map(t => (
-                              <button key={t} onClick={() => setTab(i, t)} style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "12px", letterSpacing: ".5px", padding: "7px 14px", background: tab === t ? dc : "rgba(0,0,0,0.04)", color: tab === t ? C.textOnAccent : C.dim, border: `1px solid ${tab === t ? dc : C.border}`, borderRadius: "2px", cursor: "pointer", transition: "all .2s" }}>{t}</button>
+                              <button type="button" key={t} onClick={() => setTab(i, t)} className="vc-btn vc-btn--chip" style={{ fontSize: "12px", fontWeight: 500, padding: "7px 14px", background: tab === t ? dc : "rgba(0,0,0,0.04)", color: tab === t ? C.textOnAccent : C.dim, border: `1px solid ${tab === t ? dc : C.border}` }}>{t}</button>
                             ))}
                           </div>
                           {/* TAB CONTENT */}
@@ -210,12 +210,12 @@ export default function JobsPage({ openWaitlist, addToast }) {
                           )}
                           <div style={{ marginTop: "24px" }}>
                             <button
+                              type="button"
                               onClick={() => setApplyOpen(applyOpen === i ? null : i)}
-                              style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "13px", letterSpacing: "3px", padding: "12px 28px", background: dc, color: C.textOnAccent, border: "none", borderRadius: "2px", cursor: "pointer", transition: "box-shadow .2s,transform .2s", marginRight: "10px" }}
-                              onMouseEnter={e => { e.target.style.boxShadow = `0 8px 24px ${dc}45`; e.target.style.transform = "translateY(-2px)"; }}
-                              onMouseLeave={e => { e.target.style.boxShadow = ""; e.target.style.transform = ""; }}
+                              className="vc-btn vc-btn--accent vc-btn--sm"
+                              style={{ marginRight: "10px", background: dc }}
                             >{applyOpen === i ? "Close Form" : "Apply Now"}</button>
-                            <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", color: C.dimmer }}>or email <a href="mailto:careers@vibecircle.com" style={{ color: dc, textDecoration: "none" }}>careers@vibecircle.com</a></span>
+                            <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", color: C.dimmer }}>or email <a href="mailto:careers@vibecircles.co.za" style={{ color: dc, textDecoration: "none" }}>careers@vibecircles.co.za</a></span>
                           </div>
                           {applyOpen === i && (
                             <div style={{ marginTop: "20px", padding: "20px", background: "rgba(0,0,0,0.02)", border: `1px solid ${dc}30`, borderRadius: "4px", animation: "fadeUp .3s ease" }}>
@@ -250,6 +250,7 @@ export default function JobsPage({ openWaitlist, addToast }) {
                               </label>
                               <div style={{ display: "flex", gap: "10px", alignItems: "center", marginTop: "16px", flexWrap: "wrap" }}>
                                 <button
+                                  type="button"
                                   onClick={async () => {
                                     if (!applyForm.name || !applyForm.email) { addToast({ type: "error", title: "Required", message: "Please enter your name and email." }); return; }
                                     setApplyLoading(true);
@@ -261,13 +262,12 @@ export default function JobsPage({ openWaitlist, addToast }) {
                                       setApplyOpen(null);
                                       setApplyForm({ name: "", email: "", location: "", portfolio: "", message: "" });
                                     } catch (e) {
-                                      addToast({ type: "error", title: "Something went wrong", message: "Please try again or email careers@vibecircle.com." });
+                                      addToast({ type: "error", title: "Something went wrong", message: "Please try again or email careers@vibecircles.co.za." });
                                     } finally { setApplyLoading(false); }
                                   }}
                                   disabled={applyLoading || !applyForm.name || !applyForm.email}
-                                  style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "13px", letterSpacing: "3px", padding: "12px 26px", background: (applyLoading || !applyForm.name || !applyForm.email) ? C.dimmer : dc, color: C.textOnAccent, border: "none", borderRadius: "2px", cursor: (applyLoading || !applyForm.name || !applyForm.email) ? "not-allowed" : "pointer", transition: "box-shadow .2s" }}
-                                  onMouseEnter={e => !applyLoading && applyForm.name && applyForm.email && (e.target.style.boxShadow = `0 8px 24px ${dc}45`)}
-                                  onMouseLeave={e => e.target.style.boxShadow = ""}
+                                  className="vc-btn vc-btn--accent vc-btn--sm"
+                                  style={{ background: (applyLoading || !applyForm.name || !applyForm.email) ? C.dimmer : dc }}
                                 >{applyLoading ? "Submitting..." : "Submit Application"}</button>
                                 <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", color: C.dimmer }}>We respond within 5 business days.</span>
                               </div>
@@ -283,7 +283,7 @@ export default function JobsPage({ openWaitlist, addToast }) {
           )}
         </div>
       </section>
-      <section style={{ background: C.orange, padding: "64px clamp(20px,6vw,64px)" }}><div style={{ maxWidth: "1100px", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "24px" }}><div><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(24px,4vw,44px)", color: C.textOnAccent, lineHeight: 1 }}>Don't see your role?<br />Build your own.</div><p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: "rgba(0,0,0,0.6)", marginTop: "8px" }}>careers@vibecircle.com</p></div><button onClick={() => openWaitlist("Custom Role")} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "14px 36px", background: C.bg, color: C.orange, border: "none", borderRadius: "2px", cursor: "pointer", transition: "transform .2s" }} onMouseEnter={e => e.target.style.transform = "translateY(-2px)"} onMouseLeave={e => e.target.style.transform = ""}>Get in Touch</button></div></section>
+      <section style={{ background: C.orange, padding: "64px clamp(20px,6vw,64px)" }}><div style={{ maxWidth: "1100px", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "24px" }}><div><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(24px,4vw,44px)", color: C.textOnAccent, lineHeight: 1 }}>Don't see your role?<br />Build your own.</div><p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: "rgba(0,0,0,0.6)", marginTop: "8px" }}>careers@vibecircles.co.za</p></div><button type="button" onClick={() => openWaitlist("Custom Role")} className="vc-btn vc-btn--inverse">Get in Touch</button></div></section>
     </div>
   );
 }

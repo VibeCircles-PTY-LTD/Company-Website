@@ -114,9 +114,6 @@ const PAGE_TO_PATH = {
   home: "/",
   About: "/about",
   Team: "/team",
-  Creators: "/creators",
-  Advertise: "/advertise",
-  Business: "/business",
   Jobs: "/jobs",
   Marketplace: "/marketplace",
   Contact: "/contact",
@@ -214,9 +211,7 @@ function PricingCard({ plan, price, period = "/mo", desc, features, cta, highlig
             </div>
           ))}
         </div>
-        <button onClick={onCta} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "15px", letterSpacing: "3px", padding: "14px", background: highlight ? color : "transparent", color: highlight ? C.textOnAccent : C.text, border: `1px solid ${highlight ? color : C.border}`, borderRadius: "2px", cursor: "pointer", transition: "all .2s", width: "100%" }}
-          onMouseEnter={e => { if (!highlight) { e.currentTarget.style.borderColor = color; e.currentTarget.style.color = color; } else { e.currentTarget.style.boxShadow = `0 8px 28px ${color}45`; } }}
-          onMouseLeave={e => { if (!highlight) { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.text; } else { e.currentTarget.style.boxShadow = ""; } }}
+        <button type="button" onClick={onCta} className={`vc-btn vc-btn--block ${highlight ? "vc-btn--accent" : "vc-btn--outline-muted"}`} style={highlight ? { background: color, fontSize: "13px", padding: "16px" } : { fontSize: "13px", padding: "16px" }}
         >{cta}</button>
       </div>
     </Reveal>
@@ -274,7 +269,7 @@ function WaitlistModal({ open, onClose, context, addToast }) {
     if (!form.name || !form.email || !role) return;
     setLoading(true);
     try {
-      await fetch("https://formsubmit.co/ajax/info@vibecircle.com", {
+      await fetch("https://formsubmit.co/ajax/info@vibecircles.co.za", {
         method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({ _subject: `New Waitlist Signup --- ${role}`, name: form.name, email: form.email, city: form.city, role, context: context || "Website", _template: "table" })
       });
@@ -315,11 +310,9 @@ function WaitlistModal({ open, onClose, context, addToast }) {
                 </div>
               ))}
             </div>
-            <button onClick={submit} disabled={loading || !form.name || !form.email || !role} style={{ width: "100%", fontFamily: "'Bebas Neue',sans-serif", fontSize: "16px", letterSpacing: "3px", padding: "16px", background: (!form.name || !form.email || !role) ? "rgba(255,107,0,0.3)" : C.orange, color: C.textOnAccent, border: "none", borderRadius: "3px", cursor: (!form.name || !form.email || !role) ? "not-allowed" : "pointer", transition: "box-shadow .2s", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px" }}
-              onMouseEnter={e => { if (!loading && form.name && form.email && role) e.target.style.boxShadow = `0 10px 32px ${C.orange}45`; }}
-              onMouseLeave={e => e.target.style.boxShadow = ""}
+            <button type="button" onClick={submit} disabled={loading || !form.name || !form.email || !role} className="vc-btn vc-btn--primary vc-btn--block" style={{ fontSize: "14px", padding: "16px", gap: "10px" }}
             >
-              {loading ? <span style={{ display: "inline-block", width: "16px", height: "16px", border: "2px solid rgba(0,0,0,0.2)", borderTopColor: C.textOnAccent, borderRadius: "50%", animation: "spin 0.6s linear infinite" }} /> : ""}
+              {loading ? <span className="vc-btn__spinner" style={{ width: 16, height: 16 }} aria-hidden /> : null}
               {loading ? "Joining..." : "Secure My Spot ---"}
             </button>
             <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", color: C.dimmer, textAlign: "center", marginTop: "12px" }}>No spam. Unsubscribe anytime.</p>
@@ -334,7 +327,7 @@ function WaitlistModal({ open, onClose, context, addToast }) {
             <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: C.dimmer, lineHeight: 1.7, marginBottom: "32px" }}>
               We'll email you at <span style={{ color: C.orange }}>{form.email}</span> the moment we launch in your city.
             </p>
-            <button onClick={onClose} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "13px 36px", background: C.orange, color: C.textOnAccent, border: "none", borderRadius: "3px", cursor: "pointer" }}>Close</button>
+            <button type="button" onClick={onClose} className="vc-btn vc-btn--primary">Close</button>
           </div>
         )}
       </div>
@@ -352,8 +345,8 @@ function CookieBanner({ onAccept, onDecline, setPage }) {
         <button onClick={() => setPage("Privacy")} style={{ background: "none", border: "none", color: C.orange, cursor: "pointer", fontFamily: "'DM Sans',sans-serif", fontSize: "13px", padding: 0, textDecoration: "underline" }}>Learn more</button>
       </p>
       <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
-        <button onClick={onDecline} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "13px", letterSpacing: "2px", padding: "10px 22px", background: "transparent", color: C.dimmer, border: `1px solid ${C.border}`, borderRadius: "2px", cursor: "pointer", transition: "all .2s" }} onMouseEnter={e => { e.currentTarget.style.color = C.text; e.currentTarget.style.borderColor = C.orange; }} onMouseLeave={e => { e.currentTarget.style.color = C.dimmer; e.currentTarget.style.borderColor = C.border; }}>Decline</button>
-        <button onClick={onAccept} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "13px", letterSpacing: "2px", padding: "10px 22px", background: C.orange, color: C.textOnAccent, border: "none", borderRadius: "2px", cursor: "pointer", transition: "box-shadow .2s" }} onMouseEnter={e => e.target.style.boxShadow = `0 4px 16px ${C.orange}40`} onMouseLeave={e => e.target.style.boxShadow = ""}>Accept All</button>
+        <button type="button" onClick={onDecline} className="vc-btn vc-btn--outline-muted vc-btn--sm">Decline</button>
+        <button type="button" onClick={onAccept} className="vc-btn vc-btn--primary vc-btn--sm">Accept All</button>
       </div>
     </div>
   );
@@ -365,14 +358,14 @@ function BackToTop() {
   useEffect(() => { const h = () => setShow(window.scrollY > 400); window.addEventListener("scroll", h); return () => window.removeEventListener("scroll", h); }, []);
   if (!show) return null;
   return (
-    <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} style={{ position: "fixed", bottom: "80px", right: "24px", zIndex: 400, width: "44px", height: "44px", borderRadius: "50%", background: C.orange, color: C.textOnAccent, border: "none", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "18px", boxShadow: `0 4px 20px ${C.orange}50`, transition: "transform .2s,box-shadow .2s", animation: "fadeIn .3s ease" }} onMouseEnter={e => { e.target.style.transform = "translateY(-3px)"; e.target.style.boxShadow = `0 8px 28px ${C.orange}60`; }} onMouseLeave={e => { e.target.style.transform = ""; e.target.style.boxShadow = `0 4px 20px ${C.orange}50`; }}>---</button>
+    <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="vc-btn vc-btn--fab" style={{ position: "fixed", bottom: "80px", right: "24px", zIndex: 400, animation: "fadeIn .3s ease" }}>---</button>
   );
 }
 
 // --------- NAV ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-const ALL_PAGES = ["About", "Team", "Creators", "Advertise", "Business", "Jobs", "Marketplace", "Contact", "Press", "Safety"];
-const PRIMARY_NAV = ["About", "Creators", "Marketplace", "Business", "Jobs"];
-const MORE_NAV = ["Team", "Advertise", "Contact", "Press", "Safety"];
+const ALL_PAGES = ["About", "Team", "Jobs", "Marketplace", "Contact", "Press", "Safety"];
+const PRIMARY_NAV = ["About", "Marketplace", "Jobs"];
+const MORE_NAV = ["Team", "Contact", "Press", "Safety"];
 
 function Nav({ current, setPage, openWaitlist }) {
   const [scrolled, setScrolled] = useState(false);
@@ -431,8 +424,8 @@ function Footer({ setPage, openWaitlist }) {
   const w = useWindowWidth();
   const go = (p) => { setPage(p); window.scrollTo(0, 0); };
   const cols = [
-    { title: "Platform", links: ["About", "Team", "Creators", "Marketplace"] },
-    { title: "Business", links: ["Advertise", "Business", "Contact"] },
+    { title: "Platform", links: ["About", "Team", "Marketplace"] },
+    { title: "Business", links: ["Contact"] },
     { title: "Company", links: ["Jobs", "Press", "Safety"] },
     { title: "Legal", links: ["Privacy", "Terms", "Cookies"] },
   ];
@@ -519,7 +512,7 @@ function HomePage({ setPage, openWaitlist }) {
             <button onClick={() => go("Marketplace")} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "16px", letterSpacing: "3px", padding: "16px 44px", background: "transparent", color: C.text, border: `1px solid ${C.border}`, borderRadius: "2px", cursor: "pointer", transition: "all .2s" }} onMouseEnter={e => { e.currentTarget.style.borderColor = C.orange; e.currentTarget.style.color = C.orange; }} onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.text; }}>Explore Marketplace</button>
           </div>
           <div style={{ display: "flex", gap: "10px", justifyContent: "center", flexWrap: "wrap" }}>
-            {[{ l: "About", p: "About", i: "----" }, { l: "Creators", p: "Creators", i: "---" }, { l: "Marketplace", p: "Marketplace", i: "----" }, { l: "For Business", p: "Business", i: "----" }, { l: "Contact", p: "Contact", i: "------" }].map(({ l, p, i }) => (
+            {[{ l: "About", p: "About", i: "----" }, { l: "Marketplace", p: "Marketplace", i: "----" }, { l: "Contact", p: "Contact", i: "------" }].map(({ l, p, i }) => (
               <button key={p} onClick={() => go(p)} style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "13px", padding: "10px 18px", background: "rgba(0,0,0,0.04)", border: "1px solid " + C.border, borderRadius: "2px", color: C.dim, cursor: "pointer", display: "flex", alignItems: "center", gap: "7px", transition: "all .25s" }}
                 onMouseEnter={e => { e.currentTarget.style.borderColor = C.orange; e.currentTarget.style.color = C.text; e.currentTarget.style.background = "rgba(255,107,0,0.08)"; }}
                 onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.dim; e.currentTarget.style.background = "rgba(0,0,0,0.04)"; }}
@@ -606,63 +599,6 @@ function TeamPage({ openWaitlist, setPage }) {
       <section className="sec-pad"><div style={{ maxWidth: "1100px", margin: "0 auto" }} className="grid-2"><div><Reveal><Tag>How we work</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,52px)", color: C.text, lineHeight: 1, margin: "16px 0 20px" }}>Culture isn't built in<br /><span style={{ color: C.orange }}>conference rooms.</span></h2><p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "16px", color: C.dim, lineHeight: 1.8 }}>We work embedded in cities. We ship fast. We talk to creators and businesses every day. We build what we'd actually want to use.</p></Reveal></div><div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>{[["----", "Remote-first", "Work from the cities you're building for."], ["---", "Ship weekly", "Real output, real feedback, real iteration."], ["----", "Direct impact", "No layers. Your work ships to 50K+ users."], ["----", "Equity for all", "Every full-time employee is an owner."]].map(([ic, t, d], i) => <Reveal key={i} delay={i * .08}><div style={{ display: "flex", gap: "14px", alignItems: "flex-start", padding: "18px 22px", background: "rgba(0,0,0,0.02)", border: `1px solid ${C.border}`, borderRadius: "4px", transition: "all .3s" }} onMouseEnter={e => { e.currentTarget.style.borderColor = C.orange; e.currentTarget.style.background = "rgba(255,107,0,0.06)"; }} onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.background = "rgba(0,0,0,0.02)"; }}><span style={{ fontSize: "18px" }}>{ic}</span><div><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "16px", color: C.text }}>{t}</div><div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "12px", color: C.dim, marginTop: "3px" }}>{d}</div></div></div></Reveal>)}</div></div></section>
       <Divider />
       <section className="sec-pad-sm" style={{ background: C.bg2, textAlign: "center" }}><Reveal><Tag>Join us</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(28px,5vw,52px)", color: C.text, lineHeight: 1, margin: "16px auto 20px", maxWidth: "500px" }}>Want to be on this page?<br /><span style={{ color: C.orange }}>No open roles right now.</span></h2><div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}><button onClick={() => { setPage("Jobs"); window.scrollTo(0, 0); }} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "13px 32px", background: C.orange, color: C.textOnAccent, border: "none", borderRadius: "2px", cursor: "pointer" }}>Careers</button><button onClick={() => openWaitlist("Team Interest")} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "13px 32px", background: "transparent", color: C.text, border: `1px solid ${C.border}`, borderRadius: "2px", cursor: "pointer", transition: "all .2s" }} onMouseEnter={e => { e.currentTarget.style.borderColor = C.orange; e.currentTarget.style.color = C.orange; }} onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.text; }}>Join Waitlist</button></div></Reveal></section>
-    </div>
-  );
-}
-
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// CREATORS PAGE
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-const CREATOR_TOOLS = [{ icon: "-------", title: "Live City Map", desc: "Your content appears on the real-time map of your city. People discover you by location, not algorithm." }, { icon: "---", title: "Creator Feed", desc: "A social feed that prioritizes creators in your city and culture niche. Built for discovery, not addiction." }, { icon: "-------", title: "Go Live Anywhere", desc: "Stream from any location. Your live appears on the map for nearby users to join in real time." }, { icon: "----", title: "Brand Marketplace", desc: "Browse and apply to paid brand deals directly. No middlemen, no agencies." }, { icon: "----", title: "Creator Analytics", desc: "Real metrics: map views, discovery impressions, location reach, and audience growth over time." }, { icon: "----", title: "Community Spaces", desc: "Create invite-only groups around your city scene, niche, or next event." }];
-function CreatorsPage({ openWaitlist }) {
-  return (
-    <div style={{ background: C.bg, color: C.text }}>
-      <PageHero tag="For Creators" title="Your city is your" accent="stage. Own it." sub="VibeCircle gives creators tools to build a real local following, get discovered on the live city map, and earn from brand partnerships." />
-      <Divider />
-      <section className="sec-pad-sm" style={{ background: C.bg2 }}><div style={{ maxWidth: "1100px", margin: "0 auto" }}><div className="grid-4">{[["50K+", "Active Creators"], ["R38M+", "Creator Earnings"], ["3,200+", "Brand Deals"], ["48hrs", "Avg Deal Response"]].map(([v, l], i) => <Reveal key={i} delay={i * .1}><div style={{ padding: "26px", background: "rgba(255,107,0,0.04)", border: `1px solid ${C.border}`, borderRadius: "4px", textAlign: "center" }}><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,4vw,46px)", color: C.orange, lineHeight: 1 }}>{v}</div><div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", letterSpacing: "1.5px", textTransform: "uppercase", color: C.dim, marginTop: "5px" }}>{l}</div></div></Reveal>)}</div></div></section>
-      <Divider />
-      <section className="sec-pad"><div style={{ maxWidth: "1100px", margin: "0 auto" }}><Reveal style={{ marginBottom: "52px" }}><Tag>Creator Tools</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>Everything you need to<br /><span style={{ color: C.orange }}>light up your city.</span></h2></Reveal><div className="grid-3">{CREATOR_TOOLS.map((t, i) => <Reveal key={i} delay={i * .08}><div style={{ padding: "30px 26px", background: "rgba(0,0,0,0.02)", border: "1px solid " + C.border, borderRadius: "4px", height: "100%", transition: "all .3s" }} onMouseEnter={e => { e.currentTarget.style.borderColor = C.orange; e.currentTarget.style.background = "rgba(255,107,0,0.06)"; e.currentTarget.style.transform = "translateY(-4px)"; }} onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.background = "rgba(0,0,0,0.02)"; e.currentTarget.style.transform = ""; }}><div style={{ fontSize: "24px", marginBottom: "14px" }}>{t.icon}</div><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "19px", color: C.text, marginBottom: "9px" }}>{t.title}</div><div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "13px", color: C.dim, lineHeight: 1.7 }}>{t.desc}</div></div></Reveal>)}</div></div></section>
-      <Divider />
-      <div style={{ background: C.orange, padding: "22px 64px", overflow: "hidden" }}><div style={{ display: "flex", animation: "marquee 18s linear infinite", whiteSpace: "nowrap" }}>{[...Array(4)].map((_, x) => ["City Map", "--", "Brand Deals", "--", "Go Live", "--", "Creator Fund", "--", "Real Discovery", "--"].map((wd, i) => <span key={`${x}-${i}`} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", color: "rgba(5,5,10,0.65)", marginRight: "26px" }}>{wd}</span>))}</div></div>
-    </div>
-  );
-}
-
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// ADVERTISE PAGE  (condensed, same as before but wired)
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-const AD_FEATURES = [{ icon: "----", title: "Geo-Targeted Campaigns", desc: "Reach people physically near your location. Pinpoint precision, zero waste.", color: C.orange }, { icon: "---", title: "Sponsor Creator Moments", desc: "Embed your brand inside cultural moments --- not beside them.", color: C.pink }, { icon: "-------", title: "Event Promotion", desc: "Put your event on the live map. Watch RSVPs grow as your pin pulses.", color: C.blue }, { icon: "----", title: "Boost Local Visibility", desc: "Climb the discovery feed for your neighborhood. Be impossible to miss.", color: C.orange }, { icon: "----", title: "Live Experience Ads", desc: "Promote while the experience is happening. Capture FOMO at its peak.", color: C.pink }, { icon: "----", title: "Real-Time Analytics", desc: "Track impressions, foot traffic, and engagement as they happen.", color: C.blue }];
-const AD_PRICING = [
-  { plan: "LOCAL", price: "R2,999", desc: "For single-location businesses starting their VibeCircle presence.", features: ["1 active geo-campaign", "Up to 5,000 daily impressions", "City map pin placement", "Event promotion (2/month)", "Basic analytics"], cta: "Start Local", highlight: false, color: C.orange },
-  { plan: "GROWTH", price: "R7,999", desc: "For businesses ready to own their neighborhood.", features: ["5 simultaneous campaigns", "Up to 25,000 daily impressions", "Priority map placement", "Creator sponsorship tools", "Unlimited events", "Advanced analytics + heat maps", "A/B creative testing"], cta: "Start Free Trial", highlight: true, color: C.orange },
-  { plan: "CITY", price: "R24,999", desc: "Full-city dominance for brands and agencies at scale.", features: ["Unlimited campaigns", "Unlimited impressions", "Citywide spotlight", "Dedicated campaign manager", "Creator marketplace access", "White-label reporting", "API access"], cta: "Contact Sales", highlight: false, color: C.pink },
-];
-function AdvertisePage({ openWaitlist }) {
-  return (
-    <div style={{ background: C.bg, color: C.text }}>
-      <PageHero tag="Advertise" title="Ads that integrate," accent="not interrupt." sub="Traditional ads interrupt. VibeCircle ads integrate. We power discovery, not distraction." />
-      <Divider />
-      <section className="sec-pad" style={{ background: C.bg2 }}><div style={{ maxWidth: "1100px", margin: "0 auto" }}><Reveal style={{ marginBottom: "52px" }}><Tag>Ad Products</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>Every tool to make your<br /><span style={{ color: C.orange }}>energy visible.</span></h2></Reveal><div className="grid-3">{AD_FEATURES.map((f, i) => <Reveal key={i} delay={i * .08}><div style={{ padding: "30px 26px", borderRadius: "4px", background: "rgba(0,0,0,0.02)", border: "1px solid " + C.border, height: "100%", transition: "all .3s" }} onMouseEnter={e => { e.currentTarget.style.borderColor = f.color; e.currentTarget.style.background = `${f.color}0D`; e.currentTarget.style.transform = "translateY(-4px)"; }} onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.background = "rgba(0,0,0,0.02)"; e.currentTarget.style.transform = ""; }}><div style={{ fontSize: "24px", marginBottom: "13px" }}>{f.icon}</div><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "19px", color: f.color, marginBottom: "9px" }}>{f.title}</div><div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "13px", color: C.dim, lineHeight: 1.7 }}>{f.desc}</div></div></Reveal>)}</div></div></section>
-      <Divider />
-      <section className="sec-pad"><div style={{ maxWidth: "1100px", margin: "0 auto" }}><Reveal style={{ marginBottom: "52px", textAlign: "center" }}><Tag>Advertising Plans</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,56px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>Pick your level of <span style={{ color: C.orange }}>dominance.</span></h2></Reveal><div className="grid-3">{AD_PRICING.map((p, i) => <PricingCard key={i} {...p} onCta={() => openWaitlist(`Advertise ${p.plan} Plan`)} />)}</div></div></section>
-      <div style={{ background: C.orange, padding: "20px 0", overflow: "hidden" }}><div style={{ display: "flex", animation: "marquee 18s linear infinite", whiteSpace: "nowrap" }}>{[...Array(3)].map((_, x) => ["Geo-Targeted", "--", "Creator Moments", "--", "Event Promotion", "--", "Live Ads", "--", "Real Analytics", "--"].map((wd, i) => <span key={`${x}-${i}`} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "15px", letterSpacing: "3px", color: "rgba(5,5,10,0.7)", marginRight: "30px" }}>{wd}</span>))}</div></div>
-    </div>
-  );
-}
-
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// BUSINESS PAGE
-// ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-const BIZ_TOOLS = [{ num: "01", title: "Claim Your Location", desc: "Take ownership of your spot on the VibeCircle map. Your location becomes a living destination.", icon: "----" }, { num: "02", title: "Run Promotions", desc: "Launch time-limited offers that pulse to nearby users. Create urgency. Drive traffic.", icon: "----" }, { num: "03", title: "Host Events", desc: "Create events that appear on the live map. Tap into VibeCircle's discovery engine.", icon: "----" }, { num: "04", title: "Go Live", desc: "Stream directly from your location. Let people see the energy before they arrive.", icon: "----" }, { num: "05", title: "Track Engagement", desc: "See who's viewing, saving, and visiting your location in real time.", icon: "----" }, { num: "06", title: "Launch Campaigns", desc: "Combine all tools into targeted campaigns that grow with your business.", icon: "----" }];
-function BusinessPage({ openWaitlist }) {
-  const [active, setActive] = useState(0);
-  return (
-    <div style={{ background: C.bg, color: C.text }}>
-      <PageHero tag="VibeCircle for Business" title="Turn foot traffic into" accent="digital gravity." sub="When your location pulses on the map, people don't just see you --- they find you." />
-      <Divider />
-      <section className="sec-pad" style={{ background: C.bg2 }}><div style={{ maxWidth: "1100px", margin: "0 auto" }}><Reveal style={{ marginBottom: "52px" }}><Tag>Business Tools</Tag><h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(30px,5vw,54px)", color: C.text, lineHeight: 1, marginTop: "16px" }}>Everything you need<br /><span style={{ color: C.orange }}>in one place.</span></h2></Reveal><div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: "24px" }}><div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>{BIZ_TOOLS.map((t, i) => <div key={i} onClick={() => setActive(i)} style={{ padding: "16px 20px", background: active === i ? "rgba(255,107,0,0.1)" : "rgba(0,0,0,0.02)", border: `1px solid ${active === i ? C.orange + "60" : C.border}`, borderRadius: "4px", display: "flex", alignItems: "center", gap: "12px", cursor: "pointer", transition: "all .25s" }} onMouseEnter={e => { if (active !== i) { e.currentTarget.style.background = "rgba(0,0,0,0.04)"; e.currentTarget.style.borderColor = C.border; } }} onMouseLeave={e => { if (active !== i) { e.currentTarget.style.background = "rgba(0,0,0,0.02)"; e.currentTarget.style.borderColor = C.border; } }}>  <span style={{ fontSize: "16px" }}>{t.icon}</span><div style={{ flex: 1 }}><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "15px", color: active === i ? C.orange : C.text }}>{t.title}</div><div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "10px", letterSpacing: "2px", color: C.dimmer, textTransform: "uppercase", marginTop: "1px" }}>{t.num}</div></div>{active === i && <div style={{ color: C.orange, fontSize: "13px" }}>---</div>}</div>)}</div><div key={active} style={{ padding: "40px", background: "rgba(0,0,0,0.02)", border: `1px solid ${C.border}`, borderRadius: "4px", animation: "fadeIn .3s ease", position: "relative", overflow: "hidden" }}><Orb top="-30%" right="-20%" size={280} opacity={0.15} /><div style={{ fontSize: "40px", marginBottom: "18px" }}>{BIZ_TOOLS[active].icon}</div><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(22px,3vw,38px)", color: C.orange, lineHeight: 1, marginBottom: "14px" }}>{BIZ_TOOLS[active].title}</div><p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "16px", color: C.dim, lineHeight: 1.8, marginBottom: "24px" }}>{BIZ_TOOLS[active].desc}</p><div style={{ width: "100%", height: "2px", background: `linear-gradient(90deg,${C.orange},${C.pink})`, borderRadius: "1px", transformOrigin: "left", animation: "lineGrow .4s ease forwards" }} /></div></div></div>      </section>
-      <Divider />
-      <section className="sec-pad-sm" style={{ background: C.bg3 }}><Reveal><div style={{ maxWidth: "1100px", margin: "0 auto", padding: "48px 52px", background: `linear-gradient(135deg,rgba(255,107,0,0.12) 0%,rgba(255,45,120,0.06) 100%)`, border: `1px solid ${C.orange}25`, borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "24px", flexWrap: "wrap" }}><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(24px,4vw,44px)", color: C.textOnAccent, lineHeight: 1 }}>Ready to make your<br />location <span style={{ color: C.orange }}>pulse?</span></div><div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}><button onClick={() => openWaitlist("Business Get Started")} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "13px 32px", background: C.orange, color: C.textOnAccent, border: "none", borderRadius: "2px", cursor: "pointer", transition: "box-shadow .2s" }} onMouseEnter={e => e.target.style.boxShadow = `0 10px 32px ${C.orange}40`} onMouseLeave={e => e.target.style.boxShadow = ""}>Get Started Free</button><button onClick={() => openWaitlist("Business Demo")} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "13px 32px", background: "transparent", color: C.text, border: `1px solid ${C.border}`, borderRadius: "2px", cursor: "pointer", transition: "all .2s" }} onMouseEnter={e => { e.currentTarget.style.borderColor = C.orange; e.currentTarget.style.color = C.orange; }} onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.text; }}>Book a Demo</button></div></div></Reveal></section>
     </div>
   );
 }
@@ -874,7 +810,7 @@ function JobsPage({ openWaitlist, addToast }) {
                             onMouseEnter={e => { e.target.style.boxShadow = `0 8px 24px ${dc}45`; e.target.style.transform = "translateY(-2px)"; }}
                             onMouseLeave={e => { e.target.style.boxShadow = ""; e.target.style.transform = ""; }}
                           >{applyOpen === i ? "Close Form" : "Apply Now"}</button>
-                          <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", color: C.dimmer }}>or email <a href="mailto:careers@vibecircle.com" style={{ color: dc, textDecoration: "none" }}>careers@vibecircle.com</a></span>
+                          <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", color: C.dimmer }}>or email <a href="mailto:careers@vibecircles.co.za" style={{ color: dc, textDecoration: "none" }}>careers@vibecircles.co.za</a></span>
                         </div>
                         {applyOpen === i && (
                           <div style={{ marginTop: "20px", padding: "20px", background: "rgba(0,0,0,0.02)", border: `1px solid ${dc}30`, borderRadius: "4px", animation: "fadeUp .3s ease" }}>
@@ -928,7 +864,7 @@ function JobsPage({ openWaitlist, addToast }) {
           )}
         </div>
       </section>
-      <section style={{ background: C.orange, padding: "64px clamp(20px,6vw,64px)" }}><div style={{ maxWidth: "1100px", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "24px" }}><div><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(24px,4vw,44px)", color: C.textOnAccent, lineHeight: 1 }}>Don't see your role?<br />Build your own.</div><p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: "rgba(0,0,0,0.6)", marginTop: "8px" }}>careers@vibecircle.com</p></div><button onClick={() => openWaitlist("Custom Role")} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "14px 36px", background: C.bg, color: C.orange, border: "none", borderRadius: "2px", cursor: "pointer", transition: "transform .2s" }} onMouseEnter={e => e.target.style.transform = "translateY(-2px)"} onMouseLeave={e => e.target.style.transform = ""}>Get in Touch</button></div></section>
+      <section style={{ background: C.orange, padding: "64px clamp(20px,6vw,64px)" }}><div style={{ maxWidth: "1100px", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "24px" }}><div><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "clamp(24px,4vw,44px)", color: C.textOnAccent, lineHeight: 1 }}>Don't see your role?<br />Build your own.</div><p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: "rgba(0,0,0,0.6)", marginTop: "8px" }}>careers@vibecircles.co.za</p></div><button onClick={() => openWaitlist("Custom Role")} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "14px 36px", background: C.bg, color: C.orange, border: "none", borderRadius: "2px", cursor: "pointer", transition: "transform .2s" }} onMouseEnter={e => e.target.style.transform = "translateY(-2px)"} onMouseLeave={e => e.target.style.transform = ""}>Get in Touch</button></div></section>
     </div>
   );
 }
@@ -971,7 +907,7 @@ function ApplyModal({ brand, onClose, addToast }) {
   const submit = async () => {
     if (!form.name || !form.handle) return;
     setLoading(true);
-    try { await fetch("https://formsubmit.co/ajax/info@vibecircle.com", { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify({ _subject: `Brand Deal Application --- ${brand.name}`, _template: "table", ...form, brand: brand.name, deal: brand.type, budget: brand.budget }) }); } catch (e) { }
+    try { await fetch("https://formsubmit.co/ajax/info@vibecircles.co.za", { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify({ _subject: `Brand Deal Application --- ${brand.name}`, _template: "table", ...form, brand: brand.name, deal: brand.type, budget: brand.budget }) }); } catch (e) { }
     setLoading(false); setStep(2);
     addToast({ type: "success", title: "Application sent!", message: `${brand.name} will respond within 48 hours.` });
   };
@@ -982,8 +918,8 @@ function ApplyModal({ brand, onClose, addToast }) {
         <h3 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "24px", color: C.text, marginBottom: "5px" }}>Apply for this deal</h3><p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "13px", color: C.dim, lineHeight: 1.7, marginBottom: "20px" }}>Brands typically respond within 48 hours.</p>
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>{[["name", "Your Name"], ["handle", "VibeCircle Handle (@...)"], ["city", "Your City"], ["audience", "Audience Size (e.g. 5K)"]].map(([k, ph]) => <input key={k} placeholder={ph} value={form[k]} onChange={e => setForm(f => ({ ...f, [k]: e.target.value }))} style={{ background: C.bg3, border: `1px solid ${C.border}`, borderRadius: "2px", padding: "12px 14px", fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: C.text, outline: "none", transition: "border-color .2s" }} onFocus={e => e.target.style.borderColor = brand.color} onBlur={e => e.target.style.borderColor = C.border} />)}
           <textarea placeholder="Why are you right for this brand?" rows={3} value={form.why} onChange={e => setForm(f => ({ ...f, why: e.target.value }))} style={{ background: "rgba(0,0,0,0.04)", border: "1px solid " + C.border, borderRadius: "2px", padding: "12px 14px", fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: C.text, outline: "none", resize: "vertical", transition: "border-color .2s" }} onFocus={e => e.target.style.borderColor = brand.color} onBlur={e => e.target.style.borderColor = C.border} />
-          <button onClick={submit} disabled={loading || !form.name || !form.handle} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "14px", background: brand.color, color: C.textOnAccent, border: "none", borderRadius: "2px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>{loading && <span style={{ width: "14px", height: "14px", border: `2px solid ${C.textOnAccent}40`, borderTopColor: C.textOnAccent, borderRadius: "50%", animation: "spin .6s linear infinite", display: "inline-block" }} />}{loading ? "Submitting..." : "Submit Application"}</button></div></>)
-        : (<div style={{ textAlign: "center", padding: "20px 0" }}><div style={{ fontSize: "48px", marginBottom: "16px", animation: "checkPop .5s ease" }}>----</div><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "32px", color: brand.color, marginBottom: "10px" }}>Application Sent!</div><p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: C.dim, lineHeight: 1.7, marginBottom: "24px" }}>{brand.name} will review your profile and respond within 48 hours.</p><button onClick={onClose} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "13px", letterSpacing: "3px", padding: "12px 28px", background: brand.color, color: C.textOnAccent, border: "none", borderRadius: "2px", cursor: "pointer" }}>Back to Marketplace</button></div>)}
+          <button type="button" onClick={submit} disabled={loading || !form.name || !form.handle} className="vc-btn vc-btn--accent vc-btn--block" style={{ fontSize: "13px", padding: "16px", background: brand.color }}>{loading && <span className="vc-btn__spinner" aria-hidden />}{loading ? "Submitting..." : "Submit Application"}</button></div></>)
+        : (<div style={{ textAlign: "center", padding: "20px 0" }}><div style={{ fontSize: "48px", marginBottom: "16px", animation: "checkPop .5s ease" }}>----</div><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "32px", color: brand.color, marginBottom: "10px" }}>Application Sent!</div><p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: C.dim, lineHeight: 1.7, marginBottom: "24px" }}>{brand.name} will review your profile and respond within 48 hours.</p><button type="button" onClick={onClose} className="vc-btn vc-btn--accent vc-btn--sm" style={{ background: brand.color }}>Back to Marketplace</button></div>)}
     </div>
   </div>);
 }
@@ -1002,7 +938,7 @@ function MarketplacePage({ openWaitlist, addToast }) {
   const submitPost = async () => {
     if (!postForm.brand || !postForm.budget) return;
     setPostLoading(true);
-    try { await fetch("https://formsubmit.co/ajax/partners@vibecircle.com", { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify({ _subject: `New Brand Deal Submission --- ${postForm.brand}`, _template: "table", ...postForm }) }); } catch (e) { }
+    try { await fetch("https://formsubmit.co/ajax/partners@vibecircles.co.za", { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify({ _subject: `New Brand Deal Submission --- ${postForm.brand}`, _template: "table", ...postForm }) }); } catch (e) { }
     setPostLoading(false); setPostSent(true);
     addToast({ type: "success", title: "Deal Submitted!", message: "Your campaign goes live within 24 hours." });
   };
@@ -1041,7 +977,7 @@ function MarketplacePage({ openWaitlist, addToast }) {
               : (<><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "20px", color: C.text, marginBottom: "20px" }}>Post a Campaign Deal</div><div style={{ display: "flex", flexDirection: "column", gap: "11px" }}>
                 {[["brand", "Brand Name"], ["budget", "Budget Range"], ["location", "Target Location(s)"]].map(([k, ph]) => <input key={k} placeholder={ph} value={postForm[k]} onChange={e => setPostForm(f => ({ ...f, [k]: e.target.value }))} style={{ background: "rgba(0,0,0,0.04)", border: "1px solid " + C.border, borderRadius: "2px", padding: "12px 14px", fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: C.text, outline: "none", transition: "border-color .2s" }} onFocus={e => e.target.style.borderColor = C.orange} onBlur={e => e.target.style.borderColor = C.border} />)}
                 <textarea placeholder="Describe your campaign..." rows={3} value={postForm.desc} onChange={e => setPostForm(f => ({ ...f, desc: e.target.value }))} style={{ background: "rgba(0,0,0,0.04)", border: "1px solid " + C.border, borderRadius: "2px", padding: "12px 14px", fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: C.text, outline: "none", resize: "vertical", transition: "border-color .2s" }} onFocus={e => e.target.style.borderColor = C.orange} onBlur={e => e.target.style.borderColor = C.border} />
-                <button onClick={submitPost} disabled={postLoading} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "14px", background: C.orange, color: C.textOnAccent, border: "none", borderRadius: "2px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>{postLoading && <span style={{ width: "14px", height: "14px", border: `2px solid ${C.textOnAccent}40`, borderTopColor: C.textOnAccent, borderRadius: "50%", animation: "spin .6s linear infinite", display: "inline-block" }} />}{postLoading ? "Submitting..." : "Post My Deal"}</button>
+                <button type="button" onClick={submitPost} disabled={postLoading} className="vc-btn vc-btn--primary vc-btn--block" style={{ fontSize: "13px", padding: "16px" }}>{postLoading && <span className="vc-btn__spinner" aria-hidden />}{postLoading ? "Submitting..." : "Post My Deal"}</button>
               </div></>)}
           </div></Reveal>
         </div></section>
@@ -1093,7 +1029,7 @@ function PressPage({ setPage }) {
                 <div style={{ padding: "40px", background: C.orange, borderRadius: "4px", color: C.textOnAccent }}>
                   <div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "28px", lineHeight: 1, marginBottom: "12px" }}>Media Inquiries</div>
                   <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: "rgba(0,0,0,0.6)", lineHeight: 1.6, marginBottom: "24px" }}>Journalists and media outlets, please reach out to our communications team for interviews and data insights.</p>
-                  <a href="mailto:press@vibecircle.com" style={{ display: "inline-block", fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "2px", color: C.orange, background: C.bg, padding: "12px 28px", borderRadius: "2px", textDecoration: "none" }}>Email PR Team</a>
+                  <a href="mailto:press@vibecircles.co.za" style={{ display: "inline-block", fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "2px", color: C.orange, background: C.bg, padding: "12px 28px", borderRadius: "2px", textDecoration: "none" }}>Email PR Team</a>
                 </div>
               </Reveal>
               <Reveal delay={.2}>
@@ -1193,7 +1129,7 @@ function SafetyPage() {
             <Reveal>
               <h2 style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "36px", color: C.text, marginBottom: "16px" }}>See a problem?</h2>
               <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "16px", color: C.dim, marginBottom: "32px" }}>Our safety team is active 24/7 to review reports and maintain the vibe.</p>
-              <a href="mailto:safety@vibecircle.com" style={{ display: "inline-block", fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "14px 36px", background: C.orange, color: C.textOnAccent, border: "none", borderRadius: "2px", textDecoration: "none" }}>Report an Incident</a>
+              <a href="mailto:safety@vibecircles.co.za" style={{ display: "inline-block", fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "14px 36px", background: C.orange, color: C.textOnAccent, border: "none", borderRadius: "2px", textDecoration: "none" }}>Report an Incident</a>
             </Reveal>
           </div>
         </div>
@@ -1206,11 +1142,11 @@ function SafetyPage() {
 // CONTACT PAGE --- with real FormSubmit integration
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 const CONTACT_DEPTS = [
-  { key: "general", label: "General Inquiry", email: "info@vibecircle.com", icon: "----", desc: "Questions about VibeCircle, the platform, or anything else." },
-  { key: "partnerships", label: "Partnerships", email: "partners@vibecircle.com", icon: "----", desc: "Brand deals, platform integrations, and strategic alliances." },
-  { key: "careers", label: "Careers", email: "careers@vibecircle.com", icon: "----", desc: "Job applications, internship inquiries, and hiring questions." },
-  { key: "support", label: "Support", email: "support@vibecircle.com", icon: "-------", desc: "Technical issues, account help, and bug reports." },
-  { key: "press", label: "Press & Media", email: "press@vibecircle.com", icon: "----", desc: "Media inquiries, press kits, and interview requests." },
+  { key: "general", label: "General Inquiry", email: "info@vibecircles.co.za", icon: "----", desc: "Questions about VibeCircle, the platform, or anything else." },
+  { key: "partnerships", label: "Partnerships", email: "partners@vibecircles.co.za", icon: "----", desc: "Brand deals, platform integrations, and strategic alliances." },
+  { key: "careers", label: "Careers", email: "careers@vibecircles.co.za", icon: "----", desc: "Job applications, internship inquiries, and hiring questions." },
+  { key: "support", label: "Support", email: "support@vibecircles.co.za", icon: "-------", desc: "Technical issues, account help, and bug reports." },
+  { key: "press", label: "Press & Media", email: "press@vibecircles.co.za", icon: "----", desc: "Media inquiries, press kits, and interview requests." },
 ];
 function ContactPage({ addToast }) {
   const [dept, setDept] = useState("general");
@@ -1223,7 +1159,7 @@ function ContactPage({ addToast }) {
     if (!form.name || !form.email || !form.message) return;
     setLoading(true);
     try {
-      await fetch("https://formsubmit.co/ajax/info@vibecircle.com", {
+      await fetch("https://formsubmit.co/ajax/info@vibecircles.co.za", {
         method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({ _subject: `[${selectedDept?.label}] ${form.subject || "New Message"}`, _template: "table", name: form.name, email: form.email, subject: form.subject, message: form.message, department: selectedDept?.label, replyTo: selectedDept?.email })
       });
@@ -1253,7 +1189,7 @@ function ContactPage({ addToast }) {
             <div style={{ fontSize: "48px", marginBottom: "16px", animation: "checkPop .5s ease" }}>------</div>
             <div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "30px", color: C.orange, marginBottom: "10px" }}>Message Sent.</div>
             <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: C.dim, lineHeight: 1.7, marginBottom: "24px" }}>The {selectedDept?.label} team will get back to you at <span style={{ color: C.orange }}>{form.email}</span> within 24---48 hours.</p>
-            <button onClick={() => { setSent(false); setForm({ name: "", email: "", subject: "", message: "", }); }} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "12px", letterSpacing: "2px", padding: "11px 24px", background: C.orange, color: C.textOnAccent, border: "none", borderRadius: "2px", cursor: "pointer" }}>Send Another</button>
+            <button type="button" onClick={() => { setSent(false); setForm({ name: "", email: "", subject: "", message: "", }); }} className="vc-btn vc-btn--primary vc-btn--sm">Send Another</button>
           </div>) : (<>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}><span style={{ fontSize: "20px" }}>{selectedDept?.icon}</span><div><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "18px", color: C.orange }}>{selectedDept?.label}</div><div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", color: C.dimmer }}>{selectedDept?.email}</div></div></div>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -1262,7 +1198,7 @@ function ContactPage({ addToast }) {
               </div>
               <input placeholder="Subject" value={form.subject} onChange={e => setForm(f => ({ ...f, subject: e.target.value }))} style={{ background: "rgba(0,0,0,0.04)", border: "1px solid " + C.border, borderRadius: "2px", padding: "12px 14px", fontFamily: "'DM Sans',sans-serif", fontSize: "13px", color: C.text, outline: "none", transition: "border-color .2s" }} onFocus={e => e.target.style.borderColor = C.orange} onBlur={e => e.target.style.borderColor = C.border} />
               <textarea placeholder="Your message..." rows={5} value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} style={{ background: "rgba(0,0,0,0.04)", border: "1px solid " + C.border, borderRadius: "2px", padding: "12px 14px", fontFamily: "'DM Sans',sans-serif", fontSize: "13px", color: C.text, outline: "none", resize: "vertical", transition: "border-color .2s" }} onFocus={e => e.target.style.borderColor = C.orange} onBlur={e => e.target.style.borderColor = C.border} />
-              <button onClick={submit} disabled={loading || !form.name || !form.email || !form.message} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "15px", letterSpacing: "3px", padding: "15px", background: (!form.name || !form.email || !form.message) ? "rgba(255,107,0,0.3)" : C.orange, color: C.textOnAccent, border: "none", borderRadius: "2px", cursor: (!form.name || !form.email || !form.message) ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>{loading && <span style={{ width: "14px", height: "14px", border: `2px solid ${C.textOnAccent}40`, borderTopColor: C.textOnAccent, borderRadius: "50%", animation: "spin .6s linear infinite", display: "inline-block" }} />}{loading ? "Sending..." : "Send Message ---"}</button>
+              <button type="button" onClick={submit} disabled={loading || !form.name || !form.email || !form.message} className="vc-btn vc-btn--primary vc-btn--block" style={{ fontSize: "13px", padding: "16px" }}>{loading && <span className="vc-btn__spinner" aria-hidden />}{loading ? "Sending..." : "Send message"}</button>
               <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", color: C.dimmer, textAlign: "center" }}>Typical response: 24---48 hours</p>
             </div>
           </>)}
@@ -1322,11 +1258,11 @@ const PRIVACY_SECTIONS = [
   { h: "3. Sharing Your Information", body: ["We do not sell your personal information to third parties. We do not allow advertisers to pay to have their products promoted in private conversations.", "We share data with service providers who help us operate the platform (payment processors, cloud infrastructure, analytics tools) under strict confidentiality agreements.", "Your public profile, posts, and location-tagged content are visible to other VibeCircle users as part of the platform's core functionality.", "Creators who apply to brand deals share their profile data with the relevant brand as part of the application process."] },
   { h: "4. Location Data", body: ["Location data is central to VibeCircle's functionality. Precise location is used to place your content on the city map, show you nearby events and businesses, and power geo-targeted discovery.", "You can control location permissions through your device settings. Disabling location will limit your ability to use map-based features.", "We do not share precise real-time location data with third parties without your explicit consent."] },
   { h: "5. Data Retention", body: "We retain your account data for as long as your account is active. If you delete your account, we delete or anonymize your personal data within 30 days, except where required by law or legitimate business interest." },
-  { h: "6. Your Rights (POPIA)", body: ["You have the right to access, correct, or delete your personal data. You have the right to data portability and to restrict or object to certain processing.", "South African users have rights under POPIA, including access, correction, deletion, and objection to processing.", "To exercise these rights, email privacy@vibecircle.com. We'll respond within 30 days."] },
+  { h: "6. Your Rights (POPIA)", body: ["You have the right to access, correct, or delete your personal data. You have the right to data portability and to restrict or object to certain processing.", "South African users have rights under POPIA, including access, correction, deletion, and objection to processing.", "To exercise these rights, email privacy@vibecircles.co.za. We'll respond within 30 days."] },
   { h: "7. Cookies", body: ["We use cookies and similar tracking technologies to keep you logged in, remember your preferences, and understand how people use VibeCircle.", "You can control cookies through your browser settings or through our cookie consent manager. Refusing non-essential cookies will not prevent you from using the platform but may limit personalisation."] },
   { h: "8. Security", body: "We use industry-standard encryption (TLS 1.3) for data in transit, AES-256 for data at rest, and undergo regular security audits. No system is 100% secure --- please use a strong password and enable two-factor authentication when available." },
   { h: "9. Children's Privacy", body: "VibeCircle is not directed to children under 13. We do not knowingly collect personal information from children under 13. If we learn we have done so, we will delete the information promptly." },
-  { h: "10. Contact", body: "Questions about this policy? Email privacy@vibecircle.com or write to VibeCircle (Pty) Ltd, Attn: Privacy Team, 5th Floor, 67 Rivonia Rd, Sandton, Johannesburg 2196, South Africa." },
+  { h: "10. Contact", body: "Questions about this policy? Email privacy@vibecircles.co.za or write to VibeCircle (Pty) Ltd, Attn: Privacy Team, 5th Floor, 67 Rivonia Rd, Sandton, Johannesburg 2196, South Africa." },
 ];
 
 const TERMS_SECTIONS = [
@@ -1339,7 +1275,7 @@ const TERMS_SECTIONS = [
   { h: "7. Intellectual Property", body: "VibeCircle and its design, logos, and technology are owned by VibeCircle (Pty) Ltd and protected by intellectual property laws. You may not use our marks without written permission." },
   { h: "8. Disclaimers & Limitation of Liability", body: ["VibeCircle is provided 'as is' without warranties of any kind. We don't guarantee uninterrupted service or that the platform will be error-free.", "To the maximum extent permitted by law, VibeCircle's liability for any claim is limited to the amount you paid us in the 12 months preceding the claim."] },
   { h: "9. Governing Law", body: "These terms are governed by the laws of the Republic of South Africa. Any disputes will be resolved in the courts of Gauteng, Johannesburg." },
-  { h: "10. Contact", body: "Legal questions? Email legal@vibecircle.com or write to VibeCircle (Pty) Ltd, Attn: Legal Team, 5th Floor, 67 Rivonia Rd, Sandton, Johannesburg 2196, South Africa." },
+  { h: "10. Contact", body: "Legal questions? Email legal@vibecircles.co.za or write to VibeCircle (Pty) Ltd, Attn: Legal Team, 5th Floor, 67 Rivonia Rd, Sandton, Johannesburg 2196, South Africa." },
 ];
 
 const COOKIES_SECTIONS = [
@@ -1347,7 +1283,7 @@ const COOKIES_SECTIONS = [
   { h: "Cookies We Use", body: ["Essential Cookies: Required for the platform to function. These keep you logged in and secure. Cannot be disabled.", "Analytics Cookies: Help us understand how you navigate VibeCircle --- which features you use, how long you spend, and where you encounter issues. We use this to improve the product.", "Preference Cookies: Remember your settings --- city, language, notification preferences, and display options.", "Marketing Cookies: Used to show you relevant ads and measure campaign effectiveness. Only active if you've accepted marketing cookies."] },
   { h: "Third-Party Cookies", body: "Some third-party services we use (analytics, payment processing, maps) may set their own cookies. These are governed by their own privacy policies." },
   { h: "Managing Cookies", body: ["You can control or delete cookies through your browser settings. Disabling essential cookies will prevent you from using VibeCircle.", "You can update your cookie preferences at any time by clicking 'Cookie Preferences' in the footer.", "We follow South Africa's POPIA and ECTA requirements for consent and cookie management."] },
-  { h: "Contact", body: "Cookie questions? Email privacy@vibecircle.com." },
+  { h: "Contact", body: "Cookie questions? Email privacy@vibecircles.co.za." },
 ];
 
 // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1418,9 +1354,6 @@ export default function VibeCircleApp({ initialPage = "home" }) {
     home: <HomePage {...sharedProps} />,
     About: <AboutPage {...sharedProps} />,
     Team: <TeamPage {...sharedProps} />,
-    Creators: <CreatorsPage {...sharedProps} />,
-    Advertise: <AdvertisePage {...sharedProps} />,
-    Business: <BusinessPage {...sharedProps} />,
     Jobs: <JobsPage {...sharedProps} />,
     Marketplace: <MarketplacePage {...sharedProps} />,
     Contact: <ContactPage {...sharedProps} />,

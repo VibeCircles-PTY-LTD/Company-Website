@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { C, SOCIALS } from "@/components/shared/vibeTheme";
+import { C, HELP_CENTER_HREF, SOCIALS } from "@/components/shared/vibeTheme";
 import { useWindowWidth } from "@/components/shared/hooks";
 
-const ALL_PAGES = ["About", "Team", "Creators", "Advertise", "Business", "Jobs", "Marketplace", "Pricing", "Contact"];
-const PRIMARY_NAV = ["About", "Creators", "Marketplace", "Business", "Jobs"];
-const MORE_NAV = ["Team", "Advertise", "Pricing", "Contact"];
+const ALL_PAGES = ["About", "Team", "Jobs", "Marketplace", "Contact"];
+const PRIMARY_NAV = ["About", "Marketplace", "Jobs"];
+const MORE_NAV = ["Team", "Contact"];
 
 export function Nav({ current, setPage, openWaitlist }) {
   const [scrolled, setScrolled] = useState(false);
@@ -100,14 +100,9 @@ export function Nav({ current, setPage, openWaitlist }) {
         <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
           {!isMobile && (
             <button
+              type="button"
               onClick={() => openWaitlist("Early Access")}
-              className="bg-vc-orange text-vc-white font-body uppercase tracking-[0.15em] py-3 px-8 rounded-full transition-all hover:shadow-xl hover:-translate-y-1"
-              style={{
-                fontSize: "11px",
-                fontWeight: 600,
-                border: "none",
-                cursor: "pointer",
-              }}
+              className="vc-btn vc-btn--primary vc-btn--sm"
             >
               Start Vibeing
             </button>
@@ -192,22 +187,13 @@ export function Nav({ current, setPage, openWaitlist }) {
             ))}
           </div>
           <button
+            type="button"
             onClick={() => {
               openWaitlist("Mobile Nav");
               setMenuOpen(false);
             }}
-            style={{
-              width: "100%",
-              fontFamily: "'Bebas Neue',sans-serif",
-              fontSize: "18px",
-              letterSpacing: "3px",
-              padding: "16px",
-              background: C.orange,
-              color: C.textOnAccent,
-              border: "none",
-              borderRadius: "2px",
-              cursor: "pointer",
-            }}
+            className="vc-btn vc-btn--primary"
+            style={{ width: "100%", fontSize: "13px", letterSpacing: "0.12em" }}
           >
             Join Now
           </button>
@@ -224,23 +210,29 @@ export function Footer({ setPage }) {
     window.scrollTo(0, 0);
   };
   const cols = [
-    { title: "Platform", links: ["About", "Team", "Creators", "Marketplace", "Pricing"] },
-    { title: "Business", links: ["Advertise", "Business", "Contact"] },
-    { title: "Company", links: ["Jobs", "Team", "Contact"] },
-    { title: "Legal", links: ["Privacy", "Terms", "Cookies"] },
+    { title: "Business", links: ["Marketplace", "Contact"] },
+    { title: "Company", links: ["About", "Jobs", "Help Center", "Team"] },
+    { title: "Legal", links: ["Privacy", "Terms", "Cookies", "POPIA"] },
   ];
+  const footerGridCols =
+    w < 600
+      ? "1fr"
+      : w < 1060
+        ? "repeat(2, minmax(0, 1fr))"
+        : "minmax(0, 2fr) repeat(3, minmax(0, 1fr))";
   return (
     <footer style={{ background: C.bg2, borderTop: `1px solid ${C.border}`, marginTop: "64px" }}>
       <div style={{ maxWidth: "1280px", margin: "0 auto", padding: w < 600 ? "64px 24px" : "80px 64px" }}>
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: w < 600 ? "1fr" : w < 1060 ? "1fr 1fr" : "2fr 1fr 1fr 1fr 1fr",
-            gap: "64px",
+            gridTemplateColumns: footerGridCols,
+            alignItems: "start",
+            gap: w < 600 ? "48px" : "56px",
             marginBottom: "64px",
           }}
         >
-          <div style={{ gridColumn: w < 1060 ? "1 / -1" : "span 2" }}>
+          <div style={{ gridColumn: w < 1060 ? "1 / -1" : undefined, minWidth: 0 }}>
             <button
               onClick={() => go("home")}
               style={{
@@ -260,7 +252,7 @@ export function Footer({ setPage }) {
               VIBECIRCLES
             </button>
             <p style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "14px", color: C.dim, lineHeight: 1.6, maxWidth: "320px", marginBottom: "24px" }}>
-              The social gravity engine. Connecting brands with the communities that move culture across Africa and the diaspora.
+              Connecting brands with communities that move culture across Southern Africa and the diaspora—clear strategy, real partnerships.
             </p>
             <div style={{ display: "flex", gap: "12px" }}>
               {SOCIALS.map((s, i) => (
@@ -300,32 +292,91 @@ export function Footer({ setPage }) {
               ))}
             </div>
           </div>
-          {cols.map((col) => (
-            <div key={col.title}>
-              <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", textTransform: "uppercase", letterSpacing: "2px", color: C.dim, marginBottom: "20px", fontWeight: 500 }}>
+          {cols.map((col, colIndex) => (
+            <div
+              key={col.title}
+              style={{
+                gridColumn: w >= 600 && w < 1060 && colIndex === 2 ? "1 / -1" : undefined,
+                minWidth: 0,
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: "'JetBrains Mono', monospace",
+                  fontSize: "11px",
+                  textTransform: "uppercase",
+                  letterSpacing: "2px",
+                  color: C.dim,
+                  marginBottom: "20px",
+                  fontWeight: 500,
+                }}
+              >
                 {col.title}
               </div>
-              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
+              <ul
+                style={{
+                  listStyle: "none",
+                  padding: 0,
+                  margin: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "12px",
+                  alignItems: "flex-start",
+                }}
+              >
                 {col.links.map((l) => (
-                  <li key={l}>
-                    <button
-                      onClick={() => go(l)}
-                      style={{
-                        fontFamily: "'Instrument Sans', sans-serif",
-                        fontSize: "14px",
-                        color: C.dim,
-                        background: "none",
-                        border: "none",
-                        cursor: "pointer",
-                        textAlign: "left",
-                        transition: "color .2s ease",
-                        padding: 0,
-                      }}
-                      onMouseEnter={(e) => (e.target.style.color = C.text)}
-                      onMouseLeave={(e) => (e.target.style.color = C.dim)}
-                    >
-                      {l}
-                    </button>
+                  <li key={`${col.title}-${l}`} style={{ width: "100%" }}>
+                    {l === "Help Center" ? (
+                      <a
+                        href={HELP_CENTER_HREF}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          fontFamily: "'Instrument Sans', sans-serif",
+                          fontSize: "14px",
+                          color: C.dim,
+                          textDecoration: "none",
+                          display: "block",
+                          width: "100%",
+                          lineHeight: 1.45,
+                          transition: "color .2s ease",
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.color = C.text;
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.color = C.dim;
+                        }}
+                      >
+                        {l}
+                      </a>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => go(l)}
+                        style={{
+                          fontFamily: "'Instrument Sans', sans-serif",
+                          fontSize: "14px",
+                          color: C.dim,
+                          background: "none",
+                          border: "none",
+                          cursor: "pointer",
+                          textAlign: "left",
+                          transition: "color .2s ease",
+                          padding: 0,
+                          width: "100%",
+                          lineHeight: 1.45,
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.color = C.text;
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.color = C.dim;
+                        }}
+                      >
+                        {l}
+                      </button>
+                    )}
                   </li>
                 ))}
               </ul>

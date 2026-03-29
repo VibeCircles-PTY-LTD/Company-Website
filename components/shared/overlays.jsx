@@ -109,7 +109,7 @@ export function WaitlistModal({ open, onClose, context, addToast }) {
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || "Signup failed");
       try {
-        await fetch("https://formsubmit.co/ajax/info@vibecircle.com", {
+        await fetch("https://formsubmit.co/ajax/info@vibecircles.co.za", {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
           body: JSON.stringify({ _subject: `New Waitlist Signup – ${role}`, name: form.name, email: form.email, city: form.city, role, context: context || "Website", _template: "table" }),
@@ -118,7 +118,7 @@ export function WaitlistModal({ open, onClose, context, addToast }) {
       setStep(2);
       addToast({ type: "success", title: "You're on the list!", message: `We'll be in touch at ${form.email} soon.` });
     } catch (e) {
-      addToast({ type: "error", title: "Something went wrong", message: "Please try again or email us at info@vibecircle.com." });
+      addToast({ type: "error", title: "Something went wrong", message: "Please try again or email us at info@vibecircles.co.za." });
     } finally {
       setLoading(false);
     }
@@ -221,37 +221,13 @@ export function WaitlistModal({ open, onClose, context, addToast }) {
               ))}
             </div>
             <button
+              type="button"
               onClick={submit}
               disabled={loading || !form.name || !form.email || !role}
-              style={{
-                width: "100%",
-                fontFamily: "'Bebas Neue',sans-serif",
-                fontSize: "16px",
-                letterSpacing: "3px",
-                padding: "16px",
-                background: !form.name || !form.email || !role ? "rgba(255,107,0,0.3)" : C.orange,
-                color: C.textOnAccent,
-                border: "none",
-                borderRadius: "3px",
-                cursor: !form.name || !form.email || !role ? "not-allowed" : "pointer",
-                transition: "box-shadow .2s",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "10px",
-              }}
-              onMouseEnter={(e) => {
-                if (!loading && form.name && form.email && role) e.target.style.boxShadow = `0 10px 32px ${C.orange}45`;
-              }}
-              onMouseLeave={(e) => (e.target.style.boxShadow = "")}
+              className="vc-btn vc-btn--primary vc-btn--block"
+              style={{ fontSize: "14px", padding: "16px", gap: "10px" }}
             >
-              {loading ? (
-                <span
-                  style={{ display: "inline-block", width: "16px", height: "16px", border: "2px solid rgba(0,0,0,0.2)", borderTopColor: C.textOnAccent, borderRadius: "50%", animation: "spin 0.6s linear infinite" }}
-                />
-              ) : (
-                ""
-              )}
+              {loading ? <span className="vc-btn__spinner" style={{ width: 16, height: 16 }} aria-hidden /> : null}
               {loading ? "Joining..." : "Secure My Spot →"}
             </button>
             <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", color: C.dimmer, textAlign: "center", marginTop: "12px" }}>No spam. Unsubscribe anytime.</p>
@@ -266,7 +242,7 @@ export function WaitlistModal({ open, onClose, context, addToast }) {
             <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: C.dimmer, lineHeight: 1.7, marginBottom: "32px" }}>
               We'll email you at <span style={{ color: C.orange }}>{form.email}</span> the moment we launch in your city.
             </p>
-            <button onClick={onClose} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "14px", letterSpacing: "3px", padding: "13px 36px", background: C.orange, color: C.textOnAccent, border: "none", borderRadius: "3px", cursor: "pointer" }}>
+            <button type="button" onClick={onClose} className="vc-btn vc-btn--primary">
               Close
             </button>
           </div>
@@ -305,26 +281,10 @@ export function CookieBanner({ onAccept, onDecline, setPage }) {
         </button>
       </p>
       <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
-        <button
-          onClick={onDecline}
-          style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "13px", letterSpacing: "2px", padding: "10px 22px", background: "transparent", color: C.dimmer, border: `1px solid ${C.border}`, borderRadius: "2px", cursor: "pointer", transition: "all .2s" }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = C.text;
-            e.currentTarget.style.borderColor = C.orange;
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = C.dimmer;
-            e.currentTarget.style.borderColor = C.border;
-          }}
-        >
+        <button type="button" onClick={onDecline} className="vc-btn vc-btn--outline-muted vc-btn--sm">
           Decline
         </button>
-        <button
-          onClick={onAccept}
-          style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "13px", letterSpacing: "2px", padding: "10px 22px", background: C.orange, color: C.textOnAccent, border: "none", borderRadius: "2px", cursor: "pointer", transition: "box-shadow .2s" }}
-          onMouseEnter={(e) => (e.target.style.boxShadow = `0 4px 16px ${C.orange}40`)}
-          onMouseLeave={(e) => (e.target.style.boxShadow = "")}
-        >
+        <button type="button" onClick={onAccept} className="vc-btn vc-btn--primary vc-btn--sm">
           Accept All
         </button>
       </div>
@@ -342,35 +302,16 @@ export function BackToTop() {
   if (!show) return null;
   return (
     <button
+      type="button"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Back to top"
+      className="vc-btn vc-btn--fab"
       style={{
         position: "fixed",
         bottom: "80px",
         right: "24px",
         zIndex: 400,
-        width: "44px",
-        height: "44px",
-        borderRadius: "50%",
-        background: C.orange,
-        color: C.textOnAccent,
-        border: "none",
-        cursor: "pointer",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        fontSize: "18px",
-        boxShadow: `0 4px 20px ${C.orange}50`,
-        transition: "transform .2s,box-shadow .2s",
         animation: "fadeIn .3s ease",
-      }}
-      onMouseEnter={(e) => {
-        e.target.style.transform = "translateY(-3px)";
-        e.target.style.boxShadow = `0 8px 28px ${C.orange}60`;
-      }}
-      onMouseLeave={(e) => {
-        e.target.style.transform = "";
-        e.target.style.boxShadow = `0 4px 20px ${C.orange}50`;
       }}
     >
       ↑

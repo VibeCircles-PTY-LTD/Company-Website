@@ -7,7 +7,7 @@ export const metadata = { title: "Privacy Policy - VibeCircles" };
 export default function PrivacyPageRoute() {
   return (
     <AppShell>
-      <LegalPage title="Privacy Policy" tag="Legal" lastUpdated="February 18, 2026" sections={PRIVACY_SECTIONS} />
+      <LegalPage title="Privacy Policy" tag="Legal" lastUpdated="Coming soon" sections={PRIVACY_SECTIONS} />
     </AppShell>
   );
 }

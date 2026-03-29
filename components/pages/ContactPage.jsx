@@ -5,11 +5,11 @@ import { C } from "@/components/shared/vibeTheme";
 import { Divider, PageHero, Reveal, Tag } from "@/components/shared/ui";
 
 const CONTACT_DEPTS = [
-  { key: "general", label: "General Inquiry", email: "info@vibecircle.com", icon: "----", desc: "Questions about VibeCircles, the platform, or anything else." },
-  { key: "partnerships", label: "Partnerships", email: "partners@vibecircle.com", icon: "----", desc: "Brand deals, platform integrations, and strategic alliances." },
-  { key: "careers", label: "Careers", email: "careers@vibecircle.com", icon: "----", desc: "Job applications, internship inquiries, and hiring questions." },
-  { key: "support", label: "Support", email: "support@vibecircle.com", icon: "----", desc: "Technical issues, account help, and bug reports." },
-  { key: "press", label: "Press & Media", email: "press@vibecircle.com", icon: "----", desc: "Media inquiries, press kits, and interview requests." },
+  { key: "general", label: "General Inquiry", email: "info@vibecircles.co.za", icon: "----", desc: "Questions about VibeCircles, the platform, or anything else." },
+  { key: "partnerships", label: "Partnerships", email: "partners@vibecircles.co.za", icon: "----", desc: "Brand deals, platform integrations, and strategic alliances." },
+  { key: "careers", label: "Careers", email: "careers@vibecircles.co.za", icon: "----", desc: "Job applications, internship inquiries, and hiring questions." },
+  { key: "support", label: "Support", email: "support@vibecircles.co.za", icon: "----", desc: "Technical issues, account help, and bug reports." },
+  { key: "press", label: "Press & Media", email: "press@vibecircles.co.za", icon: "----", desc: "Media inquiries, press kits, and interview requests." },
 ];
 export default function ContactPage({ addToast }) {
   const [dept, setDept] = useState("general");
@@ -26,7 +26,7 @@ export default function ContactPage({ addToast }) {
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || "Send failed");
       try {
-        await fetch("https://formsubmit.co/ajax/info@vibecircle.com", { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify({ _subject: `[${selectedDept?.label}] ${form.subject || "New Message"}`, _template: "table", name: form.name, email: form.email, subject: form.subject, message: form.message, department: selectedDept?.label, replyTo: selectedDept?.email }) });
+        await fetch("https://formsubmit.co/ajax/info@vibecircles.co.za", { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify({ _subject: `[${selectedDept?.label}] ${form.subject || "New Message"}`, _template: "table", name: form.name, email: form.email, subject: form.subject, message: form.message, department: selectedDept?.label, replyTo: selectedDept?.email }) });
       } catch (_) { }
       setSent(true);
       addToast({ type: "success", title: "Message sent!", message: `The ${selectedDept?.label} team will respond within 24–48 hours.` });
@@ -58,7 +58,7 @@ export default function ContactPage({ addToast }) {
             <div style={{ fontSize: "48px", marginBottom: "16px", animation: "checkPop .5s ease" }}>✓</div>
             <div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "30px", color: C.orange, marginBottom: "10px" }}>Message Sent.</div>
             <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "14px", color: C.dim, lineHeight: 1.7, marginBottom: "24px" }}>The {selectedDept?.label} team will get back to you at <span style={{ color: C.orange }}>{form.email}</span> within 24–48 hours.</p>
-            <button onClick={() => { setSent(false); setForm({ name: "", email: "", subject: "", message: "", }); }} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "12px", letterSpacing: "2px", padding: "11px 24px", background: C.orange, color: C.textOnAccent, border: "none", borderRadius: "2px", cursor: "pointer" }}>Send Another</button>
+            <button type="button" onClick={() => { setSent(false); setForm({ name: "", email: "", subject: "", message: "", }); }} className="vc-btn vc-btn--primary vc-btn--sm">Send Another</button>
           </div>) : (<>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "24px" }}><span style={{ fontSize: "20px" }}>{selectedDept?.icon}</span><div><div style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "18px", color: C.orange }}>{selectedDept?.label}</div><div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", color: C.dimmer }}>{selectedDept?.email}</div></div></div>
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -67,7 +67,10 @@ export default function ContactPage({ addToast }) {
               </div>
               <input placeholder="Subject" value={form.subject} onChange={e => setForm(f => ({ ...f, subject: e.target.value }))} style={{ background: C.bg3, border: `1px solid ${C.border}`, borderRadius: "2px", padding: "12px 14px", fontFamily: "'DM Sans',sans-serif", fontSize: "13px", color: C.text, outline: "none", transition: "border-color .2s" }} onFocus={e => e.target.style.borderColor = C.orange} onBlur={e => e.target.style.borderColor = C.border} />
               <textarea placeholder="Your message..." rows={5} value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} style={{ background: C.bg3, border: `1px solid ${C.border}`, borderRadius: "2px", padding: "12px 14px", fontFamily: "'DM Sans',sans-serif", fontSize: "13px", color: C.text, outline: "none", resize: "vertical", transition: "border-color .2s" }} onFocus={e => e.target.style.borderColor = C.orange} onBlur={e => e.target.style.borderColor = C.border} />
-              <button onClick={submit} disabled={loading || !form.name || !form.email || !form.message} style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "15px", letterSpacing: "3px", padding: "15px", background: (!form.name || !form.email || !form.message) ? "rgba(255,107,0,0.3)" : C.orange, color: C.textOnAccent, border: "none", borderRadius: "2px", cursor: (!form.name || !form.email || !form.message) ? "not-allowed" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>{loading && <span style={{ width: "14px", height: "14px", border: `2px solid ${C.textOnAccent}40`, borderTopColor: C.textOnAccent, borderRadius: "50%", animation: "spin .6s linear infinite", display: "inline-block" }} />}{loading ? "Sending..." : "Send Message ---"}</button>
+              <button type="button" onClick={submit} disabled={loading || !form.name || !form.email || !form.message} className="vc-btn vc-btn--primary vc-btn--block" style={{ fontSize: "13px", padding: "16px" }}>
+                {loading && <span className="vc-btn__spinner" aria-hidden />}
+                {loading ? "Sending..." : "Send message"}
+              </button>
               <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "11px", color: C.dimmer, textAlign: "center" }}>Typical response: 24–48 hours</p>
             </div>
           </>)}

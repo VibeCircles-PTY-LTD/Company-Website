@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { C } from "@/components/shared/vibeTheme";
 
-const NAV_LINKS = ["About", "Advertise", "Business", "Jobs", "Contact"];
+const NAV_LINKS = ["About", "Jobs", "Contact"];
 
 const MANIFESTO = [
   "Culture should be visible.",
@@ -370,55 +370,6 @@ function FounderStory() {
   );
 }
 
-function Advertise() {
-  const features = [
-    ["----", "Geo-targeted Campaigns", "Reach exactly who's near you, when they're near you."],
-    ["---", "Sponsor Creator Moments", "Put your brand inside the culture, not outside it."],
-    ["----", "Boost Local Visibility", "Make your location pulse on the map."],
-    ["----", "Promote Live Experiences", "Turn foot traffic into digital gravity."],
-  ];
-  return (
-    <section id="advertise" style={{ background: "#EEEEF2", padding: "120px 48px" }}>
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <AnimatedSection>
-          <p style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "13px", letterSpacing: "5px", color: "#FF6B00", marginBottom: "16px" }}>--- ADVERTISE</p>
-          <h2 style={{
-            fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: "clamp(36px,5.5vw,64px)",
-            color: "#1a1a1a", lineHeight: 1.05,
-            marginBottom: "24px",
-          }}>
-            Ads that integrate,<br />not <span style={{ color: "#FF6B00" }}>interrupt.</span>
-          </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "18px", color: "rgba(0,0,0,0.6)", marginBottom: "72px", maxWidth: "500px", lineHeight: 1.7 }}>
-            We power discovery, not distraction. Perfect for restaurants, clubs, campuses, retail, and event organizers.
-          </p>
-        </AnimatedSection>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "24px" }}>
-          {features.map(([icon, title, desc], i) => (
-            <AnimatedSection key={i} delay={i * 0.1}>
-              <div style={{
-                padding: "36px 28px",
-                background: "rgba(255,107,0,0.03)",
-                border: "1px solid rgba(255,107,0,0.1)",
-                borderRadius: "4px", height: "100%",
-                transition: "all 0.3s",
-              }}
-                onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,107,0,0.08)"; e.currentTarget.style.borderColor = "#FF6B00"; e.currentTarget.style.transform = "translateY(-4px)"; }}
-                onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,107,0,0.03)"; e.currentTarget.style.borderColor = "rgba(255,107,0,0.1)"; e.currentTarget.style.transform = ""; }}
-              >
-                <div style={{ fontSize: "28px", marginBottom: "16px" }}>{icon}</div>
-                <div style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "20px", letterSpacing: "1px", color: "#1a1a1a", marginBottom: "12px" }}>{title}</div>
-                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "14px", color: "rgba(0,0,0,0.55)", lineHeight: 1.7 }}>{desc}</div>
-              </div>
-            </AnimatedSection>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Business() {
   const tools = ["Claim Locations", "Run Promotions", "Host Events", "Go Live", "Track Engagement", "Launch Campaigns"];
   return (
@@ -517,7 +468,7 @@ function Contact() {
     setLoading(true);
     setError(false);
     try {
-      const res = await fetch("https://formsubmit.co/ajax/info@vibecircle.com", {
+      const res = await fetch("https://formsubmit.co/ajax/info@vibecircles.co.za", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({ _subject: "Contact from VibeCircle", _template: "table", name: form.name, email: form.email, message: form.message }),
@@ -540,7 +491,7 @@ function Contact() {
             Let's build<br /><span style={{ color: "#FF6B00" }}>something real.</span>
           </h2>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "16px", color: "rgba(0,0,0,0.4)", marginBottom: "60px" }}>
-            info@vibecircle.com -- partners@vibecircle.com -- careers@vibecircle.com
+            info@vibecircles.co.za -- partners@vibecircles.co.za -- careers@vibecircles.co.za
           </p>
         </AnimatedSection>
         {sent ? (
@@ -620,7 +571,7 @@ function Footer() {
       </p>
       <div style={{ display: "flex", gap: "28px" }}>
         {["info", "partners", "careers", "support"].map(e => (
-          <a key={e} href={`mailto:${e}@vibecircle.com`} style={{
+          <a key={e} href={`mailto:${e}@vibecircles.co.za`} style={{
             fontFamily: "'DM Sans', sans-serif", fontSize: "12px",
             letterSpacing: "1px", textTransform: "uppercase",
             color: "rgba(0,0,0,0.4)", textDecoration: "none",
@@ -668,7 +619,6 @@ export default function VibeCircle() {
       <About />
       <Manifesto />
       <FounderStory />
-      <Advertise />
       <Business />
       <Jobs />
       <Contact />
