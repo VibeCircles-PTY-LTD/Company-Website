@@ -1,118 +1,93 @@
-# VibeCircles Company Website
+# VibeCircles Help Center
 
-Welcome to the official website repository for VibeCircles PTY LTD.
-
-## About
-
-VibeCircles is a forward-thinking company dedicated to delivering exceptional solutions that drive business growth and innovation.
+A full, production-ready Next.js 14 help center for VibeCircles.
 
 ## Features
 
-- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
-- **Modern UI**: Clean and professional interface with smooth animations
-- **Interactive Navigation**: Mobile-friendly hamburger menu
-- **Contact Form**: Easy way for clients to get in touch
-- **Service Showcase**: Highlighting our core offerings
-- **About Section**: Company information and values
+- **7 complete help sections** with all content written
+- **Full-text search** across all articles
+- **Accordion articles** with smooth animations and helpful feedback buttons
+- **Sticky navbar** with keyboard-shortcut search modal (⌘K)
+- **Responsive design** — works on mobile, tablet, and desktop
+- **Prev/Next navigation** between sections
+- **Dark hero banners** with per-section color theming
+- **Smooth curved transitions** between sections
 
-## Getting Started
+## Sections Covered
 
-### Prerequisites
+1. Getting Started with VibeCircles
+2. Partnerships & Collaborations
+3. Services & Solutions
+4. Billing, Payments & Contracts
+5. Trust, Safety & Compliance
+6. Media & Press Kit
+7. Technical Support (For Partners)
 
-No build tools or dependencies required. This is a static HTML website.
+## Setup
 
-### Installation
+```bash
+# Install dependencies
+npm install
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/VibeCircles-PTY-LTD/Company-Website.git
-   ```
+# Run development server
+npm run dev
+# → Open http://localhost:3000
 
-2. Navigate to the project directory:
-   ```bash
-   cd Company-Website
-   ```
-
-3. Open `index.html` in your web browser:
-   - Double-click the file, or
-   - Use a local server (recommended):
-     ```bash
-     # Using Python 3
-     python -m http.server 8000
-     
-     # Using Node.js (http-server)
-     npx http-server
-     ```
-
-4. Visit `http://localhost:8000` in your browser
-
-## File Structure
-
-```
-Company-Website/
-├── index.html      # Main HTML file
-├── styles.css      # CSS styling
-├── script.js       # JavaScript functionality
-└── README.md       # This file
+# Build for production
+npm run build
+npm start
 ```
 
-## Sections
+## Project Structure
 
-- **Home**: Hero section with company tagline
-- **About**: Information about VibeCircles
-- **Services**: Our core service offerings
-- **Contact**: Contact form and company details
-- **Footer**: Quick links and company information
+```
+vibecircles-help/
+├── app/
+│   ├── layout.tsx          # Root layout with fonts
+│   ├── page.tsx            # Homepage / hub
+│   ├── globals.css         # Global styles + Tailwind
+│   ├── not-found.tsx       # 404 page
+│   ├── [slug]/
+│   │   └── page.tsx        # Dynamic section pages
+│   └── search/
+│       └── page.tsx        # Search results page
+├── components/
+│   ├── Navbar.tsx          # Sticky nav + search modal
+│   ├── Footer.tsx          # Full footer with links
+│   └── ArticleList.tsx     # Accordion article renderer
+├── data/
+│   └── helpContent.ts      # All content — edit this!
+├── package.json
+├── tailwind.config.ts
+└── next.config.js
+```
 
 ## Customization
 
-### Colors
+### Adding/Editing Content
+All content lives in `data/helpContent.ts`. Each section has:
+- `title`, `tagline`, `icon`, `color`, `slug`
+- `articles[]` — each with `id`, `title`, `content`, `tags`
 
-The color scheme can be customized in `styles.css` by modifying the CSS variables:
+Content supports basic markdown: `**bold**`, `*italic*`, and paragraph breaks.
 
-```css
-:root {
-    --primary-color: #6366f1;
-    --secondary-color: #8b5cf6;
-    --accent-color: #ec4899;
-    --dark-color: #1f2937;
-    --light-color: #f9fafb;
-    --text-color: #374151;
-}
-```
+### Changing Colors
+Each section has its own accent color defined in `helpContent.ts`. Update the hex value to match your brand.
 
-### Content
+### Adding New Sections
+Add a new entry to the `helpSections` array in `helpContent.ts`. The dynamic `[slug]/page.tsx` route handles it automatically.
 
-Edit `index.html` to update:
-- Company information
-- Services
-- Contact details
-- Footer links
+## Tech Stack
+
+- **Next.js 14** (App Router)
+- **TypeScript**
+- **Tailwind CSS**
+- **Lucide React** icons
+- **Google Fonts** — Syne (display) + Instrument Sans (body) + JetBrains Mono (code)
 
 ## Deployment
 
-This website can be deployed to any static hosting service:
-
-- **GitHub Pages**: Enable in repository settings
-- **Netlify**: Drag and drop the folder
-- **Vercel**: Import the repository
-- **AWS S3**: Upload files to a bucket
-- **Traditional hosting**: Upload via FTP
-
-## Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers
-
-## License
-
-© 2026 VibeCircles PTY LTD. All rights reserved.
-
-## Contact
-
-For questions or support, please contact:
-- Email: info@vibecircles.com
-- Phone: +1 (555) 123-4567
+Deploy to Vercel with one command:
+```bash
+npx vercel
+```
