@@ -88,6 +88,9 @@ export const SOCIALS = [
 /** External help / docs site. */
 export const HELP_CENTER_HREF = "https://help-center.vibecircles.co.za";
 
+/** Company blog (subdomain). */
+export const BLOG_HREF = "https://blog.vibecircles.co.za";
+
 export const PAGE_TO_PATH = {
   home: "/",
   About: "/about",

@@ -1,7 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { C, HELP_CENTER_HREF, SOCIALS } from "@/components/shared/vibeTheme";
+import { BLOG_HREF, C, HELP_CENTER_HREF, SOCIALS } from "@/components/shared/vibeTheme";
+
+const FOOTER_EXTERNAL_HREF = {
+  "Help Center": HELP_CENTER_HREF,
+  Blog: BLOG_HREF,
+};
 import { useWindowWidth } from "@/components/shared/hooks";
 
 const ALL_PAGES = ["About", "Team", "Jobs", "Marketplace", "Contact"];
@@ -210,7 +215,7 @@ export function Footer({ setPage }) {
     window.scrollTo(0, 0);
   };
   const cols = [
-    { title: "Business", links: ["Marketplace", "Contact"] },
+    { title: "Business", links: ["Marketplace", "Blog", "Contact"] },
     { title: "Company", links: ["About", "Jobs", "Help Center", "Team"] },
     { title: "Legal", links: ["Privacy", "Terms", "Cookies", "POPIA"] },
   ];
@@ -326,9 +331,9 @@ export function Footer({ setPage }) {
               >
                 {col.links.map((l) => (
                   <li key={`${col.title}-${l}`} style={{ width: "100%" }}>
-                    {l === "Help Center" ? (
+                    {FOOTER_EXTERNAL_HREF[l] ? (
                       <a
-                        href={HELP_CENTER_HREF}
+                        href={FOOTER_EXTERNAL_HREF[l]}
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{
