@@ -391,7 +391,7 @@ export function Footer({ setPage }) {
         <div style={{ height: "1px", background: C.border, opacity: 0.5, marginBottom: "32px" }} />
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "24px" }}>
           <p style={{ fontFamily: "'Instrument Sans', sans-serif", fontSize: "12px", color: C.dim }}>
-            © {new Date().getFullYear()} VibeCircles. Making energy visible. Johannesburg, South Africa.
+            © {new Date().getFullYear()} VibeCircles. Making energy visible. Pretoria, South Africa.
           </p>
           <div style={{ display: "flex", gap: "24px" }}>
             <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "11px", color: C.dim, opacity: 0.6 }}>
